@@ -139,63 +139,21 @@ button{font-family:inherit;cursor:pointer}
 .fc-rcount{font-size:13px;color:var(--ink4)}
 
 /* ── TIER LOCKING ── */
-/* Tags: full-only tags are dimmed with a lock icon on half-day */
 .fc-tag.tier-full{position:relative;transition:all .3s}
-.fc:not(.show-full) .fc-tag.tier-full{
-  opacity:.42;
-  filter:grayscale(.8);
-  cursor:default;
-}
-.fc:not(.show-full) .fc-tag.tier-full::after{
-  content:'🔒';
-  font-size:10px;
-  margin-left:3px;
-}
-
-/* Food cards: full-only cards get a locked overlay */
+.fc:not(.show-full) .fc-tag.tier-full{opacity:.42;filter:grayscale(.8);cursor:default;}
+.fc:not(.show-full) .fc-tag.tier-full::after{content:'🔒';font-size:10px;margin-left:3px;}
 .food-card{background:var(--bg);border:1.5px solid var(--line);border-radius:var(--r-md);overflow:hidden;transition:all .25s;position:relative}
 .food-card:hover{border-color:var(--p);box-shadow:0 4px 18px rgba(102,126,234,.12);transform:translateY(-3px)}
 .food-img{height:120px;overflow:hidden;background:var(--bg3)}
 .food-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
 .food-card:hover .food-img img{transform:scale(1.08)}
-
-/* Lock overlay for full-day food cards */
-.food-card.tier-full .food-lock{
-  display:flex;
-  position:absolute;inset:0;z-index:10;
-  background:rgba(255,255,255,.88);
-  backdrop-filter:blur(3px);
-  flex-direction:column;align-items:center;justify-content:center;gap:8px;
-  border-radius:var(--r-md);
-  transition:opacity .3s;
-}
+.food-card.tier-full .food-lock{display:flex;position:absolute;inset:0;z-index:10;background:rgba(255,255,255,.88);backdrop-filter:blur(3px);flex-direction:column;align-items:center;justify-content:center;gap:8px;border-radius:var(--r-md);transition:opacity .3s;}
 .food-card.tier-full .food-lock-ico{font-size:28px}
 .food-card.tier-full .food-lock-lbl{font-size:12px;font-weight:800;color:var(--ink3);text-align:center;line-height:1.4}
-.food-card.tier-full .food-lock-pill{
-  display:flex;align-items:center;gap:5px;
-  padding:4px 12px;border-radius:100px;
-  background:var(--ps);border:1.5px solid var(--pm);
-  color:var(--p);font-size:11px;font-weight:800;
-}
-/* Hide overlay when full day active */
+.food-card.tier-full .food-lock-pill{display:flex;align-items:center;gap:5px;padding:4px 12px;border-radius:100px;background:var(--ps);border:1.5px solid var(--pm);color:var(--p);font-size:11px;font-weight:800;}
 .fc.show-full .food-card.tier-full .food-lock{display:none}
-/* Hover suppressed when locked */
-.fc:not(.show-full) .food-card.tier-full:hover{
-  border-color:var(--line);
-  box-shadow:none;
-  transform:none;
-}
-
-/* Unlock banner that appears inside food section on half-day */
-.unlock-banner{
-  display:flex;align-items:center;gap:10px;
-  background:linear-gradient(90deg,var(--ps) 0%,#fff 100%);
-  border:1.5px dashed var(--pm);
-  border-radius:var(--r-sm);
-  padding:11px 16px;margin-top:14px;
-  font-size:13px;color:var(--p);font-weight:600;
-  transition:opacity .3s,max-height .3s;
-}
+.fc:not(.show-full) .food-card.tier-full:hover{border-color:var(--line);box-shadow:none;transform:none;}
+.unlock-banner{display:flex;align-items:center;gap:10px;background:linear-gradient(90deg,var(--ps) 0%,#fff 100%);border:1.5px dashed var(--pm);border-radius:var(--r-sm);padding:11px 16px;margin-top:14px;font-size:13px;color:var(--p);font-weight:600;transition:opacity .3s,max-height .3s;}
 .unlock-banner i{font-size:15px;flex-shrink:0}
 .fc.show-full .unlock-banner{display:none}
 
@@ -318,66 +276,23 @@ button{font-family:inherit;cursor:pointer}
 .footer-bot{border-top:1px solid rgba(255,255,255,.1);padding-top:18px;text-align:center;font-size:13px;color:rgba(255,255,255,.3)}
 
 /* ── OVERNIGHT HOUSING SECTION ── */
-.fc-housing{
-  border-top:1.5px solid var(--line);
-  background:var(--bg);
-  padding:32px 40px;
-  display:none; /* hidden by default */
-  animation:fadeSlideIn .35s ease;
-}
-@keyframes fadeSlideIn{
-  from{opacity:0;transform:translateY(-10px)}
-  to{opacity:1;transform:translateY(0)}
-}
+.fc-housing{border-top:1.5px solid var(--line);background:var(--bg);padding:32px 40px;display:none;animation:fadeSlideIn .35s ease;}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
 .fc.show-overnight .fc-housing{display:block}
-
 .fc-housing-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;gap:12px;flex-wrap:wrap}
 .fc-housing-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:10px}
 .fc-housing-title i{color:var(--p)}
 .fc-housing-sub{font-size:13px;color:var(--ink4);margin-top:3px}
-
-/* overnight notice row */
 .overnight-note{display:none}
-.housing-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-}
-.housing-photo{
-  position:relative;
-  border-radius:var(--r-md);
-  overflow:hidden;
-  aspect-ratio:4/3;
-  border:1.5px solid var(--line);
-  background:var(--bg3);
-  cursor:pointer;
-  transition:all .25s;
-  box-shadow:var(--sh-sm);
-}
+.housing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.housing-photo{position:relative;border-radius:var(--r-md);overflow:hidden;aspect-ratio:4/3;border:1.5px solid var(--line);background:var(--bg3);cursor:pointer;transition:all .25s;box-shadow:var(--sh-sm);}
 .housing-photo:hover{box-shadow:var(--sh-md);transform:translateY(-3px)}
 .housing-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
 .housing-photo:hover img{transform:scale(1.07)}
-.housing-photo-del{
-  position:absolute;top:7px;right:7px;
-  width:26px;height:26px;border-radius:50%;
-  background:rgba(0,0,0,.55);
-  border:none;color:#fff;font-size:11px;
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;transition:opacity .2s;cursor:pointer;
-  z-index:5;
-}
+.housing-photo-del{position:absolute;top:7px;right:7px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.55);border:none;color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;cursor:pointer;z-index:5;}
 .housing-photo:hover .housing-photo-del{opacity:1}
 .housing-photo-del:hover{background:var(--red)}
-
-/* caption badge on photo */
-.housing-photo-cap{
-  position:absolute;bottom:0;left:0;right:0;
-  padding:6px 10px;
-  background:linear-gradient(to top,rgba(0,0,0,.65) 0%,transparent 100%);
-  font-size:11px;color:#fff;font-weight:600;
-}
-
-/* lightbox */
+.housing-photo-cap{position:absolute;bottom:0;left:0;right:0;padding:6px 10px;background:linear-gradient(to top,rgba(0,0,0,.65) 0%,transparent 100%);font-size:11px;color:#fff;font-weight:600;}
 .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:10000;align-items:center;justify-content:center;padding:20px}
 .lightbox.open{display:flex}
 .lightbox img{max-width:90vw;max-height:85vh;border-radius:var(--r-lg);object-fit:contain;box-shadow:0 24px 80px rgba(0,0,0,.5)}
@@ -388,15 +303,7 @@ button{font-family:inherit;cursor:pointer}
 .lightbox-prev{left:20px}
 .lightbox-next{right:20px}
 .lightbox-counter{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.6);font-size:13px;font-weight:600}
-
-/* overnight notice row */
-.overnight-note{
-  display:flex;align-items:center;gap:10px;
-  background:#fffbeb;border:1.5px solid #fde68a;
-  border-radius:var(--r-sm);padding:12px 16px;
-  font-size:13px;color:#92400e;font-weight:600;
-  margin-bottom:20px;
-}
+.overnight-note{display:flex;align-items:center;gap:10px;background:#fffbeb;border:1.5px solid #fde68a;border-radius:var(--r-sm);padding:12px 16px;font-size:13px;color:#92400e;font-weight:600;margin-bottom:20px;}
 .overnight-note i{color:var(--gold);font-size:16px;flex-shrink:0}
 
 /* RESPONSIVE */
@@ -431,7 +338,6 @@ button{font-family:inherit;cursor:pointer}
 </style>
 </head>
 <body>
-
 
 <nav class="nav" id="mainNav">
   <div class="nav-inner">
@@ -541,16 +447,12 @@ button{font-family:inherit;cursor:pointer}
             </div>
             <span class="fc-mbr-lbl"><strong>Ratanak, Sokha & family</strong> · 5 members</span>
           </div>
-          <p class="fc-desc">
-            Wake before sunrise and join Grandpa Rith in the paddy fields. Learn how Cambodians have cultivated rice for generations — planting, harvesting, and the songs sung while working. Later, he will take you on a guided sunrise tour of Angkor Wat, receive a traditional monk water blessing in the morning, and visit a local pottery workshop to try shaping clay by hand. In the afternoon, collect vegetables from the garden, help feed the water buffaloes, cook together over a wood fire, and enjoy a free bicycle to wander the quiet village roads at your own pace.
-          </p>
+          <p class="fc-desc">Wake before sunrise and join Grandpa Rith in the paddy fields. Learn how Cambodians have cultivated rice for generations — planting, harvesting, and the songs sung while working. Later, he will take you on a guided sunrise tour of Angkor Wat, receive a traditional monk water blessing in the morning, and visit a local pottery workshop to try shaping clay by hand. In the afternoon, collect vegetables from the garden, help feed the water buffaloes, cook together over a wood fire, and enjoy a free bicycle to wander the quiet village roads at your own pace.</p>
           <div class="fc-tags">
-            <!-- HALF DAY -->
             <span class="fc-tag t-farming tier-half"><i class="fas fa-seedling"></i> Rice Farming</span>
             <span class="fc-tag t-farming tier-half"><i class="fas fa-cow"></i> Buffalo Care</span>
             <span class="fc-tag t-farming tier-half"><i class="fas fa-fire"></i> Wood-fire Cooking</span>
             <span class="fc-tag t-farming tier-half"><i class="fas fa-bicycle"></i> Free Bicycle</span>
-            <!-- FULL DAY ONLY -->
             <span class="fc-tag t-farming tier-full"><i class="fas fa-landmark"></i> Angkor Wat Tour</span>
             <span class="fc-tag t-farming tier-full"><i class="fas fa-pray"></i> Water Blessing</span>
             <span class="fc-tag t-farming tier-full"><i class="fas fa-shapes"></i> Pottery Workshop</span>
@@ -562,87 +464,25 @@ button{font-family:inherit;cursor:pointer}
         </div>
       </div>
     </div>
-
-    <!-- FOOD -->
     <div class="fc-food">
-      <div class="fc-food-hdr">
-        <div>
-          <div class="fc-food-title"><i class="fas fa-utensils"></i> What You'll Cook Together</div>
-          <div class="fc-food-sub">Prepare 2–3 dishes using ingredients straight from the farm</div>
-        </div>
-      </div>
+      <div class="fc-food-hdr"><div><div class="fc-food-title"><i class="fas fa-utensils"></i> What You'll Cook Together</div><div class="fc-food-sub">Prepare 2–3 dishes using ingredients straight from the farm</div></div></div>
       <div class="food-grid">
-        <!-- HALF DAY food -->
-        <div class="food-card tier-half">
-          <div class="food-img"><img src="./imgg/amokkkk.jpg" alt="Fish Amok"></div>
-          <div class="food-body">
-            <div class="food-name">Fish Amok</div>
-            <div class="food-khmer">អាម៉ក់ត្រី</div>
-            <p class="food-desc">Cambodia's most iconic dish — freshwater fish steamed in coconut curry paste wrapped in banana leaves. You'll grind the kroeung spice paste from scratch using a stone mortar just as the family has done for decades.</p>
-            <div class="food-pills"><span class="fp">Steamed</span><span class="fp">Coconut</span><span class="fp spicy">Mild Spice</span></div>
-          </div>
-        </div>
-        <div class="food-card tier-half">
-          <div class="food-img"><img src="./imgg/nom.jpg" alt="Nom Banh Chok"></div>
-          <div class="food-body">
-            <div class="food-name">Nom Banh Chok</div>
-            <div class="food-khmer">នំបញ្ចុក</div>
-            <p class="food-desc">Fresh rice noodles topped with green curry gravy made from lemongrass and turmeric fish, served with fresh vegetables.</p>
-            <div class="food-pills"><span class="fp">Soup</span><span class="fp sweet">Rich Flavor</span></div>
-          </div>
-        </div>
-        <!-- FULL DAY food -->
-        <div class="food-card tier-full">
-          <div class="food-lock">
-            <div class="food-lock-ico">🔒</div>
-            <div class="food-lock-lbl">Fresh Thnoat<br>Palm Fruit</div>
-            <div class="food-lock-pill"><i class="fas fa-sun"></i> Full Day only</div>
-          </div>
-          <div class="food-img"><img src="./imgg/palmmm.jpg" alt="Fresh Thnoat"></div>
-          <div class="food-body">
-            <div class="food-name">Fresh Thnoat (Palm Fruit)</div>
-            <div class="food-khmer">ផ្លែត្នោត</div>
-            <p class="food-desc">Harvested straight from the sugar palm tree, thnoat is Cambodia's most refreshing countryside treat. You'll learn how to open the fruit properly and enjoy its soft, jelly-like flesh chilled in cool well water.</p>
-            <div class="food-pills"><span class="fp vegan">Natural</span><span class="fp sweet">Lightly Sweet</span><span class="fp">Seasonal</span></div>
-          </div>
-        </div>
-        <div class="food-card tier-full">
-          <div class="food-lock">
-            <div class="food-lock-ico">🔒</div>
-            <div class="food-lock-lbl">Fresh Palm Juice</div>
-            <div class="food-lock-pill"><i class="fas fa-sun"></i> Full Day only</div>
-          </div>
-          <div class="food-img"><img src="./imgg/palm.jpg" alt="Palm Juice"></div>
-          <div class="food-body">
-            <div class="food-name">Fresh Palm Juice</div>
-            <div class="food-khmer">ទឹកត្នោត</div>
-            <p class="food-desc">Collected at sunrise from the sugar palm flower, this fresh palm juice is lightly sweet and cooling. Grandpa Rith will show you how villagers climb the tall palm trees and collect the sap — a tradition passed down for generations.</p>
-            <div class="food-pills"><span class="fp">Fresh Sap</span><span class="fp vegan">100% Natural</span><span class="fp sweet">Village Classic</span></div>
-          </div>
-        </div>
+        <div class="food-card tier-half"><div class="food-img"><img src="./imgg/amokkkk.jpg" alt="Fish Amok"></div><div class="food-body"><div class="food-name">Fish Amok</div><div class="food-khmer">អាម៉ក់ត្រី</div><p class="food-desc">Cambodia's most iconic dish — freshwater fish steamed in coconut curry paste wrapped in banana leaves.</p><div class="food-pills"><span class="fp">Steamed</span><span class="fp">Coconut</span><span class="fp spicy">Mild Spice</span></div></div></div>
+        <div class="food-card tier-half"><div class="food-img"><img src="./imgg/nom.jpg" alt="Nom Banh Chok"></div><div class="food-body"><div class="food-name">Nom Banh Chok</div><div class="food-khmer">នំបញ្ចុក</div><p class="food-desc">Fresh rice noodles topped with green curry gravy made from lemongrass and turmeric fish, served with fresh vegetables.</p><div class="food-pills"><span class="fp">Soup</span><span class="fp sweet">Rich Flavor</span></div></div></div>
+        <div class="food-card tier-full"><div class="food-lock"><div class="food-lock-ico">🔒</div><div class="food-lock-lbl">Fresh Thnoat<br>Palm Fruit</div><div class="food-lock-pill"><i class="fas fa-sun"></i> Full Day only</div></div><div class="food-img"><img src="./imgg/palmmm.jpg" alt="Fresh Thnoat"></div><div class="food-body"><div class="food-name">Fresh Thnoat (Palm Fruit)</div><div class="food-khmer">ផ្លែត្នោត</div><p class="food-desc">Harvested straight from the sugar palm tree — Cambodia's most refreshing countryside treat.</p><div class="food-pills"><span class="fp vegan">Natural</span><span class="fp sweet">Lightly Sweet</span><span class="fp">Seasonal</span></div></div></div>
+        <div class="food-card tier-full"><div class="food-lock"><div class="food-lock-ico">🔒</div><div class="food-lock-lbl">Fresh Palm Juice</div><div class="food-lock-pill"><i class="fas fa-sun"></i> Full Day only</div></div><div class="food-img"><img src="./imgg/palm.jpg" alt="Palm Juice"></div><div class="food-body"><div class="food-name">Fresh Palm Juice</div><div class="food-khmer">ទឹកត្នោត</div><p class="food-desc">Collected at sunrise from the sugar palm flower — lightly sweet and cooling, a tradition passed down for generations.</p><div class="food-pills"><span class="fp">Fresh Sap</span><span class="fp vegan">100% Natural</span><span class="fp sweet">Village Classic</span></div></div></div>
       </div>
-      <div class="unlock-banner">
-        <i class="fas fa-sun"></i>
-        <span>Upgrade to <strong>Full Day</strong> to unlock 2 more dishes + Angkor Wat tour, water blessing & pottery workshop.</span>
-      </div>
+      <div class="unlock-banner"><i class="fas fa-sun"></i><span>Upgrade to <strong>Full Day</strong> to unlock 2 more dishes + Angkor Wat tour, water blessing & pottery workshop.</span></div>
     </div>
-
-    <!-- HOUSING: overnight only -->
     <div class="fc-housing">
-      <div class="fc-housing-hdr">
-        <div>
-          <div class="fc-housing-title"><i class="fas fa-bed"></i> Where You'll Sleep</div>
-          <div class="fc-housing-sub">Add photos of the guest room &amp; home for overnight guests</div>
-        </div>
-      </div>
+      <div class="fc-housing-hdr"><div><div class="fc-housing-title"><i class="fas fa-bed"></i> Where You'll Sleep</div><div class="fc-housing-sub">Guest room & home for overnight guests</div></div></div>
       <div class="housing-grid">
-        <div class="housing-photo" onclick="openLightbox(['./imgg/puvin2.JPG','./imgg/puvin2.JPG','./imgg/puvin.JPG','./imgg/puvin.JPG'],0)"><img src="./imgg/puvin2.JPG" alt="Guest Room"><div class="housing-photo-cap"></div></div>
-        <div class="housing-photo" onclick="openLightbox(['./imgg/puvin.JPG','./imgg/puvin.JPG','./imgg/puvin.JPG','./imgg/puvin.JPG'],1)"><img src="./imgg/puvin.JPG" alt="Bathroom"><div class="housing-photo-cap"></div></div>
-        <div class="housing-photo" onclick="openLightbox(['./imgg/puvin3.JPG','./imgg/puvin3.JPG','./imgg/puvin.JPG','./imgg/puvin3.JPG'],2)"><img src="./imgg/puvin3.JPG" alt="Common Area"><div class="housing-photo-cap"></div></div>
-        <div class="housing-photo" onclick="openLightbox(['./imgg/puvin.JPG','./imgg/puvin.JPG','./imgg/puvin.JPG','./imgg/puvin.JPG'],3)"><img src="./imgg/puvin.JPG" alt="Garden"><div class="housing-photo-cap"></div></div>
+        <div class="housing-photo" onclick="openLightbox(['./imgg/puvin2.JPG','./imgg/puvin.JPG','./imgg/puvin3.JPG','./imgg/puvin.JPG'],0)"><img src="./imgg/puvin2.JPG" alt="Guest Room"><div class="housing-photo-cap"></div></div>
+        <div class="housing-photo" onclick="openLightbox(['./imgg/puvin2.JPG','./imgg/puvin.JPG','./imgg/puvin3.JPG','./imgg/puvin.JPG'],1)"><img src="./imgg/puvin.JPG" alt="Bathroom"><div class="housing-photo-cap"></div></div>
+        <div class="housing-photo" onclick="openLightbox(['./imgg/puvin2.JPG','./imgg/puvin.JPG','./imgg/puvin3.JPG','./imgg/puvin.JPG'],2)"><img src="./imgg/puvin3.JPG" alt="Common Area"><div class="housing-photo-cap"></div></div>
+        <div class="housing-photo" onclick="openLightbox(['./imgg/puvin2.JPG','./imgg/puvin.JPG','./imgg/puvin3.JPG','./imgg/puvin.JPG'],3)"><img src="./imgg/puvin.JPG" alt="Garden"><div class="housing-photo-cap"></div></div>
       </div>
     </div>
-
     <div class="fc-booking">
       <div><div class="fc-price-lbl">Starting from</div><div class="fc-price-val" id="pv-chea">$35 <span>/person</span></div></div>
       <div class="dur-tabs">
@@ -658,8 +498,7 @@ button{font-family:inherit;cursor:pointer}
     </div>
   </div>
 
-
-  <!-- ══════════════ FAMILY 2: POV ══════════════ -->
+  <!-- ══════════════ FAMILY 2: Enoch ══════════════ -->
   <div class="fc" data-lifestyle="fishing" data-family="pov">
     <div class="fc-top">
       <div class="fc-gallery">
@@ -685,14 +524,10 @@ button{font-family:inherit;cursor:pointer}
             </div>
             <span class="fc-mbr-lbl"><strong>Na srey Noch, son Polysokheng, Rithisak</strong> · Floating village family</span>
           </div>
-          <p class="fc-desc">
-            Spend a meaningful day in the floating village of Tonlé Sap, Siem Reap. Cruise by wooden boat through colorful floating homes and markets, visit the local floating school to learn how children study on water, and discover how families adapt to the lake's changing seasons. Back at the house, join the family to cook a traditional Khmer meal, then deliver and share dishes with neighbors by boat — a beautiful tradition of community life on the lake.
-          </p>
+          <p class="fc-desc">Spend a meaningful day in the floating village of Tonlé Sap, Siem Reap. Cruise by wooden boat through colorful floating homes and markets, visit the local floating school to learn how children study on water, and discover how families adapt to the lake's changing seasons. Back at the house, join the family to cook a traditional Khmer meal, then deliver and share dishes with neighbors by boat.</p>
           <div class="fc-tags">
-            <!-- HALF DAY -->
             <span class="fc-tag t-fishing tier-half"><i class="fas fa-ship"></i> Village Boat Tour</span>
             <span class="fc-tag t-fishing tier-half"><i class="fas fa-utensils"></i> Khmer Cooking</span>
-            <!-- FULL DAY ONLY -->
             <span class="fc-tag t-fishing tier-full"><i class="fas fa-school"></i> School Visit</span>
             <span class="fc-tag t-fishing tier-full"><i class="fas fa-hands-helping"></i> Community Sharing</span>
           </div>
@@ -703,86 +538,25 @@ button{font-family:inherit;cursor:pointer}
         </div>
       </div>
     </div>
-
     <div class="fc-food">
-      <div class="fc-food-hdr">
-        <div>
-          <div class="fc-food-title"><i class="fas fa-utensils"></i> What You'll Cook Together</div>
-          <div class="fc-food-sub">All ingredients caught or sourced from the lake that very morning</div>
-        </div>
-      </div>
+      <div class="fc-food-hdr"><div><div class="fc-food-title"><i class="fas fa-utensils"></i> What You'll Cook Together</div><div class="fc-food-sub">All ingredients caught or sourced from the lake that very morning</div></div></div>
       <div class="food-grid">
-        <!-- HALF DAY food -->
-        <div class="food-card tier-half">
-          <div class="food-img"><img src="./imgg/kuteaw.jpg" alt="Kuy Teav"></div>
-          <div class="food-body">
-            <div class="food-name">Kuy Teav</div>
-            <div class="food-khmer">គុយទាវ</div>
-            <p class="food-desc">A comforting Cambodian rice noodle soup enjoyed from early morning. Slow-simmered pork or beef broth poured over silky rice noodles and topped with fresh herbs, bean sprouts, lime, and crispy garlic.</p>
-            <div class="food-pills"><span class="fp">Noodle Soup</span><span class="fp vegan">Fresh Herbs</span><span class="fp">Breakfast Classic</span></div>
-          </div>
-        </div>
-        <div class="food-card tier-half">
-          <div class="food-img"><img src="./imgg/foodfloat.jpg" alt="Num Banh Chhev"></div>
-          <div class="food-body">
-            <div class="food-name">Num Banh Chhev</div>
-            <div class="food-khmer">នំបាញ់ឆែវ</div>
-            <p class="food-desc">A crispy golden Cambodian savory pancake made from rice flour and coconut milk batter, filled with minced pork, shrimp, and bean sprouts. Wrapped in fresh lettuce and dipped in sweet fish sauce.</p>
-            <div class="food-pills"><span class="fp">Savory Pancake</span><span class="fp">Crispy</span><span class="fp spicy">Street Favorite</span></div>
-          </div>
-        </div>
-        <!-- FULL DAY food -->
-        <div class="food-card tier-full">
-          <div class="food-lock">
-            <div class="food-lock-ico">🔒</div>
-            <div class="food-lock-lbl">Mju Fruit Mix</div>
-            <div class="food-lock-pill"><i class="fas fa-sun"></i> Full Day only</div>
-          </div>
-          <div class="food-img"><img src="./imgg/mju.jpg" alt="Mju Fruit Mix"></div>
-          <div class="food-body">
-            <div class="food-name">Mju Fruit Mix</div>
-            <div class="food-khmer">ម្ជូរផ្លែឈើ</div>
-            <p class="food-desc">A vibrant Cambodian fruit mix made with green mango, guava, pineapple, and seasonal fruits tossed in chilli salt, palm sugar, and a splash of lime. Sweet, sour, salty, and spicy all at once.</p>
-            <div class="food-pills"><span class="fp">Fresh Fruit</span><span class="fp spicy">Sweet & Spicy</span><span class="fp vegan">Street Snack</span></div>
-          </div>
-        </div>
-        <div class="food-card tier-full">
-          <div class="food-lock">
-            <div class="food-lock-ico">🔒</div>
-            <div class="food-lock-lbl">Fresh Coconut Drink</div>
-            <div class="food-lock-pill"><i class="fas fa-sun"></i> Full Day only</div>
-          </div>
-          <div class="food-img"><img src="./imgg/coconut.jpeg" alt="Fresh Coconut Drink"></div>
-          <div class="food-body">
-            <div class="food-name">Fresh Coconut Drink</div>
-            <div class="food-khmer">ទឹកដូងស្រស់</div>
-            <p class="food-desc">Chilled fresh coconut opened right on the boat and served straight from the shell. Naturally sweet and refreshing, it's the perfect drink under the warm Siem Reap sun.</p>
-            <div class="food-pills"><span class="fp">Refreshing</span><span class="fp vegan">100% Natural</span><span class="fp">Tropical</span></div>
-          </div>
-        </div>
+        <div class="food-card tier-half"><div class="food-img"><img src="./imgg/kuteaw.jpg" alt="Kuy Teav"></div><div class="food-body"><div class="food-name">Kuy Teav</div><div class="food-khmer">គុយទាវ</div><p class="food-desc">A comforting Cambodian rice noodle soup — slow-simmered broth poured over silky noodles with fresh herbs and crispy garlic.</p><div class="food-pills"><span class="fp">Noodle Soup</span><span class="fp vegan">Fresh Herbs</span><span class="fp">Breakfast Classic</span></div></div></div>
+        <div class="food-card tier-half"><div class="food-img"><img src="./imgg/foodfloat.jpg" alt="Num Banh Chhev"></div><div class="food-body"><div class="food-name">Num Banh Chhev</div><div class="food-khmer">នំបាញ់ឆែវ</div><p class="food-desc">A crispy golden Cambodian savory pancake filled with minced pork, shrimp, and bean sprouts. Wrapped in lettuce, dipped in sweet fish sauce.</p><div class="food-pills"><span class="fp">Savory Pancake</span><span class="fp">Crispy</span><span class="fp spicy">Street Favorite</span></div></div></div>
+        <div class="food-card tier-full"><div class="food-lock"><div class="food-lock-ico">🔒</div><div class="food-lock-lbl">Mju Fruit Mix</div><div class="food-lock-pill"><i class="fas fa-sun"></i> Full Day only</div></div><div class="food-img"><img src="./imgg/mju.jpg" alt="Mju Fruit Mix"></div><div class="food-body"><div class="food-name">Mju Fruit Mix</div><div class="food-khmer">ម្ជូរផ្លែឈើ</div><p class="food-desc">Green mango, guava, pineapple tossed in chilli salt, palm sugar, and lime. Sweet, sour, salty, and spicy all at once.</p><div class="food-pills"><span class="fp">Fresh Fruit</span><span class="fp spicy">Sweet & Spicy</span><span class="fp vegan">Street Snack</span></div></div></div>
+        <div class="food-card tier-full"><div class="food-lock"><div class="food-lock-ico">🔒</div><div class="food-lock-lbl">Fresh Coconut Drink</div><div class="food-lock-pill"><i class="fas fa-sun"></i> Full Day only</div></div><div class="food-img"><img src="./imgg/coconut.jpeg" alt="Fresh Coconut Drink"></div><div class="food-body"><div class="food-name">Fresh Coconut Drink</div><div class="food-khmer">ទឹកដូងស្រស់</div><p class="food-desc">Chilled fresh coconut opened right on the boat and served straight from the shell. Naturally sweet and refreshing.</p><div class="food-pills"><span class="fp">Refreshing</span><span class="fp vegan">100% Natural</span><span class="fp">Tropical</span></div></div></div>
       </div>
-      <div class="unlock-banner">
-        <i class="fas fa-sun"></i>
-        <span>Upgrade to <strong>Full Day</strong> to unlock 2 more dishes + floating school visit & community sharing experience.</span>
-      </div>
+      <div class="unlock-banner"><i class="fas fa-sun"></i><span>Upgrade to <strong>Full Day</strong> to unlock 2 more dishes + floating school visit & community sharing experience.</span></div>
     </div>
-
-    <!-- HOUSING: overnight only -->
     <div class="fc-housing">
-      <div class="fc-housing-hdr">
-        <div>
-          <div class="fc-housing-title"><i class="fas fa-bed"></i> Where You'll Sleep</div>
-          <div class="fc-housing-sub">Add photos of the floating home guest room &amp; living areas</div>
-        </div>
-      </div>
+      <div class="fc-housing-hdr"><div><div class="fc-housing-title"><i class="fas fa-bed"></i> Where You'll Sleep</div><div class="fc-housing-sub">Floating home guest room & living areas</div></div></div>
       <div class="housing-grid">
-        <div class="housing-photo" onclick="openLightbox(['./imgg/new.JPG','./imgg/puvin.JPG','./imgg/puvin.JPG','./imgg/puvin.JPG'],0)"><img src="./imgg/new.jpg" alt="Guest Room"><div class="housing-photo-cap"></div></div>
-        <div class="housing-photo" onclick="openLightbox(['./imgg/new1.JPG','./imgg/new1.JPG','./imgg/new1.JPG','./imgg/new1.JPG'],1)"><img src="./imgg/new1.jpg" alt="Bathroom"><div class="housing-photo-cap"></div></div>
-        <div class="housing-photo" onclick="openLightbox(['./imgg/new2.','./imgg/new2.JPG','./imgg/new2.JPG','./imgg/new2.JPG'],2)"><img src="./imgg/new2.jpg" alt="Lake View"><div class="housing-photo-cap"></div></div>
-        <div class="housing-photo" onclick="openLightbox(['./imgg/new3.jpg','./imgg/new3.jpg','./imgg/new3.jpg','./imgg/new3.jpg'],3)"><img src="./imgg/new3.jpg" alt="Boat Dock"><div class="housing-photo-cap"></div></div>
+        <div class="housing-photo" onclick="openLightbox(['./imgg/new.jpg','./imgg/new1.jpg','./imgg/new2.jpg','./imgg/new3.jpg'],0)"><img src="./imgg/new.jpg" alt="Guest Room"><div class="housing-photo-cap"></div></div>
+        <div class="housing-photo" onclick="openLightbox(['./imgg/new.jpg','./imgg/new1.jpg','./imgg/new2.jpg','./imgg/new3.jpg'],1)"><img src="./imgg/new1.jpg" alt="Bathroom"><div class="housing-photo-cap"></div></div>
+        <div class="housing-photo" onclick="openLightbox(['./imgg/new.jpg','./imgg/new1.jpg','./imgg/new2.jpg','./imgg/new3.jpg'],2)"><img src="./imgg/new2.jpg" alt="Lake View"><div class="housing-photo-cap"></div></div>
+        <div class="housing-photo" onclick="openLightbox(['./imgg/new.jpg','./imgg/new1.jpg','./imgg/new2.jpg','./imgg/new3.jpg'],3)"><img src="./imgg/new3.jpg" alt="Boat Dock"><div class="housing-photo-cap"></div></div>
       </div>
     </div>
-
     <div class="fc-booking">
       <div><div class="fc-price-lbl">Starting from</div><div class="fc-price-val" id="pv-pov">$42 <span>/person</span></div></div>
       <div class="dur-tabs">
@@ -797,7 +571,6 @@ button{font-family:inherit;cursor:pointer}
       </div>
     </div>
   </div>
-
 
   <!-- ══════════════ FAMILY 3: SOPHEAK ══════════════ -->
   <div class="fc" data-lifestyle="artisan" data-family="sopheak">
@@ -827,10 +600,8 @@ button{font-family:inherit;cursor:pointer}
           </div>
           <p class="fc-desc">Enter a workshop filled with the rhythmic clack of wooden looms. Grandmother Sopheak's family has woven silk in Siem Reap for four generations. Try the loom, learn natural plant dyeing, paint your own krama scarf — then sit in the courtyard for a morning feast Bopha prepares from scratch while you weave.</p>
           <div class="fc-tags">
-            <!-- HALF DAY -->
             <span class="fc-tag t-artisan tier-half"><i class="fas fa-tshirt"></i> Silk Weaving</span>
             <span class="fc-tag t-artisan tier-half"><i class="fas fa-paint-brush"></i> Plant Dyeing</span>
-            <!-- FULL DAY ONLY -->
             <span class="fc-tag t-artisan tier-full"><i class="fas fa-mortar-pestle"></i> Khmer Snacks</span>
             <span class="fc-tag t-artisan tier-full"><i class="fas fa-hands"></i> Take-home Craft</span>
           </div>
@@ -841,86 +612,25 @@ button{font-family:inherit;cursor:pointer}
         </div>
       </div>
     </div>
-
     <div class="fc-food">
-      <div class="fc-food-hdr">
-        <div>
-          <div class="fc-food-title"><i class="fas fa-utensils"></i> What You'll Cook Together</div>
-          <div class="fc-food-sub">Artisan snacks and sweet treats made between weaving sessions</div>
-        </div>
-      </div>
+      <div class="fc-food-hdr"><div><div class="fc-food-title"><i class="fas fa-utensils"></i> What You'll Cook Together</div><div class="fc-food-sub">Artisan snacks and sweet treats made between weaving sessions</div></div></div>
       <div class="food-grid">
-        <!-- HALF DAY food -->
-        <div class="food-card tier-half">
-          <div class="food-img"><img src="./imgg/nomakor.png" alt="Nom Kor"></div>
-          <div class="food-body">
-            <div class="food-name">Nom Kor</div>
-            <div class="food-khmer">នំកូរ</div>
-            <p class="food-desc">Traditional Khmer steamed rice cakes shaped into flowers and animals — a craft in themselves. Bopha uses pandan leaf for the green colour and fresh coconut milk for silky texture. You'll fold the intricate banana leaf moulds by hand.</p>
-            <div class="food-pills"><span class="fp vegan">Vegan</span><span class="fp sweet">Sweet</span><span class="fp">Steamed</span></div>
-          </div>
-        </div>
-        <div class="food-card tier-half">
-          <div class="food-img"><img src="./imgg/bobor.jpg" alt="Bobor Moan"></div>
-          <div class="food-body">
-            <div class="food-name">Bobor Moan</div>
-            <div class="food-khmer">បបរមាន់</div>
-            <p class="food-desc">Silky Cambodian chicken congee with ginger and crispy shallots — the family's mid-morning break dish, slow-cooked for hours before you arrive. You'll finish it together with fresh garnishes from the kitchen garden.</p>
-            <div class="food-pills"><span class="fp">Congee</span><span class="fp">Comfort Food</span></div>
-          </div>
-        </div>
-        <!-- FULL DAY food -->
-        <div class="food-card tier-full">
-          <div class="food-lock">
-            <div class="food-lock-ico">🔒</div>
-            <div class="food-lock-lbl">Num Ansom Chek</div>
-            <div class="food-lock-pill"><i class="fas fa-sun"></i> Full Day only</div>
-          </div>
-          <div class="food-img"><img src="./imgg/pisang.jpg" alt="Num Ansom Chek"></div>
-          <div class="food-body">
-            <div class="food-name">Num Ansom Chek</div>
-            <div class="food-khmer">នំអន្សមចេក</div>
-            <p class="food-desc">Sticky rice and ripe banana wrapped tightly in banana leaves and steamed for hours. Kanha calls it "grandma's hug in food form." You'll master the intricate folding technique — a tradition the family has kept for four generations.</p>
-            <div class="food-pills"><span class="fp vegan">Vegan</span><span class="fp sweet">Banana</span></div>
-          </div>
-        </div>
-        <div class="food-card tier-full">
-          <div class="food-lock">
-            <div class="food-lock-ico">🔒</div>
-            <div class="food-lock-lbl">Lap Khmer</div>
-            <div class="food-lock-pill"><i class="fas fa-sun"></i> Full Day only</div>
-          </div>
-          <div class="food-img"><img src="./imgg/lap.png" alt="Lap Khmer"></div>
-          <div class="food-body">
-            <div class="food-name">Lap Khmer</div>
-            <div class="food-khmer">ឡាប់ខ្មែរ</div>
-            <p class="food-desc">A bright beef salad tossed with lemongrass, fresh lime, chilli, and Kampot pepper — the family's lunchtime celebration dish. Beef is "cooked" by lime acid in the traditional style, finished with fresh herbs and fried shallots.</p>
-            <div class="food-pills"><span class="fp spicy">Spicy</span><span class="fp">Lime-cured</span></div>
-          </div>
-        </div>
+        <div class="food-card tier-half"><div class="food-img"><img src="./imgg/nomakor.png" alt="Nom Kor"></div><div class="food-body"><div class="food-name">Nom Kor</div><div class="food-khmer">នំកូរ</div><p class="food-desc">Traditional Khmer steamed rice cakes shaped into flowers and animals. You'll fold the intricate banana leaf moulds by hand.</p><div class="food-pills"><span class="fp vegan">Vegan</span><span class="fp sweet">Sweet</span><span class="fp">Steamed</span></div></div></div>
+        <div class="food-card tier-half"><div class="food-img"><img src="./imgg/bobor.jpg" alt="Bobor Moan"></div><div class="food-body"><div class="food-name">Bobor Moan</div><div class="food-khmer">បបរមាន់</div><p class="food-desc">Silky Cambodian chicken congee with ginger and crispy shallots — the family's mid-morning break dish.</p><div class="food-pills"><span class="fp">Congee</span><span class="fp">Comfort Food</span></div></div></div>
+        <div class="food-card tier-full"><div class="food-lock"><div class="food-lock-ico">🔒</div><div class="food-lock-lbl">Num Ansom Chek</div><div class="food-lock-pill"><i class="fas fa-sun"></i> Full Day only</div></div><div class="food-img"><img src="./imgg/pisang.jpg" alt="Num Ansom Chek"></div><div class="food-body"><div class="food-name">Num Ansom Chek</div><div class="food-khmer">នំអន្សមចេក</div><p class="food-desc">Sticky rice and ripe banana wrapped in banana leaves and steamed for hours. Kanha calls it "grandma's hug in food form."</p><div class="food-pills"><span class="fp vegan">Vegan</span><span class="fp sweet">Banana</span></div></div></div>
+        <div class="food-card tier-full"><div class="food-lock"><div class="food-lock-ico">🔒</div><div class="food-lock-lbl">Lap Khmer</div><div class="food-lock-pill"><i class="fas fa-sun"></i> Full Day only</div></div><div class="food-img"><img src="./imgg/lap.png" alt="Lap Khmer"></div><div class="food-body"><div class="food-name">Lap Khmer</div><div class="food-khmer">ឡាប់ខ្មែរ</div><p class="food-desc">A bright beef salad tossed with lemongrass, fresh lime, chilli, and Kampot pepper — the family's lunchtime celebration dish.</p><div class="food-pills"><span class="fp spicy">Spicy</span><span class="fp">Lime-cured</span></div></div></div>
       </div>
-      <div class="unlock-banner">
-        <i class="fas fa-sun"></i>
-        <span>Upgrade to <strong>Full Day</strong> to unlock 2 more dishes + take-home craft & hands-on snack making.</span>
-      </div>
+      <div class="unlock-banner"><i class="fas fa-sun"></i><span>Upgrade to <strong>Full Day</strong> to unlock 2 more dishes + take-home craft & hands-on snack making.</span></div>
     </div>
-
-    <!-- HOUSING: overnight only -->
     <div class="fc-housing">
-      <div class="fc-housing-hdr">
-        <div>
-          <div class="fc-housing-title"><i class="fas fa-bed"></i> Where You'll Sleep</div>
-          <div class="fc-housing-sub">Add photos of the weaver's courtyard home &amp; guest room</div>
-        </div>
-      </div>
+      <div class="fc-housing-hdr"><div><div class="fc-housing-title"><i class="fas fa-bed"></i> Where You'll Sleep</div><div class="fc-housing-sub">Weaver's courtyard home & guest room</div></div></div>
       <div class="housing-grid">
-        <div class="housing-photo" onclick="openLightbox(['./imgg/puvin.JPG','./imgg/puvin.JPG','./imgg/puvin.JPG','./imgg/puvin.JPG'],0)"><img src="./imgg/vin.jpg" alt="Guest Room"><div class="housing-photo-cap"></div></div>
-        <div class="housing-photo" onclick="openLightbox(['./imgg/puvin.JPG','./imgg/puvin.JPG','./imgg/puvin.JPG','./imgg/puvin.JPG'],1)"><img src="./imgg/vin1.jpg" alt="Bathroom"><div class="housing-photo-cap"></div></div>
-        <div class="housing-photo" onclick="openLightbox(['./imgg/puvin.JPG','./imgg/puvin.JPG','./imgg/puvin.JPG','./imgg/puvin.JPG'],2)"><img src="./imgg/vin2.jpg" alt="Courtyard"><div class="housing-photo-cap"></div></div>
-        <div class="housing-photo" onclick="openLightbox(['./imgg/puvin.JPG','./imgg/puvin.JPG','./imgg/puvin.JPG','./imgg/puvin.JPG'],3)"><img src="./imgg/klengek1.jpg" alt="Weaving Studio"><div class="housing-photo-cap"></div></div>
+        <div class="housing-photo" onclick="openLightbox(['./imgg/vin.jpg','./imgg/vin1.jpg','./imgg/vin2.jpg','./imgg/klengek1.jpg'],0)"><img src="./imgg/vin.jpg" alt="Guest Room"><div class="housing-photo-cap"></div></div>
+        <div class="housing-photo" onclick="openLightbox(['./imgg/vin.jpg','./imgg/vin1.jpg','./imgg/vin2.jpg','./imgg/klengek1.jpg'],1)"><img src="./imgg/vin1.jpg" alt="Bathroom"><div class="housing-photo-cap"></div></div>
+        <div class="housing-photo" onclick="openLightbox(['./imgg/vin.jpg','./imgg/vin1.jpg','./imgg/vin2.jpg','./imgg/klengek1.jpg'],2)"><img src="./imgg/vin2.jpg" alt="Courtyard"><div class="housing-photo-cap"></div></div>
+        <div class="housing-photo" onclick="openLightbox(['./imgg/vin.jpg','./imgg/vin1.jpg','./imgg/vin2.jpg','./imgg/klengek1.jpg'],3)"><img src="./imgg/klengek1.jpg" alt="Weaving Studio"><div class="housing-photo-cap"></div></div>
       </div>
     </div>
-
     <div class="fc-booking">
       <div><div class="fc-price-lbl">Starting from</div><div class="fc-price-val" id="pv-sopheak">$38 <span>/person</span></div></div>
       <div class="dur-tabs">
@@ -944,39 +654,9 @@ button{font-family:inherit;cursor:pointer}
     <div class="sec-lbl"><i class="fas fa-quote-left"></i> Guest Stories</div>
     <div class="sec-title">Moments That Stay With You</div>
     <div class="test-grid">
-      <div class="test-card">
-        <div class="test-stars">★★★★★</div>
-       <p class="test-q">Riding bicycles through the quiet morning roads to Angkor Wat with Pu Nak felt like stepping into another world. We cooked together with the family, shared stories over the fire, and even received a gentle water blessing that left me unexpectedly emotional. I came as a visitor — I left feeling like family.</p>
-<div class="test-author">
-  <div class="test-av">J</div>
-  <div>
-    <div class="test-name">Jenny L.</div>
-    <div class="test-info">🇹🇱 Timor-Leste · Pu Nak Family</div>
-  </div>
-</div>
-      </div>
-   <div class="test-card">
-  <div class="test-stars">★★★★★</div>
-  <p class="test-q">Gliding by boat through the floating village at dawn felt unreal. We passed children heading to school in tiny boats, laughing and balancing their backpacks as the water shimmered around them. Seeing the floating school up close changed something in me — life here moves with the river, and it's beautiful.</p>
-  <div class="test-author">
-    <div class="test-av">K</div>
-    <div>
-      <div class="test-name">Kamini R.</div>
-      <div class="test-info">🇲🇾 Malaysia · Enoch Floating Village</div>
-    </div>
-  </div>
-</div>
-  <div class="test-card">
-  <div class="test-stars">★★★★★</div>
-  <p class="test-q">Spending time in Enoch Floating Village changed the way I see the world. Watching families build their lives on water, seeing children row themselves to school with such independence — it humbled me deeply. I arrived curious, but I left with a new perspective on resilience, gratitude, and community.</p>
-  <div class="test-author">
-    <div class="test-av">K</div>
-    <div>
-      <div class="test-name">Kamini R.</div>
-      <div class="test-info">🇲🇾 Malaysia · Enoch Floating Village</div>
-    </div>
-  </div>
-</div>
+      <div class="test-card"><div class="test-stars">★★★★★</div><p class="test-q">Riding bicycles through the quiet morning roads to Angkor Wat with Pu Nak felt like stepping into another world. I came as a visitor — I left feeling like family.</p><div class="test-author"><div class="test-av">J</div><div><div class="test-name">Jenny L.</div><div class="test-info">🇹🇱 Timor-Leste · Pu Nak Family</div></div></div></div>
+      <div class="test-card"><div class="test-stars">★★★★★</div><p class="test-q">Gliding by boat through the floating village at dawn felt unreal. Seeing the floating school up close changed something in me — life here moves with the river, and it's beautiful.</p><div class="test-author"><div class="test-av">K</div><div><div class="test-name">Kamini R.</div><div class="test-info">🇲🇾 Malaysia · Enoch Floating Village</div></div></div></div>
+      <div class="test-card"><div class="test-stars">★★★★★</div><p class="test-q">Spending time in Enoch Floating Village changed the way I see the world. I arrived curious, but I left with a new perspective on resilience, gratitude, and community.</p><div class="test-author"><div class="test-av">K</div><div><div class="test-name">Kamini R.</div><div class="test-info">🇲🇾 Malaysia · Enoch Floating Village</div></div></div></div>
     </div>
   </div>
 </div>
@@ -1076,148 +756,242 @@ button{font-family:inherit;cursor:pointer}
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
-const EJ_KEY='SmoLQAp-ij_aoJbAd',EJ_SVC='service_9ogox5a',EJ_TPL='template_0pi47tp';
-if(typeof emailjs!=='undefined')emailjs.init(EJ_KEY);
+/* ══════════════════════════════════════
+   EMAILJS CREDENTIALS
+══════════════════════════════════════ */
+const EJ_KEY = 'f6HV0gopdt8FE-mw7';
+const EJ_SVC = 'service_xum7qyo';
+const EJ_TPL = 'template_a9e8je3';
+if (typeof emailjs !== 'undefined') emailjs.init(EJ_KEY);
 
-window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',scrollY>30));
-document.getElementById('b-date').min=new Date().toISOString().split('T')[0];
+/* ── NAV SCROLL ── */
+window.addEventListener('scroll', () =>
+  document.getElementById('mainNav').classList.toggle('scrolled', scrollY > 30));
 
-function swapImg(id,src){document.getElementById(id).src=src}
+/* ── DATE MIN ── */
+document.getElementById('b-date').min = new Date().toISOString().split('T')[0];
 
-function filterFamilies(type,btn){
-  document.querySelectorAll('.f-chip').forEach(b=>b.classList.remove('active'));
+/* ── GALLERY SWAP ── */
+function swapImg(id, src) { document.getElementById(id).src = src; }
+
+/* ── FILTER ── */
+function filterFamilies(type, btn) {
+  document.querySelectorAll('.f-chip').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('.fc').forEach(c=>c.classList.toggle('hidden',type!=='all'&&c.dataset.lifestyle!==type));
+  document.querySelectorAll('.fc').forEach(c =>
+    c.classList.toggle('hidden', type !== 'all' && c.dataset.lifestyle !== type));
 }
 
-// ── TIER UNLOCK LOGIC ──
-function setDur(fam,price,lbl,btn){
-  // Update price display
-  const el=document.getElementById('pv-'+fam);
-  if(el)el.innerHTML=`$${price} <span>/person</span>`;
-
-  // Update button active state
-  btn.closest('.dur-tabs').querySelectorAll('.dur-btn').forEach(b=>b.classList.remove('sel'));
+/* ── TIER UNLOCK ── */
+function setDur(fam, price, lbl, btn) {
+  const el = document.getElementById('pv-' + fam);
+  if (el) el.innerHTML = `$${price} <span>/person</span>`;
+  btn.closest('.dur-tabs').querySelectorAll('.dur-btn').forEach(b => b.classList.remove('sel'));
   btn.classList.add('sel');
-
-  // Find the parent family card and toggle tiers
-  const card=btn.closest('.fc');
-  const isHalf=(lbl==='Half Day');
-  const isOvernight=(lbl==='Overnight');
-
-  // Full unlock (full day OR overnight both show all food/activities)
-  if(isHalf){
-    card.classList.remove('show-full','show-overnight');
-  } else if(isOvernight){
-    card.classList.add('show-full','show-overnight');
+  const card = btn.closest('.fc');
+  if (lbl === 'Half Day') {
+    card.classList.remove('show-full', 'show-overnight');
+  } else if (lbl === 'Overnight') {
+    card.classList.add('show-full', 'show-overnight');
   } else {
     card.classList.add('show-full');
     card.classList.remove('show-overnight');
   }
 }
 
-// ── LIGHTBOX (static photos) ──
-let lbPhotos=[], lbIdx=0;
-
-function openLightbox(photos,idx){
-  lbPhotos=photos; lbIdx=idx;
-  document.getElementById('lightbox-img').src=lbPhotos[lbIdx];
-  document.getElementById('lightbox-counter').textContent=`${lbIdx+1} / ${lbPhotos.length}`;
+/* ── LIGHTBOX ── */
+let lbPhotos = [], lbIdx = 0;
+function openLightbox(photos, idx) {
+  lbPhotos = photos; lbIdx = idx;
+  document.getElementById('lightbox-img').src = lbPhotos[lbIdx];
+  document.getElementById('lightbox-counter').textContent = `${lbIdx + 1} / ${lbPhotos.length}`;
   document.getElementById('lightbox').classList.add('open');
-  document.body.style.overflow='hidden';
+  document.body.style.overflow = 'hidden';
 }
-function lightboxNav(dir,e){
-  if(e)e.stopPropagation();
-  lbIdx=(lbIdx+dir+lbPhotos.length)%lbPhotos.length;
-  document.getElementById('lightbox-img').src=lbPhotos[lbIdx];
-  document.getElementById('lightbox-counter').textContent=`${lbIdx+1} / ${lbPhotos.length}`;
+function lightboxNav(dir, e) {
+  if (e) e.stopPropagation();
+  lbIdx = (lbIdx + dir + lbPhotos.length) % lbPhotos.length;
+  document.getElementById('lightbox-img').src = lbPhotos[lbIdx];
+  document.getElementById('lightbox-counter').textContent = `${lbIdx + 1} / ${lbPhotos.length}`;
 }
-function closeLightbox(e){
-  if(e&&e.target!==document.getElementById('lightbox'))return;
+function closeLightbox(e) {
+  if (e && e.target !== document.getElementById('lightbox')) return;
   document.getElementById('lightbox').classList.remove('open');
-  document.body.style.overflow='';
+  document.body.style.overflow = '';
 }
-function closeLightboxForced(){
+function closeLightboxForced() {
   document.getElementById('lightbox').classList.remove('open');
-  document.body.style.overflow='';
+  document.body.style.overflow = '';
 }
-document.addEventListener('keydown',e=>{
-  if(!document.getElementById('lightbox').classList.contains('open'))return;
-  if(e.key==='ArrowLeft')lightboxNav(-1);
-  if(e.key==='ArrowRight')lightboxNav(1);
-  if(e.key==='Escape')closeLightboxForced();
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'ArrowLeft') lightboxNav(-1);
+  if (e.key === 'ArrowRight') lightboxNav(1);
+  if (e.key === 'Escape') closeLightboxForced();
 });
 
-function toggleWish(btn){
+/* ── WISHLIST ── */
+function toggleWish(btn) {
   btn.classList.toggle('liked');
-  btn.innerHTML=btn.classList.contains('liked')?'<i class="fas fa-heart"></i>':'<i class="far fa-heart"></i>';
+  btn.innerHTML = btn.classList.contains('liked')
+    ? '<i class="fas fa-heart"></i>'
+    : '<i class="far fa-heart"></i>';
 }
 
-/* BOOKING */
-let bk={};
-function openBook(family,icon,ls,half,full,night){
-  bk={family,icon,ls,half,full,night,selType:'half',selPrice:half};
-  document.getElementById('bm-icon').textContent=icon;
-  document.getElementById('bm-name').textContent=family;
-  document.getElementById('bm-ls').textContent=ls+' · TosTrip Experience';
-  document.getElementById('bm-sn').textContent=family;
-  updateSum('half',half);
-  document.getElementById('bm-dur').innerHTML=`
+/* ══════════════════════════════════════
+   BOOKING MODAL
+══════════════════════════════════════ */
+let bk = {};
+function openBook(family, icon, ls, half, full, night) {
+  bk = { family, icon, ls, half, full, night, selType: 'half', selPrice: half };
+  document.getElementById('bm-icon').textContent = icon;
+  document.getElementById('bm-name').textContent = family;
+  document.getElementById('bm-ls').textContent = ls + ' · TosTrip Experience';
+  document.getElementById('bm-sn').textContent = family;
+  updateSum('half', half);
+  document.getElementById('bm-dur').innerHTML = `
     <div class="dur-opt sel" onclick="pickDur('half',${half},this)"><input type="radio" name="dur" checked><div class="dur-chk"><i class="fas fa-check"></i></div><div class="dur-lbl">🌅 Half Day</div><div class="dur-sub">~4 hours</div><div class="dur-price">$${half}</div></div>
     <div class="dur-opt" onclick="pickDur('full',${full},this)"><input type="radio" name="dur"><div class="dur-chk"><i class="fas fa-check"></i></div><div class="dur-lbl">☀️ Full Day</div><div class="dur-sub">~8 hours</div><div class="dur-price">$${full}</div></div>
     <div class="dur-opt dur-full" onclick="pickDur('night',${night},this)"><input type="radio" name="dur"><div class="dur-chk"><i class="fas fa-check"></i></div><div class="dur-lbl">🌙 Overnight Stay</div><div class="dur-sub">Arrive afternoon, leave next morning</div><div class="dur-price">$${night}</div></div>`;
   document.getElementById('bookModal').classList.add('open');
 }
-function pickDur(type,price,el){
-  bk.selType=type;bk.selPrice=price;
-  document.querySelectorAll('#bm-dur .dur-opt').forEach(o=>o.classList.remove('sel'));
-  el.classList.add('sel');updateSum(type,price);
+function pickDur(type, price, el) {
+  bk.selType = type; bk.selPrice = price;
+  document.querySelectorAll('#bm-dur .dur-opt').forEach(o => o.classList.remove('sel'));
+  el.classList.add('sel');
+  updateSum(type, price);
 }
-function updateSum(type,price){
-  const l={half:'Half Day Experience',full:'Full Day Experience',night:'Overnight Stay'};
-  document.getElementById('bm-sd').textContent=l[type];
-  document.getElementById('bm-sp').textContent='$'+price;
+function updateSum(type, price) {
+  const l = { half: 'Half Day Experience', full: 'Full Day Experience', night: 'Overnight Stay' };
+  document.getElementById('bm-sd').textContent = l[type];
+  document.getElementById('bm-sp').textContent = '$' + price;
 }
-document.getElementById('bookModal').addEventListener('click',e=>{if(e.target===document.getElementById('bookModal'))document.getElementById('bookModal').classList.remove('open')});
+document.getElementById('bookModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('bookModal'))
+    document.getElementById('bookModal').classList.remove('open');
+});
 
-function submitBook(e){
+/* ── SUBMIT BOOKING ── */
+function submitBook(e) {
   e.preventDefault();
-  const btn=e.target.querySelector('.m-btn');
-  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending…';btn.disabled=true;
-  const p={user_name:document.getElementById('b-name').value,user_email:document.getElementById('b-email').value,phone:document.getElementById('b-phone').value,booking_date:document.getElementById('b-date').value,message:document.getElementById('b-notes').value||'No special requests',request_type:'Live Like a Local – Booking',friend_name:bk.family,duration:bk.selType+' — $'+bk.selPrice,price:bk.selPrice,lifestyle:bk.ls,people:document.getElementById('b-pax').value};
-  if(typeof emailjs!=='undefined'){
-    emailjs.send(EJ_SVC,EJ_TPL,p).then(()=>window.location.href='thankyou.html').catch(err=>{alert('Error: '+(err.text||err.message));btn.innerHTML='<i class="fas fa-check-circle"></i> Confirm Booking';btn.disabled=false});
-  }else{alert('Demo: Booking for '+bk.family+' received!');btn.innerHTML='<i class="fas fa-check-circle"></i> Confirm Booking';btn.disabled=false}
+  const btn = e.target.querySelector('.m-btn');
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
+  btn.disabled = true;
+
+  const name  = document.getElementById('b-name').value;
+  const email = document.getElementById('b-email').value;
+  const phone = document.getElementById('b-phone').value;
+  const date  = document.getElementById('b-date').value;
+  const pax   = document.getElementById('b-pax').value;
+  const notes = document.getElementById('b-notes').value || '';
+
+  const durLabel = { half: 'Half Day', full: 'Full Day', night: 'Overnight Stay' }[bk.selType];
+
+  /* EmailJS payload — matches your template variables */
+  const payload = {
+    user_name:    name,
+    user_email:   email,
+    phone:        phone,
+    booking_date: date,
+    message:      notes || 'No special requests',
+    request_type: 'Live Like a Local – Booking',
+    friend_name:  bk.family,
+    duration:     durLabel + ' — $' + bk.selPrice,
+    price:        bk.selPrice,
+    lifestyle:    bk.ls,
+    people:       pax
+  };
+
+  /* thankyou.html URL with all booking data as params */
+  const params = new URLSearchParams({
+    family:    bk.family,
+    lifestyle: bk.ls,
+    icon:      bk.icon,
+    duration:  durLabel,
+    price:     bk.selPrice,
+    name:      name,
+    email:     email,
+    phone:     phone,
+    date:      date,
+    pax:       pax,
+    notes:     notes
+  });
+  const redirectURL = 'thankyou.html?' + params.toString();
+
+  if (typeof emailjs !== 'undefined') {
+    emailjs.send(EJ_SVC, EJ_TPL, payload)
+      .then(() => { window.location.href = redirectURL; })
+      .catch(err => {
+        alert('Error sending booking: ' + (err.text || err.message));
+        btn.innerHTML = '<i class="fas fa-check-circle"></i> Confirm Booking';
+        btn.disabled = false;
+      });
+  } else {
+    /* Demo fallback — still redirects with data */
+    window.location.href = redirectURL;
+  }
 }
 
-/* MESSAGE */
-let mm={};
-function openMsg(family,icon,ls){
-  mm={family,icon,ls};
-  document.getElementById('mm-icon').textContent=icon;
-  document.getElementById('mm-name').textContent=family;
-  document.getElementById('mm-ls').textContent=ls+' Family · Ask anything before you book';
-  document.querySelectorAll('.t-chip').forEach(c=>c.classList.remove('sel'));
-  document.getElementById('m-msg').value='';
+/* ══════════════════════════════════════
+   MESSAGE MODAL
+══════════════════════════════════════ */
+let mm = {};
+function openMsg(family, icon, ls) {
+  mm = { family, icon, ls };
+  document.getElementById('mm-icon').textContent = icon;
+  document.getElementById('mm-name').textContent = family;
+  document.getElementById('mm-ls').textContent = ls + ' Family · Ask anything before you book';
+  document.querySelectorAll('.t-chip').forEach(c => c.classList.remove('sel'));
+  document.getElementById('m-msg').value = '';
   document.getElementById('msgModal').classList.add('open');
 }
-document.getElementById('msgModal').addEventListener('click',e=>{if(e.target===document.getElementById('msgModal'))document.getElementById('msgModal').classList.remove('open')});
+document.getElementById('msgModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('msgModal'))
+    document.getElementById('msgModal').classList.remove('open');
+});
 
-function addTopic(btn,text){
+function addTopic(btn, text) {
   btn.classList.toggle('sel');
-  const ta=document.getElementById('m-msg');
-  if(btn.classList.contains('sel')){ta.value=ta.value?ta.value.trimEnd()+'\n'+text:text}
-  else{ta.value=ta.value.replace('\n'+text,'').replace(text,'').trim()}
+  const ta = document.getElementById('m-msg');
+  if (btn.classList.contains('sel')) {
+    ta.value = ta.value ? ta.value.trimEnd() + '\n' + text : text;
+  } else {
+    ta.value = ta.value.replace('\n' + text, '').replace(text, '').trim();
+  }
 }
 
-function submitMsg(e){
+/* ── SUBMIT MESSAGE ── */
+function submitMsg(e) {
   e.preventDefault();
-  const btn=e.target.querySelector('.m-btn');
-  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending…';btn.disabled=true;
-  const p={user_name:document.getElementById('m-name').value,user_email:document.getElementById('m-email').value,request_type:'Live Like a Local – Message',message:document.getElementById('m-msg').value,friend_name:mm.family,lifestyle:mm.ls,booking_date:'N/A',duration:'N/A',price:'N/A',phone:'N/A',people:'N/A'};
-  if(typeof emailjs!=='undefined'){
-    emailjs.send(EJ_SVC,EJ_TPL,p).then(()=>window.location.href='thankyou.html').catch(err=>{alert('Error: '+(err.text||err.message));btn.innerHTML='<i class="fas fa-paper-plane"></i> Send Message';btn.disabled=false});
-  }else{alert('Demo: Message to '+mm.family+' sent!');btn.innerHTML='<i class="fas fa-paper-plane"></i> Send Message';btn.disabled=false}
+  const btn = e.target.querySelector('.m-btn');
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
+  btn.disabled = true;
+
+  const payload = {
+    user_name:    document.getElementById('m-name').value,
+    user_email:   document.getElementById('m-email').value,
+    request_type: 'Live Like a Local – Message',
+    message:      document.getElementById('m-msg').value,
+    friend_name:  mm.family,
+    lifestyle:    mm.ls,
+    booking_date: 'N/A',
+    duration:     'N/A',
+    price:        'N/A',
+    phone:        'N/A',
+    people:       'N/A'
+  };
+
+  if (typeof emailjs !== 'undefined') {
+    emailjs.send(EJ_SVC, EJ_TPL, payload)
+      .then(() => { window.location.href = 'thankyou.html'; })
+      .catch(err => {
+        alert('Error sending message: ' + (err.text || err.message));
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+        btn.disabled = false;
+      });
+  } else {
+    window.location.href = 'thankyou.html';
+  }
 }
 </script>
 </body>
