@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rent a Friend — TosTrip Cambodia</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --p:#667eea; --pd:#4f63d2; --ps:#f0f0fd; --pm:#ddd5fb;
+  --gold:#f59e0b; --green:#10b981; --red:#ef4444; --orange:#f97316;
+  --ink:#111827; --ink2:#374151; --ink3:#6b7280; --ink4:#9ca3af;
+  --line:#e5e7eb; --bg:#fff; --bg2:#f9fafb; --bg3:#f3f4f6;
+  --r-xs:6px; --r-sm:10px; --r-md:16px; --r-lg:22px; --r-xl:30px;
+  --sh-sm:0 1px 4px rgba(0,0,0,.07);
+  --sh-md:0 4px 20px rgba(0,0,0,.09);
+  --sh-lg:0 12px 48px rgba(0,0,0,.13);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;width:100%;object-fit:cover}
+button{font-family:inherit;cursor:pointer}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1.5px solid var(--line);transition:box-shadow .3s}
+.nav.scrolled{box-shadow:var(--sh-md)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 28px;height:66px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo img{height:36px;width:auto}
+.logo-text{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--p)}
+.nav-links{display:flex;list-style:none;gap:2px}
+.nav-links a{padding:8px 14px;border-radius:var(--r-sm);font-size:14px;font-weight:500;color:var(--ink3);transition:all .18s}
+.nav-links a:hover,.nav-links a.active{color:var(--p);background:var(--ps)}
+.btn-back{padding:9px 20px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--bg);font-size:14px;font-weight:600;color:var(--ink2);display:flex;align-items:center;gap:7px;transition:all .2s}
+.btn-back:hover{border-color:var(--p);color:var(--p)}
+.hamburger{display:none;background:none;border:none;font-size:22px;color:var(--ink3)}
+
+/* ── HERO ── */
+.hero{margin-top:66px;background:var(--bg);padding:64px 28px 0;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-100px;right:-120px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(102,126,234,.08) 0%,transparent 65%);pointer-events:none}
+.hero-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 480px;gap:60px;align-items:center}
+.hero-crumb{display:flex;align-items:center;gap:7px;margin-bottom:16px;font-size:13px;color:var(--ink4)}
+.hero-crumb a{color:var(--ink4);transition:color .2s}
+.hero-crumb a:hover{color:var(--p)}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:var(--ps);border:1px solid var(--pm);color:var(--p);font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:18px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(34px,4.2vw,56px);font-weight:800;color:var(--ink);line-height:1.08;letter-spacing:-.5px;margin-bottom:16px}
+.hero h1 .accent{color:var(--p)}
+.hero h1 em{font-style:italic}
+.hero-desc{font-size:16px;color:var(--ink3);line-height:1.75;max-width:520px;margin-bottom:28px}
+.hero-trust{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:32px}
+.htrust{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink2);font-weight:600}
+.htrust i{color:var(--green);font-size:13px}
+.hero-stats{display:flex;gap:28px;flex-wrap:wrap;padding-top:24px;border-top:1px solid var(--line)}
+.hs-num{font-size:24px;font-weight:800;color:var(--ink);font-family:'Playfair Display',serif}
+.hs-lbl{font-size:12px;color:var(--ink4);margin-top:2px;font-weight:500}
+
+/* hero visual */
+.hero-visual{position:relative;height:440px}
+.hv-main{position:absolute;top:0;left:0;right:55px;bottom:55px;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-lg)}
+.hv-main img{width:100%;height:100%}
+.hv-sm{position:absolute;bottom:0;right:0;width:170px;height:170px;border-radius:var(--r-md);overflow:hidden;box-shadow:var(--sh-lg);border:4px solid #fff}
+.hv-sm img{width:100%;height:100%}
+/* floating guide card */
+.hv-card{position:absolute;top:20px;right:10px;background:#fff;border-radius:var(--r-md);padding:14px 16px;box-shadow:var(--sh-lg);min-width:190px;border:1.5px solid var(--line)}
+.hv-card-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.hv-av{width:40px;height:40px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--ps);border:2px solid var(--pm)}
+.hv-av img{width:100%;height:100%}
+.hv-name{font-size:14px;font-weight:700;color:var(--ink)}
+.hv-loc{font-size:11px;color:var(--ink4)}
+.hv-badge{display:flex;align-items:center;gap:4px;font-size:10px;font-weight:700;color:var(--green);background:#f0fdf4;border:1px solid #bbf7d0;padding:3px 9px;border-radius:100px;width:fit-content;margin-bottom:8px}
+.hv-rating{display:flex;align-items:center;gap:5px}
+.hv-stars{color:var(--gold);font-size:12px}
+.hv-rc{font-size:11px;color:var(--ink4)}
+/* availability dot */
+.hv-avail{position:absolute;bottom:18px;left:18px;background:#fff;border-radius:100px;padding:6px 14px;box-shadow:var(--sh-md);display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--ink2)}
+.avail-dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;animation:pulse-dot 1.8s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* ── HOW IT WORKS ── */
+.how-section{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:44px 28px}
+.how-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.how-step{padding:0 24px;text-align:center;border-right:1px dashed var(--line)}
+.how-step:last-child{border-right:none}
+.how-num{width:44px;height:44px;border-radius:50%;background:var(--bg);border:2px solid var(--pm);color:var(--p);font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.how-step h4{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.how-step p{font-size:12px;color:var(--ink3);line-height:1.55}
+
+/* ── SEARCH + FILTER BAR ── */
+.search-bar{background:var(--bg);border-bottom:1.5px solid var(--line);position:sticky;top:66px;z-index:800;padding:0 28px}
+.search-inner{max-width:1280px;margin:0 auto;padding:14px 0;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.search-input-wrap{position:relative;flex:1;min-width:200px;max-width:320px}
+.search-input-wrap i{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--ink4);font-size:13px;pointer-events:none}
+.search-input{width:100%;padding:10px 14px 10px 36px;border-radius:var(--r-sm);border:1.5px solid var(--line);font-family:inherit;font-size:14px;color:var(--ink);outline:none;transition:border-color .2s}
+.search-input:focus{border-color:var(--p)}
+.search-input::placeholder{color:var(--ink4)}
+.filter-chips{display:flex;align-items:center;gap:7px;overflow-x:auto;scrollbar-width:none;flex:1}
+.filter-chips::-webkit-scrollbar{display:none}
+.fc{flex-shrink:0;padding:8px 16px;border-radius:100px;border:1.5px solid var(--line);background:var(--bg);font-size:13px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:5px}
+.fc:hover{border-color:var(--p);color:var(--p)}
+.fc.active{background:var(--p);border-color:var(--p);color:#fff}
+.count-badge{font-size:10px;background:var(--pm);color:var(--pd);padding:1px 6px;border-radius:100px;font-weight:800}
+.fc.active .count-badge{background:rgba(255,255,255,.25);color:#fff}
+.sort-select{padding:9px 14px;border-radius:var(--r-sm);border:1.5px solid var(--line);font-family:inherit;font-size:13px;font-weight:600;color:var(--ink2);outline:none;cursor:pointer;background:var(--bg);transition:border-color .2s}
+.sort-select:focus{border-color:var(--p)}
+
+/* ── GUIDES SECTION ── */
+.guides-section{max-width:1280px;margin:0 auto;padding:48px 28px}
+.guides-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px}
+.guides-header h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--ink)}
+.result-count{font-size:14px;color:var(--ink3)}
+.result-count strong{color:var(--ink)}
+.guides-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+
+/* ── GUIDE CARD ── */
+.guide-card{background:var(--bg);border:1.5px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);transition:all .3s;display:flex;flex-direction:column}
+.guide-card:hover{box-shadow:var(--sh-lg);transform:translateY(-3px);border-color:var(--pm)}
+.guide-card.hidden{display:none}
+
+/* photo */
+.gc-photo{position:relative;height:220px;overflow:hidden}
+.gc-photo img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.guide-card:hover .gc-photo img{transform:scale(1.05)}
+.gc-verified{position:absolute;top:12px;left:12px;display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border-radius:100px;padding:4px 10px;font-size:11px;font-weight:800;color:var(--green);border:1px solid rgba(16,185,129,.2)}
+.gc-avail{position:absolute;top:12px;right:12px;padding:4px 10px;border-radius:100px;font-size:10px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+.avail-yes{background:rgba(16,185,129,.15);color:#059669;border:1px solid rgba(16,185,129,.3)}
+.avail-busy{background:rgba(245,158,11,.15);color:#d97706;border:1px solid rgba(245,158,11,.3)}
+.gc-city-pill{position:absolute;bottom:12px;left:12px;display:flex;align-items:center;gap:5px;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:100px}
+
+/* body */
+.gc-body{padding:20px;flex:1;display:flex;flex-direction:column}
+.gc-name-row{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px}
+.gc-name{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--ink)}
+.gc-rating{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.gc-score{font-size:14px;font-weight:800;color:var(--ink)}
+.gc-stars{color:var(--gold);font-size:12px}
+.gc-reviews{font-size:11px;color:var(--ink4)}
+.gc-tagline{font-size:13px;color:var(--p);font-weight:600;margin-bottom:10px;font-style:italic}
+.gc-bio{font-size:13px;color:var(--ink3);line-height:1.65;margin-bottom:14px;flex:1}
+
+/* languages */
+.gc-langs{display:flex;align-items:center;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.gc-langs-lbl{font-size:11px;font-weight:700;color:var(--ink4);text-transform:uppercase;letter-spacing:.5px}
+.lang-pill{font-size:11px;font-weight:600;padding:3px 8px;border-radius:100px;background:var(--bg3);color:var(--ink2)}
+
+/* specialties */
+.gc-specs{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
+.spec-tag{display:flex;align-items:center;gap:4px;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:700;background:var(--ps);color:var(--pd)}
+
+/* pricing */
+.gc-pricing{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;padding:14px;background:var(--bg2);border-radius:var(--r-sm);border:1px solid var(--line)}
+.price-opt{text-align:center}
+.price-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink4);margin-bottom:3px}
+.price-val{font-size:20px;font-weight:800;color:var(--ink);font-family:'Playfair Display',serif;line-height:1}
+.price-dur{font-size:10px;color:var(--ink4);margin-top:2px}
+.price-divider{width:1px;background:var(--line);align-self:stretch}
+
+/* actions */
+.gc-actions{display:flex;gap:8px}
+.btn-book{flex:1;padding:11px;border-radius:var(--r-sm);background:var(--p);border:none;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 3px 12px rgba(102,126,234,.28);transition:all .22s}
+.btn-book:hover{background:var(--pd);transform:translateY(-1px);box-shadow:0 6px 20px rgba(102,126,234,.38)}
+.btn-chat{padding:11px 14px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--bg);color:var(--ink2);font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;transition:all .2s}
+.btn-chat:hover{border-color:var(--p);color:var(--p)}
+.btn-heart{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:var(--bg);font-size:15px;color:var(--ink4);display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.btn-heart:hover{color:var(--red);border-color:var(--red)}
+.btn-heart.liked{color:var(--red);border-color:var(--red);background:#fff5f5}
+
+/* ── WHY SECTION ── */
+.why-section{background:var(--bg2);border-top:1.5px solid var(--line);padding:64px 28px}
+.why-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.why-text .sec-lbl{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--p);margin-bottom:10px}
+.why-text h2{font-family:'Playfair Display',serif;font-size:34px;font-weight:800;color:var(--ink);line-height:1.15;margin-bottom:18px}
+.why-text h2 em{font-style:italic;color:var(--p)}
+.why-text p{font-size:16px;color:var(--ink3);line-height:1.75;margin-bottom:28px}
+.why-list{display:flex;flex-direction:column;gap:16px}
+.why-item{display:flex;gap:14px;align-items:flex-start}
+.why-icon{width:44px;height:44px;border-radius:var(--r-sm);background:var(--ps);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;border:1.5px solid var(--pm)}
+.why-item h4{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.why-item p{font-size:13px;color:var(--ink3);line-height:1.55}
+/* why image grid */
+.why-imgs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:12px;height:420px}
+.wi{border-radius:var(--r-md);overflow:hidden}
+.wi img{width:100%;height:100%}
+.wi.tall{grid-row:1/3}
+
+/* ── FAQ ── */
+.faq-section{max-width:760px;margin:0 auto;padding:64px 28px}
+.faq-section .sec-lbl{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--p);margin-bottom:10px}
+.faq-section h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--ink);margin-bottom:32px}
+.faq-item{border-bottom:1.5px solid var(--line);padding:20px 0}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;user-select:none}
+.faq-q h4{font-size:15px;font-weight:700;color:var(--ink);flex:1}
+.faq-q i{color:var(--p);font-size:14px;transition:transform .25s;flex-shrink:0}
+.faq-item.open .faq-q i{transform:rotate(45deg)}
+.faq-a{font-size:14px;color:var(--ink3);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease}
+.faq-item.open .faq-a{max-height:200px;padding-top:12px}
+
+/* ── TESTIMONIALS ── */
+.test-section{background:var(--bg2);border-top:1.5px solid var(--line);padding:60px 28px}
+.test-inner{max-width:1280px;margin:0 auto}
+.sec-lbl{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--p);margin-bottom:8px}
+.sec-title{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--ink);margin-bottom:28px}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.test-card{background:var(--bg);border:1.5px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);transition:all .25s}
+.test-card:hover{box-shadow:var(--sh-md);border-color:var(--pm)}
+.test-guide-tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;background:var(--ps);color:var(--p);padding:3px 10px;border-radius:100px;margin-bottom:10px}
+.test-stars{color:var(--gold);font-size:14px;letter-spacing:1px;margin-bottom:10px}
+.test-q{font-size:14px;color:var(--ink2);line-height:1.7;font-style:italic;margin-bottom:16px;padding-left:18px;position:relative}
+.test-q::before{content:'"';position:absolute;left:0;top:-4px;font-size:36px;color:var(--pm);line-height:1;font-family:'Playfair Display',serif}
+.test-author{display:flex;align-items:center;gap:9px}
+.test-av{width:38px;height:38px;border-radius:50%;flex-shrink:0;background:var(--ps);color:var(--p);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+.test-name{font-size:14px;font-weight:700;color:var(--ink)}
+.test-info{font-size:12px;color:var(--ink4)}
+
+/* ── MODALS ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(17,24,39,.52);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--bg);border-radius:var(--r-xl);max-width:560px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 28px 80px rgba(0,0,0,.2);animation:popIn .26s cubic-bezier(.16,1,.3,1)}
+@keyframes popIn{from{opacity:0;transform:scale(.92) translateY(14px)}to{opacity:1;transform:scale(1) translateY(0)}}
+
+/* book modal head */
+.mh-book{background:linear-gradient(135deg,#4f63d2 0%,#667eea 100%);padding:28px 32px;border-radius:var(--r-xl) var(--r-xl) 0 0;position:relative}
+.mh-book-top{display:flex;align-items:center;gap:14px;margin-bottom:4px}
+.mh-guide-av{width:52px;height:52px;border-radius:50%;border:3px solid rgba(255,255,255,.4);overflow:hidden;flex-shrink:0;background:var(--pm)}
+.mh-guide-av img{width:100%;height:100%}
+.mh-book h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:2px}
+.mh-book h2 span{color:#fde68a}
+.mh-book p{font-size:13px;color:rgba(255,255,255,.75)}
+.mh-book .modal-close{background:rgba(255,255,255,.18);color:#fff}
+.mh-book .modal-close:hover{background:rgba(255,255,255,.3)}
+
+/* msg modal head */
+.mh-msg{background:var(--bg2);border-bottom:1.5px solid var(--line);padding:28px 32px;border-radius:var(--r-xl) var(--r-xl) 0 0;position:relative}
+.mh-msg-row{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.mh-msg-av{width:52px;height:52px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid var(--pm);background:var(--ps)}
+.mh-msg-av img{width:100%;height:100%}
+.mh-msg h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink)}
+.mh-msg h2 span{color:var(--p)}
+.mh-msg p{font-size:13px;color:var(--ink3)}
+.mh-msg .modal-close{background:var(--bg3);color:var(--ink3)}
+.mh-msg .modal-close:hover{background:var(--line)}
+
+.modal-close{position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:all .2s}
+
+/* modal body */
+.m-body{padding:28px 32px}
+.sum-bar{background:var(--ps);border:1.5px solid var(--pm);border-radius:var(--r-sm);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.sum-name{font-size:15px;font-weight:700;color:var(--ink)}
+.sum-dur{font-size:12px;color:var(--ink4);margin-top:2px}
+.sum-price{font-size:24px;font-weight:800;color:var(--p);font-family:'Playfair Display',serif}
+.dur-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.dur-opt{border:2px solid var(--line);border-radius:var(--r-md);padding:14px;cursor:pointer;position:relative;transition:all .2s;background:var(--bg)}
+.dur-opt.sel{border-color:var(--p);background:var(--ps)}
+.dur-opt:hover{border-color:var(--p)}
+.dur-opt input{position:absolute;opacity:0}
+.dur-chk{position:absolute;top:10px;right:10px;width:18px;height:18px;border-radius:50%;border:2px solid var(--line);background:var(--bg);display:flex;align-items:center;justify-content:center;transition:all .2s}
+.dur-opt.sel .dur-chk{background:var(--p);border-color:var(--p)}
+.dur-chk i{font-size:8px;color:#fff;display:none}
+.dur-opt.sel .dur-chk i{display:block}
+.dur-lbl{font-size:13px;font-weight:700;color:var(--ink)}
+.dur-sub{font-size:11px;color:var(--ink4);margin-top:2px}
+.dur-price{font-size:20px;font-weight:800;color:var(--p);margin-top:8px;font-family:'Playfair Display',serif}
+
+/* activities checkboxes */
+.activities-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
+.act-cb{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:var(--r-sm);border:1.5px solid var(--line);cursor:pointer;transition:all .2s;font-size:13px;font-weight:600;color:var(--ink2)}
+.act-cb:hover{border-color:var(--p);background:var(--ps)}
+.act-cb input{accent-color:var(--p);width:14px;height:14px}
+.act-cb.checked{border-color:var(--p);background:var(--ps);color:var(--pd)}
+
+.fg{margin-bottom:16px}
+.fl{display:block;font-size:13px;font-weight:600;color:var(--ink3);margin-bottom:7px}
+.fl .req{color:var(--red)}
+.fi{width:100%;padding:12px 14px;border-radius:var(--r-sm);border:1.5px solid var(--line);outline:none;font-family:inherit;font-size:14px;color:var(--ink);transition:border-color .2s,box-shadow .2s;background:var(--bg)}
+.fi:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(102,126,234,.1)}
+.fi::placeholder{color:var(--ink4)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.f-ta{resize:vertical;min-height:88px}
+.ok-note{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:var(--r-xs);padding:12px 16px;display:flex;gap:9px;font-size:13px;color:#166534;line-height:1.5;margin-bottom:18px}
+.ok-note i{flex-shrink:0;margin-top:1px}
+.m-btn{width:100%;padding:14px;border-radius:var(--r-sm);border:none;color:#fff;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:all .2s}
+.m-btn.purple{background:var(--p);box-shadow:0 4px 16px rgba(102,126,234,.28)}
+.m-btn.purple:hover{background:var(--pd)}
+.m-btn.dark{background:var(--ink);box-shadow:0 4px 14px rgba(0,0,0,.15)}
+.m-btn.dark:hover{background:var(--ink2)}
+
+/* msg topics */
+.topic-row{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+.t-chip{padding:6px 13px;border-radius:100px;border:1.5px solid var(--line);background:var(--bg);font-size:12px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .18s}
+.t-chip:hover,.t-chip.sel{border-color:var(--p);color:var(--p);background:var(--ps)}
+
+/* ── FOOTER ── */
+.footer{background:#1a1f4e;color:rgba(255,255,255,.55);padding:44px 28px 28px}
+.footer-inner{max-width:1280px;margin:0 auto}
+.footer-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:20px}
+.footer-logo img{height:32px;filter:brightness(0) invert(1);opacity:.8}
+.footer-logo-text{font-family:'Playfair Display',serif;font-size:20px;color:rgba(255,255,255,.8)}
+.footer-nav{display:flex;gap:20px}
+.footer-nav a{font-size:14px;color:rgba(255,255,255,.5);transition:color .2s}
+.footer-nav a:hover{color:#fff}
+.footer-bot{border-top:1px solid rgba(255,255,255,.1);padding-top:18px;text-align:center;font-size:13px;color:rgba(255,255,255,.3)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-visual{height:280px}
+  .guides-grid{grid-template-columns:repeat(2,1fr)}
+  .why-inner{grid-template-columns:1fr}
+  .why-imgs{display:none}
+  .how-inner{grid-template-columns:1fr 1fr;gap:24px}
+  .how-step{border-right:none;padding-bottom:20px;border-bottom:1px dashed var(--line)}
+  .how-step:nth-child(2n){border-right:none}
+  .how-step:last-child{border-bottom:none}
+  .test-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:block}
+  .nav-links.open{display:flex;flex-direction:column;position:absolute;top:66px;left:0;right:0;background:var(--bg);padding:12px;border-bottom:1px solid var(--line);box-shadow:var(--sh-md)}
+  .guides-grid{grid-template-columns:1fr}
+  .search-inner{flex-wrap:wrap}
+  .f-row{grid-template-columns:1fr}
+  .dur-grid{grid-template-columns:1fr 1fr}
+  .activities-grid{grid-template-columns:1fr}
+  .test-grid{grid-template-columns:1fr}
+  .how-inner{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .hero-stats{gap:16px}
+  .guides-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <img src="./imgg/loko.png" alt="TosTrip" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="logo-text" style="display:none">TosTrip</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="livelikelocal.html">Live Like a Local</a></li>
+      <li><a href="rentafriend.html" class="active">Rent a Friend</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:10px">
+      <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back</a>
+      <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-crumb">
+        <a href="index.html">Home</a>
+        <i class="fas fa-chevron-right" style="font-size:9px"></i>
+        <span>Rent a Friend</span>
+      </div>
+      <div class="hero-badge"><i class="fas fa-user-friends"></i> Local Companion Service</div>
+      <h1>Your <em>Personal</em><br><span class="accent">Cambodian Friend</span><br>for the Day</h1>
+      <p class="hero-desc">Not a tour guide. Not a driver. A real local who shows you their city the way they'd show a friend — the hidden spots, the honest restaurants, the stories no guidebook has.</p>
+      <div class="hero-trust">
+        <span class="htrust"><i class="fas fa-shield-alt"></i> 100% Verified</span>
+        <span class="htrust"><i class="fas fa-comments"></i> Chat Before Booking</span>
+        <span class="htrust"><i class="fas fa-undo"></i> Free Cancellation</span>
+        <span class="htrust"><i class="fas fa-wifi"></i> Works Offline</span>
+      </div>
+      <div class="hero-stats">
+        <div><div class="hs-num">50+</div><div class="hs-lbl">Local Friends</div></div>
+        <div><div class="hs-num">3</div><div class="hs-lbl">Cities</div></div>
+        <div><div class="hs-num">4.9★</div><div class="hs-lbl">Avg Rating</div></div>
+        <div><div class="hs-num">800+</div><div class="hs-lbl">Day Trips Done</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hv-main"><img src="./imgg/keolocal.jpg" alt="Local guide"></div>
+      <div class="hv-sm"><img src="./imgg/keofri.jpg" alt="Guide friend"></div>
+      <div class="hv-card">
+        <div class="hv-card-top">
+          <div class="hv-av"><img src="./imgg/keolocal.jpg" alt=""></div>
+          <div><div class="hv-name">Sokha K.</div><div class="hv-loc">Phnom Penh</div></div>
+        </div>
+        <div class="hv-badge"><i class="fas fa-check-circle"></i> Verified Friend</div>
+        <div class="hv-rating">
+          <span class="hv-stars">★★★★★</span>
+          <span class="hv-rc">5.0 · 84 trips</span>
+        </div>
+      </div>
+      <div class="hv-avail">
+        <span class="avail-dot"></span>
+        12 friends available today
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<div class="how-section">
+  <div class="how-inner">
+    <div class="how-step"><div class="how-num">1</div><h4>Browse Friends</h4><p>Filter by city, interest, and language to find your match</p></div>
+    <div class="how-step"><div class="how-num">2</div><h4>Chat First</h4><p>Send a message, ask anything — no obligation to book yet</p></div>
+    <div class="how-step"><div class="how-num">3</div><h4>Book Your Day</h4><p>Half day or full day, pick a date and confirm</p></div>
+    <div class="how-step"><div class="how-num">4</div><h4>Meet & Explore</h4><p>They greet you, you explore together like old friends</p></div>
+  </div>
+</div>
+
+<!-- SEARCH + FILTER -->
+<div class="search-bar">
+  <div class="search-inner">
+    <div class="search-input-wrap">
+      <i class="fas fa-search"></i>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search by name or specialty…" oninput="liveSearch(this.value)">
+    </div>
+    <div class="filter-chips">
+      <button class="fc active" onclick="filterGuides('all',this)">All <span class="count-badge" id="cnt-all">8</span></button>
+      <button class="fc" onclick="filterGuides('phnom-penh',this)">📍 Phnom Penh</button>
+      <button class="fc" onclick="filterGuides('siem-reap',this)">📍 Siem Reap</button>
+      <button class="fc" onclick="filterGuides('kampot',this)">📍 Kampot</button>
+      <button class="fc" onclick="filterGuides('food',this)">🍜 Food Tours</button>
+      <button class="fc" onclick="filterGuides('temples',this)">🛕 Temples</button>
+      <button class="fc" onclick="filterGuides('nightlife',this)">🌙 Nightlife</button>
+      <button class="fc" onclick="filterGuides('photography',this)">📸 Photography</button>
+      <button class="fc" onclick="filterGuides('history',this)">📚 History</button>
+    </div>
+    <select class="sort-select" onchange="sortGuides(this.value)">
+      <option value="rating">Sort: Top Rated</option>
+      <option value="price-low">Price: Low to High</option>
+      <option value="price-high">Price: High to Low</option>
+      <option value="reviews">Most Reviews</option>
+    </select>
+  </div>
+</div>
+
+<!-- GUIDES GRID -->
+<div class="guides-section">
+  <div class="guides-header">
+    <h2>Meet Your Local Friends</h2>
+    <div class="result-count">Showing <strong id="showing-count">8</strong> friends</div>
+  </div>
+
+  <div class="guides-grid" id="guidesGrid">
+
+    <!-- ── GUIDE 1: SOKHA ── -->
+    <div class="guide-card" data-city="phnom-penh" data-tags="food nightlife history" data-rating="5.0" data-half="25" data-full="45" data-reviews="84">
+      <div class="gc-photo">
+        <img src="./imgg/keolocal.jpg" alt="Sokha">
+        <div class="gc-verified"><i class="fas fa-check-circle"></i> Verified</div>
+        <div class="gc-avail avail-yes">● Available</div>
+        <div class="gc-city-pill"><i class="fas fa-map-marker-alt"></i> Phnom Penh</div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-name-row">
+          <div class="gc-name">Sokha Keo</div>
+          <div class="gc-rating"><span class="gc-score">5.0</span><span class="gc-stars">★</span><span class="gc-reviews">(84)</span></div>
+        </div>
+        <div class="gc-tagline">"I'll show you the Phnom Penh tourists never find"</div>
+        <p class="gc-bio">Born and raised in BKK1, Sokha knows every street food cart, rooftop bar, and hidden pagoda in the city. She's a food blogger by night and your best friend by day. Fluent in English and French, endlessly enthusiastic.</p>
+        <div class="gc-langs">
+          <span class="gc-langs-lbl">Languages</span>
+          <span class="lang-pill">🇰🇭 Khmer</span>
+          <span class="lang-pill">🇬🇧 English</span>
+          <span class="lang-pill">🇫🇷 French</span>
+        </div>
+        <div class="gc-specs">
+          <span class="spec-tag"><i class="fas fa-utensils"></i> Street Food</span>
+          <span class="spec-tag"><i class="fas fa-moon"></i> Nightlife</span>
+          <span class="spec-tag"><i class="fas fa-landmark"></i> History</span>
+          <span class="spec-tag"><i class="fas fa-shopping-bag"></i> Markets</span>
+        </div>
+        <div class="gc-pricing">
+          <div class="price-opt"><div class="price-lbl">Half Day</div><div class="price-val">$25</div><div class="price-dur">~4 hrs</div></div>
+          <div class="price-divider"></div>
+          <div class="price-opt"><div class="price-lbl">Full Day</div><div class="price-val">$45</div><div class="price-dur">~8 hrs</div></div>
+        </div>
+        <div class="gc-actions">
+          <button class="btn-book" onclick="openBook('Sokha Keo','Phnom Penh',25,45,'./imgg/keolocal.jpg')"><i class="fas fa-calendar-check"></i> Book</button>
+          <button class="btn-chat" onclick="openChat('Sokha Keo','Phnom Penh','./imgg/keolocal.jpg')"><i class="fas fa-comment-dots"></i> Chat</button>
+          <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── GUIDE 2: DARA ── -->
+    <div class="guide-card" data-city="siem-reap" data-tags="temples history photography" data-rating="4.9" data-half="30" data-full="55" data-reviews="112">
+      <div class="gc-photo">
+        <img src="./imgg/keofri.jpg" alt="Dara">
+        <div class="gc-verified"><i class="fas fa-check-circle"></i> Verified</div>
+        <div class="gc-avail avail-yes">● Available</div>
+        <div class="gc-city-pill"><i class="fas fa-map-marker-alt"></i> Siem Reap</div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-name-row">
+          <div class="gc-name">Dara Chann</div>
+          <div class="gc-rating"><span class="gc-score">4.9</span><span class="gc-stars">★</span><span class="gc-reviews">(112)</span></div>
+        </div>
+        <div class="gc-tagline">"Angkor isn't a monument — it's a living story"</div>
+        <p class="gc-bio">Dara studied Khmer history at the Royal University and spent 8 years working at Angkor Conservation. He'll take you to temples that aren't in any guidebook and explain 1,000-year-old carvings like they happened yesterday.</p>
+        <div class="gc-langs">
+          <span class="gc-langs-lbl">Languages</span>
+          <span class="lang-pill">🇰🇭 Khmer</span>
+          <span class="lang-pill">🇬🇧 English</span>
+          <span class="lang-pill">🇯🇵 Japanese</span>
+        </div>
+        <div class="gc-specs">
+          <span class="spec-tag"><i class="fas fa-gopuram"></i> Temples</span>
+          <span class="spec-tag"><i class="fas fa-camera"></i> Photography</span>
+          <span class="spec-tag"><i class="fas fa-book-open"></i> History</span>
+          <span class="spec-tag"><i class="fas fa-bicycle"></i> Cycling</span>
+        </div>
+        <div class="gc-pricing">
+          <div class="price-opt"><div class="price-lbl">Half Day</div><div class="price-val">$30</div><div class="price-dur">~4 hrs</div></div>
+          <div class="price-divider"></div>
+          <div class="price-opt"><div class="price-lbl">Full Day</div><div class="price-val">$55</div><div class="price-dur">~8 hrs</div></div>
+        </div>
+        <div class="gc-actions">
+          <button class="btn-book" onclick="openBook('Dara Chann','Siem Reap',30,55,'./imgg/keofri.jpg')"><i class="fas fa-calendar-check"></i> Book</button>
+          <button class="btn-chat" onclick="openChat('Dara Chann','Siem Reap','./imgg/keofri.jpg')"><i class="fas fa-comment-dots"></i> Chat</button>
+          <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── GUIDE 3: VIRAK ── -->
+    <div class="guide-card" data-city="kampot" data-tags="food photography" data-rating="4.8" data-half="28" data-full="50" data-reviews="67">
+      <div class="gc-photo">
+        <img src="./imgg/pic.JPG" alt="Virak">
+        <div class="gc-verified"><i class="fas fa-check-circle"></i> Verified</div>
+        <div class="gc-avail avail-busy">◐ Busy Today</div>
+        <div class="gc-city-pill"><i class="fas fa-map-marker-alt"></i> Kampot</div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-name-row">
+          <div class="gc-name">Virak Sorn</div>
+          <div class="gc-rating"><span class="gc-score">4.8</span><span class="gc-stars">★</span><span class="gc-reviews">(67)</span></div>
+        </div>
+        <div class="gc-tagline">"Kampot is slow on purpose — let me show you why"</div>
+        <p class="gc-bio">Virak grew up on a pepper farm outside Kampot and moved back from Phnom Penh to share what he calls "the last quiet corner of Cambodia." Kayaking the river, cycling the salt flats, watching the sunset from Bokor Hill.</p>
+        <div class="gc-langs">
+          <span class="gc-langs-lbl">Languages</span>
+          <span class="lang-pill">🇰🇭 Khmer</span>
+          <span class="lang-pill">🇬🇧 English</span>
+        </div>
+        <div class="gc-specs">
+          <span class="spec-tag"><i class="fas fa-water"></i> Kayaking</span>
+          <span class="spec-tag"><i class="fas fa-camera"></i> Photography</span>
+          <span class="spec-tag"><i class="fas fa-leaf"></i> Pepper Farm</span>
+          <span class="spec-tag"><i class="fas fa-bicycle"></i> Cycling</span>
+        </div>
+        <div class="gc-pricing">
+          <div class="price-opt"><div class="price-lbl">Half Day</div><div class="price-val">$28</div><div class="price-dur">~4 hrs</div></div>
+          <div class="price-divider"></div>
+          <div class="price-opt"><div class="price-lbl">Full Day</div><div class="price-val">$50</div><div class="price-dur">~8 hrs</div></div>
+        </div>
+        <div class="gc-actions">
+          <button class="btn-book" onclick="openBook('Virak Sorn','Kampot',28,50,'./imgg/pic.JPG')"><i class="fas fa-calendar-check"></i> Book</button>
+          <button class="btn-chat" onclick="openChat('Virak Sorn','Kampot','./imgg/pic.JPG')"><i class="fas fa-comment-dots"></i> Chat</button>
+          <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── GUIDE 4: MALY ── -->
+    <div class="guide-card" data-city="phnom-penh" data-tags="food photography nightlife" data-rating="5.0" data-half="27" data-full="48" data-reviews="93">
+      <div class="gc-photo">
+        <img src="./imgg/tour.jpg" alt="Maly">
+        <div class="gc-verified"><i class="fas fa-check-circle"></i> Verified</div>
+        <div class="gc-avail avail-yes">● Available</div>
+        <div class="gc-city-pill"><i class="fas fa-map-marker-alt"></i> Phnom Penh</div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-name-row">
+          <div class="gc-name">Maly Pich</div>
+          <div class="gc-rating"><span class="gc-score">5.0</span><span class="gc-stars">★</span><span class="gc-reviews">(93)</span></div>
+        </div>
+        <div class="gc-tagline">"The best meals in Phnom Penh have no sign outside"</div>
+        <p class="gc-bio">Maly runs a popular food Instagram and has eaten at every hidden gem in the city. She'll take you past the tourist restaurants to the plastic-stool spots where locals eat three times a day — and she knows everyone's name.</p>
+        <div class="gc-langs">
+          <span class="gc-langs-lbl">Languages</span>
+          <span class="lang-pill">🇰🇭 Khmer</span>
+          <span class="lang-pill">🇬🇧 English</span>
+          <span class="lang-pill">🇨🇳 Mandarin</span>
+        </div>
+        <div class="gc-specs">
+          <span class="spec-tag"><i class="fas fa-utensils"></i> Food Tours</span>
+          <span class="spec-tag"><i class="fas fa-camera"></i> Photography</span>
+          <span class="spec-tag"><i class="fas fa-moon"></i> Night Markets</span>
+          <span class="spec-tag"><i class="fas fa-cocktail"></i> Rooftop Bars</span>
+        </div>
+        <div class="gc-pricing">
+          <div class="price-opt"><div class="price-lbl">Half Day</div><div class="price-val">$27</div><div class="price-dur">~4 hrs</div></div>
+          <div class="price-divider"></div>
+          <div class="price-opt"><div class="price-lbl">Full Day</div><div class="price-val">$48</div><div class="price-dur">~8 hrs</div></div>
+        </div>
+        <div class="gc-actions">
+          <button class="btn-book" onclick="openBook('Maly Pich','Phnom Penh',27,48,'./imgg/tour.jpg')"><i class="fas fa-calendar-check"></i> Book</button>
+          <button class="btn-chat" onclick="openChat('Maly Pich','Phnom Penh','./imgg/tour.jpg')"><i class="fas fa-comment-dots"></i> Chat</button>
+          <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── GUIDE 5: RITH ── -->
+    <div class="guide-card" data-city="siem-reap" data-tags="temples food history" data-rating="4.9" data-half="32" data-full="58" data-reviews="78">
+      <div class="gc-photo">
+        <img src="./imgg/tour1.jpg" alt="Rith">
+        <div class="gc-verified"><i class="fas fa-check-circle"></i> Verified</div>
+        <div class="gc-avail avail-yes">● Available</div>
+        <div class="gc-city-pill"><i class="fas fa-map-marker-alt"></i> Siem Reap</div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-name-row">
+          <div class="gc-name">Rith Meng</div>
+          <div class="gc-rating"><span class="gc-score">4.9</span><span class="gc-stars">★</span><span class="gc-reviews">(78)</span></div>
+        </div>
+        <div class="gc-tagline">"Siem Reap is so much more than Angkor Wat"</div>
+        <p class="gc-bio">Rith is the guy you want when you're tired of tourist traps. He'll take you to a family-run silk workshop, a floating village school, and a sunset boat that has room for exactly five people. No crowds, no scripts.</p>
+        <div class="gc-langs">
+          <span class="gc-langs-lbl">Languages</span>
+          <span class="lang-pill">🇰🇭 Khmer</span>
+          <span class="lang-pill">🇬🇧 English</span>
+          <span class="lang-pill">🇩🇪 German</span>
+        </div>
+        <div class="gc-specs">
+          <span class="spec-tag"><i class="fas fa-gopuram"></i> Off-path Temples</span>
+          <span class="spec-tag"><i class="fas fa-utensils"></i> Local Eats</span>
+          <span class="spec-tag"><i class="fas fa-ship"></i> River Life</span>
+          <span class="spec-tag"><i class="fas fa-tshirt"></i> Craft Villages</span>
+        </div>
+        <div class="gc-pricing">
+          <div class="price-opt"><div class="price-lbl">Half Day</div><div class="price-val">$32</div><div class="price-dur">~4 hrs</div></div>
+          <div class="price-divider"></div>
+          <div class="price-opt"><div class="price-lbl">Full Day</div><div class="price-val">$58</div><div class="price-dur">~8 hrs</div></div>
+        </div>
+        <div class="gc-actions">
+          <button class="btn-book" onclick="openBook('Rith Meng','Siem Reap',32,58,'./imgg/tour1.jpg')"><i class="fas fa-calendar-check"></i> Book</button>
+          <button class="btn-chat" onclick="openChat('Rith Meng','Siem Reap','./imgg/tour1.jpg')"><i class="fas fa-comment-dots"></i> Chat</button>
+          <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── GUIDE 6: LINDA ── -->
+    <div class="guide-card" data-city="phnom-penh" data-tags="history food" data-rating="4.8" data-half="24" data-full="44" data-reviews="56">
+      <div class="gc-photo">
+        <img src="./imgg/tour2.jpg" alt="Linda">
+        <div class="gc-verified"><i class="fas fa-check-circle"></i> Verified</div>
+        <div class="gc-avail avail-busy">◐ Busy Today</div>
+        <div class="gc-city-pill"><i class="fas fa-map-marker-alt"></i> Phnom Penh</div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-name-row">
+          <div class="gc-name">Linda Sam</div>
+          <div class="gc-rating"><span class="gc-score">4.8</span><span class="gc-stars">★</span><span class="gc-reviews">(56)</span></div>
+        </div>
+        <div class="gc-tagline">"History isn't heavy when you hear it from a local"</div>
+        <p class="gc-bio">Linda's grandmother survived the Khmer Rouge and Linda grew up with stories others only read in books. She leads one of the most sensitive, honest, and human-centred visits to S-21 and the Killing Fields you'll ever experience.</p>
+        <div class="gc-langs">
+          <span class="gc-langs-lbl">Languages</span>
+          <span class="lang-pill">🇰🇭 Khmer</span>
+          <span class="lang-pill">🇬🇧 English</span>
+          <span class="lang-pill">🇰🇷 Korean</span>
+        </div>
+        <div class="gc-specs">
+          <span class="spec-tag"><i class="fas fa-landmark"></i> Dark History</span>
+          <span class="spec-tag"><i class="fas fa-book"></i> Cultural Context</span>
+          <span class="spec-tag"><i class="fas fa-heart"></i> Healing Stories</span>
+          <span class="spec-tag"><i class="fas fa-utensils"></i> Local Food</span>
+        </div>
+        <div class="gc-pricing">
+          <div class="price-opt"><div class="price-lbl">Half Day</div><div class="price-val">$24</div><div class="price-dur">~4 hrs</div></div>
+          <div class="price-divider"></div>
+          <div class="price-opt"><div class="price-lbl">Full Day</div><div class="price-val">$44</div><div class="price-dur">~8 hrs</div></div>
+        </div>
+        <div class="gc-actions">
+          <button class="btn-book" onclick="openBook('Linda Sam','Phnom Penh',24,44,'./imgg/tour2.jpg')"><i class="fas fa-calendar-check"></i> Book</button>
+          <button class="btn-chat" onclick="openChat('Linda Sam','Phnom Penh','./imgg/tour2.jpg')"><i class="fas fa-comment-dots"></i> Chat</button>
+          <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── GUIDE 7: CHAN ── -->
+    <div class="guide-card" data-city="kampot" data-tags="food photography nightlife" data-rating="4.9" data-half="26" data-full="46" data-reviews="41">
+      <div class="gc-photo">
+        <img src="./imgg/koh.jpg" alt="Chan">
+        <div class="gc-verified"><i class="fas fa-check-circle"></i> Verified</div>
+        <div class="gc-avail avail-yes">● Available</div>
+        <div class="gc-city-pill"><i class="fas fa-map-marker-alt"></i> Kampot</div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-name-row">
+          <div class="gc-name">Chan Bopha</div>
+          <div class="gc-rating"><span class="gc-score">4.9</span><span class="gc-stars">★</span><span class="gc-reviews">(41)</span></div>
+        </div>
+        <div class="gc-tagline">"The river at dusk here is better than any Instagram"</div>
+        <p class="gc-bio">Chan is a photographer, a cook, and someone who's never once recommended a restaurant that disappointed. She'll drive you on her motorbike to the best durian vendor in the province, then catch the sunset from a spot only her friends know.</p>
+        <div class="gc-langs">
+          <span class="gc-langs-lbl">Languages</span>
+          <span class="lang-pill">🇰🇭 Khmer</span>
+          <span class="lang-pill">🇬🇧 English</span>
+        </div>
+        <div class="gc-specs">
+          <span class="spec-tag"><i class="fas fa-camera"></i> Photography</span>
+          <span class="spec-tag"><i class="fas fa-utensils"></i> Local Food</span>
+          <span class="spec-tag"><i class="fas fa-motorcycle"></i> Moto Rides</span>
+          <span class="spec-tag"><i class="fas fa-star-and-crescent"></i> Sunsets</span>
+        </div>
+        <div class="gc-pricing">
+          <div class="price-opt"><div class="price-lbl">Half Day</div><div class="price-val">$26</div><div class="price-dur">~4 hrs</div></div>
+          <div class="price-divider"></div>
+          <div class="price-opt"><div class="price-lbl">Full Day</div><div class="price-val">$46</div><div class="price-dur">~8 hrs</div></div>
+        </div>
+        <div class="gc-actions">
+          <button class="btn-book" onclick="openBook('Chan Bopha','Kampot',26,46,'./imgg/koh.jpg')"><i class="fas fa-calendar-check"></i> Book</button>
+          <button class="btn-chat" onclick="openChat('Chan Bopha','Kampot','./imgg/koh.jpg')"><i class="fas fa-comment-dots"></i> Chat</button>
+          <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── GUIDE 8: PHEARA ── -->
+    <div class="guide-card" data-city="siem-reap" data-tags="temples photography nightlife" data-rating="4.9" data-half="29" data-full="52" data-reviews="60">
+      <div class="gc-photo">
+        <img src="./imgg/trip3.JPG" alt="Pheara">
+        <div class="gc-verified"><i class="fas fa-check-circle"></i> Verified</div>
+        <div class="gc-avail avail-yes">● Available</div>
+        <div class="gc-city-pill"><i class="fas fa-map-marker-alt"></i> Siem Reap</div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-name-row">
+          <div class="gc-name">Pheara Noun</div>
+          <div class="gc-rating"><span class="gc-score">4.9</span><span class="gc-stars">★</span><span class="gc-reviews">(60)</span></div>
+        </div>
+        <div class="gc-tagline">"Every Siem Reap sunrise at Angkor is different"</div>
+        <p class="gc-bio">Pheara wakes at 4am every morning just to watch how the light changes on the Angkor temples. She'll take you to the right reflection pool at the right moment, then spend the afternoon exploring the lesser-known Ta Nei and Beng Mealea ruins.</p>
+        <div class="gc-langs">
+          <span class="gc-langs-lbl">Languages</span>
+          <span class="lang-pill">🇰🇭 Khmer</span>
+          <span class="lang-pill">🇬🇧 English</span>
+          <span class="lang-pill">🇪🇸 Spanish</span>
+        </div>
+        <div class="gc-specs">
+          <span class="spec-tag"><i class="fas fa-sunrise"></i> Sunrise Tours</span>
+          <span class="spec-tag"><i class="fas fa-gopuram"></i> Temples</span>
+          <span class="spec-tag"><i class="fas fa-camera"></i> Photography</span>
+          <span class="spec-tag"><i class="fas fa-moon"></i> Night Walks</span>
+        </div>
+        <div class="gc-pricing">
+          <div class="price-opt"><div class="price-lbl">Half Day</div><div class="price-val">$29</div><div class="price-dur">~4 hrs</div></div>
+          <div class="price-divider"></div>
+          <div class="price-opt"><div class="price-lbl">Full Day</div><div class="price-val">$52</div><div class="price-dur">~8 hrs</div></div>
+        </div>
+        <div class="gc-actions">
+          <button class="btn-book" onclick="openBook('Pheara Noun','Siem Reap',29,52,'./imgg/trip3.JPG')"><i class="fas fa-calendar-check"></i> Book</button>
+          <button class="btn-chat" onclick="openChat('Pheara Noun','Siem Reap','./imgg/trip3.JPG')"><i class="fas fa-comment-dots"></i> Chat</button>
+          <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i></button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /guides-grid -->
+
+  <!-- empty state -->
+  <div id="emptyState" style="display:none;text-align:center;padding:60px 20px">
+    <div style="font-size:48px;margin-bottom:16px">🔍</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:var(--ink);margin-bottom:8px">No friends found</h3>
+    <p style="color:var(--ink3);font-size:15px">Try a different filter or search term</p>
+  </div>
+</div>
+
+<!-- WHY SECTION -->
+<div class="why-section">
+  <div class="why-inner">
+    <div class="why-text">
+      <div class="sec-lbl"><i class="fas fa-heart"></i> Why Rent a Friend?</div>
+      <h2>Not a Tour.<br><em>A Real Connection.</em></h2>
+      <p>Tour guides follow a script. Your local friend follows your curiosity. They eat where they eat, go where they go, and show you the version of Cambodia that never ends up in a brochure.</p>
+      <div class="why-list">
+        <div class="why-item">
+          <div class="why-icon">✅</div>
+          <div><h4>Fully Verified & Background-checked</h4><p>Every friend on TosTrip goes through identity verification, reference checks, and a personal interview before being listed.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">💬</div>
+          <div><h4>Chat Before You Commit</h4><p>Message your friend first. Ask anything. Get a feel for their personality before booking a single dollar.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🔒</div>
+          <div><h4>Your Safety, Always</h4><p>All meetups happen in public spaces. Every booking is logged. 24/7 support if anything ever feels off.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">📵</div>
+          <div><h4>Works Fully Offline</h4><p>Download your friend's contact and meetup info before you land. No SIM card needed to connect.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="why-imgs">
+      <div class="wi tall"><img src="./imgg/keolocal.jpg" alt=""></div>
+      <div class="wi"><img src="./imgg/pic.JPG" alt=""></div>
+      <div class="wi"><img src="./imgg/trip3.JPG" alt=""></div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <div class="sec-lbl"><i class="fas fa-question-circle"></i> Common Questions</div>
+  <h2>Before You Book</h2>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)"><h4>Is this safe? How are friends verified?</h4><i class="fas fa-plus"></i></div>
+    <div class="faq-a">Every TosTrip friend goes through a three-step process: government ID verification, a video interview with our team, and a background check. We also read every review after each trip. Any complaint suspends the listing immediately while we investigate.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)"><h4>What's the difference between a friend and a tour guide?</h4><i class="fas fa-plus"></i></div>
+    <div class="faq-a">A tour guide follows a fixed route with a group. Your local friend spends the day with only you (or your group), going wherever your conversation takes you. No script, no schedule, no other tourists. They eat with you, introduce you to their friends, and show you the places they actually love.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)"><h4>What's included in the price?</h4><i class="fas fa-plus"></i></div>
+    <div class="faq-a">The listed price covers your friend's time. Transport, entrance fees, food, and activities are paid separately as you go — this keeps things flexible and fair. Your friend will always know the best-value options and won't take you anywhere overpriced.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)"><h4>Can I cancel or reschedule?</h4><i class="fas fa-plus"></i></div>
+    <div class="faq-a">Yes — full free cancellation up to 48 hours before your booked time. After that, a 50% cancellation fee applies to respect your friend's time. Rescheduling is always free with at least 24 hours' notice.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)"><h4>What if I don't speak Khmer?</h4><i class="fas fa-plus"></i></div>
+    <div class="faq-a">All TosTrip friends speak at least English. Many speak French, Mandarin, Japanese, Korean, German, or Spanish — filter by language to find the right match. And honestly, some of the best moments happen without any common language at all.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)"><h4>Can I book for a group?</h4><i class="fas fa-plus"></i></div>
+    <div class="faq-a">Yes — mention your group size when booking. Groups of 1–4 pay the same rate per booking. For groups of 5 or more, contact us directly and we'll arrange a group price or match you with multiple friends.</div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div class="test-section">
+  <div class="test-inner">
+    <div class="sec-lbl"><i class="fas fa-quote-left"></i> Guest Stories</div>
+    <div class="sec-title">Days You Won't Stop Talking About</div>
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="test-guide-tag"><i class="fas fa-user-circle"></i> Sokha Keo · Phnom Penh</div>
+        <div class="test-stars">★★★★★</div>
+        <p class="test-q">Sokha took me to a restaurant down a lane so small the tuk-tuk couldn't fit. Ten people, plastic stools, the most extraordinary fish soup. No tourist had ever been there. That was my whole trip.</p>
+        <div class="test-author"><div class="test-av">M</div><div><div class="test-name">Marco V.</div><div class="test-info">🇮🇹 Italy · 3-day Phnom Penh trip</div></div></div>
+      </div>
+      <div class="test-card">
+        <div class="test-guide-tag"><i class="fas fa-user-circle"></i> Dara Chann · Siem Reap</div>
+        <div class="test-stars">★★★★★</div>
+        <p class="test-q">I'd done Angkor twice before with group tours and felt nothing. Dara took me alone, pre-dawn, to a temple I'd never seen, sat down beside a 1,000-year-old carving and told me who carved it and why. I cried. Genuinely.</p>
+        <div class="test-author"><div class="test-av">S</div><div><div class="test-name">Sarah L.</div><div class="test-info">🇺🇸 USA · Solo traveller</div></div></div>
+      </div>
+      <div class="test-card">
+        <div class="test-guide-tag"><i class="fas fa-user-circle"></i> Virak Sorn · Kampot</div>
+        <div class="test-stars">★★★★★</div>
+        <p class="test-q">We kayaked at 7am, visited his family's pepper farm at 10, ate lunch at his aunt's house, and watched the sunset from a hill no Google Maps pin exists for. Virak wasn't a guide. He was just a friend showing me his home.</p>
+        <div class="test-author"><div class="test-av">T</div><div><div class="test-name">Tom H.</div><div class="test-info">🇳🇱 Netherlands · 2 weeks in Cambodia</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="bookModal">
+  <div class="modal-box">
+    <div class="mh-book">
+      <div class="mh-book-top">
+        <div class="mh-guide-av"><img id="bm-av" src="" alt=""></div>
+        <div>
+          <h2>Book <span id="bm-name">Guide</span></h2>
+          <p id="bm-city">City · TosTrip Local Friend</p>
+        </div>
+      </div>
+      <button class="modal-close" onclick="document.getElementById('bookModal').classList.remove('open')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="m-body">
+      <div class="sum-bar">
+        <div><div class="sum-name" id="bm-sn">Guide Name</div><div class="sum-dur" id="bm-sd">Half Day · ~4 hours</div></div>
+        <div class="sum-price" id="bm-sp">$25</div>
+      </div>
+      <form id="bookForm" onsubmit="submitBook(event)">
+        <label class="fl" style="margin-bottom:10px">Choose Duration</label>
+        <div class="dur-grid" id="bm-dur-grid"></div>
+
+        <label class="fl" style="margin-bottom:10px">What would you like to do? <span style="font-weight:400;color:var(--ink4)">(optional)</span></label>
+        <div class="activities-grid" id="actGrid">
+          <label class="act-cb" onclick="this.classList.toggle('checked')"><input type="checkbox" value="Street Food"> 🍜 Street Food Tour</label>
+          <label class="act-cb" onclick="this.classList.toggle('checked')"><input type="checkbox" value="Temples"> 🛕 Temples & Ruins</label>
+          <label class="act-cb" onclick="this.classList.toggle('checked')"><input type="checkbox" value="Markets"> 🛍️ Local Markets</label>
+          <label class="act-cb" onclick="this.classList.toggle('checked')"><input type="checkbox" value="Photography"> 📸 Photography</label>
+          <label class="act-cb" onclick="this.classList.toggle('checked')"><input type="checkbox" value="Nightlife"> 🌙 Night Out</label>
+          <label class="act-cb" onclick="this.classList.toggle('checked')"><input type="checkbox" value="Nature"> 🌿 Nature & Outdoors</label>
+        </div>
+
+        <div class="fg"><label class="fl">Full Name <span class="req">*</span></label><input type="text" id="b-name" class="fi" placeholder="Your full name" required></div>
+        <div class="f-row">
+          <div class="fg"><label class="fl">Email <span class="req">*</span></label><input type="email" id="b-email" class="fi" placeholder="you@email.com" required></div>
+          <div class="fg"><label class="fl">Phone</label><input type="tel" id="b-phone" class="fi" placeholder="+855 12 345 678"></div>
+        </div>
+        <div class="f-row">
+          <div class="fg"><label class="fl">Date <span class="req">*</span></label><input type="date" id="b-date" class="fi" required></div>
+          <div class="fg"><label class="fl">Group Size</label><select id="b-pax" class="fi"><option>1 person</option><option selected>2 people</option><option>3 people</option><option>4 people</option><option>5+ people</option></select></div>
+        </div>
+        <div class="fg"><label class="fl">Anything else?</label><textarea id="b-notes" class="fi f-ta" placeholder="Languages you speak, mobility needs, specific places you'd love to visit…"></textarea></div>
+        <div class="ok-note"><i class="fas fa-shield-alt"></i><span><strong>Free cancellation</strong> up to 48 hours before your booking. Full refund guaranteed.</span></div>
+        <button type="submit" class="m-btn purple"><i class="fas fa-check-circle"></i> Confirm Booking</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- CHAT MODAL -->
+<div class="modal-overlay" id="chatModal">
+  <div class="modal-box">
+    <div class="mh-msg">
+      <div class="mh-msg-row">
+        <div class="mh-msg-av"><img id="cm-av" src="" alt=""></div>
+        <div><h2>Chat with <span id="cm-name">Guide</span></h2><p id="cm-city">Ask anything before you book</p></div>
+      </div>
+      <button class="modal-close" onclick="document.getElementById('chatModal').classList.remove('open')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="m-body">
+      <label class="fl" style="margin-bottom:10px">Quick topics — tap to add to your message</label>
+      <div class="topic-row">
+        <button type="button" class="t-chip" onclick="addTopic(this,'What areas do you usually take people to?')">🗺️ Areas covered?</button>
+        <button type="button" class="t-chip" onclick="addTopic(this,'Do you have a motorbike or can we walk?')">🛵 Transport?</button>
+        <button type="button" class="t-chip" onclick="addTopic(this,'What are your top 3 food recommendations?')">🍜 Food picks?</button>
+        <button type="button" class="t-chip" onclick="addTopic(this,'Is it okay if I have dietary restrictions?')">🥦 Dietary needs?</button>
+        <button type="button" class="t-chip" onclick="addTopic(this,'Can you recommend a good time of day to meet?')">⏰ Best time?</button>
+        <button type="button" class="t-chip" onclick="addTopic(this,'I am travelling with kids — is that okay?')">👶 Kids welcome?</button>
+        <button type="button" class="t-chip" onclick="addTopic(this,'Can we plan the day together in advance?')">📝 Plan ahead?</button>
+      </div>
+      <form id="chatForm" onsubmit="submitChat(event)">
+        <div class="fg"><label class="fl">Your Name <span class="req">*</span></label><input type="text" id="c-name" class="fi" placeholder="Your name" required></div>
+        <div class="fg"><label class="fl">Email <span class="req">*</span></label><input type="email" id="c-email" class="fi" placeholder="you@email.com" required></div>
+        <div class="fg"><label class="fl">Your Message <span class="req">*</span></label><textarea id="c-msg" class="fi f-ta" style="min-height:130px" placeholder="Hi! I'm visiting next week and I'd love to explore the city with a local friend. I was wondering…" required></textarea></div>
+        <button type="submit" class="m-btn dark"><i class="fas fa-paper-plane"></i> Send Message</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-logo">
+        <img src="./imgg/loko.png" alt="TosTrip" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="footer-logo-text" style="display:none">TosTrip</span>
+      </div>
+      <div class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="likelocal.html">Live Like a Local</a>
+        <a href="us.html">About</a>
+        <a href="us.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bot">© 2025 TosTrip · Rent a Friend · Made with ❤️ in Cambodia</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+const EJ_KEY='SmoLQAp-ij_aoJbAd',EJ_SVC='service_9ogox5a',EJ_TPL='template_0pi47tp';
+if(typeof emailjs!=='undefined')emailjs.init(EJ_KEY);
+
+/* nav scroll */
+window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',scrollY>30));
+document.getElementById('b-date').min=new Date().toISOString().split('T')[0];
+
+/* ── FILTER & SEARCH ── */
+let activeFilter='all', searchTerm='';
+
+function filterGuides(type, btn){
+  activeFilter = type;
+  document.querySelectorAll('.fc').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function liveSearch(val){
+  searchTerm = val.toLowerCase();
+  applyFilters();
+}
+
+function applyFilters(){
+  const cards = document.querySelectorAll('.guide-card');
+  let shown = 0;
+  cards.forEach(c=>{
+    const city    = c.dataset.city || '';
+    const tags    = c.dataset.tags || '';
+    const nameEl  = c.querySelector('.gc-name');
+    const bioEl   = c.querySelector('.gc-bio');
+    const name    = nameEl ? nameEl.textContent.toLowerCase() : '';
+    const bio     = bioEl  ? bioEl.textContent.toLowerCase()  : '';
+
+    const matchFilter = activeFilter==='all' || city===activeFilter || tags.includes(activeFilter);
+    const matchSearch = !searchTerm || name.includes(searchTerm) || bio.includes(searchTerm) || tags.includes(searchTerm);
+
+    const show = matchFilter && matchSearch;
+    c.classList.toggle('hidden', !show);
+    if(show) shown++;
+  });
+  document.getElementById('showing-count').textContent = shown;
+  document.getElementById('emptyState').style.display = shown===0 ? 'block' : 'none';
+}
+
+/* ── SORT ── */
+function sortGuides(by){
+  const grid = document.getElementById('guidesGrid');
+  const cards = [...grid.querySelectorAll('.guide-card')];
+  cards.sort((a,b)=>{
+    if(by==='rating') return parseFloat(b.dataset.rating)-parseFloat(a.dataset.rating);
+    if(by==='price-low') return parseInt(a.dataset.half)-parseInt(b.dataset.half);
+    if(by==='price-high') return parseInt(b.dataset.half)-parseInt(a.dataset.half);
+    if(by==='reviews') return parseInt(b.dataset.reviews)-parseInt(a.dataset.reviews);
+  });
+  cards.forEach(c=>grid.appendChild(c));
+}
+
+/* ── WISHLIST ── */
+function toggleHeart(btn){
+  btn.classList.toggle('liked');
+  btn.innerHTML=btn.classList.contains('liked')?'<i class="fas fa-heart"></i>':'<i class="far fa-heart"></i>';
+}
+
+/* ── FAQ ── */
+function toggleFaq(el){
+  el.parentElement.classList.toggle('open');
+}
+
+/* ── BOOKING MODAL ── */
+let bk={};
+function openBook(name, city, half, full, img){
+  bk={name,city,half,full,img,selType:'half',selPrice:half};
+  document.getElementById('bm-av').src = img;
+  document.getElementById('bm-name').textContent = name;
+  document.getElementById('bm-city').textContent = city+' · TosTrip Local Friend';
+  document.getElementById('bm-sn').textContent = name;
+  updateSum('half', half);
+  document.getElementById('bm-dur-grid').innerHTML=`
+    <div class="dur-opt sel" onclick="pickDur('half',${half},this)">
+      <input type="radio" name="dur" checked>
+      <div class="dur-chk"><i class="fas fa-check"></i></div>
+      <div class="dur-lbl">🌅 Half Day</div>
+      <div class="dur-sub">~4 hours together</div>
+      <div class="dur-price">$${half}</div>
+    </div>
+    <div class="dur-opt" onclick="pickDur('full',${full},this)">
+      <input type="radio" name="dur">
+      <div class="dur-chk"><i class="fas fa-check"></i></div>
+      <div class="dur-lbl">☀️ Full Day</div>
+      <div class="dur-sub">~8 hours together</div>
+      <div class="dur-price">$${full}</div>
+    </div>`;
+  document.getElementById('bookModal').classList.add('open');
+}
+function pickDur(type,price,el){
+  bk.selType=type; bk.selPrice=price;
+  document.querySelectorAll('#bm-dur-grid .dur-opt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');
+  updateSum(type,price);
+}
+function updateSum(type,price){
+  document.getElementById('bm-sd').textContent = type==='half'?'Half Day · ~4 hours':'Full Day · ~8 hours';
+  document.getElementById('bm-sp').textContent = '$'+price;
+}
+document.getElementById('bookModal').addEventListener('click',e=>{if(e.target===document.getElementById('bookModal'))document.getElementById('bookModal').classList.remove('open')});
+
+function submitBook(e){
+  e.preventDefault();
+  const activities = [...document.querySelectorAll('#actGrid input:checked')].map(i=>i.value).join(', ')||'Not specified';
+  const btn=e.target.querySelector('.m-btn');
+  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending…';btn.disabled=true;
+  const p={
+    user_name:document.getElementById('b-name').value,
+    user_email:document.getElementById('b-email').value,
+    phone:document.getElementById('b-phone').value||'Not provided',
+    booking_date:document.getElementById('b-date').value,
+    message:(document.getElementById('b-notes').value||'No notes')+'\nActivities: '+activities,
+    request_type:'Rent a Friend – Booking',
+    friend_name:bk.name,
+    duration:bk.selType+' — $'+bk.selPrice,
+    price:bk.selPrice,
+    lifestyle:bk.city,
+    people:document.getElementById('b-pax').value
+  };
+  if(typeof emailjs!=='undefined'){
+    emailjs.send(EJ_SVC,EJ_TPL,p).then(()=>window.location.href='thankyou.html').catch(err=>{alert('Error: '+(err.text||err.message));btn.innerHTML='<i class="fas fa-check-circle"></i> Confirm Booking';btn.disabled=false});
+  } else {
+    alert('Demo: Booking with '+bk.name+' received!');
+    btn.innerHTML='<i class="fas fa-check-circle"></i> Confirm Booking';btn.disabled=false;
+  }
+}
+
+/* ── CHAT MODAL ── */
+let cm={};
+function openChat(name, city, img){
+  cm={name,city,img};
+  document.getElementById('cm-av').src = img;
+  document.getElementById('cm-name').textContent = name;
+  document.getElementById('cm-city').textContent = city+' · Ask anything before you book';
+  document.querySelectorAll('.t-chip').forEach(c=>c.classList.remove('sel'));
+  document.getElementById('c-msg').value='';
+  document.getElementById('chatModal').classList.add('open');
+}
+document.getElementById('chatModal').addEventListener('click',e=>{if(e.target===document.getElementById('chatModal'))document.getElementById('chatModal').classList.remove('open')});
+
+function addTopic(btn,text){
+  btn.classList.toggle('sel');
+  const ta=document.getElementById('c-msg');
+  if(btn.classList.contains('sel')){ta.value=ta.value?ta.value.trimEnd()+'\n'+text:text}
+  else{ta.value=ta.value.replace('\n'+text,'').replace(text,'').trim()}
+}
+
+function submitChat(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.m-btn');
+  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending…';btn.disabled=true;
+  const p={
+    user_name:document.getElementById('c-name').value,
+    user_email:document.getElementById('c-email').value,
+    request_type:'Rent a Friend – Message',
+    message:document.getElementById('c-msg').value,
+    friend_name:cm.name,
+    lifestyle:cm.city,
+    booking_date:'N/A',duration:'N/A',price:'N/A',phone:'N/A',people:'N/A'
+  };
+  if(typeof emailjs!=='undefined'){
+    emailjs.send(EJ_SVC,EJ_TPL,p).then(()=>window.location.href='thankyou.html').catch(err=>{alert('Error: '+(err.text||err.message));btn.innerHTML='<i class="fas fa-paper-plane"></i> Send Message';btn.disabled=false});
+  } else {
+    alert('Demo: Message to '+cm.name+' sent!');
+    btn.innerHTML='<i class="fas fa-paper-plane"></i> Send Message';btn.disabled=false;
+  }
+}
+</script>
+</body>
+</html>

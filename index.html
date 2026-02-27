@@ -1,0 +1,2445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TosTrip — Cambodia Travel Platform</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ROOT & RESET
+============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --blue:       #667eea;
+  --blue-dark:  #4f63d2;
+  --blue-light: #eeeffd;
+  --gold:       #f5a623;
+  --gold-light: #fff8ec;
+  --green:      #00b67a;
+  --red:        #e63946;
+  --text-900:   #0a0f1e;
+  --text-600:   #4b5563;
+  --text-400:   #9ca3af;
+  --border:     #e5e7eb;
+  --surface:    #f8fafc;
+  --white:      #ffffff;
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.08);
+  --shadow-md:  0 4px 16px rgba(0,0,0,.1);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,.14);
+  --r-sm:       8px;
+  --r-md:       14px;
+  --r-lg:       20px;
+  --r-xl:       28px;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text-900);
+  background: var(--white);
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+img { display: block; width: 100%; object-fit: cover; }
+button { font-family: inherit; cursor: pointer; }
+
+/* ============================================================
+   HEADER / NAV
+============================================================ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow .3s;
+}
+.nav.scrolled { box-shadow: var(--shadow-md); }
+.nav-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; height: 64px;
+}
+.logo {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 700; color: var(--blue);
+  letter-spacing: -.3px;
+}
+.logo img { height: 60px; width: auto; object-fit: contain; }
+.nav-links {
+  display: flex; align-items: center; gap: 4px; list-style: none;
+}
+.nav-links a {
+  padding: 8px 14px; border-radius: var(--r-sm);
+  font-size: 14px; font-weight: 500; color: var(--text-600);
+  transition: all .2s;
+}
+.nav-links a:hover { color: var(--blue); background: var(--blue-light); }
+.nav-right { display: flex; align-items: center; gap: 10px; }
+.btn-signin {
+  padding: 8px 18px; border-radius: var(--r-sm);
+  background: var(--white); border: 1.5px solid var(--border);
+  font-size: 14px; font-weight: 600; color: var(--text-600);
+  transition: all .2s;
+}
+.btn-signin:hover { border-color: var(--blue); color: var(--blue); }
+.btn-register {
+  padding: 8px 18px; border-radius: var(--r-sm);
+  background: var(--blue); border: none;
+  font-size: 14px; font-weight: 600; color: var(--white);
+  transition: background .2s;
+}
+.btn-register:hover { background: var(--blue-dark); }
+.hamburger {
+  display: none; background: none; border: none;
+  font-size: 22px; color: var(--text-600);
+}
+
+/* ============================================================
+   HERO
+============================================================ */
+.hero {
+  position: relative; min-height: 620px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 120px 24px 60px;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(160deg,
+      rgba(79, 99, 210, 0.92) 0%,
+      rgba(102, 126, 234, 0.85) 45%,
+      rgba(55, 48, 163, 0.92) 100%
+    ),
+    url('./imgg/angkorwatttt.jpg') center/cover no-repeat;
+}
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 60% 50%, rgba(167, 139, 250, 0.12) 0%, transparent 70%);
+}
+.hero-content { position: relative; text-align: center; max-width: 760px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,.15); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.25);
+  color: #fff; font-size: 13px; font-weight: 600;
+  padding: 6px 16px; border-radius: 100px;
+  margin-bottom: 20px;
+  letter-spacing: .4px;
+}
+.hero-badge i { color: var(--gold); }
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 5.5vw, 60px);
+  font-weight: 800; color: #fff;
+  line-height: 1.12; letter-spacing: -.5px;
+  margin-bottom: 16px;
+}
+.hero h1 span { color: var(--gold); }
+.hero p {
+  font-size: 17px; color: rgba(255,255,255,.82);
+  font-weight: 400; margin-bottom: 36px; line-height: 1.6;
+}
+.hero-stats {
+  display: flex; align-items: center; justify-content: center; gap: 32px;
+  margin-top: 32px; position: relative;
+}
+.stat { text-align: center; }
+.stat-num {
+  font-size: 22px; font-weight: 700; color: #fff;
+  font-family: 'Playfair Display', serif;
+}
+.stat-label { font-size: 13px; color: rgba(255,255,255,.6); margin-top: 2px; }
+.hero-stats-divider {
+  width: 1px; height: 36px;
+  background: rgba(255,255,255,.2);
+}
+
+/* ============================================================
+   SECTION SHELL
+============================================================ */
+.section { padding: 72px 24px; max-width: 1280px; margin: 0 auto; }
+.section-label {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 700; letter-spacing: 1.2px;
+  text-transform: uppercase; color: var(--blue);
+  margin-bottom: 10px;
+}
+.section-label i { font-size: 11px; }
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 3vw, 38px); font-weight: 700;
+  color: var(--text-900); line-height: 1.2; margin-bottom: 6px;
+}
+.section-sub {
+  font-size: 15px; color: var(--text-600); margin-bottom: 40px;
+}
+.section-header-row {
+  display: flex; align-items: flex-end;
+  justify-content: space-between; margin-bottom: 36px;
+  flex-wrap: wrap; gap: 12px;
+}
+.see-all {
+  font-size: 14px; font-weight: 600; color: var(--blue);
+  display: flex; align-items: center; gap: 4px;
+  padding: 8px 16px; border-radius: var(--r-sm);
+  border: 1.5px solid var(--blue); transition: all .2s;
+}
+.see-all:hover { background: var(--blue-light); }
+
+/* ============================================================
+   DESTINATIONS STRIP
+============================================================ */
+.dest-strip { background: var(--surface); padding: 48px 0; }
+.dest-inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+.dest-scroll {
+  display: flex; gap: 14px;
+  overflow-x: auto; padding-bottom: 8px;
+  scrollbar-width: none;
+}
+.dest-scroll::-webkit-scrollbar { display: none; }
+.dest-chip {
+  flex-shrink: 0;
+  position: relative; border-radius: var(--r-md);
+  overflow: hidden; cursor: pointer;
+  width: 160px; height: 210px;
+  box-shadow: var(--shadow-sm);
+  transition: transform .3s, box-shadow .3s;
+}
+.dest-chip:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.dest-chip img { width: 100%; height: 100%; object-fit: cover; }
+.dest-chip-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 60%);
+  display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 14px 12px;
+}
+.dest-chip-name { color: #fff; font-size: 14px; font-weight: 700; letter-spacing: .3px; margin-bottom: 2px; }
+.dest-chip-count { color: rgba(255,255,255,.7); font-size: 11px; }
+.dest-chip-badge {
+  position: absolute; top: 10px; left: 10px;
+  background: var(--gold); color: var(--white);
+  font-size: 10px; font-weight: 700; letter-spacing: .5px;
+  padding: 3px 8px; border-radius: 100px;
+  text-transform: uppercase;
+}
+.dest-chip.locked .dest-chip-overlay {
+  background: linear-gradient(to top, rgba(0,0,0,.8) 0%, rgba(0,0,0,.3) 100%);
+}
+.dest-chip.locked::before {
+  content: '🔒';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 28px; z-index: 2;
+}
+.dest-chip.locked img { filter: brightness(.5); }
+.chip-soon {
+  background: rgba(255,255,255,.2); border: 1px solid rgba(255,255,255,.4);
+  color: #fff; font-size: 10px; font-weight: 600;
+  padding: 3px 8px; border-radius: 100px; display: inline-block; margin-top: 4px;
+}
+
+/* ============================================================
+   PACKAGES
+============================================================ */
+.pkg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
+}
+.pkg-card {
+  border-radius: var(--r-lg); overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  background: var(--white);
+  transition: all .3s; cursor: pointer;
+}
+.pkg-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.pkg-img { position: relative; height: 220px; overflow: hidden; }
+.pkg-img img { height: 100%; transition: transform .5s; }
+.pkg-card:hover .pkg-img img { transform: scale(1.06); }
+.pkg-tag {
+  position: absolute; top: 14px; left: 14px;
+  background: var(--blue); color: #fff;
+  font-size: 11px; font-weight: 700; letter-spacing: .6px;
+  padding: 4px 12px; border-radius: 100px; text-transform: uppercase;
+}
+.pkg-tag.gold { background: var(--gold); }
+.pkg-body { padding: 22px; }
+.pkg-body h3 {
+  font-size: 19px; font-weight: 700;
+  color: var(--text-900); margin-bottom: 6px;
+  font-family: 'Playfair Display', serif;
+}
+.pkg-body p { font-size: 14px; color: var(--text-600); line-height: 1.6; margin-bottom: 16px; }
+.pkg-meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--text-600); margin-bottom: 18px; }
+.pkg-meta span { display: flex; align-items: center; gap: 5px; }
+.pkg-meta i { color: var(--blue); }
+.pkg-cta { display: flex; align-items: center; justify-content: space-between; }
+.pkg-btn {
+  padding: 10px 22px; border-radius: var(--r-sm);
+  background: var(--blue); border: none;
+  color: #fff; font-size: 14px; font-weight: 600;
+  transition: background .2s; display: flex; align-items: center; gap: 6px;
+}
+.pkg-btn:hover { background: var(--blue-dark); }
+.pkg-reviews { display: flex; align-items: center; gap: 4px; font-size: 13px; color: var(--text-600); }
+.pkg-reviews i { color: var(--gold); font-size: 12px; }
+.pkg-score { font-weight: 700; color: var(--text-900); }
+
+/* ============================================================
+   FRIENDS
+============================================================ */
+.friends-section { background: var(--surface); padding: 72px 24px; }
+.friends-inner { max-width: 1280px; margin: 0 auto; }
+.friends-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+.friend-card {
+  background: var(--white); border-radius: var(--r-lg);
+  border: 1px solid var(--border); overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all .3s;
+}
+.friend-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.fc-photo { position: relative; height: 240px; overflow: hidden; }
+.fc-photo img { height: 100%; transition: transform .5s; }
+.friend-card:hover .fc-photo img { transform: scale(1.04); }
+.fc-price-badge {
+  position: absolute; bottom: 14px; right: 14px;
+  background: var(--white); border-radius: var(--r-sm);
+  padding: 6px 14px; box-shadow: var(--shadow-md);
+}
+.fc-price-badge .price { font-size: 18px; font-weight: 700; color: var(--blue); }
+.fc-price-badge .per { font-size: 12px; color: var(--text-400); }
+.fc-verified {
+  position: absolute; top: 14px; left: 14px;
+  background: var(--green); color: #fff;
+  font-size: 11px; font-weight: 700;
+  padding: 4px 10px; border-radius: 100px;
+  display: flex; align-items: center; gap: 4px;
+}
+.fc-body { padding: 20px; }
+.fc-row { display: flex; justify-content: space-between; align-items: start; margin-bottom: 4px; }
+.fc-name { font-size: 20px; font-weight: 700; font-family: 'Playfair Display', serif; }
+.fc-rating {
+  display: flex; align-items: center; gap: 4px;
+  background: var(--gold-light); padding: 4px 10px; border-radius: var(--r-sm);
+}
+.fc-rating i { color: var(--gold); font-size: 12px; }
+.fc-rating span { font-size: 13px; font-weight: 700; }
+.fc-info { display: flex; gap: 14px; font-size: 13px; color: var(--text-600); margin: 10px 0 12px; }
+.fc-info span { display: flex; align-items: center; gap: 5px; }
+.fc-info i { color: var(--blue); }
+.fc-bio { font-size: 14px; color: var(--text-600); line-height: 1.6; margin-bottom: 14px; }
+.fc-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
+.fc-tag {
+  background: var(--blue-light); color: var(--blue);
+  font-size: 12px; font-weight: 600;
+  padding: 5px 12px; border-radius: 100px;
+  display: flex; align-items: center; gap: 5px;
+}
+.fc-pricing {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-bottom: 18px;
+}
+.fc-price-box {
+  background: var(--surface); border-radius: var(--r-sm);
+  padding: 12px; text-align: center;
+}
+.fc-price-box .label { font-size: 11px; color: var(--text-400); margin-bottom: 4px; }
+.fc-price-box .amount { font-size: 20px; font-weight: 700; color: var(--text-900); }
+.fc-actions { display: flex; gap: 10px; }
+.fc-btn-book {
+  flex: 1; padding: 12px; border-radius: var(--r-sm);
+  background: var(--blue); border: none; color: #fff;
+  font-size: 14px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  transition: background .2s;
+}
+.fc-btn-book:hover { background: var(--blue-dark); }
+.fc-btn-chat {
+  width: 46px; border-radius: var(--r-sm);
+  background: var(--white); border: 1.5px solid var(--border);
+  font-size: 18px; color: var(--text-600);
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.fc-btn-chat:hover { border-color: var(--blue); color: var(--blue); }
+
+/* ============================================================
+   TRUST STRIP
+============================================================ */
+.trust-strip {
+  background: linear-gradient(135deg, #4f63d2 0%, #667eea 50%, #7c8ff0 100%);
+  padding: 52px 24px;
+}
+.trust-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px; text-align: center;
+}
+.trust-item i { font-size: 32px; color: rgba(255,255,255,.7); margin-bottom: 12px; }
+.trust-item .t-num { font-size: 32px; font-weight: 700; color: #fff; font-family: 'Playfair Display', serif; margin-bottom: 4px; }
+.trust-item .t-label { font-size: 14px; color: rgba(255,255,255,.65); }
+
+/* ============================================================
+   ABOUT
+============================================================ */
+.about-section { padding: 80px 24px; }
+.about-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: center;
+}
+.about-image {
+  border-radius: var(--r-xl); overflow: hidden;
+  height: 440px; box-shadow: var(--shadow-lg);
+  position: relative;
+}
+.about-image::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(to top, rgba(102,126,234,0.5), transparent);
+}
+.about-text .section-label { color: var(--gold); }
+.about-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 3vw, 40px); font-weight: 700; margin-bottom: 16px; line-height: 1.2; }
+.about-text p { font-size: 15px; color: var(--text-600); line-height: 1.8; margin-bottom: 28px; }
+.about-pills { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 32px; }
+.about-pill { display: flex; align-items: center; gap: 7px; background: var(--blue-light); color: var(--blue); font-size: 13px; font-weight: 600; padding: 8px 16px; border-radius: 100px; }
+.about-cta { padding: 14px 32px; border-radius: var(--r-sm); background: var(--blue); border: none; color: #fff; font-size: 15px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: background .2s; }
+.about-cta:hover { background: var(--blue-dark); }
+
+/* ============================================================
+   HIDDEN SECTIONS
+============================================================ */
+.toggle-section { display: none; }
+
+/* ============================================================
+   LANGUAGE
+============================================================ */
+.lang-wrapper { position: relative; }
+.lang-btn {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: 100px; padding: 7px 14px;
+  font-size: 13px; font-weight: 600; color: var(--text-600);
+  display: flex; align-items: center; gap: 6px;
+  cursor: pointer; transition: all .2s;
+}
+.lang-btn:hover { border-color: var(--blue); color: var(--blue); }
+.lang-menu {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--r-md); box-shadow: var(--shadow-lg);
+  list-style: none; padding: 6px; min-width: 140px;
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: all .2s; z-index: 100;
+}
+.lang-menu.open { opacity: 1; visibility: visible; transform: translateY(0); }
+.lang-menu li { padding: 9px 14px; border-radius: var(--r-sm); font-size: 14px; font-weight: 500; cursor: pointer; transition: background .15s; color: var(--text-600); }
+.lang-menu li:hover { background: var(--blue-light); color: var(--blue); }
+
+/* Social Links */
+.social-links { display: flex; gap: 18px; align-items: center; }
+.social-links a { color: rgba(255,255,255,.6); font-size: 16px; transition: 0.3s ease; }
+.social-links a:hover { color: #ffffff; transform: translateY(-2px); }
+
+/* ============================================================
+   FOOTER
+============================================================ */
+.footer { background: #1a1f4e; color: rgba(255,255,255,.65); padding: 64px 24px 32px; }
+.footer-inner { max-width: 1280px; margin: 0 auto; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+.footer-brand .logo { color: var(--white); margin-bottom: 14px; }
+.footer-brand p { font-size: 14px; line-height: 1.7; max-width: 280px; }
+.footer-col h4 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--white); margin-bottom: 16px; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.footer-col ul li a { font-size: 14px; color: rgba(255,255,255,.55); transition: color .2s; }
+.footer-col ul li a:hover { color: var(--white); }
+.footer-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,.1); display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: rgba(255,255,255,.35); flex-wrap: wrap; gap: 12px; }
+
+/* ============================================================
+   WORKSHOPS
+============================================================ */
+.workshops-section { background: var(--white); padding: 80px 24px; }
+.ws-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px; margin-bottom: 48px;
+  max-width: 1280px; margin-left: auto; margin-right: auto;
+}
+.ws-card { border-radius: var(--r-lg); border: 1px solid var(--border); background: var(--white); overflow: hidden; box-shadow: var(--shadow-sm); transition: all .3s; display: flex; flex-direction: column; }
+.ws-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.ws-img { position: relative; height: 200px; overflow: hidden; }
+.ws-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+.ws-card:hover .ws-img img { transform: scale(1.06); }
+.ws-badge { position: absolute; top: 14px; left: 14px; background: var(--blue); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .5px; padding: 4px 12px; border-radius: 100px; text-transform: uppercase; }
+.ws-badge.craft  { background: #7c3aed; }
+.ws-badge.farm   { background: var(--green); }
+.ws-badge.culture{ background: var(--gold); }
+.ws-duration { position: absolute; bottom: 12px; right: 12px; background: rgba(0,0,0,.55); backdrop-filter: blur(4px); color: #fff; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 100px; display: flex; align-items: center; gap: 5px; }
+.ws-body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+.ws-partner-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.ws-logo-placeholder { width: 38px; height: 38px; border-radius: var(--r-sm); background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.ws-partner-name { font-size: 13px; font-weight: 700; color: var(--text-900); }
+.ws-partner-type { font-size: 11px; color: var(--green); font-weight: 600; }
+.ws-partner-type::before { content: '✓ '; }
+.ws-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--text-900); margin-bottom: 8px; line-height: 1.3; }
+.ws-desc { font-size: 13px; color: var(--text-600); line-height: 1.6; margin-bottom: 14px; flex: 1; }
+.ws-meta { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--text-600); margin-bottom: 16px; }
+.ws-meta span { display: flex; align-items: center; gap: 4px; }
+.ws-meta i { color: var(--blue); }
+.ws-footer { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.ws-price-block { display: flex; align-items: baseline; gap: 3px; }
+.ws-from { font-size: 11px; color: var(--text-400); }
+.ws-price { font-size: 24px; font-weight: 700; color: var(--text-900); }
+.ws-per { font-size: 12px; color: var(--text-400); }
+.ws-rating { display: flex; align-items: center; gap: 4px; background: var(--gold-light); padding: 5px 10px; border-radius: var(--r-sm); font-size: 13px; font-weight: 700; }
+.ws-rating i { color: var(--gold); font-size: 12px; }
+.ws-btn { width: 100%; padding: 12px; border-radius: var(--r-sm); border: none; background: var(--blue-light); color: var(--blue); font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all .2s; }
+.ws-btn:hover { background: var(--blue); color: var(--white); }
+
+/* ============================================================
+   CLIENTS GALLERY
+============================================================ */
+.clients-section { background: var(--surface); padding: 80px 24px; }
+.clients-inner { max-width: 1280px; margin: 0 auto; }
+.client-filter-tabs { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.cf-tab { padding: 8px 18px; border-radius: 100px; border: 1.5px solid var(--border); background: var(--white); font-size: 13px; font-weight: 600; color: var(--text-600); cursor: pointer; transition: all .2s; }
+.cf-tab:hover, .cf-tab.active { background: var(--blue); border-color: var(--blue); color: var(--white); }
+.clients-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 200px; gap: 12px; margin-bottom: 32px; }
+.cg-item { position: relative; border-radius: var(--r-md); overflow: hidden; cursor: pointer; transition: transform .3s, box-shadow .3s; grid-row: span 1; }
+.cg-item.cg-tall { grid-row: span 2; }
+.cg-item.cg-wide { grid-column: span 2; }
+.cg-item:hover { transform: scale(1.02); box-shadow: var(--shadow-lg); z-index: 2; }
+.cg-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+.cg-item:hover img { transform: scale(1.06); }
+.cg-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.78) 0%, rgba(0,0,0,.1) 55%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; opacity: 0; transition: opacity .3s; }
+.cg-item:hover .cg-overlay { opacity: 1; }
+.cg-info { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.cg-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--blue); border: 2px solid var(--white); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--white); flex-shrink: 0; }
+.cg-name { font-size: 14px; font-weight: 700; color: var(--white); }
+.cg-location { font-size: 11px; color: rgba(255,255,255,.7); }
+.cg-quote { font-size: 12px; color: rgba(255,255,255,.85); font-style: italic; line-height: 1.4; margin-bottom: 6px; }
+.cg-stars { color: var(--gold); font-size: 13px; letter-spacing: 1px; }
+.cg-item.hidden { display: none; }
+.cg-cta-row { display: flex; justify-content: center; }
+.cg-cta-card { display: flex; align-items: center; gap: 16px; background: var(--white); border: 1.5px dashed #93c5fd; border-radius: var(--r-lg); padding: 20px 28px; max-width: 520px; width: 100%; }
+.cg-cta-card i { font-size: 28px; color: var(--blue); flex-shrink: 0; }
+.cg-cta-card strong { font-size: 15px; display: block; margin-bottom: 4px; }
+.cg-cta-card p { font-size: 13px; color: var(--text-600); margin: 0; }
+
+/* ============================================================
+   ✦ UNIFIED MODAL SYSTEM ✦
+============================================================ */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(10,15,30,.6); backdrop-filter: blur(8px);
+  z-index: 9999; align-items: center; justify-content: center;
+  padding: 20px;
+  animation: fadeIn .2s ease-out;
+}
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+.modal-overlay.open { display: flex; }
+
+.modal-box {
+  background: var(--white); border-radius: var(--r-xl);
+  max-width: 560px; width: 100%; max-height: 92vh;
+  overflow-y: auto; box-shadow: 0 24px 80px rgba(0,0,0,.22);
+  animation: popIn .28s cubic-bezier(.34,1.56,.64,1);
+  scrollbar-width: thin; scrollbar-color: #e5e7eb transparent;
+}
+.modal-box::-webkit-scrollbar { width: 4px; }
+.modal-box::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 4px; }
+@keyframes popIn {
+  from { opacity:0; transform: scale(.92) translateY(16px); }
+  to   { opacity:1; transform: scale(1) translateY(0); }
+}
+
+/* Modal header */
+.modal-head {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+  color: #fff; padding: 28px 32px 24px; border-radius: var(--r-xl) var(--r-xl) 0 0;
+  position: sticky; top: 0; z-index: 1;
+}
+.modal-head-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.modal-head h2 { font-size: 22px; font-weight: 700; margin-bottom: 4px; font-family: 'Playfair Display', serif; }
+.modal-head h2 span { color: var(--gold); }
+.modal-head p { font-size: 13px; opacity: .75; }
+.modal-close {
+  background: rgba(255,255,255,.15); border: none; color: #fff;
+  width: 36px; height: 36px; border-radius: 50%;
+  font-size: 15px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background .2s; flex-shrink: 0; margin-top: -2px;
+}
+.modal-close:hover { background: rgba(255,255,255,.28); }
+
+/* Guide mini-profile strip */
+.modal-guide-strip {
+  display: flex; align-items: center; gap: 14px;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: var(--r-md); padding: 12px 16px; margin-top: 16px;
+}
+.guide-avatar {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: rgba(255,255,255,.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 700; color: #fff;
+  border: 2px solid rgba(255,255,255,.4);
+  flex-shrink: 0;
+}
+.guide-strip-info .guide-strip-name { font-size: 16px; font-weight: 700; color: #fff; }
+.guide-strip-info .guide-strip-meta { font-size: 12px; color: rgba(255,255,255,.7); margin-top: 2px; }
+.guide-strip-badge {
+  margin-left: auto; background: var(--green); color: #fff;
+  font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 100px;
+  display: flex; align-items: center; gap: 4px; flex-shrink: 0;
+}
+
+/* Step progress bar */
+.modal-steps {
+  display: flex; align-items: center;
+  padding: 18px 32px 0; gap: 0;
+}
+.step-item {
+  display: flex; flex-direction: column; align-items: center;
+  flex: 1; position: relative;
+}
+.step-item:not(:last-child)::after {
+  content: '';
+  position: absolute; top: 14px; left: 50%; right: -50%;
+  height: 2px; background: var(--border);
+  z-index: 0;
+}
+.step-item.done:not(:last-child)::after,
+.step-item.active:not(:last-child)::after { background: var(--blue); }
+.step-circle {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700;
+  border: 2px solid var(--border);
+  background: var(--white); color: var(--text-400);
+  position: relative; z-index: 1;
+  transition: all .3s;
+}
+.step-item.active .step-circle { border-color: var(--blue); background: var(--blue); color: #fff; }
+.step-item.done .step-circle { border-color: var(--blue); background: var(--blue); color: #fff; }
+.step-label { font-size: 11px; color: var(--text-400); margin-top: 6px; font-weight: 600; white-space: nowrap; }
+.step-item.active .step-label, .step-item.done .step-label { color: var(--blue); }
+
+/* Modal body */
+.modal-body { padding: 28px 32px 32px; }
+
+/* Form elements */
+.form-label {
+  display: block; font-size: 13px; font-weight: 600;
+  color: var(--text-600); margin-bottom: 7px;
+}
+.form-label span { color: var(--red); margin-left: 2px; }
+.form-label .opt { color: var(--text-400); font-weight: 400; font-size: 12px; }
+.form-input {
+  width: 100%; padding: 12px 14px; border-radius: var(--r-sm);
+  border: 1.5px solid var(--border); outline: none;
+  font-family: inherit; font-size: 14px; color: var(--text-900);
+  transition: border-color .2s, box-shadow .2s;
+  background: var(--white);
+}
+.form-input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(102,126,234,.12);
+}
+.form-input::placeholder { color: var(--text-400); }
+.form-input.error { border-color: var(--red); box-shadow: 0 0 0 3px rgba(230,57,70,.1); }
+.field-error { font-size: 12px; color: var(--red); margin-top: 5px; display: none; }
+.field-error.show { display: block; }
+.form-group { margin-bottom: 20px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-select {
+  width: 100%; padding: 12px 14px; border-radius: var(--r-sm);
+  border: 1.5px solid var(--border); outline: none;
+  font-family: inherit; font-size: 14px; color: var(--text-900);
+  background: var(--white); cursor: pointer;
+  transition: border-color .2s, box-shadow .2s;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239ca3af' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+.form-select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(102,126,234,.12); }
+.form-textarea { resize: vertical; min-height: 90px; }
+
+/* Duration picker */
+.duration-picker { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.dur-option {
+  border: 2px solid var(--border); border-radius: var(--r-md);
+  padding: 14px 12px; cursor: pointer; transition: all .25s;
+  text-align: center; position: relative;
+}
+.dur-option:hover { border-color: #93c5fd; background: #f8faff; }
+.dur-option.selected { border-color: var(--blue); background: var(--blue-light); }
+.dur-option .dur-icon { font-size: 22px; margin-bottom: 6px; }
+.dur-option .dur-label { font-size: 13px; font-weight: 700; color: var(--text-900); }
+.dur-option .dur-hours { font-size: 11px; color: var(--text-400); margin: 2px 0 6px; }
+.dur-option .dur-price { font-size: 20px; font-weight: 700; color: var(--blue); }
+.dur-option .dur-check {
+  position: absolute; top: 8px; right: 8px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--blue); color: #fff;
+  font-size: 10px; display: none;
+  align-items: center; justify-content: center;
+}
+.dur-option.selected .dur-check { display: flex; }
+
+/* Number stepper */
+.stepper {
+  display: flex; align-items: center; gap: 0;
+  border: 1.5px solid var(--border); border-radius: var(--r-sm);
+  overflow: hidden; width: fit-content;
+}
+.stepper button {
+  width: 38px; height: 42px; background: var(--surface);
+  border: none; font-size: 18px; color: var(--text-600);
+  transition: background .15s;
+}
+.stepper button:hover { background: var(--blue-light); color: var(--blue); }
+.stepper-val {
+  width: 48px; text-align: center;
+  font-size: 15px; font-weight: 700; color: var(--text-900);
+  border-left: 1.5px solid var(--border);
+  border-right: 1.5px solid var(--border);
+  height: 42px; display: flex; align-items: center; justify-content: center;
+}
+
+/* Info / warning boxes */
+.info-box {
+  background: var(--blue-light); border: 1.5px solid #bfdbfe;
+  border-radius: var(--r-sm); padding: 13px 15px;
+  display: flex; gap: 10px; margin-bottom: 22px;
+  font-size: 13px; color: var(--blue-dark); line-height: 1.6;
+}
+.info-box i { flex-shrink: 0; margin-top: 2px; }
+.warn-box {
+  background: var(--gold-light); border: 1.5px solid #fde68a;
+  border-radius: var(--r-sm); padding: 13px 15px;
+  display: flex; gap: 10px; margin-bottom: 22px;
+  font-size: 13px; color: #92400e; line-height: 1.6;
+}
+.warn-box i { flex-shrink: 0; margin-top: 2px; color: var(--gold); }
+
+/* Booking summary card */
+.summary-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-md); overflow: hidden; margin-bottom: 24px;
+}
+.summary-card-head {
+  background: var(--blue); color: #fff;
+  padding: 12px 18px; font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; gap: 8px;
+}
+.summary-rows { padding: 0; }
+.summary-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 18px; border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.summary-row:last-child { border-bottom: none; }
+.summary-row .s-label { color: var(--text-600); display: flex; align-items: center; gap: 6px; }
+.summary-row .s-label i { color: var(--blue); width: 16px; }
+.summary-row .s-val { font-weight: 600; color: var(--text-900); }
+.summary-total {
+  background: var(--blue-light); border-top: 2px solid var(--blue);
+  padding: 14px 18px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.summary-total .t-label { font-size: 14px; font-weight: 700; color: var(--blue-dark); }
+.summary-total .t-price { font-size: 26px; font-weight: 800; color: var(--blue); font-family: 'Playfair Display', serif; }
+
+/* Payment method selector */
+.payment-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
+.pm-option {
+  border: 2px solid var(--border); border-radius: var(--r-sm);
+  padding: 10px 12px; cursor: pointer; transition: all .2s;
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 600; color: var(--text-600);
+}
+.pm-option:hover { border-color: #93c5fd; }
+.pm-option.selected { border-color: var(--blue); background: var(--blue-light); color: var(--blue); }
+.pm-option i { font-size: 16px; }
+
+/* Modal action row */
+.modal-actions { display: flex; gap: 10px; margin-top: 4px; }
+.modal-btn {
+  flex: 1; padding: 14px; border-radius: var(--r-sm);
+  background: var(--blue); border: none; color: #fff;
+  font-size: 15px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: all .2s; cursor: pointer;
+}
+.modal-btn:hover:not(:disabled) { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(79,99,210,.35); }
+.modal-btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+.modal-btn-outline {
+  padding: 14px 20px; border-radius: var(--r-sm);
+  background: var(--white); border: 1.5px solid var(--border);
+  color: var(--text-600); font-size: 14px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  cursor: pointer; transition: all .2s; white-space: nowrap;
+}
+.modal-btn-outline:hover { border-color: var(--blue); color: var(--blue); }
+
+/* Success state */
+.success-state {
+  display: none; flex-direction: column; align-items: center;
+  text-align: center; padding: 48px 32px;
+}
+.success-state.show { display: flex; }
+.success-icon {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+  border: 3px solid var(--green);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px; margin-bottom: 20px;
+  animation: successPop .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes successPop { from{transform:scale(0)} to{transform:scale(1)} }
+.success-state h3 { font-size: 22px; font-weight: 700; margin-bottom: 8px; font-family: 'Playfair Display', serif; }
+.success-state p { font-size: 14px; color: var(--text-600); line-height: 1.6; margin-bottom: 24px; max-width: 340px; }
+.success-meta { background: var(--surface); border-radius: var(--r-md); padding: 16px 20px; width: 100%; max-width: 360px; text-align: left; margin-bottom: 24px; }
+.success-meta-row { display: flex; justify-content: space-between; font-size: 13px; padding: 5px 0; border-bottom: 1px solid var(--border); }
+.success-meta-row:last-child { border-bottom: none; }
+.success-meta-row .sk { color: var(--text-400); }
+.success-meta-row .sv { font-weight: 600; color: var(--text-900); }
+
+/* Chat modal specifics */
+.chat-type-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+.ct-tab {
+  flex: 1; padding: 10px; border-radius: var(--r-sm);
+  border: 2px solid var(--border); background: var(--white);
+  font-size: 13px; font-weight: 600; color: var(--text-600);
+  cursor: pointer; transition: all .2s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.ct-tab:hover { border-color: #93c5fd; color: var(--blue); }
+.ct-tab.active { border-color: var(--blue); background: var(--blue-light); color: var(--blue); }
+.ct-tab i { font-size: 14px; }
+
+/* Character counter */
+.char-counter { text-align: right; font-size: 11px; color: var(--text-400); margin-top: 4px; }
+.char-counter.warn { color: var(--gold); }
+.char-counter.limit { color: var(--red); }
+
+/* ============================================================
+   CHATBOT
+============================================================ */
+.chatbot-container { position: fixed; bottom: 24px; right: 24px; z-index: 8000; }
+.chatbot-trigger {
+  width: 58px; height: 58px; border-radius: 50%;
+  background: var(--blue); border: none; color: #fff;
+  font-size: 24px; box-shadow: 0 8px 24px rgba(102,126,234,0.45);
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s; animation: botPulse 2.5s infinite;
+}
+@keyframes botPulse {
+  0%,100% { box-shadow: 0 8px 24px rgba(102,126,234,0.45); }
+  50% { box-shadow: 0 12px 32px rgba(102,126,234,0.7); }
+}
+.chatbot-trigger:hover { transform: scale(1.08); }
+.chatbot-window {
+  display: none; width: 380px; height: 560px;
+  background: var(--white); border-radius: var(--r-xl);
+  box-shadow: var(--shadow-lg); overflow: hidden;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  animation: slideUp .25s ease-out;
+}
+@keyframes slideUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+.chatbot-window.open { display: flex; }
+.cbot-head { background: linear-gradient(135deg, var(--blue), var(--blue-dark)); padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; }
+.cbot-head-info { display: flex; align-items: center; gap: 12px; }
+.cbot-icon { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; }
+.cbot-head h3 { font-size: 16px; font-weight: 700; color: #fff; }
+.cbot-head p { font-size: 11px; color: rgba(255,255,255,.7); }
+.cbot-close { background: rgba(255,255,255,.15); border: none; color: #fff; width: 30px; height: 30px; border-radius: 50%; font-size: 15px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.cbot-quick { background: var(--surface); border-bottom: 1px solid var(--border); padding: 10px 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.cbot-q { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 8px 10px; font-size: 12px; font-weight: 500; color: var(--text-600); display: flex; align-items: center; gap: 6px; cursor: pointer; transition: all .2s; }
+.cbot-q:hover { background: var(--blue-light); border-color: #93c5fd; color: var(--blue); }
+.cbot-q i { color: var(--blue); font-size: 12px; }
+.cbot-msgs { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; background: #f5f7fb; }
+.cbot-msgs::-webkit-scrollbar { width: 4px; }
+.cbot-msgs::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
+.msg { display: flex; }
+.msg.user { justify-content: flex-end; }
+.msg-bubble { max-width: 80%; padding: 10px 14px; border-radius: 14px; font-size: 14px; line-height: 1.55; white-space: pre-wrap; word-break: break-word; }
+.msg.bot .msg-bubble { background: var(--white); color: var(--text-900); border-bottom-left-radius: 4px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+.msg.user .msg-bubble { background: var(--blue); color: #fff; border-bottom-right-radius: 4px; }
+.msg-label { font-size: 11px; font-weight: 700; color: var(--blue); margin-bottom: 5px; display: flex; align-items: center; gap: 5px; }
+.typing-dots { display: flex; gap: 4px; padding: 4px 0; }
+.typing-dots span { width: 7px; height: 7px; background: #93c5fd; border-radius: 50%; animation: dot .9s infinite; }
+.typing-dots span:nth-child(2) { animation-delay: .15s; }
+.typing-dots span:nth-child(3) { animation-delay: .3s; }
+@keyframes dot { 0%,60%,100%{transform:translateY(0);opacity:.7} 30%{transform:translateY(-6px);opacity:1} }
+.cbot-input-area { padding: 12px; background: var(--white); border-top: 1px solid var(--border); }
+.cbot-input-row { display: flex; gap: 8px; }
+.cbot-input { flex: 1; border: 1.5px solid var(--border); border-radius: 100px; padding: 10px 16px; font-family: inherit; font-size: 14px; outline: none; transition: border-color .2s; }
+.cbot-input:focus { border-color: var(--blue); }
+.cbot-send { width: 40px; height: 40px; border-radius: 50%; background: var(--blue); border: none; color: #fff; font-size: 15px; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+.cbot-send:hover { background: var(--blue-dark); }
+.cbot-note { text-align: center; font-size: 11px; color: var(--text-400); margin-top: 7px; }
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 1024px) {
+  .about-inner { grid-template-columns: 1fr; gap: 36px; }
+  .about-image { height: 320px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: block; }
+  .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--white); padding: 12px; border-bottom: 1px solid var(--border); box-shadow: var(--shadow-md); z-index: 999; }
+  .hero-stats { gap: 16px; }
+  .hero-stats-divider { display: none; }
+  .friends-grid, .pkg-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .chatbot-window { width: calc(100vw - 32px); height: calc(100vh - 100px); }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .trust-inner { grid-template-columns: 1fr 1fr; }
+  .pkg-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .pkg-img { height: 140px; }
+  .pkg-body { padding: 14px; }
+  .pkg-body h3 { font-size: 15px; }
+  .pkg-body p { font-size: 12px; line-height: 1.4; }
+  .duration-picker { grid-template-columns: 1fr; }
+  .modal-steps { padding: 14px 20px 0; }
+  .modal-head { padding: 22px 22px 18px; }
+  .modal-body { padding: 20px 22px 24px; }
+  .ws-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .ws-img { height: 160px; }
+}
+@media (max-width: 640px) {
+  .footer-grid { display: none; }
+  .footer { padding: 32px 20px; }
+  .footer-bottom { justify-content: center; flex-direction: column; text-align: center; gap: 14px; }
+  .copyright { font-size: 12px; }
+  .social-links { justify-content: center; }
+  .clients-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
+  .cg-item.cg-tall { grid-row: span 1; }
+  .cg-overlay { opacity: 1; }
+  .client-filter-tabs { justify-content: center; }
+  .payment-methods { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .btn-signin { display: none; }
+  .ws-grid { grid-template-columns: 1fr; }
+  .modal-box { border-radius: var(--r-lg) var(--r-lg) 0 0; }
+  .modal-overlay { align-items: flex-end; padding: 0; }
+  .modal-head { border-radius: var(--r-lg) var(--r-lg) 0 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <img src="./imgg/loko.png" alt="TosTrip">
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="livelikelocal.html">Live like a local</a></li>
+      <li><a href="rentafriend.html">Rent a Friend</a></li>
+      <li><a href="#friends">Workshop</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-wrapper">
+        <button class="lang-btn" id="langBtn" onclick="toggleLang()">
+          <i class="fas fa-globe"></i> English <i class="fas fa-chevron-down" style="font-size:10px"></i>
+        </button>
+        <ul class="lang-menu" id="langMenu">
+          <li onclick="setLang('en','English')">🇺🇸 English</li>
+          <li onclick="setLang('fr','Français')">🇫🇷 Français</li>
+          <li onclick="setLang('km','ខ្មែរ')">🇰🇭 ខ្មែរ</li>
+        </ul>
+      </div>
+      <a href="offline.html">
+  <button class="btn-register">OFFLINE MODE</button>
+</a>
+      <button class="hamburger" id="hamburger" onclick="toggleMobileNav()">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <i class="fas fa-star"></i> Cambodia at your fingertip
+    </div>
+    <h1>Discover Cambodia<br><span>Like a Local</span></h1>
+    <p>Authentic experiences, hidden gems, and local connections.<br>Explore Siem Reap, Phnom Penh, Kampot & beyond.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Destinations</div>
+      </div>
+      <div class="hero-stats-divider"></div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Local Guides</div>
+      </div>
+      <div class="hero-stats-divider"></div>
+      <div class="stat">
+        <div class="stat-num">Offline</div>
+        <div class="stat-label">Access</div>
+      </div>
+      <div class="hero-stats-divider"></div>
+      <div class="stat">
+        <div class="stat-num">Site</div>
+        <div class="stat-label">Authentic</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT STRIP -->
+<div class="about-inner" style="max-width:1280px;margin:0 auto;padding:80px 24px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+  <div class="about-image">
+  <img src="./imgg/live.jpeg" alt="About TosTrip" style="height:100%; width:100%; object-fit:cover;">
+</div>
+  <div class="about-text">
+    <div class="section-label" style="color:var(--gold)"><i class="fas fa-heart"></i></div>
+    <h2>Travel Safer,<br>Travel Smarter</h2>
+    <p>TosTrip is a travel assistant platform that helps travelers live like a local. We connect you with verified Cambodian guides for authentic experiences — from hidden street food stalls to ancient temple stories that never made it into any guidebook.</p>
+    <p>Currently focused on Siem Reap, Phnom Penh, and Kampot — with more destinations coming soon.</p>
+    <div class="about-pills">
+      <div class="about-pill"><i class="fas fa-wifi"></i> Works Offline</div>
+      <div class="about-pill"><i class="fas fa-user-check"></i> Verified Guides</div>
+      <div class="about-pill"><i class="fas fa-map"></i> Local Knowledge</div>
+      <div class="about-pill"><i class="fas fa-lock"></i> We Are Here to Support You</div>
+    </div>
+    <a href="about.html" class="about-cta">Our Full Story <i class="fas fa-arrow-right"></i></a>
+  </div>
+</div>
+
+<!-- TOUR PACKAGES -->
+<section id="packages" style="background:var(--white);padding:72px 24px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div class="section-header-row">
+      <div>
+        <div class="section-label"><i class="fas fa-box-open"></i> Our Offerings</div>
+        <h2 class="section-title">Tour Packages</h2>
+        <p class="section-sub">Choose your way to explore Cambodia</p>
+      </div>
+    </div>
+    <div class="pkg-grid">
+      <div class="pkg-card" onclick="toggleSection('localSection')">
+        <div class="pkg-img">
+          <img src="./imgg/keolocal.jpg" alt="Live Like A Local">
+          <span class="pkg-tag gold">Best Seller</span>
+        </div>
+        <div class="pkg-body">
+          <h3>Live Like a Local</h3>
+          <p>Spend a day experiencing authentic local life — discover hidden gems, neighbourhood spots, and the real Cambodia beyond tourist trails.</p>
+          <div class="pkg-meta">
+            <span><i class="fas fa-clock"></i> Half or Full Day</span>
+            <span><i class="fas fa-wifi"></i> Offline Access</span>
+            <span><i class="fas fa-map-marked-alt"></i> 3 unique families</span>
+          </div>
+          <div class="pkg-cta">
+            <button class="pkg-btn"><i class="fas fa-arrow-right"></i> Explore</button>
+            <div class="pkg-reviews">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <span class="pkg-score" style="margin-left:4px">4.9</span>
+              <span style="margin-left:4px">(128)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pkg-card" onclick="toggleSection('friendSection')">
+        <div class="pkg-img">
+          <img src="./imgg/keofri.jpg" alt="Rent a Friend">
+          <span class="pkg-tag">Unique</span>
+        </div>
+        <div class="pkg-body">
+          <h3>Rent a Friend</h3>
+          <p>Connect with verified local guides for a truly immersive experience. Chat, explore, eat and discover like you've lived here your whole life.</p>
+          <div class="pkg-meta">
+            <span><i class="fas fa-user-check"></i> Verified Locals</span>
+            <span><i class="fas fa-comments"></i> Pre-trip chat</span>
+            <span><i class="fas fa-shield-alt"></i> Safe & Insured</span>
+          </div>
+          <div class="pkg-cta">
+            <button class="pkg-btn"><i class="fas fa-arrow-right"></i> Meet Locals</button>
+            <div class="pkg-reviews">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <span class="pkg-score" style="margin-left:4px">5.0</span>
+              <span style="margin-left:4px">(84)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCAL DESTINATIONS (toggle) -->
+<div id="localSection" class="toggle-section" style="background:var(--surface);padding:48px 24px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div class="section-header-row">
+      <div>
+        <div class="section-label"><i class="fas fa-compass"></i> Live Like a Local</div>
+        <h2 class="section-title">Choose Your Destination</h2>
+      </div>
+      <button onclick="toggleSection('localSection')" style="background:none;border:1.5px solid var(--border);padding:8px 18px;border-radius:var(--r-sm);font-size:14px;font-weight:600;cursor:pointer;color:var(--text-600);">
+        <i class="fas fa-times"></i> Close
+      </button>
+    </div>
+    <div class="dest-scroll">
+      <a href="siemreap.html" style="flex-shrink:0">
+        <div class="dest-chip"><img src="./imgg/pp2.JPG" alt="Siem Reap"><div class="dest-chip-badge">Available</div><div class="dest-chip-overlay"><div class="dest-chip-name">Siem Reap</div></div></div>
+      </a>
+      <div class="dest-chip" style="flex-shrink:0"><img src="./imgg/pic.JPG" alt="Phnom Penh"><div class="dest-chip-overlay"><div class="dest-chip-name">Phnom Penh</div></div></div>
+      <div class="dest-chip" style="flex-shrink:0"><img src="./imgg/trip3.JPG" alt="Kampot"><div class="dest-chip-overlay"><div class="dest-chip-name">Kampot</div></div></div>
+      <div class="dest-chip locked" style="flex-shrink:0"><img src="./imgg/koh.jpg" alt="Koh Rong"><div class="dest-chip-overlay"><div class="dest-chip-name">Koh Rong</div><span class="chip-soon">Coming Soon</span></div></div>
+      <div class="dest-chip locked" style="flex-shrink:0"><img src="./imgg/kep.jpg" alt="Kep"><div class="dest-chip-overlay"><div class="dest-chip-name">Kep</div><span class="chip-soon">Coming Soon</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- RENT A FRIEND CARDS -->
+<section id="friendSection" class="toggle-section friends-section">
+  <div class="friends-inner">
+    <div class="section-header-row">
+      <div>
+        <div class="section-label"><i class="fas fa-user-friends"></i> Rent a Friend</div>
+        <h2 class="section-title">Meet Your Local Guide</h2>
+        <p class="section-sub">Verified locals ready to show you the real Cambodia</p>
+      </div>
+      <button onclick="toggleSection('friendSection')" style="background:none;border:1.5px solid var(--border);padding:8px 18px;border-radius:var(--r-sm);font-size:14px;font-weight:600;cursor:pointer;color:var(--text-600);">
+        <i class="fas fa-times"></i> Close
+      </button>
+    </div>
+    <div class="friends-grid">
+      <!-- Sokha -->
+      <div class="friend-card">
+        <div class="fc-photo">
+          <img src="./imgg/tour.jpg" alt="Sokha">
+          <div class="fc-verified"><i class="fas fa-check"></i> Verified</div>
+          <div class="fc-price-badge"><div class="price">$25</div><div class="per">/half day</div></div>
+        </div>
+        <div class="fc-body">
+          <div class="fc-row">
+            <div class="fc-name">Sokha</div>
+            <div class="fc-rating"><i class="fas fa-star"></i><span>4.9</span></div>
+          </div>
+          <div class="fc-info">
+            <span><i class="fas fa-map-marker-alt"></i> Phnom Penh</span>
+            <span><i class="fas fa-language"></i> EN, KH</span>
+          </div>
+          <p class="fc-bio">Local foodie who knows all the best street food spots and hidden cafes in the city.</p>
+          <div class="fc-tags">
+            <span class="fc-tag"><i class="fas fa-utensils"></i> Food Tours</span>
+            <span class="fc-tag"><i class="fas fa-shopping-basket"></i> Markets</span>
+          </div>
+          <div class="fc-pricing">
+            <div class="fc-price-box"><div class="label">Half Day (4h)</div><div class="amount">$25</div></div>
+            <div class="fc-price-box"><div class="label">Full Day (8h)</div><div class="amount">$45</div></div>
+          </div>
+          <div class="fc-actions">
+            <button class="fc-btn-book" onclick="openRentModal({name:'Sokha',city:'Phnom Penh',langs:'EN, KH',specialty:'Food Tours & Markets',half:25,full:45,rating:'4.9'})"><i class="fas fa-calendar-check"></i> Book Now</button>
+            <button class="fc-btn-chat" onclick="openChatModal({name:'Sokha',city:'Phnom Penh',langs:'EN, KH'})"><i class="fas fa-comment-dots"></i></button>
+          </div>
+        </div>
+      </div>
+      <!-- Dara -->
+      <div class="friend-card">
+        <div class="fc-photo">
+          <img src="./imgg/tour1.jpg" alt="Dara">
+          <div class="fc-verified"><i class="fas fa-check"></i> Verified</div>
+          <div class="fc-price-badge"><div class="price">$30</div><div class="per">/half day</div></div>
+        </div>
+        <div class="fc-body">
+          <div class="fc-row">
+            <div class="fc-name">Dara</div>
+            <div class="fc-rating"><i class="fas fa-star"></i><span>5.0</span></div>
+          </div>
+          <div class="fc-info">
+            <span><i class="fas fa-map-marker-alt"></i> Siem Reap</span>
+            <span><i class="fas fa-language"></i> EN, FR, KH</span>
+          </div>
+          <p class="fc-bio">History buff and temple expert who shares stories far beyond any guidebook.</p>
+          <div class="fc-tags">
+            <span class="fc-tag"><i class="fas fa-gopuram"></i> Temples</span>
+            <span class="fc-tag"><i class="fas fa-book"></i> History</span>
+          </div>
+          <div class="fc-pricing">
+            <div class="fc-price-box"><div class="label">Half Day (4h)</div><div class="amount">$30</div></div>
+            <div class="fc-price-box"><div class="label">Full Day (8h)</div><div class="amount">$50</div></div>
+          </div>
+          <div class="fc-actions">
+            <button class="fc-btn-book" onclick="openRentModal({name:'Dara',city:'Siem Reap',langs:'EN, FR, KH',specialty:'Temples & History',half:30,full:50,rating:'5.0'})"><i class="fas fa-calendar-check"></i> Book Now</button>
+            <button class="fc-btn-chat" onclick="openChatModal({name:'Dara',city:'Siem Reap',langs:'EN, FR, KH'})"><i class="fas fa-comment-dots"></i></button>
+          </div>
+        </div>
+      </div>
+      <!-- Virak -->
+      <div class="friend-card">
+        <div class="fc-photo">
+          <img src="./imgg/tour2.jpg" alt="Virak">
+          <div class="fc-verified"><i class="fas fa-check"></i> Verified</div>
+          <div class="fc-price-badge"><div class="price">$28</div><div class="per">/half day</div></div>
+        </div>
+        <div class="fc-body">
+          <div class="fc-row">
+            <div class="fc-name">Virak</div>
+            <div class="fc-rating"><i class="fas fa-star"></i><span>4.8</span></div>
+          </div>
+          <div class="fc-info">
+            <span><i class="fas fa-map-marker-alt"></i> Kampot</span>
+            <span><i class="fas fa-language"></i> EN, KH</span>
+          </div>
+          <p class="fc-bio">Adventure enthusiast who loves kayaking, cycling, and exploring the countryside.</p>
+          <div class="fc-tags">
+            <span class="fc-tag"><i class="fas fa-hiking"></i> Adventure</span>
+            <span class="fc-tag"><i class="fas fa-leaf"></i> Nature</span>
+          </div>
+          <div class="fc-pricing">
+            <div class="fc-price-box"><div class="label">Half Day (4h)</div><div class="amount">$28</div></div>
+            <div class="fc-price-box"><div class="label">Full Day (8h)</div><div class="amount">$48</div></div>
+          </div>
+          <div class="fc-actions">
+            <button class="fc-btn-book" onclick="openRentModal({name:'Virak',city:'Kampot',langs:'EN, KH',specialty:'Adventure & Nature',half:28,full:48,rating:'4.8'})"><i class="fas fa-calendar-check"></i> Book Now</button>
+            <button class="fc-btn-chat" onclick="openChatModal({name:'Virak',city:'Kampot',langs:'EN, KH'})"><i class="fas fa-comment-dots"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKSHOP SECTION LABEL -->
+<div style="max-width:1280px;margin:0 auto;padding:60px 24px 0;">
+  <div class="section-label"><i class="fas fa-box-open"></i> Our Partnership</div>
+  <h2 class="section-title">Workshops</h2>
+</div>
+
+<!-- WORKSHOPS -->
+<section class="workshops-section" style="padding-top:24px;">
+  <div class="ws-grid">
+    <!-- Mordock Ceramics -->
+    <div class="ws-card">
+      <div class="ws-img">
+        <img src="./imgg/potery.jpg" alt="Mordock Ceramics Workshop">
+        <span class="ws-badge craft">Craft</span>
+        <div class="ws-duration"><i class="fas fa-clock"></i> Flexible</div>
+      </div>
+      <div class="ws-body">
+        <div class="ws-partner-row">
+          <div class="ws-logo-placeholder">🏺</div>
+          <div>
+            <div class="ws-partner-name">Mordock Ceramics</div>
+            <div class="ws-partner-type">Community-based Workshop</div>
+          </div>
+        </div>
+        <h3 class="ws-title">Creative Pottery & Community Craft Workshop</h3>
+        <p class="ws-desc">Hands-on creative pottery sessions supporting local artisans and community craft development.</p>
+        <div class="ws-meta">
+          <span><i class="fas fa-map-marker-alt"></i> Siem Reap, Cambodia</span>
+          <span><i class="fas fa-users"></i> Community Workshop</span>
+          <span><i class="fas fa-language"></i> EN, KH</span>
+        </div>
+        <div class="ws-footer">
+          <div class="ws-price-block">
+            <span class="ws-from">Workshops from</span>
+            <span class="ws-price">$25</span>
+            <span class="ws-per">/person</span>
+          </div>
+          <div class="ws-rating"><i class="fas fa-star"></i><span>Trusted</span></div>
+        </div>
+        <button class="ws-btn" onclick="openWorkshopModal({name:'Mordock Ceramics',title:'Creative Pottery & Community Craft',location:'Siem Reap',duration:'Flexible',price:25,langs:'EN, KH',emoji:'🏺',type:'Craft'})">Book Now <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+    <!-- DSK Creative -->
+    <div class="ws-card">
+      <div class="ws-img">
+        <img src="./imgg/dsk.png" alt="DSK Creative Workshop">
+        <span class="ws-badge craft">Training</span>
+        <div class="ws-duration"><i class="fas fa-clock"></i> Flexible</div>
+      </div>
+      <div class="ws-body">
+        <div class="ws-partner-row">
+          <div class="ws-logo-placeholder">🎨</div>
+          <div>
+            <div class="ws-partner-name">DSK Creative Workshop</div>
+            <div class="ws-partner-type">Trusted Partner</div>
+          </div>
+        </div>
+        <h3 class="ws-title">Hands-on Training, Craft & Skill Development Center</h3>
+        <p class="ws-desc">Practical training programs focused on craft development and hands-on skill building.</p>
+        <div class="ws-meta">
+          <span><i class="fas fa-map-marker-alt"></i> Siem Reap</span>
+          <span><i class="fas fa-users"></i> Skill Training Center</span>
+          <span><i class="fas fa-language"></i> EN, KH</span>
+        </div>
+        <div class="ws-footer">
+          <div class="ws-price-block">
+            <span class="ws-from">Programs from</span>
+            <span class="ws-price">$10</span>
+            <span class="ws-per">/person</span>
+          </div>
+          <div class="ws-rating"><i class="fas fa-star"></i><span>Trusted</span></div>
+        </div>
+        <button class="ws-btn" onclick="openWorkshopModal({name:'DSK Creative Workshop',title:'Hands-on Training & Skill Development',location:'Siem Reap',duration:'Flexible',price:10,langs:'EN, KH',emoji:'🎨',type:'Training'})">Book Now <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+    <!-- Kleng Ek -->
+    <div class="ws-card">
+      <div class="ws-img">
+        <img src="./imgg/klengekk.jpg" alt="Kleng Ek Workshop">
+        <span class="ws-badge craft">Community</span>
+        <div class="ws-duration"><i class="fas fa-clock"></i> Flexible</div>
+      </div>
+      <div class="ws-body">
+        <div class="ws-partner-row">
+          <div class="ws-logo-placeholder">🧵</div>
+          <div>
+            <div class="ws-partner-name">Kleng Ek Workshop</div>
+            <div class="ws-partner-type">Local Artisans & Trainees</div>
+          </div>
+        </div>
+        <h3 class="ws-title">Traditional Craft & Local Skills Training Center</h3>
+        <p class="ws-desc">Community-driven training center supporting traditional crafts and artisan development.</p>
+        <div class="ws-meta">
+          <span><i class="fas fa-map-marker-alt"></i> Siem Reap</span>
+          <span><i class="fas fa-users"></i> Local Community</span>
+          <span><i class="fas fa-language"></i> KH</span>
+        </div>
+        <div class="ws-footer">
+          <div class="ws-price-block">
+            <span class="ws-from">Workshops from</span>
+            <span class="ws-price">$5</span>
+            <span class="ws-per">/person</span>
+          </div>
+          <div class="ws-rating"><i class="fas fa-star"></i><span>Community</span></div>
+        </div>
+        <button class="ws-btn" onclick="openWorkshopModal({name:'Kleng Ek Workshop',title:'Traditional Craft & Local Skills',location:'Siem Reap',duration:'Flexible',price:5,langs:'KH',emoji:'🧵',type:'Community'})">Book Now <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+    <!-- Floating Village -->
+    <div class="ws-card">
+      <div class="ws-img">
+        <img src="./imgg/floatinggggg.jpg" alt="Floating Village Boat Tour">
+        <span class="ws-badge culture">Tour</span>
+        <div class="ws-duration"><i class="fas fa-clock"></i> Half Day</div>
+      </div>
+      <div class="ws-body">
+        <div class="ws-partner-row">
+          <div class="ws-logo-placeholder">🚤</div>
+          <div>
+            <div class="ws-partner-name">Floating Village Boat Tour</div>
+            <div class="ws-partner-type">Scenic & Cultural Experience</div>
+          </div>
+        </div>
+        <h3 class="ws-title">Explore Life on Tonlé Sap Lake</h3>
+        <p class="ws-desc">Scenic boat tour experience exploring floating communities and cultural life on the lake.</p>
+        <div class="ws-meta">
+          <span><i class="fas fa-map-marker-alt"></i> Siem Reap</span>
+          <span><i class="fas fa-users"></i> Guided Tour</span>
+          <span><i class="fas fa-language"></i> EN, KH</span>
+        </div>
+        <div class="ws-footer">
+          <div class="ws-price-block">
+            <span class="ws-from">From</span>
+            <span class="ws-price">$15</span>
+            <span class="ws-per">/person</span>
+          </div>
+          <div class="ws-rating"><i class="fas fa-star"></i><span>4.6/5</span></div>
+        </div>
+        <button class="ws-btn" onclick="openWorkshopModal({name:'Floating Village Boat Tour',title:'Explore Life on Tonlé Sap Lake',location:'Siem Reap',duration:'Half Day',price:15,langs:'EN, KH',emoji:'🚤',type:'Cultural Tour'})">Book Now <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS GALLERY -->
+<section class="clients-section">
+  <div class="clients-inner">
+    <div class="section-header-row">
+      <div>
+        <div class="section-label"><i class="fas fa-images"></i> Testimony</div>
+        <h2 class="section-title">From Our Travelers</h2>
+        <p class="section-sub">Snapshots shared by our community — real people, real experiences</p>
+      </div>
+      <div class="client-filter-tabs">
+        <button class="cf-tab active" onclick="filterClients('all', this)">All</button>
+        <button class="cf-tab" onclick="filterClients('siemreap', this)">Live like a local</button>
+        <button class="cf-tab" onclick="filterClients('phnompenh', this)">Rent a friend</button>
+        <button class="cf-tab" onclick="filterClients('kampot', this)">Workshop</button>
+      </div>
+    </div>
+    <div class="clients-grid" id="clientsGrid">
+      <div class="cg-item cg-tall" data-city="siemreap"><img src="./imgg/test89.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">S</div><div><div class="cg-name">Sarah M.</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> Siem Reap</div></div></div><div class="cg-quote">"The most authentic experience I've ever had!"</div><div class="cg-stars">★★★★★</div></div></div>
+      <div class="cg-item" data-city="phnompenh"><img src="./imgg/test2.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">L</div><div><div class="cg-name">Lucas B.</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> Phnom Penh</div></div></div><div class="cg-quote">"Sokha showed us places no guidebook mentions."</div><div class="cg-stars">★★★★★</div></div></div>
+      <div class="cg-item cg-wide" data-city="kampot"><img src="./imgg/test1.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">A</div><div><div class="cg-name">Amara K.</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> Kampot</div></div></div><div class="cg-quote">"Kayaking at sunrise with Virak — absolutely magical."</div><div class="cg-stars">★★★★★</div></div></div>
+      <div class="cg-item" data-city="siemreap"><img src="./imgg/test4.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">J</div><div><div class="cg-name">James T.</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> Siem Reap</div></div></div><div class="cg-quote">"Living like a local for a day changed my perspective."</div><div class="cg-stars">★★★★★</div></div></div>
+      <div class="cg-item cg-tall" data-city="phnompenh"><img src="./imgg/test5.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">M</div><div><div class="cg-name">Marie F.</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> Phnom Penh</div></div></div><div class="cg-quote">"My local friend became a real friend for life."</div><div class="cg-stars">★★★★★</div></div></div>
+      <div class="cg-item cg-wide" data-city="siemreap"><img src="./imgg/test6.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">R</div><div><div class="cg-name">Ravi P.</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> Siem Reap</div></div></div><div class="cg-quote">"Dara's temple stories gave me goosebumps."</div><div class="cg-stars">★★★★★</div></div></div>
+      <div class="cg-item" data-city="kampot"><img src="./imgg/test7.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">E</div><div><div class="cg-name">Elena V.</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> Kampot</div></div></div><div class="cg-quote">"10/10 would rent a friend again!"</div><div class="cg-stars">★★★★★</div></div></div>
+      <div class="cg-item" data-city="phnompenh"><img src="./imgg/test8.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">K</div><div><div class="cg-name">Kenji H.</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> Phnom Penh</div></div></div><div class="cg-quote">"The street food tour was the highlight of my trip."</div><div class="cg-stars">★★★★★</div></div></div>
+    </div>
+    <div class="cg-cta-row">
+      <div class="cg-cta-card">
+        <i class="fas fa-camera"></i>
+        <div>
+          <strong>Share Your Moment</strong>
+          <p>Traveled with TosTrip? Tag us on Instagram <span style="color:var(--blue)">@tostrip.kh</span> to be featured here.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section style="padding:80px 24px;background:var(--white);">
+  <div style="max-width:1280px;margin:0 auto;display:flex;justify-content:center;text-align:center;">
+    <div style="max-width:650px;">
+      <div class="section-label" style="color:var(--gold);justify-content:center;"><i class="fas fa-envelope"></i> Stay Connected</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(28px,3vw,40px);font-weight:700;margin-bottom:16px;line-height:1.2;">Join The TosTrip<br>Newsletter</h2>
+      <p style="font-size:15px;color:var(--text-600);line-height:1.8;margin-bottom:28px;">Get insider travel tips, hidden local gems, exclusive experiences, and early access to new destinations across Cambodia.</p>
+      <form id="newsletterForm" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <input type="email" id="nlEmail" placeholder="Enter your email address" required
+          style="min-width:260px;padding:14px 16px;border:1.5px solid var(--border);border-radius:var(--r-sm);background:#fff;font-family:inherit;font-size:14px;outline:none;transition:border-color .2s;"
+          onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--border)'">
+        <button type="submit" id="nlBtn"
+          style="padding:14px 26px;background:var(--gold);border:none;border-radius:var(--r-sm);color:#000;font-weight:700;cursor:pointer;font-size:14px;transition:all .2s;display:flex;align-items:center;gap:8px;">
+          <i class="fas fa-paper-plane"></i> Subscribe
+        </button>
+      </form>
+      <div id="nlSuccess" style="display:none;margin-top:16px;padding:14px 20px;background:#d1fae5;border-radius:var(--r-sm);color:#065f46;font-weight:600;font-size:14px;">
+        <i class="fas fa-check-circle"></i> You're subscribed! Welcome to the TosTrip community 🎉
+      </div>
+      <div style="margin-top:14px;font-size:12px;color:#777;">We respect your privacy. Unsubscribe anytime.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ✦ RENT A FRIEND BOOKING MODAL (2 Steps)
+============================================================ -->
+<div class="modal-overlay" id="rentModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-head-row">
+        <div>
+          <h2><i class="fas fa-calendar-check" style="opacity:.8"></i> Book <span id="rentFriendName">Guide</span></h2>
+          <p id="rentModalSub">Complete your reservation in 2 easy steps</p>
+        </div>
+        <button class="modal-close" onclick="closeModal('rentModal')"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-guide-strip" id="guideStrip">
+        <div class="guide-avatar" id="guideAvatarLetter">G</div>
+        <div class="guide-strip-info">
+          <div class="guide-strip-name" id="guideStripName">Guide Name</div>
+          <div class="guide-strip-meta" id="guideStripMeta">Location · Languages</div>
+        </div>
+        <div class="guide-strip-badge"><i class="fas fa-check"></i> Verified</div>
+      </div>
+    </div>
+
+    <!-- Step indicators -->
+    <div class="modal-steps" id="rentStepsBar">
+      <div class="step-item active" id="rentStep1Ind">
+        <div class="step-circle">1</div>
+        <div class="step-label">Your Details</div>
+      </div>
+      <div class="step-item" id="rentStep2Ind">
+        <div class="step-circle">2</div>
+        <div class="step-label">Confirm & Pay</div>
+      </div>
+    </div>
+
+    <!-- STEP 1: Personal + trip details -->
+    <div class="modal-body" id="rentStep1">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Full Name <span>*</span></label>
+          <input type="text" id="bookingName" class="form-input" placeholder="Your full name">
+          <div class="field-error" id="err-bookingName">Please enter your name.</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone <span>*</span></label>
+          <input type="tel" id="bookingPhone" class="form-input" placeholder="+855 12 345 678">
+          <div class="field-error" id="err-bookingPhone">Please enter your phone number.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email <span>*</span></label>
+        <input type="email" id="bookingEmail" class="form-input" placeholder="you@email.com">
+        <div class="field-error" id="err-bookingEmail">Please enter a valid email address.</div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Date <span>*</span></label>
+          <input type="date" id="bookingDate" class="form-input">
+          <div class="field-error" id="err-bookingDate">Please choose a date.</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Number of People <span>*</span></label>
+          <div class="stepper">
+            <button type="button" onclick="stepperChange('pax',-1)">−</button>
+            <div class="stepper-val" id="paxVal">1</div>
+            <button type="button" onclick="stepperChange('pax',1)">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Duration <span>*</span></label>
+        <div class="duration-picker" id="durationPicker">
+          <!-- filled by JS -->
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Preferred Activities <span class="opt">(Optional)</span></label>
+        <textarea id="bookingActivities" class="form-input form-textarea" placeholder="e.g. street food, temples, markets, sunset spots…"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="modal-btn" onclick="rentGoStep2()">
+          Continue <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Summary + payment -->
+    <div class="modal-body" id="rentStep2" style="display:none;">
+      <div class="summary-card">
+        <div class="summary-card-head"><i class="fas fa-receipt"></i> Booking Summary</div>
+        <div class="summary-rows">
+          <div class="summary-row"><span class="s-label"><i class="fas fa-user-friends"></i> Guide</span><span class="s-val" id="sum-guide">—</span></div>
+          <div class="summary-row"><span class="s-label"><i class="fas fa-map-marker-alt"></i> Location</span><span class="s-val" id="sum-city">—</span></div>
+          <div class="summary-row"><span class="s-label"><i class="fas fa-calendar"></i> Date</span><span class="s-val" id="sum-date">—</span></div>
+          <div class="summary-row"><span class="s-label"><i class="fas fa-clock"></i> Duration</span><span class="s-val" id="sum-duration">—</span></div>
+          <div class="summary-row"><span class="s-label"><i class="fas fa-users"></i> Guests</span><span class="s-val" id="sum-pax">—</span></div>
+        </div>
+        <div class="summary-total">
+          <div class="t-label">Total Amount</div>
+          <div class="t-price" id="sum-total">$0</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Payment Method <span>*</span></label>
+        <div class="payment-methods">
+          <div class="pm-option selected" data-pm="onsite" onclick="selectPM(this)">
+            <i class="fas fa-money-bill-wave"></i> Pay on Site
+          </div>
+          <div class="pm-option" data-pm="card" onclick="selectPM(this)">
+            <i class="fas fa-credit-card"></i> Credit Card
+          </div>
+          <div class="pm-option" data-pm="aba" onclick="selectPM(this)">
+            <i class="fas fa-university"></i> ABA / Wing
+          </div>
+          <div class="pm-option" data-pm="paypal" onclick="selectPM(this)">
+            <i class="fab fa-paypal"></i> PayPal
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <i class="fas fa-shield-alt"></i>
+        <div><strong>Free cancellation</strong> up to 24 hours before your trip. Full refund guaranteed. A confirmation email will be sent shortly after booking.</div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="modal-btn-outline" onclick="rentGoStep1()">
+          <i class="fas fa-arrow-left"></i> Back
+        </button>
+        <button type="button" class="modal-btn" id="rentConfirmBtn" onclick="confirmRentBooking()">
+          <i class="fas fa-check-circle"></i> Confirm Booking
+        </button>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success-state" id="rentSuccess">
+      <div class="success-icon">✓</div>
+      <h3>Booking Confirmed! 🎉</h3>
+      <p>Your booking request has been sent. Your guide will reach out within 2 hours to confirm the details.</p>
+      <div class="success-meta" id="rentSuccessMeta"></div>
+      <button class="modal-btn" style="max-width:280px" onclick="closeModal('rentModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     ✦ CHAT WITH GUIDE MODAL
+============================================================ -->
+<div class="modal-overlay" id="chatModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-head-row">
+        <div>
+          <h2><i class="fas fa-comment-dots" style="opacity:.8"></i> Chat with <span id="chatFriendName">Guide</span></h2>
+          <p>Ask questions before you book — no commitment required</p>
+        </div>
+        <button class="modal-close" onclick="closeModal('chatModal')"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-guide-strip">
+        <div class="guide-avatar" id="chatGuideAvatar">G</div>
+        <div class="guide-strip-info">
+          <div class="guide-strip-name" id="chatGuideStripName">Guide Name</div>
+          <div class="guide-strip-meta" id="chatGuideStripMeta">Location · Languages</div>
+        </div>
+        <div class="guide-strip-badge" style="background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3)">
+          <i class="fas fa-clock"></i> Replies in ~1h
+        </div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">How would you like to connect? <span>*</span></label>
+        <div class="chat-type-tabs">
+          <button type="button" class="ct-tab active" data-ct="email" onclick="selectChatType(this)">
+            <i class="fas fa-envelope"></i> Email
+          </button>
+          <button type="button" class="ct-tab" data-ct="whatsapp" onclick="selectChatType(this)">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+          </button>
+          <button type="button" class="ct-tab" data-ct="telegram" onclick="selectChatType(this)">
+            <i class="fab fa-telegram-plane"></i> Telegram
+          </button>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Your Name <span>*</span></label>
+          <input type="text" id="chatName" class="form-input" placeholder="Your name">
+          <div class="field-error" id="err-chatName">Please enter your name.</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" id="chatContactLabel">Email Address <span>*</span></label>
+          <input type="text" id="chatContact" class="form-input" placeholder="you@email.com">
+          <div class="field-error" id="err-chatContact">Please fill in your contact.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Planned travel dates <span class="opt">(Optional)</span></label>
+        <div class="form-row">
+          <input type="date" id="chatDateFrom" class="form-input" placeholder="From">
+          <input type="date" id="chatDateTo" class="form-input" placeholder="To">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Your Message <span>*</span></label>
+        <textarea id="chatMessage" class="form-input form-textarea" rows="5"
+          maxlength="500"
+          placeholder="Hi! I'm interested in booking you. I'd love to know more about…"
+          oninput="updateCharCount()"></textarea>
+        <div class="char-counter" id="charCounter">0 / 500</div>
+        <div class="field-error" id="err-chatMessage">Please write a message.</div>
+      </div>
+      <div class="warn-box">
+        <i class="fas fa-info-circle"></i>
+        <div>Your guide will reply to your preferred contact. Once connected, you can discuss activities, schedule, and confirm your booking directly.</div>
+      </div>
+      <!-- SUCCESS inline -->
+      <div id="chatSuccess" style="display:none;padding:28px;background:#d1fae5;border-radius:var(--r-md);text-align:center;margin-bottom:16px;">
+        <div style="font-size:32px;margin-bottom:10px;">✓</div>
+        <div style="font-size:16px;font-weight:700;margin-bottom:6px;">Message Sent!</div>
+        <div style="font-size:13px;color:#065f46;">Your guide will get back to you within 1–2 hours.</div>
+      </div>
+      <div class="modal-actions" id="chatActions">
+        <button type="button" class="modal-btn" onclick="sendChatMessage()">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     ✦ WORKSHOP BOOKING MODAL
+============================================================ -->
+<div class="modal-overlay" id="workshopModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-head-row">
+        <div>
+          <h2><i class="fas fa-tools" style="opacity:.8"></i> Book <span id="wsModalName">Workshop</span></h2>
+          <p id="wsModalTitle">Workshop booking form</p>
+        </div>
+        <button class="modal-close" onclick="closeModal('workshopModal')"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-guide-strip">
+        <div class="guide-avatar" id="wsEmoji" style="font-size:22px;">🏺</div>
+        <div class="guide-strip-info">
+          <div class="guide-strip-name" id="wsStripName">Workshop</div>
+          <div class="guide-strip-meta" id="wsStripMeta">Location · Duration</div>
+        </div>
+        <div class="guide-strip-badge" style="background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3)">
+          <span id="wsTypeBadge">Craft</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-body" id="wsFormBody">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Full Name <span>*</span></label>
+          <input type="text" id="wsName" class="form-input" placeholder="Your full name">
+          <div class="field-error" id="err-wsName">Please enter your name.</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email <span>*</span></label>
+          <input type="email" id="wsEmail" class="form-input" placeholder="you@email.com">
+          <div class="field-error" id="err-wsEmail">Please enter a valid email.</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Phone <span class="opt">(Optional)</span></label>
+          <input type="tel" id="wsPhone" class="form-input" placeholder="+855 12 345 678">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Preferred Date <span>*</span></label>
+          <input type="date" id="wsDate" class="form-input">
+          <div class="field-error" id="err-wsDate">Please choose a date.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Number of Participants <span>*</span></label>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div class="stepper">
+            <button type="button" onclick="stepperChange('ws',-1)">−</button>
+            <div class="stepper-val" id="wsParticipantsVal">1</div>
+            <button type="button" onclick="stepperChange('ws',1)">+</button>
+          </div>
+          <div style="font-size:13px;color:var(--text-600);">
+            Total: <strong id="wsTotal" style="color:var(--blue);">$0</strong>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Experience Level</label>
+        <select id="wsLevel" class="form-select form-input">
+          <option value="">Select your level</option>
+          <option value="beginner">Beginner — No experience needed</option>
+          <option value="intermediate">Intermediate — Some background</option>
+          <option value="advanced">Advanced — Experienced</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Special Requests <span class="opt">(Optional)</span></label>
+        <textarea id="wsRequests" class="form-input form-textarea" rows="3" placeholder="Accessibility needs, group type, language preference…"></textarea>
+      </div>
+      <div class="info-box">
+        <i class="fas fa-info-circle"></i>
+        <div>Payment is collected on-site. You'll receive a confirmation email with the workshop address and what to bring.</div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="modal-btn" id="wsBookBtn" onclick="confirmWorkshop()">
+          <i class="fas fa-check-circle"></i> Request Booking
+        </button>
+      </div>
+    </div>
+
+    <!-- Workshop success -->
+    <div class="success-state" id="wsSuccess">
+      <div class="success-icon">✓</div>
+      <h3>Request Sent! 🎉</h3>
+      <p>Your workshop booking request has been received. The organiser will confirm your spot within 24 hours.</p>
+      <div class="success-meta" id="wsSuccessMeta"></div>
+      <button class="modal-btn" style="max-width:280px" onclick="closeModal('workshopModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- CHATBOT -->
+<div class="chatbot-container">
+  <button class="chatbot-trigger" onclick="toggleChatbot()"><i class="fas fa-robot"></i></button>
+  <div class="chatbot-window" id="chatbotWindow">
+    <div class="cbot-head">
+      <div class="cbot-head-info">
+        <div class="cbot-icon"><i class="fas fa-robot"></i></div>
+        <div><h3>TosTrip Assistant</h3><p>Always here to help</p></div>
+      </div>
+      <button class="cbot-close" onclick="toggleChatbot()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cbot-quick">
+      <button class="cbot-q" onclick="quickAsk('emergency')"><i class="fas fa-exclamation-triangle"></i> Emergency Help</button>
+      <button class="cbot-q" onclick="quickAsk('destinations')"><i class="fas fa-map-marker-alt"></i> Destinations</button>
+      <button class="cbot-q" onclick="quickAsk('packages')"><i class="fas fa-box"></i> Tour Packages</button>
+      <button class="cbot-q" onclick="quickAsk('contact')"><i class="fas fa-phone"></i> Contact Info</button>
+    </div>
+    <div class="cbot-msgs" id="cbotMsgs">
+      <div class="msg bot">
+        <div class="msg-bubble">
+          <div class="msg-label"><i class="fas fa-robot"></i> TosTrip AI</div>
+          👋 Hello! I'm your TosTrip assistant. I can help with:
+
+🚨 <strong>Emergency info</strong> — Medical, police, safety
+🗺️ <strong>Travel tips</strong> — Tours, destinations, activities
+🤝 <strong>Local connections</strong> — Guides, food, culture
+
+How can I help you today?
+        </div>
+      </div>
+    </div>
+    <div class="cbot-input-area">
+      <div class="cbot-input-row">
+        <input type="text" class="cbot-input" id="cbotInput" placeholder="Ask anything about Cambodia…" onkeypress="if(event.key==='Enter')sendBot()">
+        <button class="cbot-send" onclick="sendBot()"><i class="fas fa-paper-plane"></i></button>
+      </div>
+      <div class="cbot-note">🚨 Real emergencies: call <strong>119</strong> or <strong>117</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo" style="margin-bottom:14px"><img src="./imgg/loko.png" alt="TosTrip" style="height:36px;filter:brightness(0) invert(1);opacity:.9"></div>
+        <p>Cambodia's local travel platform. Authentic experiences, verified guides, and offline access — all in one place.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#">Siem Reap</a></li>
+          <li><a href="#">Phnom Penh</a></li>
+          <li><a href="#">Kampot</a></li>
+          <li><a href="#">Coming Soon…</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Live Like a Local</a></li>
+          <li><a href="#">Rent a Friend</a></li>
+          <li><a href="Offline.html">Offline Mode</a></li>
+          <li><a href="#">Gift Cards</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="us.html">About Us</a></li>
+          <li><a href="us.html">Insurance Policy</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="copyright">© 2025 TosTrip. All rights reserved.</span>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-telegram-plane"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner" style="position:fixed;bottom:0;left:0;width:100%;background:#111;color:#fff;padding:18px 20px;display:none;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;z-index:9999;font-size:14px;">
+  <div style="max-width:800px;">We use cookies to improve your experience on TosTrip. By continuing to browse, you agree to our use of cookies.</div>
+  <button id="cookie-accept" style="padding:10px 18px;background:var(--gold);border:none;color:#000;font-weight:600;cursor:pointer;border-radius:var(--r-sm);">Accept</button>
+</div>
+
+<!-- EmailJS SDK — add your public key below when ready -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script src="translator.js" onerror="console.log('translator.js not loaded')"></script>
+<script src="chatbot.js"    onerror="console.log('chatbot.js not loaded')"></script>
+
+<script>
+/* ============================================================
+   ✦ EMAILJS CONFIG — fill these in when ready
+   ============================================================
+   Steps:
+     1. Sign up at https://www.emailjs.com
+     2. Create a service (Gmail, Outlook, etc.) → copy Service ID
+     3. Create email templates → copy Template IDs
+     4. Copy your Public Key from Account → API Keys
+   ============================================================ */
+const EMAILJS_PUBLIC_KEY      = 'YOUR_PUBLIC_KEY';         // ← replace
+const EMAILJS_SERVICE_ID      = 'YOUR_SERVICE_ID';         // ← replace
+const EMAILJS_TEMPLATE_BOOKING = 'YOUR_BOOKING_TEMPLATE';  // ← replace
+const EMAILJS_TEMPLATE_CHAT    = 'YOUR_CHAT_TEMPLATE';     // ← replace
+const EMAILJS_TEMPLATE_WORKSHOP= 'YOUR_WORKSHOP_TEMPLATE'; // ← replace
+const EMAILJS_TEMPLATE_NEWSLETTER='YOUR_NEWSLETTER_TEMPLATE';// ← replace
+
+// Initialize EmailJS once key is set
+if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+}
+
+/* ============================================================
+   COOKIES
+============================================================ */
+function setCookie(n,v,d){const e=new Date(Date.now()+d*864e5).toUTCString();document.cookie=n+'='+v+';expires='+e+';path=/;SameSite=Lax';}
+function getCookie(n){return document.cookie.split('; ').reduce((a,p)=>{const[k,v]=p.split('=');return k===n?v:a;},null);}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const b=document.getElementById('cookie-banner');
+  if(getCookie('tosTripCookiesAccepted')!=='true') b.style.display='flex';
+  document.getElementById('cookie-accept').addEventListener('click',()=>{
+    setCookie('tosTripCookiesAccepted','true',365); b.style.display='none';
+  });
+
+  // video stop at 15s
+  const v=document.getElementById('aboutVideo');
+  if(v){v.addEventListener('timeupdate',()=>{if(v.currentTime>=15)v.pause();});}
+
+  // Prevent past dates
+  const today=new Date().toISOString().split('T')[0];
+  ['bookingDate','wsDate','chatDateFrom','chatDateTo'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.min=today;
+  });
+});
+
+/* ============================================================
+   NAV
+============================================================ */
+window.addEventListener('scroll',()=>{
+  document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>30);
+});
+function toggleMobileNav(){document.getElementById('navLinks').classList.toggle('open');}
+
+/* ============================================================
+   LANGUAGE
+============================================================ */
+function toggleLang(){document.getElementById('langMenu').classList.toggle('open');}
+function setLang(code,label){
+  document.getElementById('langBtn').innerHTML='<i class="fas fa-globe"></i> '+label+' <i class="fas fa-chevron-down" style="font-size:10px"></i>';
+  document.getElementById('langMenu').classList.remove('open');
+  localStorage.setItem('lang',code);
+}
+document.addEventListener('click',e=>{
+  const w=document.querySelector('.lang-wrapper');
+  if(w&&!w.contains(e.target)) document.getElementById('langMenu').classList.remove('open');
+});
+
+/* ============================================================
+   SECTION TOGGLE
+============================================================ */
+function toggleSection(id){
+  const el=document.getElementById(id);
+  const wasHidden=el.style.display==='none'||el.style.display==='';
+  ['localSection','friendSection'].forEach(s=>{document.getElementById(s).style.display='none';});
+  if(wasHidden){el.style.display='block';setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),50);}
+}
+
+/* ============================================================
+   GALLERY FILTER
+============================================================ */
+function filterClients(city,btn){
+  document.querySelectorAll('.cf-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.cg-item').forEach(item=>{
+    item.classList.toggle('hidden',city!=='all'&&item.dataset.city!==city);
+  });
+}
+
+/* ============================================================
+   NEWSLETTER
+============================================================ */
+document.getElementById('newsletterForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const email=document.getElementById('nlEmail').value.trim();
+  const btn=document.getElementById('nlBtn');
+  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending…';
+  btn.disabled=true;
+
+  // ── EmailJS hook (newsletter) ──────────────────────────────
+  // Uncomment when templates are ready:
+  // emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_NEWSLETTER, { user_email: email })
+  //   .then(()=>{ showNlSuccess(); })
+  //   .catch(()=>{ showNlSuccess(); }); // show success anyway so UX doesn't break
+  // ──────────────────────────────────────────────────────────
+
+  setTimeout(showNlSuccess, 800); // remove this line when EmailJS is wired
+});
+function showNlSuccess(){
+  document.getElementById('newsletterForm').style.display='none';
+  document.getElementById('nlSuccess').style.display='block';
+}
+
+/* ============================================================
+   MODAL SYSTEM
+============================================================ */
+function closeModal(id){
+  document.getElementById(id).classList.remove('open');
+  // Reset modals on close
+  if(id==='rentModal') resetRentModal();
+  if(id==='chatModal') resetChatModal();
+  if(id==='workshopModal') resetWorkshopModal();
+}
+document.querySelectorAll('.modal-overlay').forEach(m=>{
+  m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');});
+});
+
+/* ============================================================
+   STEPPER UTILITY
+============================================================ */
+const stepperData={pax:{val:1,min:1,max:20},ws:{val:1,min:1,max:30}};
+function stepperChange(key,delta){
+  const d=stepperData[key];
+  d.val=Math.max(d.min,Math.min(d.max,d.val+delta));
+  if(key==='pax') document.getElementById('paxVal').textContent=d.val;
+  if(key==='ws'){
+    document.getElementById('wsParticipantsVal').textContent=d.val;
+    updateWsTotal();
+  }
+}
+
+/* ============================================================
+   FORM VALIDATION HELPERS
+============================================================ */
+function showErr(id,msg){
+  const inp=document.getElementById(id);
+  const err=document.getElementById('err-'+id);
+  if(inp) inp.classList.add('error');
+  if(err){err.textContent=msg||err.textContent;err.classList.add('show');}
+}
+function clearErr(id){
+  const inp=document.getElementById(id);
+  const err=document.getElementById('err-'+id);
+  if(inp) inp.classList.remove('error');
+  if(err) err.classList.remove('show');
+}
+function validateEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);}
+function val(id){return document.getElementById(id)?.value.trim()||'';}
+
+/* ============================================================
+   ✦ RENT A FRIEND MODAL
+============================================================ */
+let currentFriend={};
+let selectedDuration='half';
+let selectedPM='onsite';
+
+function openRentModal(guide){
+  currentFriend=guide;
+  selectedDuration='half';
+  stepperData.pax.val=1;
+  document.getElementById('paxVal').textContent='1';
+
+  // Header
+  document.getElementById('rentFriendName').textContent=guide.name;
+  document.getElementById('guideAvatarLetter').textContent=guide.name[0];
+  document.getElementById('guideStripName').textContent=guide.name;
+  document.getElementById('guideStripMeta').textContent=guide.city+' · '+guide.langs;
+
+  // Build duration picker
+  document.getElementById('durationPicker').innerHTML=`
+    <div class="dur-option selected" data-d="half" onclick="selectDuration(this,'half')">
+      <div class="dur-icon">🌅</div>
+      <div class="dur-label">Half Day</div>
+      <div class="dur-hours">4 hours</div>
+      <div class="dur-price">$${guide.half}</div>
+      <div class="dur-check"><i class="fas fa-check"></i></div>
+    </div>
+    <div class="dur-option" data-d="full" onclick="selectDuration(this,'full')">
+      <div class="dur-icon">🌄</div>
+      <div class="dur-label">Full Day</div>
+      <div class="dur-hours">8 hours</div>
+      <div class="dur-price">$${guide.full}</div>
+      <div class="dur-check"><i class="fas fa-check"></i></div>
+    </div>`;
+
+  // Reset steps
+  rentGoStep1(true);
+  document.getElementById('rentModal').classList.add('open');
+}
+
+function selectDuration(el,key){
+  selectedDuration=key;
+  document.querySelectorAll('#durationPicker .dur-option').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function selectPM(el){
+  document.querySelectorAll('.pm-option').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedPM=el.dataset.pm;
+}
+
+function rentGoStep1(init){
+  document.getElementById('rentStep1').style.display='block';
+  document.getElementById('rentStep2').style.display='none';
+  document.getElementById('rentSuccess').classList.remove('show');
+  document.getElementById('rentStepsBar').style.display='flex';
+  document.getElementById('rentStep1Ind').className='step-item active';
+  document.getElementById('rentStep2Ind').className='step-item';
+  if(!init){
+    ['bookingName','bookingEmail','bookingPhone','bookingDate'].forEach(id=>clearErr(id));
+  }
+}
+
+function rentGoStep2(){
+  // Validate step 1
+  let ok=true;
+  if(!val('bookingName')){showErr('bookingName');ok=false;}else clearErr('bookingName');
+  if(!validateEmail(val('bookingEmail'))){showErr('bookingEmail');ok=false;}else clearErr('bookingEmail');
+  if(!val('bookingPhone')){showErr('bookingPhone');ok=false;}else clearErr('bookingPhone');
+  if(!val('bookingDate')){showErr('bookingDate');ok=false;}else clearErr('bookingDate');
+  if(!ok) return;
+
+  // Build summary
+  const pax=stepperData.pax.val;
+  const durLabel=selectedDuration==='half'?'Half Day (4h)':'Full Day (8h)';
+  const priceEach=selectedDuration==='half'?currentFriend.half:currentFriend.full;
+  const total=priceEach*pax;
+  const dateRaw=val('bookingDate');
+  const dateDisplay=new Date(dateRaw+'T00:00:00').toLocaleDateString('en-US',{weekday:'short',day:'numeric',month:'long',year:'numeric'});
+
+  document.getElementById('sum-guide').textContent=currentFriend.name;
+  document.getElementById('sum-city').textContent=currentFriend.city;
+  document.getElementById('sum-date').textContent=dateDisplay;
+  document.getElementById('sum-duration').textContent=durLabel+' ($'+priceEach+'/person)';
+  document.getElementById('sum-pax').textContent=pax+' person'+(pax>1?'s':'');
+  document.getElementById('sum-total').textContent='$'+total;
+
+  document.getElementById('rentStep1').style.display='none';
+  document.getElementById('rentStep2').style.display='block';
+  document.getElementById('rentStep1Ind').className='step-item done';
+  document.getElementById('rentStep2Ind').className='step-item active';
+}
+
+function confirmRentBooking(){
+  const btn=document.getElementById('rentConfirmBtn');
+  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending…';
+  btn.disabled=true;
+
+  const pax=stepperData.pax.val;
+  const priceEach=selectedDuration==='half'?currentFriend.half:currentFriend.full;
+  const total=priceEach*pax;
+  const durLabel=selectedDuration==='half'?'Half Day (4h)':'Full Day (8h)';
+
+  // ── EmailJS hook (booking) ─────────────────────────────────
+  // Uncomment when templates are ready:
+  // emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_BOOKING, {
+  //   user_name:     val('bookingName'),
+  //   user_email:    val('bookingEmail'),
+  //   user_phone:    val('bookingPhone'),
+  //   friend_name:   currentFriend.name,
+  //   friend_city:   currentFriend.city,
+  //   booking_date:  val('bookingDate'),
+  //   duration:      durLabel,
+  //   guests:        pax,
+  //   total_price:   '$'+total,
+  //   payment:       selectedPM,
+  //   activities:    val('bookingActivities') || 'None specified',
+  //   request_type:  'Rent a Friend Booking',
+  // }).then(showRentSuccess).catch(err=>{
+  //   alert('Failed to send. Please try again.');
+  //   btn.innerHTML='<i class="fas fa-check-circle"></i> Confirm Booking';
+  //   btn.disabled=false;
+  // });
+  // ──────────────────────────────────────────────────────────
+
+  setTimeout(()=>showRentSuccess(pax,durLabel,total), 1200); // remove when EmailJS is wired
+}
+
+function showRentSuccess(pax,durLabel,total){
+  document.getElementById('rentStep1').style.display='none';
+  document.getElementById('rentStep2').style.display='none';
+  document.getElementById('rentStepsBar').style.display='none';
+  const s=document.getElementById('rentSuccess');
+  s.innerHTML=`
+    <div class="success-icon">✓</div>
+    <h3>Booking Confirmed! 🎉</h3>
+    <p>Your booking request has been sent. <strong>${currentFriend.name}</strong> will reach out within 2 hours to confirm.</p>
+    <div class="success-meta">
+      <div class="success-meta-row"><span class="sk">Guide</span><span class="sv">${currentFriend.name} — ${currentFriend.city}</span></div>
+      <div class="success-meta-row"><span class="sk">Date</span><span class="sv">${val('bookingDate')}</span></div>
+      <div class="success-meta-row"><span class="sk">Duration</span><span class="sv">${durLabel||selectedDuration}</span></div>
+      <div class="success-meta-row"><span class="sk">Guests</span><span class="sv">${pax||stepperData.pax.val} person(s)</span></div>
+      <div class="success-meta-row"><span class="sk">Total</span><span class="sv" style="color:var(--blue);font-size:16px">$${total||((selectedDuration==='half'?currentFriend.half:currentFriend.full)*stepperData.pax.val)}</span></div>
+    </div>
+    <button class="modal-btn" style="max-width:280px" onclick="closeModal('rentModal')">Close</button>`;
+  s.classList.add('show');
+}
+
+function resetRentModal(){
+  document.getElementById('rentSuccess').classList.remove('show');
+  rentGoStep1(true);
+  ['bookingName','bookingEmail','bookingPhone','bookingDate','bookingActivities'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.value='';
+    clearErr(id);
+  });
+  stepperData.pax.val=1;
+  document.getElementById('paxVal').textContent='1';
+  selectedPM='onsite';
+  document.querySelectorAll('.pm-option').forEach((o,i)=>{o.classList.toggle('selected',i===0);});
+}
+
+/* ============================================================
+   ✦ CHAT MODAL
+============================================================ */
+let currentChatType='email';
+
+function openChatModal(guide){
+  document.getElementById('chatFriendName').textContent=guide.name;
+  document.getElementById('chatGuideAvatar').textContent=guide.name[0];
+  document.getElementById('chatGuideStripName').textContent=guide.name;
+  document.getElementById('chatGuideStripMeta').textContent=guide.city+' · '+guide.langs;
+  document.getElementById('chatModal').classList.add('open');
+}
+
+function selectChatType(btn){
+  document.querySelectorAll('.ct-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  currentChatType=btn.dataset.ct;
+  const map={email:'Email Address',whatsapp:'WhatsApp Number',telegram:'Telegram Username'};
+  const phmap={email:'you@email.com',whatsapp:'+855 12 345 678',telegram:'@yourusername'};
+  const lbl=document.getElementById('chatContactLabel');
+  const inp=document.getElementById('chatContact');
+  lbl.innerHTML=map[currentChatType]+' <span>*</span>';
+  inp.placeholder=phmap[currentChatType];
+  inp.value='';
+}
+
+function updateCharCount(){
+  const len=document.getElementById('chatMessage').value.length;
+  const el=document.getElementById('charCounter');
+  el.textContent=len+' / 500';
+  el.className='char-counter'+(len>450?' warn':'')+(len>=500?' limit':'');
+}
+
+function sendChatMessage(){
+  let ok=true;
+  if(!val('chatName')){showErr('chatName');ok=false;}else clearErr('chatName');
+  if(!val('chatContact')){showErr('chatContact');ok=false;}else clearErr('chatContact');
+  if(!val('chatMessage')){showErr('chatMessage');ok=false;}else clearErr('chatMessage');
+  if(!ok) return;
+
+  const btn=document.querySelector('#chatActions .modal-btn');
+  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending…';
+  btn.disabled=true;
+
+  // ── EmailJS hook (chat) ────────────────────────────────────
+  // Uncomment when templates are ready:
+  // emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_CHAT, {
+  //   user_name:    val('chatName'),
+  //   contact_type: currentChatType,
+  //   user_contact: val('chatContact'),
+  //   friend_name:  document.getElementById('chatFriendName').textContent,
+  //   date_from:    val('chatDateFrom') || 'Flexible',
+  //   date_to:      val('chatDateTo') || 'Flexible',
+  //   message:      val('chatMessage'),
+  //   request_type: 'Pre-Booking Chat',
+  // }).then(showChatSuccess).catch(err=>{
+  //   alert('Failed to send. Please try again.');
+  //   btn.innerHTML='<i class="fas fa-paper-plane"></i> Send Message';
+  //   btn.disabled=false;
+  // });
+  // ──────────────────────────────────────────────────────────
+
+  setTimeout(showChatSuccess, 1000); // remove when EmailJS is wired
+}
+
+function showChatSuccess(){
+  document.getElementById('chatSuccess').style.display='block';
+  document.getElementById('chatActions').style.display='none';
+}
+
+function resetChatModal(){
+  document.getElementById('chatSuccess').style.display='none';
+  document.getElementById('chatActions').style.display='flex';
+  ['chatName','chatContact','chatDateFrom','chatDateTo','chatMessage'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.value='';
+    clearErr(id);
+  });
+  currentChatType='email';
+  document.querySelectorAll('.ct-tab').forEach((t,i)=>t.classList.toggle('active',i===0));
+  document.getElementById('chatContactLabel').innerHTML='Email Address <span>*</span>';
+  document.getElementById('chatContact').placeholder='you@email.com';
+  document.getElementById('charCounter').textContent='0 / 500';
+  const btn=document.querySelector('#chatActions .modal-btn');
+  if(btn){btn.innerHTML='<i class="fas fa-paper-plane"></i> Send Message';btn.disabled=false;}
+}
+
+/* ============================================================
+   ✦ WORKSHOP MODAL
+============================================================ */
+let currentWorkshop={};
+
+function openWorkshopModal(ws){
+  currentWorkshop=ws;
+  stepperData.ws.val=1;
+  document.getElementById('wsParticipantsVal').textContent='1';
+
+  document.getElementById('wsModalName').textContent=ws.name;
+  document.getElementById('wsModalTitle').textContent=ws.title;
+  document.getElementById('wsEmoji').textContent=ws.emoji;
+  document.getElementById('wsStripName').textContent=ws.name;
+  document.getElementById('wsStripMeta').textContent=ws.location+' · '+ws.duration;
+  document.getElementById('wsTypeBadge').textContent=ws.type;
+
+  updateWsTotal();
+  resetWorkshopModal(true); // reset without closing
+  document.getElementById('workshopModal').classList.add('open');
+}
+
+function updateWsTotal(){
+  const p=stepperData.ws.val*(currentWorkshop.price||0);
+  const el=document.getElementById('wsTotal');
+  if(el) el.textContent='$'+p;
+}
+
+function confirmWorkshop(){
+  let ok=true;
+  if(!val('wsName')){showErr('wsName');ok=false;}else clearErr('wsName');
+  if(!validateEmail(val('wsEmail'))){showErr('wsEmail');ok=false;}else clearErr('wsEmail');
+  if(!val('wsDate')){showErr('wsDate');ok=false;}else clearErr('wsDate');
+  if(!ok) return;
+
+  const btn=document.getElementById('wsBookBtn');
+  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending…';
+  btn.disabled=true;
+
+  const participants=stepperData.ws.val;
+  const total=participants*(currentWorkshop.price||0);
+
+  // ── EmailJS hook (workshop) ────────────────────────────────
+  // Uncomment when templates are ready:
+  // emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_WORKSHOP, {
+  //   user_name:       val('wsName'),
+  //   user_email:      val('wsEmail'),
+  //   user_phone:      val('wsPhone') || 'Not provided',
+  //   workshop_name:   currentWorkshop.name,
+  //   workshop_title:  currentWorkshop.title,
+  //   workshop_location: currentWorkshop.location,
+  //   preferred_date:  val('wsDate'),
+  //   participants:    participants,
+  //   total_price:     '$'+total,
+  //   level:           val('wsLevel') || 'Not specified',
+  //   requests:        val('wsRequests') || 'None',
+  //   request_type:    'Workshop Booking',
+  // }).then(()=>showWorkshopSuccess(participants,total)).catch(err=>{
+  //   alert('Failed to send. Please try again.');
+  //   btn.innerHTML='<i class="fas fa-check-circle"></i> Request Booking';
+  //   btn.disabled=false;
+  // });
+  // ──────────────────────────────────────────────────────────
+
+  setTimeout(()=>showWorkshopSuccess(participants,total), 1200); // remove when EmailJS is wired
+}
+
+function showWorkshopSuccess(participants,total){
+  document.getElementById('wsFormBody').style.display='none';
+  const s=document.getElementById('wsSuccess');
+  s.innerHTML=`
+    <div class="success-icon">✓</div>
+    <h3>Request Sent! 🎉</h3>
+    <p>Your booking request for <strong>${currentWorkshop.name}</strong> has been received. You'll hear back within 24 hours.</p>
+    <div class="success-meta">
+      <div class="success-meta-row"><span class="sk">Workshop</span><span class="sv">${currentWorkshop.name}</span></div>
+      <div class="success-meta-row"><span class="sk">Location</span><span class="sv">${currentWorkshop.location}</span></div>
+      <div class="success-meta-row"><span class="sk">Date</span><span class="sv">${val('wsDate')}</span></div>
+      <div class="success-meta-row"><span class="sk">Participants</span><span class="sv">${participants} person(s)</span></div>
+      <div class="success-meta-row"><span class="sk">Total</span><span class="sv" style="color:var(--blue);font-size:16px">$${total}</span></div>
+    </div>
+    <button class="modal-btn" style="max-width:280px" onclick="closeModal('workshopModal')">Close</button>`;
+  s.classList.add('show');
+}
+
+function resetWorkshopModal(skipStateReset){
+  if(!skipStateReset){
+    document.getElementById('wsFormBody').style.display='block';
+    document.getElementById('wsSuccess').classList.remove('show');
+    document.getElementById('wsSuccess').innerHTML='';
+  }
+  if(!skipStateReset){
+    ['wsName','wsEmail','wsPhone','wsDate','wsRequests'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el) el.value='';
+      clearErr(id);
+    });
+    const lvl=document.getElementById('wsLevel');
+    if(lvl) lvl.value='';
+    stepperData.ws.val=1;
+    document.getElementById('wsParticipantsVal').textContent='1';
+    const btn=document.getElementById('wsBookBtn');
+    if(btn){btn.innerHTML='<i class="fas fa-check-circle"></i> Request Booking';btn.disabled=false;}
+  }
+}
+
+/* ============================================================
+   CHATBOT
+============================================================ */
+let botOpen=false;
+function toggleChatbot(){
+  botOpen=!botOpen;
+  document.getElementById('chatbotWindow').classList.toggle('open',botOpen);
+}
+const botReplies={
+  emergency:'🚨 Emergency Numbers:\n• 119 — Ambulance\n• 117 — Police\n• 118 — Fire Department\n• 012 920 429 — Tourist Police\n\nStay calm and call the relevant number immediately.',
+  destinations:'📍 Current Destinations:\n• Siem Reap — Temples & culture\n• Phnom Penh — City life & history\n• Kampot — Nature & adventure\n\nKoh Rong & Kep coming soon! 🔒',
+  packages:'🎒 Our Packages:\n• Live Like a Local — Experience daily local life\n• Rent a Friend — Hire a verified local guide\n\nPrices start from $25/half day.',
+  contact:'📞 Contact Us:\n• Email: info@tostrip.com\n• Tourist Police: 012 920 429\n• Available: 8am – 8pm',
+};
+function quickAsk(type){addBotMsg(botReplies[type]||"I'll help you with that!");}
+function addBotMsg(text){
+  const msgs=document.getElementById('cbotMsgs');
+  const typing=document.createElement('div');
+  typing.className='msg bot';
+  typing.innerHTML='<div class="msg-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>';
+  msgs.appendChild(typing);
+  msgs.scrollTop=msgs.scrollHeight;
+  setTimeout(()=>{
+    typing.remove();
+    const el=document.createElement('div');
+    el.className='msg bot';
+    el.innerHTML='<div class="msg-bubble"><div class="msg-label"><i class="fas fa-robot"></i> TosTrip AI</div>'+text+'</div>';
+    msgs.appendChild(el);
+    msgs.scrollTop=msgs.scrollHeight;
+  },900);
+}
+function sendBot(){
+  const inp=document.getElementById('cbotInput');
+  const v=inp.value.trim();
+  if(!v) return;
+  const msgs=document.getElementById('cbotMsgs');
+  const user=document.createElement('div');
+  user.className='msg user';
+  user.innerHTML='<div class="msg-bubble">'+v+'</div>';
+  msgs.appendChild(user);
+  inp.value='';
+  msgs.scrollTop=msgs.scrollHeight;
+  const lv=v.toLowerCase();
+  let reply="I'm not sure about that, but you can contact us at info@tostrip.com or call Tourist Police: 012 920 429.";
+  if(lv.includes('emergency')||lv.includes('help')||lv.includes('danger')) reply=botReplies.emergency;
+  else if(lv.includes('destination')||lv.includes('where')||lv.includes('city')) reply=botReplies.destinations;
+  else if(lv.includes('package')||lv.includes('tour')||lv.includes('price')||lv.includes('cost')) reply=botReplies.packages;
+  else if(lv.includes('contact')||lv.includes('phone')||lv.includes('email')) reply=botReplies.contact;
+  else if(lv.includes('siem')||lv.includes('angkor')) reply='🏛️ Siem Reap is available now! You can book a local guide or explore with our Live Like a Local package.';
+  else if(lv.includes('offline')) reply='📱 TosTrip works offline! Visit our Offline Mode page to download maps and guides.';
+  addBotMsg(reply);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#667eea">
+    <meta name="description" content="Premium offline travel companion for Cambodia">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>TosTrip</title>
+    <link rel="manifest" href="Manifest.json">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --glass: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            min-height: 100vh;
+            color: #1f2937;
+            overflow-x: hidden;
+            padding-bottom: 80px;
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, -50px) rotate(90deg); }
+            50% { transform: translate(0, -100px) rotate(180deg); }
+            75% { transform: translate(-50px, -50px) rotate(270deg); }
+        }
+
+        .install-prompt {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 16px 24px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            gap: 16px;
+            max-width: 90%;
+            animation: slideDown 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes slideDown {
+            from { transform: translateX(-50%) translateY(-100px); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+
+        .install-prompt-icon {
+            font-size: 32px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .install-prompt button {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .install-prompt button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .install-prompt .close {
+            background: #f3f4f6;
+            color: #6b7280;
+            padding: 8px 16px;
+        }
+
+        .install-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 10001;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .install-modal-content {
+            background: white;
+            padding: 32px;
+            border-radius: 24px;
+            max-width: 500px;
+            margin: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .install-modal h2 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: #1f2937;
+        }
+
+        .install-modal p {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .install-steps {
+            background: #f3f4f6;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .install-step {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            align-items: flex-start;
+        }
+
+        .install-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .install-step-number {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .install-step-text {
+            color: #374151;
+            line-height: 1.5;
+            font-size: 15px;
+        }
+
+        .status-bar {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 8px;
+            z-index: 9999;
+        }
+
+        .status-badge {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .status-badge.online {
+            background: linear-gradient(135deg, var(--success), #059669);
+        }
+
+        .status-badge.offline {
+            background: linear-gradient(135deg, var(--warning), #d97706);
+        }
+
+        .pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 32px 24px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header .subtitle {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-weight: 400;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .quick-action-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 4px 20px rgba(238, 90, 82, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quick-action-btn:active {
+            transform: scale(0.95);
+        }
+
+        .quick-action-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(238, 90, 82, 0.5);
+        }
+
+        .quick-action-btn .icon {
+            font-size: 28px;
+        }
+
+        .info-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .location-display {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .location-display .icon {
+            font-size: 24px;
+            animation: bounce 2s infinite;
+        }
+
+        .coordinates {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 16px;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .tabs {
+            display: flex;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 8px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            gap: 6px;
+            scrollbar-width: none;
+        }
+
+        .tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 14px 20px;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            transform: scale(1.05);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.4s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .card-icon {
+            font-size: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+
+        .card-subtitle {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .card-content {
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        .card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .card-info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #374151;
+            font-size: 15px;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            color: white;
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+        }
+
+        .emergency-card {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 16px;
+            box-shadow: 0 10px 40px rgba(239, 68, 68, 0.3);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .emergency-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 50px rgba(239, 68, 68, 0.4);
+        }
+
+        .emergency-number {
+            font-size: 48px;
+            font-weight: 800;
+            margin: 16px 0;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .emergency-label {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .emergency-desc {
+            opacity: 0.9;
+            margin-bottom: 16px;
+        }
+
+        .phrase-card {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
+        }
+
+        .phrase-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .phrase-item:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateX(4px);
+        }
+
+        .phrase-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .phrase-english {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+
+        .phrase-khmer {
+            font-size: 15px;
+            opacity: 0.95;
+            font-style: italic;
+        }
+
+        .tool-group {
+            background: white;
+            padding: 24px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .tool-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .input-wrapper {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #6b7280;
+            margin-bottom: 6px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        .convert-icon {
+            font-size: 24px;
+            color: #9ca3af;
+        }
+
+        .time-display {
+            text-align: center;
+            padding: 32px;
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(6, 182, 212, 0.3);
+        }
+
+        .time-value {
+            font-size: 56px;
+            font-weight: 800;
+            font-family: 'Courier New', monospace;
+            margin: 16px 0;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .time-label {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .emergency-fab {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(239, 68, 68, 0.5);
+            z-index: 9998;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .emergency-fab:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 12px 40px rgba(239, 68, 68, 0.6);
+        }
+
+        .emergency-fab:active {
+            transform: scale(0.95);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 16px; }
+            .header { padding: 24px 20px; }
+            .status-bar { top: 8px; right: 8px; flex-direction: column; align-items: flex-end; }
+            .install-prompt { flex-direction: column; text-align: center; }
+            .quick-actions { grid-template-columns: repeat(2, 1fr); }
+            .emergency-fab { bottom: 20px; right: 20px; width: 56px; height: 56px; font-size: 24px; }
+            .time-value { font-size: 40px; }
+            .emergency-number { font-size: 36px; }
+        }
+
+        @media print {
+            .emergency-fab, .install-prompt, .install-modal, .status-bar, .quick-actions { display: none; }
+        }
+
+        .nearby-filter-btn {
+            padding: 10px 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border-radius: 24px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+            backdrop-filter: blur(10px);
+        }
+        .nearby-filter-btn:hover {
+            background: rgba(255,255,255,0.25);
+        }
+        .nearby-filter-btn.active {
+            background: white;
+            color: var(--primary);
+            border-color: white;
+        }
+        .place-distance-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .place-type-badge {
+            display: inline-flex;
+            align-items: center;
+            background: #f3f4f6;
+            color: #6b7280;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-animation" id="bgAnimation"></div>
+
+    <!-- Install Prompt (Desktop) -->
+    <div class="install-prompt" id="installPrompt">
+        <div class="install-prompt-icon">📱</div>
+        <div>
+            <strong>Install Tourism Companion</strong>
+            <p style="font-size: 14px; color: #6b7280; margin-top: 4px;">Works offline • Fast • No storage</p>
+        </div>
+        <button onclick="installApp()">Install</button>
+        <button class="close" onclick="closeInstallPrompt()">Later</button>
+    </div>
+
+    <!-- Mobile Sticky Install Banner -->
+    <div id="mobileInstallBanner" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 16px 20px; z-index: 10000; box-shadow: 0 -4px 20px rgba(0,0,0,0.2);">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: 600px; margin: 0 auto;">
+            <div style="flex: 1;">
+                <div style="font-weight: 700; font-size: 16px; margin-bottom: 4px;">📥 Add to Home Screen</div>
+                <div style="font-size: 13px; opacity: 0.95;">Quick access for emergencies - works offline!</div>
+            </div>
+            <button onclick="promptInstall()" style="background: white; color: #059669; border: none; padding: 12px 24px; border-radius: 12px; font-weight: 700; font-size: 14px; cursor: pointer; white-space: nowrap; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                Install Now
+            </button>
+            <button onclick="closeMobileInstallBanner()" style="background: rgba(255,255,255,0.2); color: white; border: none; padding: 8px; border-radius: 8px; cursor: pointer; font-size: 20px; line-height: 1; width: 36px; height: 36px;">
+                ✕
+            </button>
+        </div>
+    </div>
+
+    <!-- Install Instructions Modal -->
+    <div class="install-modal" id="installModal">
+        <div class="install-modal-content">
+            <h2>📥 Add to Home Screen</h2>
+            <p>Install this app on your device for quick offline access during emergencies.</p>
+            <div class="install-steps" id="installInstructions"></div>
+            <div style="display: flex; gap: 12px; margin-top: 20px;">
+                <button class="btn btn-primary" style="flex: 1;" onclick="closeInstallModal()">Got it!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-badge" id="networkStatus">
+            <span class="pulse">●</span>
+            <span id="networkText">Checking...</span>
+        </div>
+        <div class="status-badge">
+            <span id="batteryLevel">🔋 --</span>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <h1>🌟TosTrip</h1>
+                <p class="subtitle">Your offline companion</p>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <button class="quick-action-btn" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);" onclick="promptInstall()" id="installBtn">
+                <span class="icon">📥</span>
+                <span>Install App</span>
+            </button>
+            <button class="quick-action-btn" onclick="shareLocation()">
+                <span class="icon">📤</span>
+                <span>Share Location</span>
+            </button>
+            <button class="quick-action-btn" onclick="call('119')">
+                <span class="icon">🚑</span>
+                <span>Emergency</span>
+            </button>
+            <button class="quick-action-btn" onclick="sendEmergencySMS()">
+                <span class="icon">📲</span>
+                <span>SOS Alert</span>
+            </button>
+            <button class="quick-action-btn" onclick="showTab(1)">
+                <span class="icon">🗣️</span>
+                <span>Phrases</span>
+            </button>
+        </div>
+
+        <!-- Location Info -->
+        <div class="info-card">
+            <div class="location-display">
+                <span class="icon">📍</span>
+                <span id="locationName">Locating...</span>
+            </div>
+            <div class="coordinates">
+                <div>Latitude: <strong><span id="lat">--</span></strong></div>
+                <div>Longitude: <strong><span id="lng">--</span></strong></div>
+                <div>Accuracy: <strong><span id="accuracy">--</span></strong></div>
+                <div>Updated: <strong><span id="lastUpdate">--</span></strong></div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab(0)">🗺️ Map</button>
+            <button class="tab-btn" onclick="showTab(1)">🗣️ Phrases</button>
+            <button class="tab-btn" onclick="showTab(2)">🚨 Emergency</button>
+            <button class="tab-btn" onclick="showTab(3)">🏛️ Embassy</button>
+            <button class="tab-btn" onclick="showTab(4)">🛠️ Tools</button>
+        </div>
+
+        <!-- Tab 0: Map & Nearby -->
+        <div class="tab-content active" id="tab0">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:12px;">
+                <h2 class="section-title" style="margin-bottom:0;">🗺️ Nearby Places</h2>
+                <button class="btn btn-primary" id="refreshNearbyBtn" onclick="fetchNearbyPlaces()">
+                    🔄 Refresh
+                </button>
+            </div>
+
+            <!-- Category Filter -->
+            <div style="display:flex; gap:8px; margin-bottom:20px; overflow-x:auto; scrollbar-width:none; padding-bottom:4px;">
+                <button class="nearby-filter-btn active" onclick="filterCategory('all')">🌐 All</button>
+                <button class="nearby-filter-btn" onclick="filterCategory('hospital')">🏥 Hospitals</button>
+                <button class="nearby-filter-btn" onclick="filterCategory('hotel')">🏨 Hotels</button>
+                <button class="nearby-filter-btn" onclick="filterCategory('restaurant')">🍽️ Food</button>
+                <button class="nearby-filter-btn" onclick="filterCategory('atm')">🏧 ATMs</button>
+                <button class="nearby-filter-btn" onclick="filterCategory('fuel')">⛽ Fuel</button>
+            </div>
+
+            <!-- Loading State -->
+            <div id="nearbyLoading" style="display:none; text-align:center; padding:48px 24px;">
+                <div class="loading" style="width:40px;height:40px;border-width:4px;margin:0 auto 16px;"></div>
+                <p style="color:white; font-size:16px; opacity:0.9;">Finding places near you...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="nearbyError" style="display:none;">
+                <div class="card" style="text-align:center; padding:32px;">
+                    <div style="font-size:48px; margin-bottom:16px;">📡</div>
+                    <div class="card-title" id="nearbyErrorMsg">Could not load nearby places</div>
+                    <div class="card-subtitle" style="margin-top:8px; margin-bottom:20px;">Check your connection and try again</div>
+                    <button class="btn btn-primary" onclick="fetchNearbyPlaces()">Try Again</button>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div id="nearbyResults"></div>
+        </div>
+
+        <!-- Tab 1: Phrases -->
+        <div class="tab-content" id="tab1">
+            <h2 class="section-title">🗣️ Essential Khmer Phrases</h2>
+
+            <div class="phrase-card">
+                <h3 style="font-size: 22px; margin-bottom: 16px; font-weight: 700;">👋 Greetings & Basics</h3>
+                <div class="phrase-item" onclick="speakPhrase('hello')">
+                    <div class="phrase-english">Hello / Good day</div>
+                    <div class="phrase-khmer">ជំរាបសួរ (Chomreab suor)</div>
+                </div>
+                <div class="phrase-item" onclick="speakPhrase('thank-you')">
+                    <div class="phrase-english">Thank you very much</div>
+                    <div class="phrase-khmer">អរគុណច្រើន (Orkun chran)</div>
+                </div>
+                <div class="phrase-item" onclick="speakPhrase('please')">
+                    <div class="phrase-english">Please help me</div>
+                    <div class="phrase-khmer">សូមជួយខ្ញុំផង (Som chuoy khnhom phong)</div>
+                </div>
+                <div class="phrase-item" onclick="speakPhrase('excuse-me')">
+                    <div class="phrase-english">Excuse me / Sorry</div>
+                    <div class="phrase-khmer">សុំទោស (Som tos)</div>
+                </div>
+                <div class="phrase-item" onclick="speakPhrase('goodbye')">
+                    <div class="phrase-english">Goodbye / See you later</div>
+                    <div class="phrase-khmer">លាហើយ (Lea haey)</div>
+                </div>
+            </div>
+
+            <div class="phrase-card">
+                <h3 style="font-size: 22px; margin-bottom: 16px; font-weight: 700;">🍽️ Food & Dining</h3>
+                <div class="phrase-item" onclick="speakPhrase('how-much')">
+                    <div class="phrase-english">How much does it cost?</div>
+                    <div class="phrase-khmer">តម្លៃប៉ុន្មាន? (Tomlai ponman?)</div>
+                </div>
+                <div class="phrase-item" onclick="speakPhrase('hungry')">
+                    <div class="phrase-english">I'm very hungry</div>
+                    <div class="phrase-khmer">ខ្ញុំឃ្លានណាស់ (Khnhom khlean nas)</div>
+                </div>
+                <div class="phrase-item" onclick="speakPhrase('menu')">
+                    <div class="phrase-english">Can I see the menu?</div>
+                    <div class="phrase-khmer">ខ្ញុំអាចមើលម៉ឺនុយបានទេ? (Khnhom ach merl menu ban te?)</div>
+                </div>
+                <div class="phrase-item" onclick="speakPhrase('not-spicy')">
+                    <div class="phrase-english">Not too spicy, please</div>
+                    <div class="phrase-khmer">កុំឲ្យហាលពេកសូម (Kom aoy hal pek som)</div>
+                </div>
+                <div class="phrase-item" onclick="speakPhrase('delicious')">
+                    <div class="phrase-english">This is delicious!</div>
+                    <div class="phrase-khmer">នេះឆ្ងាញ់ណាស់! (Nih chhnganha nas!)</div>
+                </div>
+                <div class="phrase-item" onclick="speakPhrase('bill')">
+                    <div class="phrase-english">Can I have the bill?</div>
+                    <div class="phrase-khmer">សូមគិតលុយផង (Som kit luy phong)</div>
+                </div>
+            </div>
+
+            <div class="phrase-card">
+                <h3 style="font-size: 22px; margin-bottom: 16px; font-weight: 700;">🚗 Transportation</h3>
+                <div class="phrase-item" onclick="speakPhrase('airport')">
+                    <div class="phrase-english">Please take me to the airport</div>
+                    <div class="phrase-khmer">សូមយកខ្ញុំទៅអាកាសយានដ្ឋាន (Som yok khnhom tov akasayeandthan)</div>
+                </div>
+                <div class="phrase-item" onclick="speakPhrase('bus')">
+                    <div class="phrase-english">Where is the bus station?</div>
+                    <div class="phrase-khmer">ស្ថានីយ៍ឡាននៅឯណា? (Sthani loan nov ei na?)</div>
+                </div>
+                <div class="phrase-item" onclick="speakPhrase('stop')">
+                    <div class="phrase-english">Please stop here</div>
+                    <div class="phrase-khmer">សូមឈប់ត្រង់នេះ (Som chhob trong nih)</div>
+                </div>
+            </div>
+
+            <div class="phrase-card">
+                <h3 style="font-size: 22px; margin-bottom: 16px; font-weight: 700;">🚨 Emergency</h3>
+                <div class="phrase-item" onclick="speakPhrase('help')">
+                    <div class="phrase-english">Help me please!</div>
+                    <div class="phrase-khmer">សូមជួយខ្ញុំផង! (Som chuoy khnhom phong!)</div>
+                </div>
+                <div class="phrase-item" onclick="speakPhrase('doctor')">
+                    <div class="phrase-english">I need to see a doctor</div>
+                    <div class="phrase-khmer">ខ្ញុំត្រូវការជួបវេជ្ជបណ្ឌិត (Khnhom trov kar chuob vech bandit)</div>
+                </div>
+                <div class="phrase-item" onclick="speakPhrase('police')">
+                    <div class="phrase-english">Please call the police</div>
+                    <div class="phrase-khmer">សូមហៅប៉ូលីស (Som hav polis)</div>
+                </div>
+                <div class="phrase-item" onclick="speakPhrase('lost')">
+                    <div class="phrase-english">I am lost</div>
+                    <div class="phrase-khmer">ខ្ញុំបាត់ផ្លូវ (Khnhom bat plov)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2: Emergency -->
+        <div class="tab-content" id="tab2">
+            <h2 class="section-title">🚨 Emergency Services</h2>
+
+            <div class="emergency-card" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                <div style="font-size: 48px; margin-bottom: 12px;">📲</div>
+                <div class="emergency-label">Emergency SMS Contact</div>
+                <div style="font-size: 36px; font-weight: 800; margin: 16px 0;">0716145925</div>
+                <div class="emergency-desc">Sends your current GPS location via SMS</div>
+                <button class="btn btn-primary" style="background: white; color: #8b5cf6; box-shadow: 0 4px 20px rgba(255,255,255,0.3);" onclick="sendEmergencySMS()">
+                    📲 Send SOS Location
+                </button>
+            </div>
+
+            <div class="emergency-card">
+                <div style="font-size: 48px; margin-bottom: 12px;">👮</div>
+                <div class="emergency-label">Police Emergency</div>
+                <div class="emergency-number">117</div>
+                <div class="emergency-desc">Crimes • Theft • Security Issues</div>
+                <button class="btn btn-primary" style="background: white; color: #ef4444; box-shadow: 0 4px 20px rgba(255,255,255,0.3);" onclick="call('117')">
+                    📞 Call Now
+                </button>
+            </div>
+
+            <div class="emergency-card">
+                <div style="font-size: 48px; margin-bottom: 12px;">🚑</div>
+                <div class="emergency-label">Medical Emergency</div>
+                <div class="emergency-number">119</div>
+                <div class="emergency-desc">Medical Emergencies • Ambulance • Hospital</div>
+                <button class="btn btn-primary" style="background: white; color: #ef4444; box-shadow: 0 4px 20px rgba(255,255,255,0.3);" onclick="call('119')">
+                    📞 Call Now
+                </button>
+            </div>
+
+            <div class="emergency-card">
+                <div style="font-size: 48px; margin-bottom: 12px;">🔥</div>
+                <div class="emergency-label">Fire & Rescue</div>
+                <div class="emergency-number">118</div>
+                <div class="emergency-desc">Fire Emergencies • Rescue Operations</div>
+                <button class="btn btn-primary" style="background: white; color: #ef4444; box-shadow: 0 4px 20px rgba(255,255,255,0.3);" onclick="call('118')">
+                    📞 Call Now
+                </button>
+            </div>
+
+            <div class="emergency-card" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                <div style="font-size: 48px; margin-bottom: 12px;">🛡️</div>
+                <div class="emergency-label">Tourist Police</div>
+                <div style="font-size: 36px; font-weight: 800; margin: 16px 0;">012 942 484</div>
+                <div class="emergency-desc">English Speaking Officers • Tourist Support</div>
+                <button class="btn btn-primary" style="background: white; color: #f59e0b; box-shadow: 0 4px 20px rgba(255,255,255,0.3);" onclick="call('012942484')">
+                    📞 Call Now
+                </button>
+            </div>
+
+            <div class="card">
+                <h3 style="font-size: 20px; margin-bottom: 16px; font-weight: 700;">🏥 Important Medical Centers</h3>
+                <div class="card-info">
+                    <div class="card-info-item" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+                        <strong>Royal Phnom Penh Hospital</strong>
+                        <span>📞 +855 23 991 000 • 📍 888 Monivong Blvd</span>
+                        <span style="color: #6b7280;">⏰ 24/7 Emergency Services</span>
+                    </div>
+                    <div class="card-info-item" style="flex-direction: column; align-items: flex-start; gap: 4px; margin-top: 12px;">
+                        <strong>International SOS</strong>
+                        <span>📞 +855 23 216 911 • 📍 161 Street 51</span>
+                        <span style="color: #6b7280;">⏰ 24/7 Medical Center</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Embassy -->
+        <div class="tab-content" id="tab3">
+            <h2 class="section-title">🏛️ Embassy & Consulate</h2>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon" style="font-size: 36px;">🇺🇸</div>
+                    <div>
+                        <div class="card-title">United States Embassy</div>
+                        <div class="card-subtitle">Mon-Fri 8:00-17:00</div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-info-item">📞 +855 23 728 000</div>
+                    <div class="card-info-item">🚨 Emergency: +855 23 728 118</div>
+                    <div class="card-info-item">📍 #1, Street 96, Sangkat Wat Phnom</div>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="call('+85523728000')">📞 Call</button>
+                    <button class="btn btn-secondary" onclick="navigate('us-embassy')">🧭 Directions</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon" style="font-size: 36px;">🇬🇧</div>
+                    <div>
+                        <div class="card-title">United Kingdom Embassy</div>
+                        <div class="card-subtitle">Mon-Thu 8:00-17:00, Fri 8:00-13:30</div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-info-item">📞 +855 23 427 124</div>
+                    <div class="card-info-item">📍 27-29, Street 75, Sangkat Srah Chak</div>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="call('+85523427124')">📞 Call</button>
+                    <button class="btn btn-secondary" onclick="navigate('uk-embassy')">🧭 Directions</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon" style="font-size: 36px;">🇦🇺</div>
+                    <div>
+                        <div class="card-title">Australian Embassy</div>
+                        <div class="card-subtitle">Mon-Fri 8:00-17:00</div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-info-item">📞 +855 23 213 470</div>
+                    <div class="card-info-item">📍 16, National Assembly St, Tonle Bassac</div>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="call('+85523213470')">📞 Call</button>
+                    <button class="btn btn-secondary" onclick="navigate('au-embassy')">🧭 Directions</button>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="font-size: 28px;">🇫🇷</div>
+                        <div>
+                            <div class="card-title">French Embassy</div>
+                            <div class="card-subtitle">Mon-Fri 8:00-17:00</div>
+                        </div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-info-item">📞 +855 23 430 020</div>
+                        <div class="card-info-item">📍 1, Monivong Blvd</div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary" onclick="call('+85523430020')">📞 Call</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="font-size: 28px;">🇩🇪</div>
+                        <div>
+                            <div class="card-title">German Embassy</div>
+                            <div class="card-subtitle">Mon-Thu 7:30-16:30</div>
+                        </div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-info-item">📞 +855 23 216 381</div>
+                        <div class="card-info-item">📍 76-78, Street 214</div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary" onclick="call('+85523216381')">📞 Call</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="font-size: 28px;">🇯🇵</div>
+                        <div>
+                            <div class="card-title">Japanese Embassy</div>
+                            <div class="card-subtitle">Mon-Fri 8:30-17:15</div>
+                        </div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-info-item">📞 +855 23 217 161</div>
+                        <div class="card-info-item">📍 194, Norodom Blvd</div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary" onclick="call('+85523217161')">📞 Call</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="font-size: 28px;">🇨🇦</div>
+                        <div>
+                            <div class="card-title">Canadian Embassy</div>
+                            <div class="card-subtitle">Mon-Fri 8:00-16:30</div>
+                        </div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-info-item">📞 +855 23 213 694</div>
+                        <div class="card-info-item">📍 9F Canadia Tower</div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary" onclick="call('+85523213694')">📞 Call</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 4: Tools -->
+        <div class="tab-content" id="tab4">
+            <h2 class="section-title">🛠️ Travel Tools</h2>
+
+            <div class="tool-group">
+                <div class="tool-title">💱 Currency Converter</div>
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <label class="input-label">US Dollar (USD)</label>
+                        <input type="number" class="input-field" id="usdInput" placeholder="100" oninput="convertUSD()">
+                    </div>
+                    <div class="convert-icon">↔️</div>
+                    <div class="input-wrapper">
+                        <label class="input-label">Cambodian Riel (KHR)</label>
+                        <input type="number" class="input-field" id="khrInput" placeholder="410000" oninput="convertKHR()">
+                    </div>
+                </div>
+                <div style="color: #6b7280; font-size: 14px; margin-top: 8px;">
+                    💡 Current rate: 1 USD = 4,100 KHR
+                </div>
+            </div>
+
+            <div class="tool-group">
+                <div class="tool-title">🌡️ Temperature Converter</div>
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <label class="input-label">Celsius (°C)</label>
+                        <input type="number" class="input-field" id="celsiusInput" placeholder="28" oninput="convertCelsius()">
+                    </div>
+                    <div class="convert-icon">↔️</div>
+                    <div class="input-wrapper">
+                        <label class="input-label">Fahrenheit (°F)</label>
+                        <input type="number" class="input-field" id="fahrenheitInput" placeholder="82.4" oninput="convertFahrenheit()">
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-group">
+                <div class="tool-title">📏 Distance Converter</div>
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <label class="input-label">Kilometers (km)</label>
+                        <input type="number" class="input-field" id="kmInput" placeholder="5" oninput="convertKM()">
+                    </div>
+                    <div class="convert-icon">↔️</div>
+                    <div class="input-wrapper">
+                        <label class="input-label">Miles (mi)</label>
+                        <input type="number" class="input-field" id="milesInput" placeholder="3.1" oninput="convertMiles()">
+                    </div>
+                </div>
+            </div>
+
+            <div class="time-display">
+                <div class="time-label">⏰ Current Time in Phnom Penh</div>
+                <div class="time-value" id="currentTime">--:--:--</div>
+                <div class="time-label">Indochina Time (UTC+7)</div>
+            </div>
+
+            <div class="tool-group">
+                <div class="tool-title">🧮 Tip Calculator</div>
+                <div class="input-wrapper">
+                    <label class="input-label">Bill Amount (USD)</label>
+                    <input type="number" class="input-field" id="billAmount" placeholder="25.00" oninput="calculateTip()">
+                </div>
+                <div style="margin: 16px 0;">
+                    <label class="input-label">Tip Percentage</label>
+                    <div style="display: flex; gap: 8px; margin-top: 8px;">
+                        <button class="btn btn-secondary" id="tip10" style="flex: 1;" onclick="setTipPercent(10)">10%</button>
+                        <button class="btn btn-secondary" id="tip15" style="flex: 1;" onclick="setTipPercent(15)">15%</button>
+                        <button class="btn btn-secondary" id="tip18" style="flex: 1;" onclick="setTipPercent(18)">18%</button>
+                        <button class="btn btn-secondary" id="tip20" style="flex: 1;" onclick="setTipPercent(20)">20%</button>
+                    </div>
+                </div>
+                <div style="background: #f3f4f6; padding: 16px; border-radius: 12px; margin-top: 16px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="color: #6b7280;">Tip (<span id="tipPercent">15</span>%):</span>
+                        <strong style="color: #1f2937;">$<span id="tipAmount">0.00</span></strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: 700; color: #1f2937;">
+                        <span>Total:</span>
+                        <span>$<span id="totalAmount">0.00</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Emergency FAB -->
+    <button class="emergency-fab" onclick="sendEmergencySMS()" title="Send Emergency SMS">🚨</button>
+
+    <script>
+    'use strict';
+
+    // ── State ──────────────────────────────────────
+    let deferredInstallPrompt = null;
+    let currentLocation = { lat: 11.5564, lng: 104.9282, accuracy: null };
+    let currentTipPercent = 15;
+
+    // ── Init ───────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+        initBackgroundShapes();
+        initNetwork();
+        initBattery();
+        initGeolocation();
+        initClock();
+        initPWA();
+    });
+
+    // ── BACKGROUND SHAPES ──────────────────────────
+    function initBackgroundShapes() {
+        const container = document.getElementById('bgAnimation');
+        if (!container) return;
+        const shapes = [
+            { w: 300, h: 300, top: 10,  left: 10,  delay: 0  },
+            { w: 200, h: 200, top: 60,  left: 80,  delay: 5  },
+            { w: 150, h: 150, top: 20,  left: 50,  delay: 10 },
+            { w: 250, h: 250, top: 70,  left: 20,  delay: 3  },
+            { w: 100, h: 100, top: 40,  left: 70,  delay: 7  },
+        ];
+        shapes.forEach(s => {
+            const el = document.createElement('div');
+            el.className = 'floating-shape';
+            el.style.cssText = `width:${s.w}px;height:${s.h}px;top:${s.top}%;left:${s.left}%;animation-delay:${s.delay}s;`;
+            container.appendChild(el);
+        });
+    }
+
+    // ── TABS ───────────────────────────────────────
+    function showTab(index) {
+        document.querySelectorAll('.tab-content').forEach((el, i) => {
+            el.classList.toggle('active', i === index);
+        });
+        document.querySelectorAll('.tab-btn').forEach((el, i) => {
+            el.classList.toggle('active', i === index);
+        });
+    }
+
+    // ── NETWORK STATUS ─────────────────────────────
+    function initNetwork() {
+        updateNetworkStatus();
+        window.addEventListener('online',  updateNetworkStatus);
+        window.addEventListener('offline', updateNetworkStatus);
+    }
+
+    function updateNetworkStatus() {
+        const badge = document.getElementById('networkStatus');
+        const text  = document.getElementById('networkText');
+        if (!badge || !text) return;
+        if (navigator.onLine) {
+            badge.classList.remove('offline');
+            badge.classList.add('online');
+            text.textContent = 'Online';
+        } else {
+            badge.classList.remove('online');
+            badge.classList.add('offline');
+            text.textContent = 'Offline';
+        }
+    }
+
+    // ── BATTERY ────────────────────────────────────
+    function initBattery() {
+        if (!navigator.getBattery) {
+            document.getElementById('batteryLevel').textContent = '🔋 N/A';
+            return;
+        }
+        navigator.getBattery().then(battery => {
+            renderBattery(battery);
+            battery.addEventListener('levelchange',    () => renderBattery(battery));
+            battery.addEventListener('chargingchange', () => renderBattery(battery));
+        }).catch(() => {
+            document.getElementById('batteryLevel').textContent = '🔋 N/A';
+        });
+    }
+
+    function renderBattery(battery) {
+        const el = document.getElementById('batteryLevel');
+        if (!el) return;
+        const pct  = Math.round(battery.level * 100);
+        const icon = battery.charging ? '⚡' : pct <= 20 ? '🪫' : '🔋';
+        el.textContent = `${icon} ${pct}%`;
+    }
+
+    // ── GEOLOCATION ────────────────────────────────
+    function initGeolocation() {
+        if (!navigator.geolocation) {
+            document.getElementById('locationName').textContent = 'GPS unavailable';
+            setFallbackCoords();
+            return;
+        }
+        showNearbyLoading(true);
+        // Fast first fix
+        navigator.geolocation.getCurrentPosition(onLocationUpdate, onLocationError, {
+            enableHighAccuracy: false,
+            timeout: 5000,
+            maximumAge: 60000
+        });
+        // Continuous accurate tracking
+        navigator.geolocation.watchPosition(onLocationUpdate, onLocationError, {
+            enableHighAccuracy: true,
+            timeout: 15000,
+            maximumAge: 10000
+        });
+    }
+
+    let nearbyFetched = false;
+
+    function onLocationUpdate(position) {
+        const { latitude, longitude, accuracy } = position.coords;
+        currentLocation = { lat: latitude, lng: longitude, accuracy: Math.round(accuracy) };
+
+        document.getElementById('lat').textContent        = latitude.toFixed(4);
+        document.getElementById('lng').textContent        = longitude.toFixed(4);
+        document.getElementById('accuracy').textContent   = `±${Math.round(accuracy)}m`;
+        document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+
+        reverseGeocode(latitude, longitude);
+
+        // Auto-fetch nearby places on first good fix
+        if (!nearbyFetched && accuracy < 500) {
+            nearbyFetched = true;
+            fetchNearbyPlaces();
+        }
+    }
+
+    function onLocationError(err) {
+        const messages = {
+            1: 'Location access denied',
+            2: 'Location unavailable',
+            3: 'Location timed out'
+        };
+        document.getElementById('locationName').textContent = messages[err.code] || 'Location unavailable';
+        setFallbackCoords();
+    }
+
+    function setFallbackCoords() {
+        document.getElementById('lat').textContent      = currentLocation.lat.toFixed(4);
+        document.getElementById('lng').textContent      = currentLocation.lng.toFixed(4);
+        document.getElementById('accuracy').textContent = '±unknown';
+        document.getElementById('lastUpdate').textContent = 'N/A';
+        document.getElementById('locationName').textContent = 'Phnom Penh, Cambodia';
+    }
+
+    function reverseGeocode(lat, lng) {
+        if (!navigator.onLine) return;
+        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`, {
+            headers: { 'Accept-Language': 'en' }
+        })
+        .then(r => r.json())
+        .then(data => {
+            const addr    = data.address || {};
+            const city    = addr.city || addr.town || addr.village || addr.county || '';
+            const country = addr.country || '';
+            const display = [city, country].filter(Boolean).join(', ');
+            if (display) document.getElementById('locationName').textContent = display;
+        })
+        .catch(() => {}); // silently fail
+    }
+
+    // ── CLOCK ──────────────────────────────────────
+    function initClock() {
+        updateClock();
+        setInterval(updateClock, 1000);
+    }
+
+    function updateClock() {
+        const el = document.getElementById('currentTime');
+        if (!el) return;
+        try {
+            el.textContent = new Date().toLocaleTimeString('en-US', {
+                timeZone: 'Asia/Phnom_Penh',
+                hour:     '2-digit',
+                minute:   '2-digit',
+                second:   '2-digit',
+                hour12:   false
+            });
+        } catch (_) {
+            // Fallback: manual UTC+7
+            const utc = Date.now() + new Date().getTimezoneOffset() * 60000;
+            const pnp = new Date(utc + 7 * 3600000);
+            const p   = n => String(n).padStart(2, '0');
+            el.textContent = `${p(pnp.getHours())}:${p(pnp.getMinutes())}:${p(pnp.getSeconds())}`;
+        }
+    }
+
+    // ── CALL ───────────────────────────────────────
+    function call(number) {
+        window.location.href = 'tel:' + number.replace(/\s/g, '');
+    }
+
+    // ── NAVIGATE ───────────────────────────────────
+    const EMBASSY_COORDS = {
+        'us-embassy': '11.5794,104.9267',
+        'uk-embassy': '11.5744,104.9198',
+        'au-embassy': '11.5670,104.9283'
+    };
+
+    function navigate(dest) {
+        const coords = EMBASSY_COORDS[dest] || dest;
+        const origin = `${currentLocation.lat},${currentLocation.lng}`;
+        const url = navigator.onLine
+            ? `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${coords}&travelmode=driving`
+            : `https://www.openstreetmap.org/directions?from=${origin}&to=${coords}`;
+        window.open(url, '_blank');
+    }
+
+    // ── NEARBY PLACES (Overpass API) ───────────────
+    let allNearbyPlaces = [];
+    let activeCategory  = 'all';
+
+    const CATEGORY_CONFIG = {
+        hospital:   { icon: '🏥', label: 'Hospital',   color: '#ef4444', query: `node["amenity"="hospital"](around:3000,LAT,LNG);node["amenity"="clinic"](around:3000,LAT,LNG);node["amenity"="doctors"](around:2000,LAT,LNG);` },
+        hotel:      { icon: '🏨', label: 'Hotel',      color: '#667eea', query: `node["tourism"="hotel"](around:2000,LAT,LNG);node["tourism"="guest_house"](around:2000,LAT,LNG);node["tourism"="hostel"](around:2000,LAT,LNG);` },
+        restaurant: { icon: '🍽️', label: 'Restaurant', color: '#f59e0b', query: `node["amenity"="restaurant"](around:1500,LAT,LNG);node["amenity"="cafe"](around:1500,LAT,LNG);node["amenity"="fast_food"](around:1500,LAT,LNG);` },
+        atm:        { icon: '🏧', label: 'ATM',        color: '#10b981', query: `node["amenity"="atm"](around:1500,LAT,LNG);node["amenity"="bank"](around:1500,LAT,LNG);` },
+        fuel:       { icon: '⛽', label: 'Fuel',       color: '#8b5cf6', query: `node["amenity"="fuel"](around:2000,LAT,LNG);` },
+    };
+
+    // Haversine distance in km
+    function haversine(lat1, lng1, lat2, lng2) {
+        const R = 6371;
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLng = (lng2 - lng1) * Math.PI / 180;
+        const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.sin(dLng/2)**2;
+        return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    }
+
+    function walkTime(km)  { return Math.round(km / 0.083);  } // ~5km/h
+    function driveTime(km) { return Math.max(1, Math.round(km / 0.5)); } // ~30km/h city
+
+    function formatDist(km) {
+        return km < 1 ? `${Math.round(km * 1000)}m` : `${km.toFixed(1)}km`;
+    }
+
+    async function fetchNearbyPlaces() {
+        if (!navigator.onLine) {
+            showNearbyError('You are offline. Connect to the internet to load nearby places.');
+            return;
+        }
+
+        const { lat, lng } = currentLocation;
+        showNearbyLoading(true);
+        document.getElementById('nearbyError').style.display = 'none';
+        document.getElementById('nearbyResults').innerHTML = '';
+
+        // Build combined Overpass query for all categories
+        const queries = Object.values(CATEGORY_CONFIG)
+            .map(c => c.query.replace(/LAT/g, lat).replace(/LNG/g, lng))
+            .join('');
+
+        const overpassQuery = `[out:json][timeout:25];(${queries});out body;`;
+        const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(overpassQuery)}`;
+
+        try {
+            const res  = await fetch(url, { signal: AbortSignal.timeout(20000) });
+            const data = await res.json();
+
+            if (!data.elements || data.elements.length === 0) {
+                showNearbyError('No places found nearby. Try refreshing in a different location.');
+                return;
+            }
+
+            // Parse and enrich results
+            allNearbyPlaces = data.elements
+                .filter(el => el.lat && el.lon && el.tags && el.tags.name)
+                .map(el => {
+                    const t    = el.tags;
+                    const dist = haversine(lat, lng, el.lat, el.lon);
+                    const cat  = detectCategory(t);
+                    return {
+                        id:      el.id,
+                        name:    t.name || t['name:en'] || 'Unnamed',
+                        lat:     el.lat,
+                        lng:     el.lon,
+                        dist,
+                        category: cat,
+                        phone:   t.phone || t['contact:phone'] || null,
+                        website: t.website || t['contact:website'] || null,
+                        opening: t.opening_hours || null,
+                        address: buildAddress(t),
+                        brand:   t.brand || t.operator || null,
+                    };
+                })
+                .filter(p => p.category)
+                .sort((a, b) => a.dist - b.dist);
+
+            // Deduplicate by name+category within 50m
+            const seen = new Set();
+            allNearbyPlaces = allNearbyPlaces.filter(p => {
+                const key = `${p.category}:${p.name.toLowerCase().replace(/\s/g,'')}`;
+                if (seen.has(key)) return false;
+                seen.add(key);
+                return true;
+            });
+
+            showNearbyLoading(false);
+            renderNearbyPlaces(activeCategory);
+
+        } catch (err) {
+            showNearbyError('Failed to fetch places. Check your connection and try again.');
+        }
+    }
+
+    function detectCategory(tags) {
+        const a = tags.amenity || '';
+        const t = tags.tourism  || '';
+        if (a === 'hospital' || a === 'clinic' || a === 'doctors') return 'hospital';
+        if (a === 'atm' || a === 'bank') return 'atm';
+        if (a === 'fuel') return 'fuel';
+        if (a === 'restaurant' || a === 'cafe' || a === 'fast_food' || a === 'food_court') return 'restaurant';
+        if (t === 'hotel' || t === 'guest_house' || t === 'hostel' || t === 'motel') return 'hotel';
+        return null;
+    }
+
+    function buildAddress(tags) {
+        const parts = [
+            tags['addr:housenumber'],
+            tags['addr:street'],
+            tags['addr:suburb'] || tags['addr:district']
+        ].filter(Boolean);
+        return parts.length > 0 ? parts.join(', ') : null;
+    }
+
+    function filterCategory(cat) {
+        activeCategory = cat;
+        document.querySelectorAll('.nearby-filter-btn').forEach((btn, i) => {
+            const cats = ['all','hospital','hotel','restaurant','atm','fuel'];
+            btn.classList.toggle('active', cats[i] === cat);
+        });
+        if (allNearbyPlaces.length > 0) {
+            renderNearbyPlaces(cat);
+        }
+    }
+
+    function renderNearbyPlaces(cat) {
+        const container = document.getElementById('nearbyResults');
+        const places = cat === 'all'
+            ? allNearbyPlaces.slice(0, 30)
+            : allNearbyPlaces.filter(p => p.category === cat).slice(0, 20);
+
+        if (places.length === 0) {
+            container.innerHTML = `
+                <div class="card" style="text-align:center; padding:32px;">
+                    <div style="font-size:40px; margin-bottom:12px;">${CATEGORY_CONFIG[cat]?.icon || '🔍'}</div>
+                    <div class="card-title">No ${CATEGORY_CONFIG[cat]?.label || 'places'} found nearby</div>
+                    <div class="card-subtitle" style="margin-top:8px;">Try expanding your search or check back later</div>
+                </div>`;
+            return;
+        }
+
+        // Group by category when showing "all"
+        let html = '';
+        if (cat === 'all') {
+            const groups = {};
+            places.forEach(p => {
+                if (!groups[p.category]) groups[p.category] = [];
+                groups[p.category].push(p);
+            });
+            // Sort groups: hospitals first
+            const order = ['hospital','hotel','restaurant','atm','fuel'];
+            order.forEach(c => {
+                if (!groups[c]) return;
+                const cfg = CATEGORY_CONFIG[c];
+                html += `<h3 style="color:white;font-size:18px;font-weight:700;margin:20px 0 12px;display:flex;align-items:center;gap:8px;">${cfg.icon} ${cfg.label}s</h3>`;
+                groups[c].slice(0,5).forEach(p => { html += buildPlaceCard(p); });
+            });
+        } else {
+            places.forEach(p => { html += buildPlaceCard(p); });
+        }
+
+        container.innerHTML = html;
+    }
+
+    function buildPlaceCard(p) {
+        const cfg   = CATEGORY_CONFIG[p.category];
+        const dist  = formatDist(p.dist);
+        const walk  = walkTime(p.dist);
+        const drive = driveTime(p.dist);
+        const destCoords = `${p.lat},${p.lng}`;
+
+        const isHospital = p.category === 'hospital';
+        const callBtn = p.phone
+            ? `<button class="btn ${isHospital ? 'btn-danger' : 'btn-primary'}" onclick="call('${p.phone.replace(/\s/g,'')}')">📞 ${isHospital ? 'Call Emergency' : 'Call'}</button>`
+            : '';
+
+        const openingLine = p.opening
+            ? `<div class="card-info-item">⏰ ${p.opening}</div>`
+            : '';
+        const addressLine = p.address
+            ? `<div class="card-info-item">📍 ${p.address} • <span class="place-distance-badge">${dist}</span></div>`
+            : `<div class="card-info-item">📍 <span class="place-distance-badge">${dist} away</span></div>`;
+        const brandLine = p.brand
+            ? `<div class="card-info-item" style="color:#6b7280;font-size:13px;">🏷️ ${p.brand}</div>`
+            : '';
+
+        return `
+        <div class="card" style="border-left: 4px solid ${cfg.color};">
+            <div class="card-header">
+                <div class="card-icon" style="font-size:28px;">${cfg.icon}</div>
+                <div style="flex:1; min-width:0;">
+                    <div class="card-title" style="font-size:16px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.name}</div>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:4px;">
+                        <span class="place-type-badge">${cfg.label}</span>
+                        <span class="place-distance-badge">${dist}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-info">
+                ${addressLine}
+                ${p.phone ? `<div class="card-info-item">📞 ${p.phone}</div>` : ''}
+                ${openingLine}
+                ${brandLine}
+                <div class="card-info-item" style="color:#9ca3af; font-size:13px;">🚶 ${walk} min walk &nbsp;•&nbsp; 🚗 ${drive} min drive</div>
+            </div>
+            <div class="card-actions">
+                ${callBtn}
+                <button class="btn btn-secondary" onclick="navigate('${destCoords}')">🧭 Directions</button>
+            </div>
+        </div>`;
+    }
+
+    function showNearbyLoading(show) {
+        document.getElementById('nearbyLoading').style.display = show ? 'block' : 'none';
+        const btn = document.getElementById('refreshNearbyBtn');
+        if (btn) {
+            btn.disabled  = show;
+            btn.innerHTML = show ? '<span class="loading"></span> Loading...' : '🔄 Refresh';
+        }
+    }
+
+    function showNearbyError(msg) {
+        showNearbyLoading(false);
+        document.getElementById('nearbyError').style.display = 'block';
+        document.getElementById('nearbyErrorMsg').textContent = msg;
+    }
+
+    // ── SHARE LOCATION ─────────────────────────────
+    function shareLocation() {
+        const { lat, lng } = currentLocation;
+        const mapUrl  = `https://maps.google.com/?q=${lat},${lng}`;
+        const message = `📍 My current location in Cambodia:\n${mapUrl}\n\nCoords: ${lat}, ${lng}`;
+
+        if (navigator.share) {
+            navigator.share({ title: 'My Location — TosTrip', text: message, url: mapUrl })
+                .catch(() => {});
+        } else if (navigator.clipboard) {
+            navigator.clipboard.writeText(message)
+                .then(() => showToast('📋 Location copied to clipboard!'))
+                .catch(() => prompt('Copy this link:', mapUrl));
+        } else {
+            prompt('Copy this link:', mapUrl);
+        }
+    }
+
+    // ── EMERGENCY SMS ──────────────────────────────
+    function sendEmergencySMS() {
+        const { lat, lng } = currentLocation;
+        const mapUrl = `https://maps.google.com/?q=${lat},${lng}`;
+        const body   = `🚨 SOS — I need help!\n\nLocation: ${mapUrl}\nCoords: ${lat}, ${lng}\n\nSent via TosTrip`;
+        window.location.href = `sms:0716145925?body=${encodeURIComponent(body)}`;
+    }
+
+    // ── PHRASE SPEECH ──────────────────────────────
+    const PHRASE_TEXT = {
+        'hello':     'ជំរាបសួរ',
+        'thank-you': 'អរគុណច្រើន',
+        'please':    'សូមជួយខ្ញុំផង',
+        'excuse-me': 'សុំទោស',
+        'goodbye':   'លាហើយ',
+        'how-much':  'តម្លៃប៉ុន្មាន',
+        'hungry':    'ខ្ញុំឃ្លានណាស់',
+        'menu':      'ខ្ញុំអាចមើលម៉ឺនុយបានទេ',
+        'not-spicy': 'កុំឲ្យហាលពេកសូម',
+        'delicious': 'នេះឆ្ងាញ់ណាស់',
+        'bill':      'សូមគិតលុយផង',
+        'airport':   'សូមយកខ្ញុំទៅអាកាសយានដ្ឋាន',
+        'bus':       'ស្ថានីយ៍ឡាននៅឯណា',
+        'stop':      'សូមឈប់ត្រង់នេះ',
+        'help':      'សូមជួយខ្ញុំផង',
+        'doctor':    'ខ្ញុំត្រូវការជួបវេជ្ជបណ្ឌិត',
+        'police':    'សូមហៅប៉ូលីស',
+        'lost':      'ខ្ញុំបាត់ផ្លូវ'
+    };
+
+    function speakPhrase(id) {
+        const text = PHRASE_TEXT[id];
+        if (!text) return;
+
+        if (!('speechSynthesis' in window)) {
+            showToast('Text-to-speech not supported on this device');
+            return;
+        }
+
+        window.speechSynthesis.cancel();
+
+        // Dim all phrase items
+        const items = document.querySelectorAll('.phrase-item');
+        items.forEach(el => el.style.opacity = '0.5');
+
+        const u  = new SpeechSynthesisUtterance(text);
+        u.lang   = 'km-KH';
+        u.rate   = 0.85;
+        u.pitch  = 1.0;
+        u.onend  = () => items.forEach(el => el.style.opacity = '');
+        u.onerror = () => items.forEach(el => el.style.opacity = '');
+
+        window.speechSynthesis.speak(u);
+    }
+
+    // ── CURRENCY CONVERTER ─────────────────────────
+    const USD_TO_KHR = 4100;
+
+    function convertUSD() {
+        const usd = parseFloat(document.getElementById('usdInput').value);
+        document.getElementById('khrInput').value = isNaN(usd) ? '' : Math.round(usd * USD_TO_KHR);
+    }
+
+    function convertKHR() {
+        const khr = parseFloat(document.getElementById('khrInput').value);
+        document.getElementById('usdInput').value = isNaN(khr) ? '' : (khr / USD_TO_KHR).toFixed(2);
+    }
+
+    // ── TEMPERATURE CONVERTER ──────────────────────
+    function convertCelsius() {
+        const c = parseFloat(document.getElementById('celsiusInput').value);
+        document.getElementById('fahrenheitInput').value = isNaN(c) ? '' : ((c * 9 / 5) + 32).toFixed(1);
+    }
+
+    function convertFahrenheit() {
+        const f = parseFloat(document.getElementById('fahrenheitInput').value);
+        document.getElementById('celsiusInput').value = isNaN(f) ? '' : ((f - 32) * 5 / 9).toFixed(1);
+    }
+
+    // ── DISTANCE CONVERTER ─────────────────────────
+    function convertKM() {
+        const km = parseFloat(document.getElementById('kmInput').value);
+        document.getElementById('milesInput').value = isNaN(km) ? '' : (km * 0.621371).toFixed(2);
+    }
+
+    function convertMiles() {
+        const mi = parseFloat(document.getElementById('milesInput').value);
+        document.getElementById('kmInput').value = isNaN(mi) ? '' : (mi / 0.621371).toFixed(2);
+    }
+
+    // ── TIP CALCULATOR ─────────────────────────────
+    function setTipPercent(pct) {
+        currentTipPercent = pct;
+        document.getElementById('tipPercent').textContent = pct;
+
+        const tipBtns = { 10: 'tip10', 15: 'tip15', 18: 'tip18', 20: 'tip20' };
+        Object.entries(tipBtns).forEach(([p, id]) => {
+            const btn = document.getElementById(id);
+            if (!btn) return;
+            const active = parseInt(p) === pct;
+            btn.className = active ? 'btn btn-primary' : 'btn btn-secondary';
+            btn.style.flex = '1';
+        });
+
+        calculateTip();
+    }
+
+    function calculateTip() {
+        const bill  = parseFloat(document.getElementById('billAmount').value) || 0;
+        const tip   = bill * currentTipPercent / 100;
+        document.getElementById('tipAmount').textContent   = tip.toFixed(2);
+        document.getElementById('totalAmount').textContent = (bill + tip).toFixed(2);
+    }
+
+    // ── PWA INSTALL ────────────────────────────────
+    function initPWA() {
+        window.addEventListener('beforeinstallprompt', e => {
+            e.preventDefault();
+            deferredInstallPrompt = e;
+
+            if (!isAppInstalled()) {
+                setTimeout(() => {
+                    const banner = document.getElementById('mobileInstallBanner');
+                    if (banner) banner.style.display = 'block';
+                }, 3000);
+
+                setTimeout(() => {
+                    const prompt = document.getElementById('installPrompt');
+                    if (prompt) prompt.style.display = 'flex';
+                }, 5000);
+            }
+        });
+
+        window.addEventListener('appinstalled', () => {
+            hideInstallUI();
+            showToast('✅ App installed successfully!');
+        });
+
+        if (isAppInstalled()) hideInstallUI();
+    }
+
+    function isAppInstalled() {
+        return window.matchMedia('(display-mode: standalone)').matches
+            || window.navigator.standalone === true;
+    }
+
+    function hideInstallUI() {
+        ['installPrompt', 'mobileInstallBanner', 'installBtn'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        });
+    }
+
+    function promptInstall() {
+        if (deferredInstallPrompt) {
+            deferredInstallPrompt.prompt();
+            deferredInstallPrompt.userChoice.then(result => {
+                if (result.outcome === 'accepted') showToast('✅ Installing app…');
+                deferredInstallPrompt = null;
+            });
+            return;
+        }
+
+        if (isAppInstalled()) {
+            showToast('✅ App is already installed!');
+            return;
+        }
+
+        // Show manual instructions modal
+        const modal = document.getElementById('installModal');
+        const steps = document.getElementById('installInstructions');
+        if (!modal || !steps) return;
+
+        const isIOS     = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        const isAndroid = /Android/.test(navigator.userAgent);
+
+        if (isIOS) {
+            steps.innerHTML = `
+                <div class="install-step"><div class="install-step-number">1</div><div class="install-step-text">Tap the <strong>Share</strong> button (📤) at the bottom of Safari</div></div>
+                <div class="install-step"><div class="install-step-number">2</div><div class="install-step-text">Scroll down and tap <strong>"Add to Home Screen"</strong></div></div>
+                <div class="install-step"><div class="install-step-number">3</div><div class="install-step-text">Tap <strong>"Add"</strong> in the top right corner</div></div>`;
+        } else if (isAndroid) {
+            steps.innerHTML = `
+                <div class="install-step"><div class="install-step-number">1</div><div class="install-step-text">Tap the <strong>⋮ Menu</strong> in your browser</div></div>
+                <div class="install-step"><div class="install-step-number">2</div><div class="install-step-text">Tap <strong>"Add to Home Screen"</strong> or <strong>"Install App"</strong></div></div>
+                <div class="install-step"><div class="install-step-number">3</div><div class="install-step-text">Tap <strong>"Install"</strong> to confirm</div></div>`;
+        } else {
+            steps.innerHTML = `
+                <div class="install-step"><div class="install-step-number">1</div><div class="install-step-text">Click the <strong>install icon ⊕</strong> in the browser address bar</div></div>
+                <div class="install-step"><div class="install-step-number">2</div><div class="install-step-text">Click <strong>"Install"</strong> in the dialog that appears</div></div>`;
+        }
+
+        modal.style.display = 'flex';
+    }
+
+    function installApp()              { promptInstall(); }
+    function closeInstallPrompt()      { const el = document.getElementById('installPrompt');       if (el) el.style.display = 'none'; }
+    function closeInstallModal()       { const el = document.getElementById('installModal');        if (el) el.style.display = 'none'; }
+    function closeMobileInstallBanner(){ const el = document.getElementById('mobileInstallBanner'); if (el) el.style.display = 'none'; }
+
+    // ── TOAST ──────────────────────────────────────
+    function showToast(message, duration = 3000) {
+        const existing = document.getElementById('tostrip-toast');
+        if (existing) existing.remove();
+
+        const toast = document.createElement('div');
+        toast.id = 'tostrip-toast';
+        toast.textContent = message;
+        Object.assign(toast.style, {
+            position:       'fixed',
+            bottom:         '100px',
+            left:           '50%',
+            transform:      'translateX(-50%)',
+            background:     'rgba(31, 41, 55, 0.95)',
+            color:          'white',
+            padding:        '14px 24px',
+            borderRadius:   '14px',
+            fontSize:       '15px',
+            fontWeight:     '500',
+            zIndex:         '99999',
+            boxShadow:      '0 8px 30px rgba(0,0,0,0.3)',
+            backdropFilter: 'blur(10px)',
+            maxWidth:       '90vw',
+            textAlign:      'center',
+            whiteSpace:     'nowrap',
+            transition:     'opacity 0.3s'
+        });
+
+        document.body.appendChild(toast);
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 300);
+        }, duration);
+    }
+    </script>
+</body>
+</html>

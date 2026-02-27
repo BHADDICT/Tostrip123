@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workshops & Events — TosTrip Cambodia</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --p:#667eea;--pd:#4f63d2;--ps:#f0f0fd;--pm:#ddd5fb;
+  --gold:#f59e0b;--green:#10b981;--red:#ef4444;--orange:#f97316;
+  --ink:#111827;--ink2:#374151;--ink3:#6b7280;--ink4:#9ca3af;
+  --line:#e5e7eb;--bg:#fff;--bg2:#f9fafb;--bg3:#f3f4f6;
+  --r-sm:10px;--r-md:16px;--r-lg:22px;--r-xl:30px;
+  --sh-sm:0 1px 4px rgba(0,0,0,.07);
+  --sh-md:0 4px 20px rgba(0,0,0,.09);
+  --sh-lg:0 16px 56px rgba(0,0,0,.13);
+  --nak-cream:#f9f4ec;--nak-dark:#1a1208;--nak-gold:#c8922a;
+  --nak-gold-lt:#e8b84b;--nak-red:#8b2e10;--nak-border:rgba(200,146,42,.25);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden}
+a{text-decoration:none;color:inherit}img{display:block;width:100%;object-fit:cover}button{font-family:inherit;cursor:pointer}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1.5px solid var(--line);transition:box-shadow .3s}
+.nav.scrolled{box-shadow:var(--sh-md)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 28px;height:66px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo img{height:36px;width:auto}
+.logo-text{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--p)}
+.nav-links{display:flex;list-style:none;gap:2px}
+.nav-links a{padding:8px 14px;border-radius:var(--r-sm);font-size:14px;font-weight:500;color:var(--ink3);transition:all .18s}
+.nav-links a:hover,.nav-links a.active{color:var(--p);background:var(--ps)}
+.btn-back{padding:9px 20px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--bg);font-size:14px;font-weight:600;color:var(--ink2);display:flex;align-items:center;gap:7px;transition:all .2s}
+.btn-back:hover{border-color:var(--p);color:var(--p)}
+.hamburger{display:none;background:none;border:none;font-size:22px;color:var(--ink3)}
+
+/* HERO */
+.hero{margin-top:66px;background:var(--bg);padding:64px 28px 0;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(102,126,234,.07) 0%,transparent 65%);pointer-events:none}
+.hero-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:56px;align-items:center}
+.hero-crumb{display:flex;align-items:center;gap:7px;margin-bottom:16px;font-size:13px;color:var(--ink4)}
+.hero-crumb a{color:var(--ink4);transition:color .2s}.hero-crumb a:hover{color:var(--p)}.hero-crumb i{font-size:9px}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:var(--ps);border:1px solid var(--pm);color:var(--p);font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:18px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(34px,4.2vw,56px);font-weight:800;color:var(--ink);line-height:1.08;letter-spacing:-.5px;margin-bottom:16px}
+.hero h1 em{font-style:italic;color:var(--p)}
+.hero-desc{font-size:16px;color:var(--ink3);line-height:1.75;max-width:520px;margin-bottom:28px}
+.hero-pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px}
+.h-pill{display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:100px;font-size:13px;font-weight:600;border:1.5px solid var(--line);color:var(--ink2)}
+.h-pill i{color:var(--p);font-size:12px}
+.h-pill.gold-pill{background:#fffbeb;border-color:#fde68a;color:#92400e}
+.h-pill.gold-pill i{color:var(--gold)}
+.hero-stats{display:flex;gap:28px;flex-wrap:wrap;padding-top:24px;border-top:1px solid var(--line)}
+.hs-num{font-size:24px;font-weight:800;color:var(--ink);font-family:'Playfair Display',serif}
+.hs-lbl{font-size:12px;color:var(--ink4);margin-top:2px}
+.hero-visual{position:relative;height:400px}
+.hv-bg{position:absolute;inset:0 0 50px 0;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-lg)}
+.hv-bg img{width:100%;height:100%}
+.hv-card{position:absolute;background:#fff;border-radius:var(--r-md);padding:13px 16px;box-shadow:var(--sh-lg);border:1.5px solid var(--line)}
+.hv-card1{bottom:28px;left:-22px;min-width:195px}
+.hv-card2{top:22px;right:-14px;min-width:170px}
+.hvc-label{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--p);margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.hvc-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.hvc-row{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink4)}
+.live-dot{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:800;color:var(--red);text-transform:uppercase}
+.live-dot::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--red);flex-shrink:0;animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* REFERRAL BANNER */
+.ref-banner{background:linear-gradient(135deg,#1a1f4e 0%,#2d3580 50%,#1a1f4e 100%);padding:0 28px;position:relative;overflow:hidden}
+.ref-banner::before{content:'';position:absolute;top:-50px;right:8%;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(102,126,234,.18),transparent 70%);pointer-events:none}
+.ref-banner-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:20px;padding:18px 0;flex-wrap:wrap}
+.rb-icon{font-size:26px;flex-shrink:0}
+.rb-text{flex:1}
+.rb-text strong{font-size:15px;font-weight:700;color:#fff;display:block;margin-bottom:2px}
+.rb-text span{font-size:13px;color:rgba(255,255,255,.6)}
+.rb-text span b{color:#fde68a}
+.rb-form{display:flex;gap:8px;flex-shrink:0}
+.rb-input{padding:9px 16px;border-radius:var(--r-sm);border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.1);font-family:inherit;font-size:14px;font-weight:700;color:#fff;letter-spacing:2px;text-transform:uppercase;outline:none;width:155px;transition:all .2s}
+.rb-input::placeholder{color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:none;font-weight:400}
+.rb-input:focus{border-color:rgba(102,126,234,.6)}
+.rb-btn{padding:9px 18px;border-radius:var(--r-sm);background:var(--p);border:none;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;transition:all .2s;white-space:nowrap}
+.rb-btn:hover{background:var(--pd)}
+.rb-msg{font-size:13px;font-weight:700;display:none;align-items:center;gap:7px;padding:7px 14px;border-radius:var(--r-sm);flex-shrink:0}
+.rb-msg.ok{background:rgba(16,185,129,.2);color:#6ee7b7;border:1px solid rgba(16,185,129,.3);display:flex}
+.rb-msg.err{background:rgba(239,68,68,.18);color:#fca5a5;border:1px solid rgba(239,68,68,.25);display:flex}
+
+/* FILTER BAR */
+.filter-bar{background:var(--bg);border-bottom:1.5px solid var(--line);position:sticky;top:66px;z-index:800;padding:0 28px}
+.filter-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:8px;overflow-x:auto;padding:13px 0;scrollbar-width:none}
+.filter-inner::-webkit-scrollbar{display:none}
+.f-chip{flex-shrink:0;padding:8px 16px;border-radius:100px;border:1.5px solid var(--line);background:var(--bg);font-size:13px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:5px}
+.f-chip:hover{border-color:var(--p);color:var(--p)}
+.f-chip.active{background:var(--p);border-color:var(--p);color:#fff}
+.view-wrap{margin-left:auto;display:flex;gap:6px;flex-shrink:0}
+.view-btn{width:36px;height:36px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--bg);color:var(--ink3);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:all .2s}
+.view-btn.active,.view-btn:hover{border-color:var(--p);color:var(--p);background:var(--ps)}
+
+/* ONGOING EVENTS */
+.events-wrap{max-width:1280px;margin:0 auto;padding:56px 28px 0}
+.sec-eyebrow{font-size:11px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--p);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.sec-h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:800;color:var(--ink);margin-bottom:28px}
+.sec-h2 em{font-style:italic;color:var(--p)}
+.feat-card{display:grid;grid-template-columns:380px 1fr;border-radius:var(--r-xl);overflow:hidden;border:1.5px solid var(--line);box-shadow:var(--sh-sm);background:var(--bg);margin-bottom:20px;transition:box-shadow .3s}
+.feat-card:hover{box-shadow:var(--sh-lg)}
+.fc-img{position:relative;overflow:hidden}
+.fc-img img{width:100%;height:100%;object-fit:cover;transition:transform .55s}
+.feat-card:hover .fc-img img{transform:scale(1.05)}
+.fc-badges{position:absolute;top:14px;left:14px;display:flex;flex-direction:column;gap:5px}
+.ev-badge{padding:4px 11px;border-radius:100px;font-size:10px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.3);color:#fff;width:fit-content}
+.b-cooking{background:rgba(16,185,129,.4)}.b-craft{background:rgba(139,92,246,.4)}.b-culture{background:rgba(245,158,11,.4)}.b-farm{background:rgba(34,197,94,.4)}.b-show{background:rgba(239,68,68,.4)}.b-featured{background:rgba(102,126,234,.5);border-color:rgba(102,126,234,.5)}.b-hot{background:rgba(245,158,11,.5);border-color:rgba(245,158,11,.5)}
+.fc-seats{position:absolute;bottom:14px;left:14px;right:14px}
+.sb-wrap{background:rgba(0,0,0,.48);backdrop-filter:blur(6px);border-radius:var(--r-sm);padding:10px 14px;border:1px solid rgba(255,255,255,.15)}
+.sb-top{display:flex;justify-content:space-between;margin-bottom:6px}
+.sb-lbl,.sb-num{font-size:11px;font-weight:700;color:rgba(255,255,255,.8)}
+.sb-num{color:#fff}
+.sb-track{height:5px;background:rgba(255,255,255,.2);border-radius:100px;overflow:hidden}
+.sb-fill{height:100%;border-radius:100px;transition:width .6s}
+.fill-green{background:linear-gradient(90deg,var(--green),#34d399)}.fill-amber{background:linear-gradient(90deg,var(--gold),#fbbf24)}.fill-red{background:linear-gradient(90deg,var(--red),#f87171)}
+.fc-body{padding:30px 34px;display:flex;flex-direction:column}
+.fc-partner{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.fc-p-ico{width:30px;height:30px;border-radius:var(--r-sm);background:var(--bg3);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.fc-p-name{font-size:12px;font-weight:700;color:var(--ink3)}
+.fc-title{font-family:'Playfair Display',serif;font-size:25px;font-weight:800;color:var(--ink);margin-bottom:8px;line-height:1.15}
+.fc-desc{font-size:14px;color:var(--ink3);line-height:1.7;margin-bottom:16px;flex:1}
+.fc-meta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px}
+.fc-meta-i{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--ink2);font-weight:500}
+.fc-meta-i i{color:var(--p);font-size:12px;width:14px}
+.countdown-row{display:flex;gap:8px;margin-bottom:20px}
+.cd-block{text-align:center;background:var(--bg2);border:1.5px solid var(--line);border-radius:var(--r-sm);padding:10px 14px;min-width:60px}
+.cd-block.urgent{background:#fef2f2;border-color:#fca5a5}
+.cd-num{font-family:'Playfair Display',serif;font-size:24px;font-weight:800;color:var(--ink);line-height:1}
+.cd-block.urgent .cd-num{color:var(--red)}
+.cd-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--ink4);margin-top:4px}
+.cd-sep{font-size:22px;color:var(--ink4);align-self:center;margin-top:-4px;font-weight:700}
+.fc-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn-primary{padding:12px 24px;border-radius:var(--r-sm);background:var(--p);border:none;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;gap:7px;box-shadow:0 4px 14px rgba(102,126,234,.28);transition:all .22s}
+.btn-primary:hover{background:var(--pd);transform:translateY(-2px);box-shadow:0 8px 22px rgba(102,126,234,.4)}
+.btn-outline-sm{padding:12px 16px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--bg);color:var(--ink2);font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px;transition:all .2s}
+.btn-outline-sm:hover{border-color:var(--p);color:var(--p)}
+.fc-price{font-family:'Playfair Display',serif;font-size:28px;font-weight:800;color:var(--ink);margin-left:auto;white-space:nowrap}
+.fc-price span{font-size:13px;font-weight:500;color:var(--ink4);font-family:'DM Sans',sans-serif}
+
+/* WORKSHOP GRID */
+.wk-section{max-width:1280px;margin:0 auto;padding:48px 28px 64px}
+.wk-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:10px}
+.wk-count-lbl{font-size:14px;color:var(--ink3)}
+.wk-count-lbl strong{color:var(--ink)}
+.wk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.wk-grid.list{grid-template-columns:1fr}
+.wk-grid.list .wk-card{flex-direction:row}
+.wk-grid.list .wk-img{width:240px;flex-shrink:0;height:auto}
+.wk-grid.list .wk-body{flex:1}
+.wk-card{background:var(--bg);border:1.5px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);transition:all .3s;display:flex;flex-direction:column}
+.wk-card:hover{box-shadow:var(--sh-lg);transform:translateY(-3px);border-color:var(--pm)}
+.wk-card.hidden{display:none}
+.wk-img{position:relative;height:195px;overflow:hidden}
+.wk-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.wk-card:hover .wk-img img{transform:scale(1.06)}
+.wk-cat{position:absolute;top:11px;left:11px;padding:4px 11px;border-radius:100px;font-size:10px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.3);color:#fff}
+.wk-avail{position:absolute;top:11px;right:11px;padding:4px 10px;border-radius:100px;font-size:10px;font-weight:800;letter-spacing:.4px;text-transform:uppercase}
+.av-open{background:rgba(16,185,129,.15);color:#059669;border:1px solid rgba(16,185,129,.3)}
+.av-fill{background:rgba(245,158,11,.15);color:#d97706;border:1px solid rgba(245,158,11,.3)}
+.av-full{background:rgba(239,68,68,.15);color:#dc2626;border:1px solid rgba(239,68,68,.3)}
+.wk-body{padding:18px 20px;flex:1;display:flex;flex-direction:column}
+.wk-partner{display:flex;align-items:center;gap:7px;margin-bottom:10px}
+.wk-p-ico{width:26px;height:26px;border-radius:6px;background:var(--bg3);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.wk-p-name{font-size:11px;font-weight:700;color:var(--ink3)}
+.wk-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.2}
+.wk-desc{font-size:13px;color:var(--ink3);line-height:1.6;margin-bottom:13px;flex:1}
+.wk-meta{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:12px}
+.wk-mi{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--ink2);font-weight:500}
+.wk-mi i{color:var(--p);font-size:11px}
+.wk-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:13px;border-top:1px solid var(--line);margin-top:auto}
+.wk-price{display:flex;flex-direction:column}
+.wk-price-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink4)}
+.wk-price-val{font-size:21px;font-weight:800;color:var(--ink);font-family:'Playfair Display',serif;line-height:1}
+.wk-price-sub{font-size:10px;color:var(--ink4);font-weight:400}
+.wk-btns{display:flex;gap:7px;align-items:center}
+.btn-wkbook{padding:9px 16px;border-radius:var(--r-sm);background:var(--p);border:none;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;gap:5px;box-shadow:0 3px 12px rgba(102,126,234,.22);transition:all .2s}
+.btn-wkbook:hover{background:var(--pd);transform:translateY(-1px)}
+.btn-wkbook:disabled{background:var(--ink4);box-shadow:none;cursor:not-allowed;transform:none}
+.btn-save{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--line);background:var(--bg);color:var(--ink4);display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .2s}
+.btn-save:hover{color:var(--red);border-color:var(--red)}
+.btn-save.saved{color:var(--red);border-color:var(--red);background:#fff5f5}
+
+/* CODE PROMO BANNER ON WORKSHOPS */
+.wk-promo-notice{background:linear-gradient(90deg,#fffbeb,#fef3c7);border:1.5px solid #fde68a;border-radius:var(--r-sm);padding:11px 16px;display:flex;align-items:center;gap:10px;margin-bottom:22px;font-size:13px;color:#92400e;font-weight:600}
+.wk-promo-notice i{color:var(--gold);font-size:15px;flex-shrink:0}
+.wk-promo-notice strong{color:#78350f}
+
+/* ════ CHEF NAK SECTION ════ */
+.nak-section{background:var(--nak-cream);border-top:2px solid var(--nak-border);border-bottom:2px solid var(--nak-border);padding:72px 28px;overflow:hidden;position:relative}
+.nak-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 90% 20%,rgba(200,146,42,.08) 0%,transparent 70%),radial-gradient(ellipse 50% 60% at 10% 80%,rgba(139,46,16,.06) 0%,transparent 70%);pointer-events:none}
+.nak-inner{max-width:1280px;margin:0 auto;position:relative;z-index:1}
+.nak-divider{display:flex;align-items:center;gap:16px;margin-bottom:44px}
+.nak-divider-line{flex:1;height:1px;background:var(--nak-border)}
+.nak-divider-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--nak-gold);white-space:nowrap}
+.nak-badge{display:inline-flex;align-items:center;gap:8px;background:var(--nak-dark);color:var(--nak-gold-lt);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:2px;margin-bottom:28px}
+.nak-badge span{color:#fff;opacity:.55}
+.nak-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.nak-eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--nak-gold);margin-bottom:10px}
+.nak-name{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,5.5vw,68px);font-weight:600;color:var(--nak-dark);line-height:1;margin:0 0 6px}
+.nak-name em{font-style:italic;color:var(--nak-red)}
+.nak-title-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:rgba(26,18,8,.5);margin-bottom:24px}
+.nak-desc{font-size:15px;line-height:1.72;color:rgba(26,18,8,.7);margin-bottom:28px;max-width:460px}
+.nak-press{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-bottom:32px}
+.nak-press-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(26,18,8,.38);width:100%;margin-bottom:2px}
+.nak-press-item{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(26,18,8,.42)}
+.nak-press-dot{width:3px;height:3px;border-radius:50%;background:var(--nak-gold);display:inline-block;vertical-align:middle;margin-bottom:1px}
+.nak-cta-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.nak-btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--nak-dark);color:var(--nak-gold-lt);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;letter-spacing:.04em;padding:13px 22px;border-radius:3px;border:none;cursor:pointer;text-decoration:none;transition:background .2s,color .2s}
+.nak-btn-primary:hover{background:var(--nak-gold);color:var(--nak-dark)}
+.nak-btn-secondary{display:inline-flex;align-items:center;gap:6px;color:var(--nak-dark);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;text-decoration:none;border-bottom:1px solid var(--nak-gold);padding-bottom:1px;transition:color .2s}
+.nak-btn-secondary:hover{color:var(--nak-gold)}
+.nak-discount-pill{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#166534,#15803d);color:#bbf7d0;font-size:12px;font-weight:700;padding:7px 14px;border-radius:100px;margin-bottom:26px;letter-spacing:.02em}
+.nak-discount-pill i{font-size:13px}
+.nak-exp-header{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(26,18,8,.38);margin-bottom:14px}
+.nak-card{background:#fff;border:1px solid var(--nak-border);border-radius:8px;padding:20px 22px;margin-bottom:12px;display:grid;grid-template-columns:40px 1fr auto;gap:14px;align-items:start;transition:box-shadow .2s,border-color .2s;cursor:pointer;position:relative}
+.nak-card:hover{box-shadow:0 4px 24px rgba(200,146,42,.13);border-color:rgba(200,146,42,.5)}
+.nak-card-icon{width:40px;height:40px;border-radius:50%;background:var(--nak-cream);border:1px solid var(--nak-border);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.nak-card-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--nak-dark);margin-bottom:3px;line-height:1.2}
+.nak-card-meta{font-size:11px;color:rgba(26,18,8,.48);margin-bottom:6px}
+.nak-card-meta strong{color:var(--nak-gold);font-weight:600}
+.nak-card-desc{font-size:12.5px;line-height:1.58;color:rgba(26,18,8,.62)}
+.nak-card-right{text-align:right;flex-shrink:0}
+.nak-card-price-orig{font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(26,18,8,.4);text-decoration:line-through;white-space:nowrap}
+.nak-card-price{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--nak-dark);white-space:nowrap;line-height:1}
+.nak-card-price span{font-size:12px;color:rgba(26,18,8,.45);font-family:'DM Sans',sans-serif;font-weight:400}
+.nak-card-savings{font-size:10px;font-weight:700;color:#15803d;margin-top:3px;background:#f0fdf4;border-radius:4px;padding:2px 6px;display:inline-block}
+.nak-card-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 8px;border-radius:2px;margin-top:6px}
+.nak-tag-exclusive{background:rgba(200,146,42,.1);color:var(--nak-gold);border:1px solid rgba(200,146,42,.28)}
+.nak-tag-limited{background:rgba(139,46,16,.07);color:var(--nak-red);border:1px solid rgba(139,46,16,.18)}
+.nak-book-btn{width:100%;margin-top:12px;padding:10px;border-radius:4px;background:var(--nak-dark);border:none;color:var(--nak-gold-lt);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.04em;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .2s,color .2s}
+.nak-book-btn:hover{background:var(--nak-gold);color:var(--nak-dark)}
+.nak-card-foot{grid-column:1/-1}
+.nak-quote-block{margin-top:16px;padding:18px 20px;background:var(--nak-dark);border-radius:4px;position:relative}
+.nak-quote-block::before{content:'\201C';font-family:'Cormorant Garamond',serif;font-size:56px;color:var(--nak-gold);position:absolute;top:-8px;left:14px;line-height:1;opacity:.45}
+.nak-quote-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;line-height:1.65;color:rgba(249,244,236,.83);padding-left:8px}
+.nak-quote-attr{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--nak-gold);margin-top:9px;padding-left:8px}
+
+/* REFERRAL SECTION */
+.ref-section{background:var(--bg2);border-top:1.5px solid var(--line);border-bottom:1.5px solid var(--line);padding:72px 28px}
+.ref-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.ref-eyebrow{font-size:11px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.ref-left h2{font-family:'Playfair Display',serif;font-size:36px;font-weight:800;color:var(--ink);line-height:1.15;margin-bottom:16px}
+.ref-left h2 em{font-style:italic;color:var(--p)}
+.ref-left p{font-size:15px;color:var(--ink3);line-height:1.75;margin-bottom:28px}
+.ref-steps{display:flex;flex-direction:column;gap:18px}
+.rs{display:flex;gap:14px;align-items:flex-start}
+.rs-num{width:36px;height:36px;border-radius:50%;background:var(--p);color:#fff;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Playfair Display',serif}
+.rs h4{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.rs p{font-size:13px;color:var(--ink3);line-height:1.55}
+.ref-panel{background:var(--bg);border:1.5px solid var(--line);border-radius:var(--r-xl);padding:34px;box-shadow:var(--sh-md)}
+.ref-panel h3{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.ref-panel .sub{font-size:13px;color:var(--ink3);margin-bottom:22px}
+.code-box{background:linear-gradient(135deg,var(--ps),#eeeffe);border:2px dashed var(--pm);border-radius:var(--r-lg);padding:24px;text-align:center;margin-bottom:18px}
+.cb-lbl{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink4);margin-bottom:9px}
+.cb-code{font-family:'Playfair Display',serif;font-size:34px;font-weight:800;color:var(--p);letter-spacing:5px;margin-bottom:7px}
+.cb-sub{font-size:12px;color:var(--ink4)}
+.cb-actions{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.btn-copy{padding:9px 18px;border-radius:var(--r-sm);background:var(--p);border:none;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;transition:all .2s}
+.btn-copy:hover{background:var(--pd)}
+.btn-share-sm{padding:9px 14px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--bg);color:var(--ink2);font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;transition:all .2s}
+.btn-share-sm:hover{border-color:var(--p);color:var(--p)}
+.ref-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.rs-card{background:var(--bg2);border:1.5px solid var(--line);border-radius:var(--r-md);padding:14px;text-align:center}
+.rs-num2{font-size:26px;font-weight:800;color:var(--ink);font-family:'Playfair Display',serif;line-height:1}
+.rs-lbl{font-size:11px;color:var(--ink4);margin-top:4px;font-weight:600}
+.share-chs{display:flex;gap:8px}
+.sh-ch{flex:1;padding:10px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--bg);font-size:12px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:all .2s}
+.sh-ch i{font-size:17px}
+.sh-ch.wa:hover{border-color:#25d366;color:#25d366;background:#f0fdf4}
+.sh-ch.fb:hover{border-color:#1877f2;color:#1877f2;background:#eff6ff}
+.sh-ch.tg:hover{border-color:#0088cc;color:#0088cc;background:#f0f9ff}
+.sh-ch.lk:hover{border-color:var(--p);color:var(--p);background:var(--ps)}
+
+/* BOOKING MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(17,24,39,.55);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--bg);border-radius:var(--r-xl);max-width:580px;width:100%;max-height:93vh;overflow-y:auto;box-shadow:0 28px 80px rgba(0,0,0,.22);animation:popIn .26s cubic-bezier(.16,1,.3,1)}
+@keyframes popIn{from{opacity:0;transform:scale(.92) translateY(14px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.mh{background:linear-gradient(135deg,#4f63d2 0%,#667eea 100%);padding:26px 30px;border-radius:var(--r-xl) var(--r-xl) 0 0;position:relative}
+.mh.nak-header{background:linear-gradient(135deg,#1a1208 0%,#3d2408 100%)}
+.mh-row{display:flex;align-items:flex-start;gap:14px;margin-bottom:10px}
+.mh-ico{width:48px;height:48px;border-radius:var(--r-sm);background:rgba(255,255,255,.2);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.mh h2{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:#fff;margin-bottom:2px;line-height:1.2}
+.mh p{font-size:13px;color:rgba(255,255,255,.7)}
+.mh-meta{display:flex;gap:16px;flex-wrap:wrap}
+.mh-mi{display:flex;align-items:center;gap:5px;font-size:12px;color:rgba(255,255,255,.75);font-weight:600}
+.mh-mi i{font-size:11px}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;border:none;background:rgba(255,255,255,.18);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;transition:background .2s}
+.modal-close:hover{background:rgba(255,255,255,.3)}
+.m-body{padding:26px 30px}
+
+/* Promo notice inside modal */
+.promo-code-notice{background:linear-gradient(135deg,#fffbeb,#fef3c7);border:1.5px solid #fbbf24;border-radius:var(--r-sm);padding:12px 16px;display:flex;align-items:flex-start;gap:10px;margin-bottom:16px}
+.promo-code-notice i{color:var(--gold);font-size:16px;flex-shrink:0;margin-top:1px}
+.promo-code-notice strong{font-size:13px;color:#92400e;display:block;margin-bottom:2px}
+.promo-code-notice span{font-size:12px;color:#78350f;line-height:1.5}
+.tostrip-disc-notice{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1.5px solid #86efac;border-radius:var(--r-sm);padding:12px 16px;display:flex;align-items:flex-start;gap:10px;margin-bottom:18px}
+.tostrip-disc-notice i{color:#16a34a;font-size:16px;flex-shrink:0;margin-top:1px}
+.tostrip-disc-notice strong{font-size:13px;color:#15803d;display:block;margin-bottom:2px}
+.tostrip-disc-notice span{font-size:12px;color:#166534;line-height:1.5}
+.ref-row{display:flex;gap:8px;margin-bottom:8px}
+.ref-field{position:relative;flex:1}
+.ref-field i{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--ink4);font-size:12px;pointer-events:none}
+.ref-field input{width:100%;padding:10px 12px 10px 32px;border-radius:var(--r-sm);border:1.5px solid var(--line);font-family:inherit;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ink);outline:none;transition:all .2s}
+.ref-field input::placeholder{letter-spacing:1px;text-transform:none;font-weight:400;color:var(--ink4)}
+.ref-field input:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(102,126,234,.1)}
+.ref-field input.ok{border-color:var(--green);background:#f0fdf4}
+.ref-field input.err{border-color:var(--red)}
+.btn-apply{padding:10px 16px;border-radius:var(--r-sm);background:var(--bg3);border:1.5px solid var(--line);font-size:13px;font-weight:700;color:var(--ink2);transition:all .2s;white-space:nowrap}
+.btn-apply:hover{border-color:var(--p);color:var(--p)}
+.disc-badge{display:none;align-items:center;gap:6px;padding:8px 13px;border-radius:var(--r-sm);background:#f0fdf4;border:1.5px solid #bbf7d0;font-size:13px;font-weight:700;color:#166634;margin-bottom:14px}
+.disc-badge.show{display:flex}
+.sess-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px}
+.sess-opt{border:2px solid var(--line);border-radius:var(--r-sm);padding:12px 13px;cursor:pointer;transition:all .2s;position:relative;background:var(--bg)}
+.sess-opt:hover:not(.sess-full){border-color:var(--p)}
+.sess-opt.sel{border-color:var(--p);background:var(--ps)}
+.sess-opt.sess-full{opacity:.52;cursor:not-allowed}
+.so-date{font-size:13px;font-weight:700;color:var(--ink)}
+.so-time{font-size:11px;color:var(--ink4);margin-top:2px}
+.so-seats{font-size:11px;font-weight:700;margin-top:6px}
+.so-seats.plenty{color:var(--green)}.so-seats.few{color:var(--gold)}.so-seats.none{color:var(--red)}
+.so-full-tag{position:absolute;top:6px;right:7px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;color:var(--red)}
+.fg{margin-bottom:15px}
+.fl{display:block;font-size:13px;font-weight:600;color:var(--ink3);margin-bottom:6px}
+.fl .req{color:var(--red)}
+.fi{width:100%;padding:11px 13px;border-radius:var(--r-sm);border:1.5px solid var(--line);outline:none;font-family:inherit;font-size:14px;color:var(--ink);transition:border-color .2s,box-shadow .2s;background:var(--bg)}
+.fi:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(102,126,234,.1)}
+.fi::placeholder{color:var(--ink4)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.price-sum{background:var(--bg2);border:1.5px solid var(--line);border-radius:var(--r-sm);padding:15px 17px;margin-bottom:16px}
+.ps-row{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--ink3);margin-bottom:5px}
+.ps-row:last-child{margin-bottom:0;font-size:16px;font-weight:800;color:var(--ink);border-top:1px solid var(--line);padding-top:9px;margin-top:4px}
+.ps-row span:last-child{font-weight:700;color:var(--ink)}
+.ps-disc-row{display:none}
+.ps-green{color:var(--green)!important}
+.ok-note{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:var(--r-sm);padding:11px 15px;display:flex;gap:8px;font-size:13px;color:#166634;line-height:1.5;margin-bottom:16px}
+.ok-note i{flex-shrink:0;margin-top:1px}
+.m-btn{width:100%;padding:13px;border-radius:var(--r-sm);background:var(--p);border:none;color:#fff;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:all .2s;box-shadow:0 4px 16px rgba(102,126,234,.28)}
+.m-btn:hover{background:var(--pd)}
+.m-btn.nak-submit{background:var(--nak-dark);box-shadow:0 4px 16px rgba(26,18,8,.25)}
+.m-btn.nak-submit:hover{background:var(--nak-gold);color:var(--nak-dark)}
+.success-body{padding:36px 30px;text-align:center}
+.succ-ico{font-size:54px;margin-bottom:14px}
+.success-body h2{font-family:'Playfair Display',serif;font-size:25px;font-weight:800;color:var(--ink);margin-bottom:8px}
+.success-body p{font-size:14px;color:var(--ink3);line-height:1.7;margin-bottom:22px}
+.succ-code-box{background:var(--ps);border:2px dashed var(--pm);border-radius:var(--r-lg);padding:20px;margin-bottom:22px}
+.scb-lbl{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink4);margin-bottom:7px}
+.scb-code{font-family:'Playfair Display',serif;font-size:30px;font-weight:800;color:var(--p);letter-spacing:5px}
+.scb-sub{font-size:12px;color:var(--ink4);margin-top:6px}
+.succ-actions{display:flex;gap:10px}
+.succ-actions .m-btn{flex:1}
+.btn-done{flex:1;padding:13px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--bg);color:var(--ink2);font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-done:hover{border-color:var(--p);color:var(--p)}
+
+/* TOAST */
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--ink);color:#fff;padding:11px 20px;border-radius:100px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:7px;box-shadow:var(--sh-lg);opacity:0;transition:all .3s;z-index:99999;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast i{color:var(--green)}
+
+/* FOOTER */
+.footer{background:#1a1f4e;color:rgba(255,255,255,.55);padding:44px 28px 28px}
+.footer-inner{max-width:1280px;margin:0 auto}
+.footer-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:20px}
+.footer-logo img{height:32px;filter:brightness(0) invert(1);opacity:.8}
+.footer-logo-text{font-family:'Playfair Display',serif;font-size:20px;color:rgba(255,255,255,.8)}
+.footer-nav{display:flex;gap:20px}
+.footer-nav a{font-size:14px;color:rgba(255,255,255,.5);transition:color .2s}
+.footer-nav a:hover{color:#fff}
+.footer-bot{border-top:1px solid rgba(255,255,255,.1);padding-top:18px;text-align:center;font-size:13px;color:rgba(255,255,255,.3)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr}.hero-visual{display:none}
+  .feat-card{grid-template-columns:1fr}.fc-img{height:250px}
+  .wk-grid{grid-template-columns:1fr 1fr}
+  .ref-inner{grid-template-columns:1fr}
+  .nak-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .nav-links{display:none}.hamburger{display:block}
+  .nav-links.open{display:flex;flex-direction:column;position:absolute;top:66px;left:0;right:0;background:var(--bg);padding:12px;border-bottom:1px solid var(--line);box-shadow:var(--sh-md)}
+  .wk-grid,.wk-grid.list{grid-template-columns:1fr}
+  .wk-grid.list .wk-card{flex-direction:column}
+  .wk-grid.list .wk-img{width:100%;height:195px}
+  .f-row{grid-template-columns:1fr}
+  .sess-grid{grid-template-columns:1fr}
+  .rb-form{flex-wrap:wrap}.rb-input{width:100%}
+  .ref-banner-inner{flex-direction:column;align-items:flex-start}
+  .nak-card{grid-template-columns:36px 1fr}
+  .nak-card-right{grid-column:2;justify-self:start}
+}
+@media(max-width:480px){
+  .countdown-row{flex-wrap:wrap}
+  .fc-actions{flex-wrap:wrap}
+  .succ-actions{flex-direction:column}
+  .share-chs{flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toast-msg">Done!</span></div>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <img src="./imgg/loko.png" alt="TosTrip" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="logo-text" style="display:none">TosTrip</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="livelikelocal.html">Live Like a Local</a></li>
+      <li><a href="rentafriend.html">Rent a Friend</a></li>
+      <li><a href="workshops.html" class="active">Workshops</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:10px">
+      <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back</a>
+      <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-crumb"><a href="index.html">Home</a><i class="fas fa-chevron-right"></i><span>Workshops & Events</span></div>
+      <div class="hero-badge"><i class="fas fa-hands-helping"></i> Hands-on Experiences</div>
+      <h1>Learn. Make.<br><em>Take It Home.</em></h1>
+      <p class="hero-desc">Cooking masterclasses with local families, silk weaving with master artisans, Apsara dance shows, pepper farm tours, and more — all run by the people who've done it their whole lives.</p>
+      <div class="hero-pills">
+        <span class="h-pill"><i class="fas fa-shield-alt"></i> Verified Partners Only</span>
+        <span class="h-pill"><i class="fas fa-users"></i> Small Groups · Max 12</span>
+        <span class="h-pill gold-pill"><i class="fas fa-tag"></i> Code TOSTRIP2026 = $5 Off</span>
+      </div>
+      <div class="hero-stats">
+        <div><div class="hs-num">16</div><div class="hs-lbl">Workshops & Shows</div></div>
+        <div><div class="hs-num">8</div><div class="hs-lbl">Partner Venues</div></div>
+        <div><div class="hs-num">4.9★</div><div class="hs-lbl">Avg Rating</div></div>
+        <div><div class="hs-num">1,200+</div><div class="hs-lbl">Attendees</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hv-bg"><img src="./imgg/pot.jpg" alt="Workshop"></div>
+      <div class="hv-card hv-card1">
+        <div class="hvc-label"><span class="live-dot">Live</span> · Happening now</div>
+        <div class="hvc-title">Cambodian Village Cooking Class · Siem Reap</div>
+        <div class="hvc-row"><i class="fas fa-users" style="color:var(--green)"></i> 8 / 12 seats filled</div>
+      </div>
+      <div class="hv-card hv-card2">
+        <div class="hvc-label">🔥 Selling Fast</div>
+        <div class="hvc-title">Apsara Dance Show</div>
+        <div class="hvc-row"><i class="fas fa-calendar" style="color:var(--p)"></i> Sat 15 Mar · 7:00 PM</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERRAL BANNER -->
+<div class="ref-banner">
+  <div class="ref-banner-inner">
+    <div class="rb-icon">🎟️</div>
+    <div class="rb-text">
+      <strong>Use code <b style="color:#fde68a;letter-spacing:2px">TOSTRIP2026</b> for $5 off any workshop — or enter your referral code for 10% off.</strong>
+      <span>Enter below or at checkout. Share your code after booking to earn <b>$5 credit</b> per friend.</span>
+    </div>
+    <div class="rb-form">
+      <input type="text" class="rb-input" id="bannerCode" placeholder="Enter code…" maxlength="12" oninput="this.value=this.value.toUpperCase()">
+      <button class="rb-btn" onclick="applyBannerCode()"><i class="fas fa-tag"></i> Apply</button>
+    </div>
+    <div class="rb-msg" id="bannerMsg"></div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <button class="f-chip active" onclick="filterCards('all',this)">🎪 All</button>
+    <button class="f-chip" onclick="filterCards('cooking',this)">🍲 Cooking</button>
+    <button class="f-chip" onclick="filterCards('craft',this)">🏺 Craft</button>
+    <button class="f-chip" onclick="filterCards('culture',this)">💃 Shows & Culture</button>
+    <button class="f-chip" onclick="filterCards('farm',this)">🌿 Farm & Nature</button>
+    <button class="f-chip" onclick="filterCards('phnom-penh',this)">📍 Phnom Penh</button>
+    <button class="f-chip" onclick="filterCards('siem-reap',this)">📍 Siem Reap</button>
+    <button class="f-chip" onclick="filterCards('kampot',this)">📍 Kampot</button>
+    <div class="view-wrap">
+      <button class="view-btn active" id="gBtn" onclick="setView('grid',this)" title="Grid"><i class="fas fa-th-large"></i></button>
+      <button class="view-btn" id="lBtn" onclick="setView('list',this)" title="List"><i class="fas fa-list"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ ONGOING EVENTS ════ -->
+<div class="events-wrap">
+  <div class="sec-eyebrow"><span class="live-dot">Live &amp; Upcoming</span></div>
+  <div class="sec-h2">Ongoing Events &amp; <em>Shows</em></div>
+
+  <!-- FEATURED: APSARA SHOW -->
+  <div class="feat-card">
+    <div class="fc-img">
+      <img src="./imgg/apsara .png" alt="Apsara Show">
+      <div class="fc-badges">
+        <span class="ev-badge b-show">🔴 Live Show</span>
+        <span class="ev-badge b-featured">⭐ Featured</span>
+      </div>
+      <div class="fc-seats">
+        <div class="sb-wrap">
+          <div class="sb-top"><span class="sb-lbl">Seats remaining</span><span class="sb-num">4 left</span></div>
+          <div class="sb-track"><div class="sb-fill fill-red" style="width:67%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-partner"><div class="fc-p-ico">💃</div><div class="fc-p-name">LANA DANCE · SIEM REAP</div></div>
+      <div class="fc-title">LANA DANCE SIEM REAP</div>
+      <p class="fc-desc">Lana Dance is a personal journey that began in Siem Reap, where the graceful Apsara carvings of Angkor Wat first sparked a deep curiosity. Captivated by live performances and inspired by a background in Middle Eastern dance, Lana chose to explore Cambodian classical dance not just as a spectator, but as a participant — using movement as a way to connect more intimately with the culture.</p>
+      <div class="fc-meta">
+        <div class="fc-meta-i"><i class="fas fa-calendar"></i> Saturday 15 March 2025 · 7:00 PM</div>
+        <div class="fc-meta-i"><i class="fas fa-clock"></i> 2.5 hours</div>
+        <div class="fc-meta-i"><i class="fas fa-map-marker-alt"></i> Khmer Pub Ln, Krong Siem Reap 17252</div>
+        <div class="fc-meta-i"><i class="fas fa-users"></i> Max 40 guests</div>
+      </div>
+      <div class="countdown-row" id="cd-apsara"></div>
+      <div class="fc-actions">
+        <button class="btn-primary" onclick="openModal('LANA DANCE SIEM REAP','💃','culture','LANA DANCE','Siem Reap',18,'2.5 hrs',40,'2025-03-15T19:00:00')">
+          <i class="fas fa-ticket-alt"></i> Book Tickets
+        </button>
+        <button class="btn-outline-sm" onclick="toggleSave(this)"><i class="far fa-heart"></i> Save</button>
+        <div class="fc-price">$18 <span>/person</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURED: COOKING CLASS -->
+  <div class="feat-card">
+    <div class="fc-img">
+      <img src="./imgg/cooking123.jpg" alt="Cooking Class">
+      <div class="fc-badges">
+        <span class="ev-badge b-cooking">🍲 Cooking</span>
+        <span class="ev-badge b-hot">🔥 Selling Fast</span>
+      </div>
+      <div class="fc-seats">
+        <div class="sb-wrap">
+          <div class="sb-top"><span class="sb-lbl">Seats remaining</span><span class="sb-num">6 left</span></div>
+          <div class="sb-track"><div class="sb-fill fill-amber" style="width:50%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-partner"><div class="fc-p-ico">🍲</div><div class="fc-p-name">Cambodian Village Cooking Class · Siem Reap</div></div>
+      <div class="fc-title">Cambodian Village Cooking Class</div>
+      <p class="fc-desc">Simple but flavorsome, Cambodian cuisine makes use of fresh fish from the Mekong and an abundance of Asian spices. Immerse yourself in Siem Reap's culinary heritage as you enjoy a cooking class with a local chef in a typical Cambodian village, and enjoy a delicious 3-course lunch of traditional Khmer cuisine.</p>
+      <div class="fc-meta">
+        <div class="fc-meta-i"><i class="fas fa-calendar"></i> Sunday 16 March 2025 · 9:00 AM</div>
+        <div class="fc-meta-i"><i class="fas fa-clock"></i> 3 hours</div>
+        <div class="fc-meta-i"><i class="fas fa-map-marker-alt"></i> Siem Reap</div>
+        <div class="fc-meta-i"><i class="fas fa-users"></i> Max 12 guests</div>
+      </div>
+      <div class="countdown-row" id="cd-cooking"></div>
+      <div class="fc-actions">
+        <button class="btn-primary" onclick="openModal('Cambodian Village Cooking Class','🍲','cooking','Village Cooking Class','Siem Reap',32,'3 hrs',12,'2025-03-16T09:00:00')">
+          <i class="fas fa-ticket-alt"></i> Book Now
+        </button>
+        <button class="btn-outline-sm" onclick="toggleSave(this)"><i class="far fa-heart"></i> Save</button>
+        <div class="fc-price">$32 <span>/person</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ CHEF NAK × TOSTRIP COLLABORATION ════ -->
+<section class="nak-section" id="chef-nak-collab">
+  <div class="nak-inner">
+    <div class="nak-divider">
+      <div class="nak-divider-line"></div>
+      <div class="nak-divider-label">✦ Latest Collaboration</div>
+      <div class="nak-divider-line"></div>
+    </div>
+
+    <div class="nak-badge">TosTrip <span>×</span> Chef Nak — Exclusive Partnership</div>
+
+    <div class="nak-grid">
+      <!-- LEFT -->
+      <div>
+        <div class="nak-eyebrow">Cambodia's Leading Culinary Voice</div>
+        <h2 class="nak-name">Chef<br><em>Nak</em></h2>
+        <div class="nak-title-sub">Rotanak Ros — Award-Winning Chef & Cultural Ambassador</div>
+
+        <div class="nak-discount-pill">
+          <i class="fas fa-tag"></i>
+          Book through TosTrip and save <strong style="margin:0 4px">$5</strong> on every Chef Nak experience — exclusively here.
+        </div>
+
+        <p class="nak-desc">We've partnered with Cambodia's most celebrated chef to bring you rare, intimate culinary experiences. Chef Nak has spent decades preserving royal Cambodian recipes, training under master cooks, and sharing the country's flavours with the world — featured in the NYT, BBC, Financial Times, and more.</p>
+
+        <div class="nak-press">
+          <div class="nak-press-label">As seen in</div>
+          <span class="nak-press-item">New York Times</span>
+          <span class="nak-press-dot"></span>
+          <span class="nak-press-item">BBC</span>
+          <span class="nak-press-dot"></span>
+          <span class="nak-press-item">Financial Times</span>
+          <span class="nak-press-dot"></span>
+          <span class="nak-press-item">Robb Report</span>
+          <span class="nak-press-dot"></span>
+          <span class="nak-press-item">Condé Nast</span>
+        </div>
+
+        <div class="nak-cta-row">
+          <a href="#nak-experiences" class="nak-btn-primary">View Chef Nak Experiences →</a>
+          <a href="https://www.chefnak.com" target="_blank" rel="noopener" class="nak-btn-secondary">Visit chefnak.com ↗</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: Cards -->
+      <div id="nak-experiences">
+        <div class="nak-exp-header">Exclusive Experiences · $5 off when booked via TosTrip</div>
+
+        <div class="nak-card">
+          <div class="nak-card-icon">🍽️</div>
+          <div>
+            <div class="nak-card-title">Private Home Dining with Chef Nak</div>
+            <div class="nak-card-meta">Chef Nak's Heritage Home · Phnom Penh &nbsp;·&nbsp; <strong>Evenings</strong> &nbsp;·&nbsp; Max 10</div>
+            <div class="nak-card-desc">An intimate multi-course dinner of royal Cambodian recipes, cooked and served by Chef Nak herself in her heritage home. Seasonal, rare, and completely unrepeatable.</div>
+          </div>
+          <div class="nak-card-right">
+            <div class="nak-card-price-orig">$95</div>
+            <div class="nak-card-price">$90 <span>/person</span></div>
+            <div class="nak-card-savings">Save $5 via TosTrip</div>
+            <div class="nak-card-tag nak-tag-exclusive">Exclusive</div>
+          </div>
+          <div class="nak-card-foot">
+            <button class="nak-book-btn" onclick="openNakModal('Private Home Dining with Chef Nak','🍽️','Chef Nak\'s Heritage Home','Phnom Penh',90,'3–4 hrs',10)">
+              <i class="fas fa-ticket-alt"></i> Book via TosTrip — $5 off
+            </button>
+          </div>
+        </div>
+
+        <div class="nak-card">
+          <div class="nak-card-icon">👩‍🍳</div>
+          <div>
+            <div class="nak-card-title">Market-to-Table Private Cooking Class</div>
+            <div class="nak-card-meta">Chef Nak's Kitchen · Siem Reap &nbsp;·&nbsp; <strong>Morning</strong> &nbsp;·&nbsp; Max 6</div>
+            <div class="nak-card-desc">Start at the local market with Chef Nak, then cook a full Khmer feast together using ancestral techniques in her open kitchen.</div>
+          </div>
+          <div class="nak-card-right">
+            <div class="nak-card-price-orig">$75</div>
+            <div class="nak-card-price">$70 <span>/person</span></div>
+            <div class="nak-card-savings">Save $5 via TosTrip</div>
+            <div class="nak-card-tag nak-tag-limited">Few seats left</div>
+          </div>
+          <div class="nak-card-foot">
+            <button class="nak-book-btn" onclick="openNakModal('Market-to-Table Cooking Class','👩‍🍳','Chef Nak\'s Kitchen','Siem Reap',70,'3 hrs',6)">
+              <i class="fas fa-ticket-alt"></i> Book via TosTrip — $5 off
+            </button>
+          </div>
+        </div>
+
+        <div class="nak-card">
+          <div class="nak-card-icon">🛏️</div>
+          <div>
+            <div class="nak-card-title">Luxury Cultural Stay Package</div>
+            <div class="nak-card-meta">Chef Nak Heritage Homestay · Siem Reap &nbsp;·&nbsp; <strong>1–3 nights</strong></div>
+            <div class="nak-card-desc">Stay in Chef Nak's traditional wooden home with daily home-cooked meals, a private cooking class, and access to her recipe library.</div>
+          </div>
+          <div class="nak-card-right">
+            <div class="nak-card-price-orig">$280</div>
+            <div class="nak-card-price">$275 <span>/night</span></div>
+            <div class="nak-card-savings">Save $5 via TosTrip</div>
+            <div class="nak-card-tag nak-tag-exclusive">Exclusive</div>
+          </div>
+          <div class="nak-card-foot">
+            <button class="nak-book-btn" onclick="openNakModal('Luxury Cultural Stay','🛏️','Chef Nak Heritage Homestay','Siem Reap',275,'per night',2)">
+              <i class="fas fa-ticket-alt"></i> Book via TosTrip — $5 off
+            </button>
+          </div>
+        </div>
+
+        <div class="nak-quote-block">
+          <p class="nak-quote-text">I am dedicated to elevating and sharing the vibrant flavours and rich cultural heritage of Cambodian cuisine with the world.</p>
+          <div class="nak-quote-attr">— Chef Nak (Rotanak Ros)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ SIEM REAP WORKSHOPS ════ -->
+<div class="wk-section" id="siem-reap-workshops">
+  <div class="wk-header">
+    <div>
+      <div class="sec-eyebrow" style="margin-bottom:6px">
+        <i class="fas fa-map-marker-alt"></i> Siem Reap Experiences
+      </div>
+      <div class="sec-h2" style="margin-bottom:0">
+        Authentic Workshops in <em>Siem Reap</em>
+      </div>
+    </div>
+    <div class="wk-count-lbl">
+      Showing <strong id="wkCount">6</strong> experiences
+    </div>
+  </div>
+
+  <!-- Promo notice -->
+  <div class="wk-promo-notice">
+    <i class="fas fa-tag"></i>
+    <span>Use code <strong>TOSTRIP2026</strong> at checkout for <strong>$5 off</strong> any workshop below. Works on all Siem Reap experiences!</span>
+  </div>
+
+  <div class="wk-grid" id="wkGrid">
+
+    <!-- 1 Mordock Ceramic -->
+    <div class="wk-card" data-cat="craft">
+      <div class="wk-img">
+        <img src="./imgg/potery.jpg" alt="Mordock Ceramic Workshop">
+        <span class="wk-cat b-craft">🧵 Craft</span>
+        <span class="wk-avail av-open">Open</span>
+      </div>
+      <div class="wk-body">
+        <div class="wk-partner">
+          <div class="wk-p-ico">🧵</div>
+          <div class="wk-p-name">Mordock Ceramic · Siem Reap</div>
+        </div>
+        <div class="wk-title">Mordock Ceramic</div>
+        <p class="wk-desc">Mordock Ceramic Craft Clay — sculpture and pottery of all kinds. Good quality, non-abrasive, non-greasy, waterproof, heat resistant, good strength. Take home your own creation.</p>
+        <div class="wk-meta">
+          <div class="wk-mi"><i class="fas fa-clock"></i> 2 hours</div>
+          <div class="wk-mi"><i class="fas fa-users"></i> Small group</div>
+          <div class="wk-mi"><i class="fas fa-calendar"></i> Daily</div>
+        </div>
+        <div class="wk-bottom">
+          <div class="wk-price">
+            <div class="wk-price-lbl">Per person</div>
+            <div class="wk-price-val">$20</div>
+            <div class="wk-price-sub">$15 w/ TOSTRIP2026</div>
+          </div>
+          <div class="wk-btns">
+            <button class="btn-wkbook" onclick="openModal('Mordock Ceramic Workshop','🧵','craft','Mordock Ceramic','Siem Reap',20,'2 hrs',12,null)">
+              <i class="fas fa-ticket-alt"></i> Book Now
+            </button>
+            <button class="btn-save" onclick="toggleSaveCard(this)"><i class="far fa-heart"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 Cambodian Village Cooking -->
+    <div class="wk-card" data-cat="cooking">
+      <div class="wk-img">
+        <img src="./imgg/cooking123.jpg" alt="Khmer Gourmet Cooking Class">
+        <span class="wk-cat b-cooking">🍲 Cooking</span>
+        <span class="wk-avail av-open">Open</span>
+      </div>
+      <div class="wk-body">
+        <div class="wk-partner">
+          <div class="wk-p-ico">🍲</div>
+          <div class="wk-p-name">Cambodian Village Cooking Class · Siem Reap</div>
+        </div>
+        <div class="wk-title">Cambodian Village Cooking Class</div>
+        <p class="wk-desc">Visit a local market to learn about Cambodian herbs and spices, then prepare classic dishes like Fish Amok and Lok Lak in a fully hands-on session.</p>
+        <div class="wk-meta">
+          <div class="wk-mi"><i class="fas fa-clock"></i> 3–4 hours</div>
+          <div class="wk-mi"><i class="fas fa-users"></i> Max 12</div>
+          <div class="wk-mi"><i class="fas fa-calendar"></i> Daily</div>
+        </div>
+        <div class="wk-bottom">
+          <div class="wk-price">
+            <div class="wk-price-lbl">Per person</div>
+            <div class="wk-price-val">$32</div>
+            <div class="wk-price-sub">$27 w/ TOSTRIP2026</div>
+          </div>
+          <div class="wk-btns">
+            <button class="btn-wkbook" onclick="openModal('Cambodian Village Cooking Class','🍲','cooking','Village Cooking Class','Siem Reap',32,'3–4 hrs',12,null)">
+              <i class="fas fa-ticket-alt"></i> Book Now
+            </button>
+            <button class="btn-save" onclick="toggleSaveCard(this)"><i class="far fa-heart"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 Rokhak Basket Weaving -->
+    <div class="wk-card" data-cat="craft">
+      <div class="wk-img">
+        <img src="./imgg/rokhat.jpg" alt="Rokhak Basket Weaving">
+        <span class="wk-cat b-craft">🧺 Craft</span>
+        <span class="wk-avail av-open">Open</span>
+      </div>
+      <div class="wk-body">
+        <div class="wk-partner">
+          <div class="wk-p-ico">🧺</div>
+          <div class="wk-p-name">Rokhak Women's Handicraft Association · Siem Reap</div>
+        </div>
+        <div class="wk-title">Traditional Water Hyacinth Basket Weaving</div>
+        <p class="wk-desc">Join a women-led social enterprise and learn sustainable basket weaving techniques while creating your own handmade souvenir to take home.</p>
+        <div class="wk-meta">
+          <div class="wk-mi"><i class="fas fa-clock"></i> 2 hours</div>
+          <div class="wk-mi"><i class="fas fa-users"></i> Max 8</div>
+          <div class="wk-mi"><i class="fas fa-calendar"></i> Mon–Sat</div>
+        </div>
+        <div class="wk-bottom">
+          <div class="wk-price">
+            <div class="wk-price-lbl">Per person</div>
+            <div class="wk-price-val">$25</div>
+            <div class="wk-price-sub">$20 w/ TOSTRIP2026</div>
+          </div>
+          <div class="wk-btns">
+            <button class="btn-wkbook" onclick="openModal('Traditional Basket Weaving','🧺','craft','Rokhak Women\'s Handicraft Association','Siem Reap',25,'2 hrs',8,null)">
+              <i class="fas fa-ticket-alt"></i> Book Now
+            </button>
+            <button class="btn-save" onclick="toggleSaveCard(this)"><i class="far fa-heart"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 Angkor Pottery Center -->
+    <div class="wk-card" data-cat="craft">
+      <div class="wk-img">
+        <img src="./imgg/poterr.jpg" alt="Angkor Pottery Center">
+        <span class="wk-cat b-craft">🏺 Craft</span>
+        <span class="wk-avail av-open">Open</span>
+      </div>
+      <div class="wk-body">
+        <div class="wk-partner">
+          <div class="wk-p-ico">🏺</div>
+          <div class="wk-p-name">Angkor Pottery Center · Siem Reap</div>
+        </div>
+        <div class="wk-title">Pottery Wheel & Ceramic Painting</div>
+        <p class="wk-desc">Shape clay on a pottery wheel or paint Khmer ceramics. Your piece will be glazed and fired — ready for collection or shipped home.</p>
+        <div class="wk-meta">
+          <div class="wk-mi"><i class="fas fa-clock"></i> 1.5–2 hours</div>
+          <div class="wk-mi"><i class="fas fa-users"></i> Max 10</div>
+          <div class="wk-mi"><i class="fas fa-calendar"></i> Daily</div>
+        </div>
+        <div class="wk-bottom">
+          <div class="wk-price">
+            <div class="wk-price-lbl">Per person</div>
+            <div class="wk-price-val">$22</div>
+            <div class="wk-price-sub">$17 w/ TOSTRIP2026</div>
+          </div>
+          <div class="wk-btns">
+            <button class="btn-wkbook" onclick="openModal('Pottery Wheel & Ceramic Painting','🏺','craft','Angkor Pottery Center','Siem Reap',22,'1.5–2 hrs',10,null)">
+              <i class="fas fa-ticket-alt"></i> Book Now
+            </button>
+            <button class="btn-save" onclick="toggleSaveCard(this)"><i class="far fa-heart"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 Cambodian Living Arts -->
+    <div class="wk-card" data-cat="culture">
+      <div class="wk-img">
+        <img src="./imgg/sbek.jpg" alt="Cambodian Living Arts Performance">
+        <span class="wk-cat b-show">🎶 Culture</span>
+        <span class="wk-avail av-open">Open</span>
+      </div>
+      <div class="wk-body">
+        <div class="wk-partner">
+          <div class="wk-p-ico">🎶</div>
+          <div class="wk-p-name">Cambodian Living Arts · Siem Reap</div>
+        </div>
+        <div class="wk-title">Traditional Sbek Thom & Shadow Puppet Show</div>
+        <p class="wk-desc">Experience classical Khmer music and Sbek Thom shadow puppetry performed by master artists in an intimate theatre setting.</p>
+        <div class="wk-meta">
+          <div class="wk-mi"><i class="fas fa-clock"></i> 2 hours</div>
+          <div class="wk-mi"><i class="fas fa-calendar"></i> Selected evenings</div>
+        </div>
+        <div class="wk-bottom">
+          <div class="wk-price">
+            <div class="wk-price-lbl">Per person</div>
+            <div class="wk-price-val">$20</div>
+            <div class="wk-price-sub">$15 w/ TOSTRIP2026</div>
+          </div>
+          <div class="wk-btns">
+            <button class="btn-wkbook" onclick="openModal('Sbek Thom Shadow Puppet Show','🎶','culture','Cambodian Living Arts','Siem Reap',20,'2 hrs',30,null)">
+              <i class="fas fa-ticket-alt"></i> Book Now
+            </button>
+            <button class="btn-save" onclick="toggleSaveCard(this)"><i class="far fa-heart"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 Kleng Ek -->
+    <div class="wk-card" data-cat="craft">
+      <div class="wk-img">
+        <img src="./imgg/klengek.jpg" alt="Kleng Ek Class by Ta Vinthouen">
+        <span class="wk-cat b-craft">🎨 Craft</span>
+        <span class="wk-avail av-open">Open</span>
+      </div>
+      <div class="wk-body">
+        <div class="wk-partner">
+          <div class="wk-p-ico">🎨</div>
+          <div class="wk-p-name">Kleng Ek · Siem Reap</div>
+        </div>
+        <div class="wk-title">Kleng Ek Class by Ta Vinthouen</div>
+        <p class="wk-desc">Learn the traditional art of Kleng Ek with Ta Vinthouen in an intimate, hands-on workshop that preserves authentic Cambodian craftsmanship.</p>
+        <div class="wk-meta">
+          <div class="wk-mi"><i class="fas fa-clock"></i> 2–3 hours</div>
+          <div class="wk-mi"><i class="fas fa-users"></i> Small group</div>
+          <div class="wk-mi"><i class="fas fa-calendar"></i> By reservation</div>
+        </div>
+        <div class="wk-bottom">
+          <div class="wk-price">
+            <div class="wk-price-lbl">Per person</div>
+            <div class="wk-price-val">$15</div>
+            <div class="wk-price-sub">$10 w/ TOSTRIP2026</div>
+          </div>
+          <div class="wk-btns">
+            <button class="btn-wkbook" onclick="openModal('Kleng Ek Class by Ta Vinthouen','🎨','craft','Kleng Ek','Siem Reap',15,'2–3 hrs',8,null)">
+              <i class="fas fa-ticket-alt"></i> Book Now
+            </button>
+            <button class="btn-save" onclick="toggleSaveCard(this)"><i class="far fa-heart"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════ REFERRAL SECTION ════ -->
+<div class="ref-section">
+  <div class="ref-inner">
+    <div class="ref-left">
+      <div class="ref-eyebrow"><i class="fas fa-gift"></i> Referral Programme</div>
+      <h2>Share &amp; <em>Both Save</em></h2>
+      <p>Every booking generates a personal referral code. Share it with anyone before they book — they get <strong>10% off</strong>, and you earn <strong>$5 credit</strong> toward your next experience. No cap, no expiry.</p>
+      <div class="ref-steps">
+        <div class="rs"><div class="rs-num">1</div><div><h4>Book Any Workshop</h4><p>Complete your booking and your unique referral code is generated instantly and emailed to you.</p></div></div>
+        <div class="rs"><div class="rs-num">2</div><div><h4>Share Your Code</h4><p>Send it to friends via WhatsApp, Instagram, or any channel. They enter it at checkout before paying.</p></div></div>
+        <div class="rs"><div class="rs-num">3</div><div><h4>Everyone Wins</h4><p>Your friend gets 10% off their booking. You get $5 TosTrip credit added to your account automatically.</p></div></div>
+      </div>
+    </div>
+    <div class="ref-panel">
+      <h3>Your Referral Dashboard</h3>
+      <p class="sub">Your code is generated after your first booking</p>
+      <div class="code-box">
+        <div class="cb-lbl">Your Personal Code</div>
+        <div class="cb-code" id="yourCode">TOSTRIP2026</div>
+        <div class="cb-sub">Share this · friends get 10% off · you earn $5</div>
+        <div class="cb-actions">
+          <button class="btn-copy" onclick="copyCode()"><i class="fas fa-copy"></i> Copy Code</button>
+          <button class="btn-share-sm" onclick="shareVia('whatsapp')"><i class="fas fa-share-alt"></i> Share</button>
+        </div>
+      </div>
+      <div class="ref-stats">
+        <div class="rs-card"><div class="rs-num2" id="refCount">0</div><div class="rs-lbl">Friends Referred</div></div>
+        <div class="rs-card"><div class="rs-num2" id="refCredit">$0</div><div class="rs-lbl">Credit Earned</div></div>
+      </div>
+      <div class="share-chs">
+        <button class="sh-ch wa" onclick="shareVia('whatsapp')"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></button>
+        <button class="sh-ch fb" onclick="shareVia('facebook')"><i class="fab fa-facebook-f"></i><span>Facebook</span></button>
+        <button class="sh-ch tg" onclick="shareVia('telegram')"><i class="fab fa-telegram-plane"></i><span>Telegram</span></button>
+        <button class="sh-ch lk" onclick="copyLink()"><i class="fas fa-link"></i><span>Copy Link</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ BOOKING MODAL ════ -->
+<div class="modal-overlay" id="bookModal">
+  <div class="modal-box">
+    <div class="mh" id="modalHeader">
+      <div class="mh-row">
+        <div class="mh-ico" id="m-ico">🍲</div>
+        <div>
+          <h2 id="m-title">Workshop Title</h2>
+          <p id="m-partner">Partner · City</p>
+        </div>
+      </div>
+      <div class="mh-meta">
+        <div class="mh-mi"><i class="fas fa-clock"></i><span id="m-dur">3 hrs</span></div>
+        <div class="mh-mi"><i class="fas fa-users"></i>Max <span id="m-max">12</span></div>
+        <div class="mh-mi"><i class="fas fa-map-marker-alt"></i><span id="m-city">City</span></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="m-body" id="formWrap">
+      <!-- TosTrip $5 off notice — shown only for Chef Nak bookings -->
+      <div class="tostrip-disc-notice" id="nakDiscNotice" style="display:none">
+        <i class="fas fa-star"></i>
+        <div>
+          <strong>🎉 TosTrip Exclusive — $5 off applied!</strong>
+          <span>You're booking through TosTrip and saving $5 on this Chef Nak experience. The discount is already reflected in the price below.</span>
+        </div>
+      </div>
+
+      <!-- TOSTRIP2026 promo hint — shown for regular workshops -->
+      <div class="promo-code-notice" id="promoHint">
+        <i class="fas fa-tag"></i>
+        <div>
+          <strong>💡 Save $5 — use code TOSTRIP2026</strong>
+          <span>Enter the promo code below to get a flat $5 off your booking total. Works on all Siem Reap workshops!</span>
+        </div>
+      </div>
+
+      <label class="fl" style="margin-bottom:7px">Promo / Referral code <span style="font-weight:400;color:var(--ink4)">— TOSTRIP2026 saves $5 · referral codes save 10%</span></label>
+      <div class="ref-row">
+        <div class="ref-field">
+          <i class="fas fa-tag"></i>
+          <input type="text" id="mCode" placeholder="e.g. TOSTRIP2026" maxlength="12" oninput="this.value=this.value.toUpperCase()">
+        </div>
+        <button class="btn-apply" onclick="applyModalCode()">Apply</button>
+      </div>
+      <div class="disc-badge" id="discBadge"><i class="fas fa-check-circle"></i> <span id="discText">Discount applied</span></div>
+
+      <label class="fl" style="margin-bottom:8px;margin-top:4px">Choose a Session <span class="req">*</span></label>
+      <div class="sess-grid" id="sessGrid"></div>
+
+      <form id="bForm" onsubmit="submitBooking(event)">
+        <div class="f-row">
+          <div class="fg"><label class="fl">Full Name <span class="req">*</span></label><input type="text" id="bName" class="fi" placeholder="Your name" required></div>
+          <div class="fg"><label class="fl">Email <span class="req">*</span></label><input type="email" id="bEmail" class="fi" placeholder="you@email.com" required></div>
+        </div>
+        <div class="f-row">
+          <div class="fg"><label class="fl">Phone</label><input type="tel" id="bPhone" class="fi" placeholder="+855 12 345 678"></div>
+          <div class="fg"><label class="fl">Tickets <span class="req">*</span></label>
+            <select id="bQty" class="fi" onchange="refreshTotal()">
+              <option value="1">1 ticket</option>
+              <option value="2" selected>2 tickets</option>
+              <option value="3">3 tickets</option>
+              <option value="4">4 tickets</option>
+              <option value="5">5 tickets</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg"><label class="fl">Special requests</label><textarea id="bNotes" class="fi" style="resize:vertical;min-height:68px" placeholder="Dietary needs, mobility, language…"></textarea></div>
+        <div class="price-sum">
+          <div class="ps-row"><span id="ps-base-lbl">2 × $22</span><span id="ps-base">$44.00</span></div>
+          <div class="ps-row" id="psNakDiscRow" style="display:none"><span>TosTrip booking discount</span><span class="ps-green" id="psNakDisc">–$5.00</span></div>
+          <div class="ps-row ps-disc-row" id="psDiscRow"><span id="psDiscLabel">Promo discount</span><span class="ps-green" id="psDisc">–$0.00</span></div>
+          <div class="ps-row"><span>Total</span><span id="psTotal">$44.00</span></div>
+        </div>
+        <div class="ok-note"><i class="fas fa-shield-alt"></i><span><strong>Free cancellation</strong> up to 48 hours before your session.</span></div>
+        <button type="submit" class="m-btn" id="submitBtn"><i class="fas fa-check-circle"></i> Confirm Booking — <span id="btnTotal">$44</span></button>
+      </form>
+    </div>
+
+    <div class="success-body" id="successWrap" style="display:none">
+      <div class="succ-ico">🎉</div>
+      <h2>You're booked in!</h2>
+      <p>Confirmation is heading to your inbox. Here's your personal referral code — share it with friends and earn $5 credit every time someone books.</p>
+      <div class="succ-code-box">
+        <div class="scb-lbl">Your Referral Code</div>
+        <div class="scb-code" id="succCode">TOS–????</div>
+        <div class="scb-sub">Friends get 10% off · you earn $5 credit per booking</div>
+      </div>
+      <div class="succ-actions">
+        <button class="m-btn" onclick="copySuccessCode()"><i class="fas fa-copy"></i> Copy & Share</button>
+        <button class="btn-done" onclick="closeModal()">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-logo">
+        <img src="./imgg/loko.png" alt="TosTrip" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="footer-logo-text" style="display:none">TosTrip</span>
+      </div>
+      <div class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="likelocal.html">Live Like a Local</a>
+        <a href="rentafriend.html">Rent a Friend</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+    <div class="footer-bot">© 2025 TosTrip · Workshops & Events · Made with ❤️ in Cambodia</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+const EJ_KEY='SmoLQAp-ij_aoJbAd', EJ_SVC='service_9ogox5a', EJ_TPL='template_0pi47tp';
+if(typeof emailjs!=='undefined') emailjs.init(EJ_KEY);
+
+// ─── DISCOUNT LOGIC ──────────────────────────────────────────────
+// Percentage codes  →  {code: pct}
+const PCT_CODES = {
+  'TOS10':10,'FRIEND10':10,'WELCOME':10,'TOSTRIP':10,'CAMBODIA':10,'MALY2024':10
+};
+// Flat-$-off codes  →  {code: flatAmount}
+const FLAT_CODES = {
+  'TOSTRIP2026': 5
+};
+
+let discountPct = 0;   // percentage discount
+let discountFlat = 0;  // flat $ discount per ticket (for TOSTRIP2026 type)
+let nakDiscount = 0;   // flat $ discount per ticket for Chef Nak
+let curBooking = {};
+let myCode = '';
+
+/* NAV */
+window.addEventListener('scroll',()=>
+  document.getElementById('mainNav').classList.toggle('scrolled',scrollY>30));
+
+/* TOAST */
+function toast(msg, icon='check-circle'){
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.querySelector('i').className = 'fas fa-' + icon;
+  t.classList.add('show');
+  clearTimeout(t._t);
+  t._t = setTimeout(()=>t.classList.remove('show'), 2800);
+}
+
+/* COUNTDOWNS */
+function buildCountdown(elId, target){
+  const el = document.getElementById(elId);
+  if(!el) return;
+  const tick = ()=>{
+    const diff = new Date(target) - new Date();
+    if(diff <= 0){ el.innerHTML = '<span style="color:var(--green);font-weight:700;font-size:15px">🟢 Happening now!</span>'; return; }
+    const d = Math.floor(diff/864e5), h = Math.floor((diff%864e5)/36e5),
+          m = Math.floor((diff%36e5)/6e4), s = Math.floor((diff%6e4)/1e3);
+    const u = diff < 864e5;
+    const bs = u ? 'class="cd-block urgent"' : 'class="cd-block"';
+    el.innerHTML =
+      `<div ${bs}><div class="cd-num">${String(d).padStart(2,'0')}</div><div class="cd-lbl">Days</div></div>
+       <div class="cd-sep">:</div>
+       <div ${bs}><div class="cd-num">${String(h).padStart(2,'0')}</div><div class="cd-lbl">Hours</div></div>
+       <div class="cd-sep">:</div>
+       <div ${bs}><div class="cd-num">${String(m).padStart(2,'0')}</div><div class="cd-lbl">Mins</div></div>
+       <div class="cd-sep">:</div>
+       <div ${bs}><div class="cd-num">${String(s).padStart(2,'0')}</div><div class="cd-lbl">Secs</div></div>`;
+  };
+  tick(); setInterval(tick, 1000);
+}
+buildCountdown('cd-apsara', '2025-03-15T19:00:00');
+buildCountdown('cd-cooking', '2025-03-16T09:00:00');
+
+/* FILTER */
+function filterCards(type, btn){
+  document.querySelectorAll('.f-chip').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  let shown = 0;
+  document.querySelectorAll('.wk-card').forEach(c=>{
+    const match = type==='all' || c.dataset.cat===type || c.dataset.city===type;
+    c.classList.toggle('hidden', !match);
+    if(match) shown++;
+  });
+  document.getElementById('wkCount').textContent = shown;
+}
+
+/* VIEW */
+function setView(mode, btn){
+  document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('wkGrid').classList.toggle('list', mode==='list');
+}
+
+/* SAVE (featured cards) */
+function toggleSave(btn){
+  btn.classList.toggle('saved');
+  const saved = btn.classList.contains('saved');
+  btn.innerHTML = saved ? '<i class="fas fa-heart"></i> Saved' : '<i class="far fa-heart"></i> Save';
+  toast(saved ? 'Saved to wishlist' : 'Removed from wishlist', saved ? 'heart' : 'times-circle');
+}
+
+/* SAVE (grid cards) */
+function toggleSaveCard(btn){
+  btn.classList.toggle('saved');
+  const saved = btn.classList.contains('saved');
+  btn.innerHTML = saved ? '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>';
+  toast(saved ? 'Saved to wishlist' : 'Removed from wishlist', saved ? 'heart' : 'times-circle');
+}
+
+/* BANNER CODE */
+function applyBannerCode(){
+  const code = document.getElementById('bannerCode').value.trim().toUpperCase();
+  const msg = document.getElementById('bannerMsg');
+  if(!code){ msg.className='rb-msg err'; msg.innerHTML='<i class="fas fa-times-circle"></i> Enter a code first'; return; }
+  if(FLAT_CODES[code]){
+    msg.className = 'rb-msg ok';
+    msg.innerHTML = `<i class="fas fa-check-circle"></i> $${FLAT_CODES[code]} off saved!`;
+    sessionStorage.setItem('pendingCode', code);
+    toast('Code saved — $'+FLAT_CODES[code]+' off at checkout!', 'tag');
+  } else if(PCT_CODES[code]){
+    msg.className = 'rb-msg ok';
+    msg.innerHTML = `<i class="fas fa-check-circle"></i> ${PCT_CODES[code]}% off saved!`;
+    sessionStorage.setItem('pendingCode', code);
+    toast('Code saved — '+PCT_CODES[code]+'% off at checkout!', 'tag');
+  } else {
+    msg.className = 'rb-msg err';
+    msg.innerHTML = '<i class="fas fa-times-circle"></i> Code not recognised';
+  }
+}
+
+/* MODAL CODE */
+function applyModalCode(){
+  const code = document.getElementById('mCode').value.trim().toUpperCase();
+  const inp = document.getElementById('mCode');
+  const badge = document.getElementById('discBadge');
+  if(!code){ toast('Enter a code first', 'exclamation-circle'); return; }
+
+  if(FLAT_CODES[code]){
+    // Flat dollar off
+    discountFlat = FLAT_CODES[code];
+    discountPct = 0;
+    inp.classList.add('ok'); inp.classList.remove('err');
+    document.getElementById('discText').textContent = `Code "${code}" — $${discountFlat} off applied`;
+    document.getElementById('psDiscLabel').textContent = 'Promo discount (TOSTRIP2026)';
+    badge.classList.add('show');
+    refreshTotal();
+    toast('$'+discountFlat+' discount applied!', 'tag');
+  } else if(PCT_CODES[code]){
+    // Percentage off
+    discountPct = PCT_CODES[code];
+    discountFlat = 0;
+    inp.classList.add('ok'); inp.classList.remove('err');
+    document.getElementById('discText').textContent = `Code "${code}" — ${discountPct}% discount applied`;
+    document.getElementById('psDiscLabel').textContent = 'Referral discount';
+    badge.classList.add('show');
+    refreshTotal();
+    toast(discountPct+'% discount applied!', 'tag');
+  } else {
+    discountPct = 0; discountFlat = 0;
+    inp.classList.add('err'); inp.classList.remove('ok');
+    badge.classList.remove('show');
+    refreshTotal();
+    toast('Code not recognised — check spelling', 'times-circle');
+  }
+}
+
+/* TOTAL CALCULATOR */
+function refreshTotal(){
+  const qty = parseInt(document.getElementById('bQty')?.value || 2);
+  const base = curBooking.price || 22;
+  const sub = base * qty;
+
+  // Chef Nak flat per-ticket
+  const nakFlat = nakDiscount > 0 ? nakDiscount * qty : 0;
+  // Promo flat per-ticket (TOSTRIP2026)
+  const flatAmt = discountFlat > 0 ? discountFlat * qty : 0;
+  // Referral percentage
+  const pctAmt  = discountPct > 0 ? +(sub * (discountPct / 100)).toFixed(2) : 0;
+  // Combined discount (apply after Chef Nak, not stack infinitely)
+  const totalDisc = nakFlat + flatAmt + pctAmt;
+  const tot = Math.max(0, +(sub - totalDisc).toFixed(2));
+
+  document.getElementById('ps-base-lbl').textContent = qty + ' × $' + base;
+  document.getElementById('ps-base').textContent = '$' + sub.toFixed(2);
+
+  const nakRow = document.getElementById('psNakDiscRow');
+  nakRow.style.display = nakFlat > 0 ? 'flex' : 'none';
+  document.getElementById('psNakDisc').textContent = '–$' + nakFlat.toFixed(2);
+
+  const dr = document.getElementById('psDiscRow');
+  const discAmt = flatAmt + pctAmt;
+  dr.style.display = discAmt > 0 ? 'flex' : 'none';
+  document.getElementById('psDisc').textContent = '–$' + discAmt.toFixed(2);
+
+  document.getElementById('psTotal').textContent = '$' + tot.toFixed(2);
+  document.getElementById('btnTotal').textContent = '$' + tot.toFixed(2);
+}
+
+/* OPEN MODAL — regular workshops */
+function openModal(title, icon, cat, partner, city, price, dur, maxS, eventDate){
+  nakDiscount = 0;
+  curBooking = {title, icon, cat, partner, city, price, dur, maxS, eventDate, isNak: false};
+  _setupModal();
+}
+
+/* OPEN MODAL — Chef Nak */
+function openNakModal(title, icon, partner, city, price, dur, maxS){
+  nakDiscount = 5;
+  curBooking = {title, icon, cat:'cooking', partner, city, price, dur, maxS, eventDate: null, isNak: true};
+  _setupModal();
+}
+
+function _setupModal(){
+  discountPct = 0; discountFlat = 0;
+
+  document.getElementById('m-ico').textContent = curBooking.icon;
+  document.getElementById('m-title').textContent = curBooking.title;
+  document.getElementById('m-partner').textContent = curBooking.partner + ' · ' + curBooking.city;
+  document.getElementById('m-dur').textContent = curBooking.dur;
+  document.getElementById('m-max').textContent = curBooking.maxS;
+  document.getElementById('m-city').textContent = curBooking.city;
+
+  const hdr = document.getElementById('modalHeader');
+  const submitBtn = document.getElementById('submitBtn');
+  const nakNotice = document.getElementById('nakDiscNotice');
+  const promoHint = document.getElementById('promoHint');
+
+  if(curBooking.isNak){
+    hdr.classList.add('nak-header');
+    submitBtn.classList.add('nak-submit');
+    nakNotice.style.display = 'flex';
+    promoHint.style.display = 'none';
+  } else {
+    hdr.classList.remove('nak-header');
+    submitBtn.classList.remove('nak-submit');
+    nakNotice.style.display = 'none';
+    promoHint.style.display = 'flex';
+  }
+
+  // Pre-fill pending code
+  const pending = sessionStorage.getItem('pendingCode');
+  const codeInp = document.getElementById('mCode');
+  codeInp.value = ''; codeInp.className = '';
+  document.getElementById('discBadge').classList.remove('show');
+
+  if(pending && !curBooking.isNak){
+    codeInp.value = pending;
+    applyModalCode();
+  }
+
+  buildSessions(curBooking.eventDate || new Date().toISOString());
+  document.getElementById('formWrap').style.display = 'block';
+  document.getElementById('successWrap').style.display = 'none';
+  document.getElementById('bForm').reset();
+  document.getElementById('bQty').value = '2';
+  refreshTotal();
+  document.getElementById('bookModal').classList.add('open');
+}
+
+function buildSessions(baseDate){
+  const base = new Date(baseDate);
+  const mockSeats = [8, 4, 11, 3];
+  let html = '';
+  for(let i = 0; i < 4; i++){
+    const d = new Date(base);
+    d.setDate(d.getDate() + (i * 7));
+    const seats = mockSeats[i];
+    const full = seats === 0;
+    const few = seats > 0 && seats <= 3;
+    const sc = full ? 'none' : few ? 'few' : 'plenty';
+    const sl = full ? 'Sold out' : seats === 1 ? '1 seat left' : `${seats} seats left`;
+    html += `<div class="sess-opt${full?' sess-full':''}" onclick="pickSess(this)">
+      <input type="radio" name="sess" value="${i}" ${i===0&&!full?'checked':''} ${full?'disabled':''}>
+      ${full?'<div class="so-full-tag">SOLD OUT</div>':''}
+      <div class="so-date">${d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'})}</div>
+      <div class="so-time">${d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}</div>
+      <div class="so-seats ${sc}">${sl}</div>
+    </div>`;
+  }
+  const grid = document.getElementById('sessGrid');
+  grid.innerHTML = html;
+  const first = grid.querySelector('.sess-opt:not(.sess-full)');
+  if(first) first.classList.add('sel');
+}
+
+function pickSess(el){
+  if(el.classList.contains('sess-full')) return;
+  document.querySelectorAll('.sess-opt').forEach(s=>s.classList.remove('sel'));
+  el.classList.add('sel');
+  el.querySelector('input').checked = true;
+}
+
+function closeModal(){
+  document.getElementById('bookModal').classList.remove('open');
+  discountPct = 0; discountFlat = 0; nakDiscount = 0;
+  sessionStorage.removeItem('pendingCode');
+}
+document.getElementById('bookModal').addEventListener('click', e=>{
+  if(e.target === document.getElementById('bookModal')) closeModal();
+});
+
+/* SUBMIT */
+function submitBooking(e){
+  e.preventDefault();
+  const qty = parseInt(document.getElementById('bQty').value);
+  const base = curBooking.price;
+  const sub = base * qty;
+  const nakFlat = nakDiscount > 0 ? nakDiscount * qty : 0;
+  const flatAmt = discountFlat > 0 ? discountFlat * qty : 0;
+  const pctAmt  = discountPct > 0 ? +(sub * (discountPct / 100)).toFixed(2) : 0;
+  const total = Math.max(0, +(sub - nakFlat - flatAmt - pctAmt).toFixed(2));
+
+  const name = document.getElementById('bName').value.trim();
+  const initials = name.split(' ').map(w=>w[0]||'').join('').toUpperCase().slice(0,3);
+  myCode = 'TOS' + initials + Math.floor(Math.random()*900+100);
+
+  const btn = e.target.querySelector('.m-btn');
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Confirming…'; btn.disabled = true;
+
+  const usedCode = document.getElementById('mCode').value || 'None';
+  const params = {
+    user_name:    document.getElementById('bName').value,
+    user_email:   document.getElementById('bEmail').value,
+    phone:        document.getElementById('bPhone').value || 'N/A',
+    booking_date: curBooking.eventDate || 'On request',
+    message:      (document.getElementById('bNotes').value || 'No requests') +
+                  '\nTickets: ' + qty +
+                  '\nCode used: ' + usedCode +
+                  (nakFlat > 0 ? '\nChef Nak TosTrip discount: –$' + nakFlat : '') +
+                  (flatAmt > 0 ? '\nPromo discount ('+usedCode+'): –$' + flatAmt : '') +
+                  (pctAmt > 0  ? '\nReferral discount: –$' + pctAmt : '') +
+                  '\nTotal: $' + total +
+                  '\nReferral code generated: ' + myCode,
+    request_type: curBooking.isNak ? 'Chef Nak Booking via TosTrip' : 'Workshop Booking',
+    friend_name:  curBooking.partner,
+    duration:     curBooking.dur,
+    price:        total,
+    lifestyle:    curBooking.title,
+    people:       qty + ' ticket(s)',
+  };
+
+  const finish = ()=>{
+    document.getElementById('succCode').textContent = myCode;
+    document.getElementById('yourCode').textContent = myCode;
+    sessionStorage.setItem('myCode', myCode);
+    document.getElementById('formWrap').style.display = 'none';
+    document.getElementById('successWrap').style.display = 'block';
+  };
+
+  if(typeof emailjs !== 'undefined'){
+    emailjs.send(EJ_SVC, EJ_TPL, params).then(finish).catch(err=>{
+      alert('Error: ' + (err.text || err.message));
+      btn.innerHTML = '<i class="fas fa-check-circle"></i> Confirm Booking';
+      btn.disabled = false;
+    });
+  } else { finish(); }
+}
+
+/* REFERRAL DASHBOARD */
+window.addEventListener('load', ()=>{
+  const saved = sessionStorage.getItem('myCode');
+  if(saved){ document.getElementById('yourCode').textContent = saved; myCode = saved; }
+  document.getElementById('refCount').textContent = sessionStorage.getItem('refCount') || 0;
+  document.getElementById('refCredit').textContent = '$' + (sessionStorage.getItem('refCredit') || 0);
+  const urlCode = new URLSearchParams(location.search).get('ref');
+  if(urlCode){
+    document.getElementById('bannerCode').value = urlCode.toUpperCase();
+    applyBannerCode();
+    document.querySelector('.ref-banner').scrollIntoView({behavior:'smooth',block:'center'});
+  }
+});
+
+function copyCode(){
+  const c = document.getElementById('yourCode').textContent;
+  if(c.includes('?')){ toast('Book first to generate your code', 'exclamation-circle'); return; }
+  doCopy(c); toast('Code copied!', 'copy');
+}
+function copySuccessCode(){
+  doCopy(document.getElementById('succCode').textContent);
+  toast('Code copied — share it!', 'copy');
+}
+function copyLink(){
+  const c = myCode || sessionStorage.getItem('myCode');
+  if(!c || c.includes('?')){ toast('Book first to get your referral link', 'exclamation-circle'); return; }
+  doCopy('https://tostrip.kh/workshops?ref=' + c);
+  toast('Referral link copied!', 'link');
+}
+function doCopy(text){
+  if(navigator.clipboard){ navigator.clipboard.writeText(text); }
+  else { const t=document.createElement('textarea'); t.value=text; document.body.appendChild(t); t.select(); document.execCommand('copy'); document.body.removeChild(t); }
+}
+function shareVia(ch){
+  const c = myCode || sessionStorage.getItem('myCode');
+  if(!c || c.includes('?')){ toast('Book first to get your referral code', 'exclamation-circle'); return; }
+  const msg = encodeURIComponent('🇰🇭 Just booked a workshop with TosTrip! Use my code '+c+' for 10% off → https://tostrip.kh/workshops?ref='+c);
+  const urls = {
+    whatsapp: 'https://wa.me/?text=' + msg,
+    facebook: 'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent('https://tostrip.kh/workshops')+'&quote='+msg,
+    telegram: 'https://t.me/share/url?url='+encodeURIComponent('https://tostrip.kh/workshops')+'&text='+msg
+  };
+  if(urls[ch]) window.open(urls[ch], '_blank');
+}
+</script>
+</body>
+</html>
