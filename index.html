@@ -897,53 +897,298 @@ button { font-family: inherit; cursor: pointer; }
 /* ============================================================
    RESPONSIVE
 ============================================================ */
+/* ============================= */
+/* TABLET (1024px and below) */
+/* ============================= */
 @media (max-width: 1024px) {
-  .about-inner { grid-template-columns: 1fr; gap: 36px; }
-  .about-image { height: 320px; }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+
+  /* About Section */
+  .about-inner {
+    grid-template-columns: 1fr 1fr; /* Keep 2 columns on tablet */
+    gap: 40px;
+  }
+
+  .about-image {
+    height: 360px;
+  }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
 }
+
+
+/* ============================= */
+/* MOBILE LARGE (768px and below) */
+/* ============================= */
 @media (max-width: 768px) {
+
+  /* Navigation */
   .nav-links { display: none; }
   .hamburger { display: block; }
-  .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--white); padding: 12px; border-bottom: 1px solid var(--border); box-shadow: var(--shadow-md); z-index: 999; }
-  .hero-stats { gap: 16px; }
-  .hero-stats-divider { display: none; }
-  .friends-grid, .pkg-grid { grid-template-columns: 1fr; }
-  .form-row { grid-template-columns: 1fr; }
-  .chatbot-window { width: calc(100vw - 32px); height: calc(100vh - 100px); }
-  .footer-grid { grid-template-columns: 1fr; }
-  .footer-bottom { flex-direction: column; text-align: center; }
-  .trust-inner { grid-template-columns: 1fr 1fr; }
-  .pkg-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+    z-index: 999;
+  }
+
+  /* About Section */
+  .about-inner {
+    grid-template-columns: 1fr; /* Stack */
+    gap: 36px;
+    padding: 60px 20px;
+  }
+
+  .about-image {
+    height: 320px;
+  }
+
+  .about-text h2 {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .about-text p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .about-pills {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .about-pill {
+    font-size: 13px;
+    padding: 8px 14px;
+  }
+
+  /* Layout Grids */
+  .friends-grid,
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .trust-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pkg-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
   .pkg-img { height: 140px; }
   .pkg-body { padding: 14px; }
+
   .pkg-body h3 { font-size: 15px; }
   .pkg-body p { font-size: 12px; line-height: 1.4; }
+
+  .ws-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .ws-img { height: 160px; }
+
+  /* Hero */
+  .hero-stats { gap: 16px; }
+  .hero-stats-divider { display: none; }
+
+  /* Chatbot */
+  .chatbot-window {
+    width: calc(100vw - 32px);
+    height: calc(100vh - 100px);
+  }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* Modals */
   .duration-picker { grid-template-columns: 1fr; }
+
   .modal-steps { padding: 14px 20px 0; }
   .modal-head { padding: 22px 22px 18px; }
   .modal-body { padding: 20px 22px 24px; }
-  .ws-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .ws-img { height: 160px; }
 }
+
+
+/* ============================= */
+/* MOBILE SMALL (640px and below) */
+/* ============================= */
 @media (max-width: 640px) {
+
   .footer-grid { display: none; }
-  .footer { padding: 32px 20px; }
-  .footer-bottom { justify-content: center; flex-direction: column; text-align: center; gap: 14px; }
+
+  .footer {
+    padding: 32px 20px;
+  }
+
+  .footer-bottom {
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
+  }
+
   .copyright { font-size: 12px; }
+
   .social-links { justify-content: center; }
-  .clients-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
+
+  .clients-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 160px;
+  }
+
   .cg-item.cg-tall { grid-row: span 1; }
+
   .cg-overlay { opacity: 1; }
+
   .client-filter-tabs { justify-content: center; }
+
   .payment-methods { grid-template-columns: 1fr; }
 }
+
+
+/* ============================= */
+/* EXTRA SMALL DEVICES (480px and below) */
+/* ============================= */
 @media (max-width: 480px) {
+
   .btn-signin { display: none; }
+
   .ws-grid { grid-template-columns: 1fr; }
-  .modal-box { border-radius: var(--r-lg) var(--r-lg) 0 0; }
-  .modal-overlay { align-items: flex-end; padding: 0; }
-  .modal-head { border-radius: var(--r-lg) var(--r-lg) 0 0; }
+
+  .modal-box {
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
+  }
+
+  .modal-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .modal-head {
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
+  }
+}
+@media (max-width: 768px) {
+  .about-inner {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    padding: 48px 16px !important;
+  }
+
+  .about-image {
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    max-height: 360px;
+  }
+
+  .about-image img {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  .about-text h2 {
+    font-size: clamp(1.8rem, 6vw, 2.4rem);
+  }
+
+  .about-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .about-pill {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  .about-cta {
+    display: inline-block;
+    width: auto;
+  }
+}
+@media (max-width: 768px) {
+  #packages {
+    padding: 48px 16px !important;
+  }
+
+  .pkg-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  .pkg-card {
+    width: 100% !important;
+  }
+
+  .pkg-img {
+    height: 220px !important;
+  }
+
+  .pkg-img img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+
+  .pkg-body {
+    padding: 20px 16px !important;
+  }
+
+  .pkg-body h3 {
+    font-size: 1.2rem;
+  }
+
+  .pkg-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px !important;
+  }
+
+  .pkg-meta span {
+    font-size: 13px;
+  }
+
+  .pkg-cta {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .pkg-btn {
+    width: 100% !important;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .section-header-row {
+    text-align: center;
+  }
+
+  .section-title {
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+  }
 }
 </style>
 </head>
@@ -974,7 +1219,7 @@ button { font-family: inherit; cursor: pointer; }
         </ul>
       </div>
       <a href="offline.html">
-  <button class="btn-register">OFFLINE MODE</button>
+  <button class="btn-register">OFFLINE</button>
 </a>
       <button class="hamburger" id="hamburger" onclick="toggleMobileNav()">
         <i class="fas fa-bars"></i>
@@ -1025,7 +1270,6 @@ button { font-family: inherit; cursor: pointer; }
     <div class="section-label" style="color:var(--gold)"><i class="fas fa-heart"></i></div>
     <h2>Travel Safer,<br>Travel Smarter</h2>
     <p>TosTrip is a travel assistant platform that helps travelers live like a local. We connect you with verified Cambodian guides for authentic experiences — from hidden street food stalls to ancient temple stories that never made it into any guidebook.</p>
-    <p>Currently focused on Siem Reap, Phnom Penh, and Kampot — with more destinations coming soon.</p>
     <div class="about-pills">
       <div class="about-pill"><i class="fas fa-wifi"></i> Works Offline</div>
       <div class="about-pill"><i class="fas fa-user-check"></i> Verified Guides</div>
