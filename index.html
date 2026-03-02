@@ -1291,12 +1291,16 @@ button { font-family: inherit; cursor: pointer; }
       </div>
     </div>
     <div class="pkg-grid">
-      <div class="pkg-card" onclick="toggleSection('localSection')">
-        <div class="pkg-img">
-          <img src="./imgg/keolocal.jpg" alt="Live Like A Local">
-          <span class="pkg-tag gold">Best Seller</span>
-        </div>
-        <div class="pkg-body">
+
+      <!-- Live Like a Local -->
+      <div class="pkg-card">
+        <a href="livelikelocal.html" style="text-decoration:none;color:inherit;">
+          <div class="pkg-img">
+            <img src="./imgg/keolocal.jpg" alt="Live Like A Local">
+            <span class="pkg-tag gold">Best Seller</span>
+          </div>
+        </a>
+        <div class="pkg-body" onclick="toggleSection('localSection')">
           <h3>Live Like a Local</h3>
           <p>Spend a day experiencing authentic local life — discover hidden gems, neighbourhood spots, and the real Cambodia beyond tourist trails.</p>
           <div class="pkg-meta">
@@ -1314,12 +1318,16 @@ button { font-family: inherit; cursor: pointer; }
           </div>
         </div>
       </div>
-      <div class="pkg-card" onclick="toggleSection('friendSection')">
-        <div class="pkg-img">
-          <img src="./imgg/keofri.jpg" alt="Rent a Friend">
-          <span class="pkg-tag">Unique</span>
-        </div>
-        <div class="pkg-body">
+
+      <!-- Rent a Friend -->
+      <div class="pkg-card">
+        <a href="rentafriend.html" style="text-decoration:none;color:inherit;">
+          <div class="pkg-img">
+            <img src="./imgg/keofri.jpg" alt="Rent a Friend">
+            <span class="pkg-tag">Unique</span>
+          </div>
+        </a>
+        <div class="pkg-body" onclick="toggleSection('friendSection')">
           <h3>Rent a Friend</h3>
           <p>Connect with verified local guides for a truly immersive experience. Chat, explore, eat and discover like you've lived here your whole life.</p>
           <div class="pkg-meta">
@@ -1337,6 +1345,7 @@ button { font-family: inherit; cursor: pointer; }
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -1354,7 +1363,7 @@ button { font-family: inherit; cursor: pointer; }
       </button>
     </div>
     <div class="dest-scroll">
-      <a href="siemreap.html" style="flex-shrink:0">
+      <a href="livelikelocal.html" style="flex-shrink:0">
         <div class="dest-chip"><img src="./imgg/pp2.JPG" alt="Siem Reap"><div class="dest-chip-badge">Available</div><div class="dest-chip-overlay"><div class="dest-chip-name">Siem Reap</div></div></div>
       </a>
       <div class="dest-chip" style="flex-shrink:0"><img src="./imgg/pic.JPG" alt="Phnom Penh"><div class="dest-chip-overlay"><div class="dest-chip-name">Phnom Penh</div></div></div>
@@ -1475,7 +1484,6 @@ button { font-family: inherit; cursor: pointer; }
     </div>
   </div>
 </section>
-
 <!-- WORKSHOP SECTION LABEL -->
 <div style="max-width:1280px;margin:0 auto;padding:60px 24px 0;">
   <div class="section-label"><i class="fas fa-box-open"></i> Our Partnership</div>
