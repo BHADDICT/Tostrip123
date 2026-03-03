@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TosTrip - Offline Adventure Mode</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal: #00e5c3;
+            --teal-dim: rgba(0,229,195,0.15);
+            --teal-glow: rgba(0,229,195,0.4);
+            --amber: #ffb347;
+            --amber-dim: rgba(255,179,71,0.15);
+            --green: #39d98a;
+            --green-dim: rgba(57,217,138,0.15);
+            --red: #ff5c5c;
+            --bg: #0d0f1a;
+            --bg2: #131626;
+            --surface: rgba(255,255,255,0.04);
+            --border: rgba(255,255,255,0.08);
+            --text: #e8eaf0;
+            --text-muted: rgba(232,234,240,0.5);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            color: var(--text);
+            overflow: hidden;
+            position: relative;
+        }
+        body::before {
+            content:'';
+            position:fixed; inset:0;
+            background-image:
+                linear-gradient(rgba(0,229,195,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,229,195,0.03) 1px, transparent 1px);
+            background-size:40px 40px;
+            pointer-events:none; z-index:0;
+        }
+        .bg-glow {
+            position:fixed; width:600px; height:600px; border-radius:50%;
+            background:radial-gradient(circle, rgba(0,229,195,0.07) 0%, transparent 70%);
+            top:50%; left:50%; transform:translate(-50%,-50%);
+            pointer-events:none; z-index:0;
+            animation:breathe 6s ease-in-out infinite;
+        }
+        @keyframes breathe {
+            0%,100% { transform:translate(-50%,-50%) scale(1); opacity:0.7; }
+            50% { transform:translate(-50%,-50%) scale(1.2); opacity:1; }
+        }
+        .floaters { position:fixed; inset:0; pointer-events:none; z-index:1; }
+        .floater {
+            position:absolute; font-size:1.5rem; opacity:0.07;
+            animation:drift linear infinite;
+        }
+        @keyframes drift {
+            0% { transform:translateY(100vh) rotate(0deg); opacity:0; }
+            10% { opacity:0.07; }
+            90% { opacity:0.07; }
+            100% { transform:translateY(-100px) rotate(360deg); opacity:0; }
+        }
+        .screen {
+            position:fixed; inset:0;
+            display:flex; align-items:center; justify-content:center;
+            z-index:10; padding:1.5rem;
+            transition:opacity 0.5s, transform 0.5s;
+        }
+        .screen.hidden { opacity:0; pointer-events:none; transform:scale(0.97); }
+        .card {
+            background:var(--bg2);
+            border:1px solid var(--border);
+            border-radius:20px;
+            padding:2.5rem;
+            width:100%; max-width:460px;
+            position:relative;
+            box-shadow:0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,229,195,0.05);
+            overflow:hidden;
+        }
+        .card::after {
+            content:''; position:absolute; top:0; left:20%; right:20%; height:1px;
+            background:linear-gradient(90deg, transparent, var(--teal), transparent);
+            opacity:0.6;
+        }
+        .logo { display:flex; align-items:center; gap:10px; margin-bottom:0.5rem; }
+        .logo-mark {
+            width:40px; height:40px;
+            background:linear-gradient(135deg, var(--teal), #00b89a);
+            border-radius:10px; display:flex; align-items:center; justify-content:center;
+            font-size:20px; box-shadow:0 0 20px var(--teal-glow);
+        }
+        .logo-name {
+            font-family:'Syne',sans-serif; font-size:1.6rem; font-weight:800; letter-spacing:-0.5px;
+            background:linear-gradient(135deg, var(--teal), #5af5df);
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+        }
+        .tagline { color:var(--text-muted); font-size:0.82rem; margin-bottom:2rem; padding-left:50px; }
+        .signal-badge {
+            display:inline-flex; align-items:center; gap:8px;
+            padding:8px 14px; background:var(--amber-dim);
+            border:1px solid rgba(255,179,71,0.25); border-radius:8px; margin-bottom:1.5rem;
+        }
+        .signal-dot {
+            width:7px; height:7px; background:var(--amber); border-radius:50%;
+            animation:blink 1.5s ease-in-out infinite;
+        }
+        @keyframes blink {
+            0%,100% { opacity:1; box-shadow:0 0 6px var(--amber); }
+            50% { opacity:0.4; box-shadow:none; }
+        }
+        .signal-label { font-size:0.8rem; color:var(--amber); font-weight:500; }
+        .prompt-heading { font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:700; line-height:1.3; margin-bottom:0.75rem; }
+        .prompt-body { color:var(--text-muted); font-size:0.9rem; line-height:1.65; margin-bottom:2rem; }
+        .coverage-pills { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:2rem; }
+        .pill {
+            display:flex; align-items:center; gap:6px; padding:6px 12px;
+            background:var(--surface); border:1px solid var(--border);
+            border-radius:20px; font-size:0.78rem; color:var(--text-muted);
+        }
+        .btn-row { display:flex; gap:0.75rem; }
+        .btn {
+            flex:1; padding:14px; border-radius:12px; font-size:0.92rem; font-weight:600;
+            cursor:pointer; border:1px solid; transition:all 0.25s;
+            font-family:'DM Sans',sans-serif; letter-spacing:0.01em;
+        }
+        .btn-primary {
+            background:linear-gradient(135deg, var(--teal), #00c8ad);
+            border-color:transparent; color:#0d1a17;
+        }
+        .btn-primary:hover { transform:translateY(-1px); box-shadow:0 8px 24px var(--teal-glow); }
+        .btn-ghost { background:var(--surface); border-color:var(--border); color:var(--text-muted); }
+        .btn-ghost:hover { border-color:rgba(255,255,255,0.2); color:var(--text); }
+        .dl-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem; }
+        .dl-title { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:700; }
+        .dl-badge {
+            font-size:0.75rem; color:var(--teal); background:var(--teal-dim);
+            border:1px solid rgba(0,229,195,0.2); padding:4px 10px; border-radius:6px;
+        }
+        .location-info {
+            display:flex; align-items:center; gap:8px;
+            padding:10px 14px; background:var(--surface);
+            border:1px solid var(--border); border-radius:10px;
+            margin-bottom:1.5rem; font-size:0.83rem;
+        }
+        .location-info span { color:var(--text-muted); }
+        .location-info strong { color:var(--text); }
+        .dl-items { display:flex; flex-direction:column; gap:12px; margin-bottom:1.5rem; }
+        .dl-item {
+            background:var(--surface); border:1px solid var(--border);
+            border-radius:12px; padding:14px 16px; transition:border-color 0.3s;
+        }
+        .dl-item.downloading { border-color:rgba(0,229,195,0.3); }
+        .dl-item.done { border-color:rgba(57,217,138,0.3); }
+        .dl-item-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+        .dl-item-left { display:flex; align-items:center; gap:10px; }
+        .dl-icon {
+            width:32px; height:32px; border-radius:8px;
+            display:flex; align-items:center; justify-content:center;
+            font-size:16px; background:var(--surface);
+            border:1px solid var(--border); flex-shrink:0;
+        }
+        .dl-item-name { font-size:0.88rem; font-weight:500; }
+        .dl-item-sub { font-size:0.75rem; color:var(--text-muted); }
+        .dl-item-right { display:flex; align-items:center; gap:8px; }
+        .dl-size { font-size:0.75rem; color:var(--text-muted); font-variant-numeric:tabular-nums; }
+        .dl-status-icon { font-size:0.9rem; width:20px; text-align:center; }
+        .progress-bar-track { height:4px; background:var(--border); border-radius:4px; overflow:hidden; }
+        .progress-bar-fill {
+            height:100%; border-radius:4px;
+            background:linear-gradient(90deg, var(--teal), #5af5df);
+            width:0%; transition:width 0.3s ease; position:relative;
+        }
+        .progress-bar-fill.done { background:linear-gradient(90deg, var(--green), #6fedb4); }
+        .total-progress {
+            background:var(--surface); border:1px solid var(--border);
+            border-radius:12px; padding:14px 16px;
+        }
+        .total-progress-row {
+            display:flex; justify-content:space-between; align-items:center;
+            margin-bottom:8px; font-size:0.82rem;
+        }
+        .total-label { color:var(--text-muted); }
+        .total-pct { font-family:'Syne',sans-serif; font-weight:700; color:var(--teal); font-size:0.95rem; }
+        .total-bar-track { height:6px; background:var(--border); border-radius:6px; overflow:hidden; }
+        .total-bar-fill {
+            height:100%; border-radius:6px;
+            background:linear-gradient(90deg, var(--teal), #5af5df);
+            width:0%; transition:width 0.4s ease;
+        }
+        .ready-badge {
+            display:flex; align-items:center; gap:10px; padding:12px 16px;
+            background:var(--green-dim); border:1px solid rgba(57,217,138,0.3);
+            border-radius:12px; margin-bottom:1.5rem;
+        }
+        .ready-dot {
+            width:10px; height:10px; background:var(--green); border-radius:50%;
+            box-shadow:0 0 10px var(--green);
+            animation:pulse-green 2s ease-in-out infinite; flex-shrink:0;
+        }
+        @keyframes pulse-green {
+            0%,100% { box-shadow:0 0 10px var(--green); }
+            50% { box-shadow:0 0 20px var(--green), 0 0 30px rgba(57,217,138,0.3); }
+        }
+        .ready-title { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; color:var(--green); }
+        .ready-sub { font-size:0.78rem; color:rgba(57,217,138,0.7); }
+        .nearby-heading {
+            font-family:'Syne',sans-serif; font-size:0.85rem; font-weight:700;
+            color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.75rem;
+        }
+        .nearby-list {
+            display:flex; flex-direction:column; gap:8px; margin-bottom:1.5rem;
+            max-height:200px; overflow-y:auto; padding-right:2px;
+        }
+        .nearby-list::-webkit-scrollbar { width:3px; }
+        .nearby-list::-webkit-scrollbar-track { background:var(--surface); }
+        .nearby-list::-webkit-scrollbar-thumb { background:var(--teal); border-radius:2px; }
+        .nearby-item {
+            display:flex; align-items:center; gap:10px;
+            padding:10px 12px; background:var(--surface);
+            border:1px solid var(--border); border-radius:10px;
+            font-size:0.83rem; animation:item-in 0.4s ease both;
+        }
+        @keyframes item-in {
+            from { opacity:0; transform:translateX(-8px); }
+            to { opacity:1; transform:translateX(0); }
+        }
+        .nearby-type-badge {
+            width:28px; height:28px; border-radius:7px;
+            display:flex; align-items:center; justify-content:center;
+            font-size:14px; flex-shrink:0;
+        }
+        .nearby-info { flex:1; min-width:0; }
+        .nearby-name { font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .nearby-meta { display:flex; gap:8px; color:var(--text-muted); font-size:0.72rem; margin-top:1px; }
+        .cached-chip {
+            display:flex; align-items:center; gap:4px; font-size:0.68rem;
+            color:var(--green); background:var(--green-dim);
+            padding:2px 7px; border-radius:4px; flex-shrink:0;
+        }
+        .cache-stats { display:flex; gap:8px; margin-bottom:1.5rem; }
+        .cache-stat {
+            flex:1; padding:10px 12px; background:var(--surface);
+            border:1px solid var(--border); border-radius:10px; text-align:center;
+        }
+        .cache-stat-val { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:700; color:var(--teal); }
+        .cache-stat-label { font-size:0.7rem; color:var(--text-muted); margin-top:2px; }
+    </style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<div class="floaters" id="floaters"></div>
+
+<!-- Screen 1: Prompt -->
+<div class="screen" id="screen-prompt">
+    <div class="card">
+        <div class="logo">
+            <div class="logo-mark">🛡️</div>
+            <div class="logo-name">TosTrip</div>
+        </div>
+        <div class="tagline">Your offline adventure companion</div>
+        <div class="signal-badge">
+            <div class="signal-dot"></div>
+            <span class="signal-label">Weak signal detected in your area</span>
+        </div>
+        <div class="prompt-heading">Download area data<br>before you lose signal?</div>
+        <div class="prompt-body">
+            We'll save everything you need for nearby exploration — maps, points of interest, emergency contacts, and trails — directly to your device.
+        </div>
+        <div class="coverage-pills">
+            <div class="pill"><span>🗺️</span> Offline Maps</div>
+            <div class="pill"><span>📍</span> Nearby POIs</div>
+            <div class="pill"><span>🚨</span> Emergency SOS</div>
+            <div class="pill"><span>🧭</span> Navigation</div>
+            <div class="pill"><span>⛺</span> Campsites</div>
+            <div class="pill"><span>🏥</span> Medical</div>
+        </div>
+        <div class="btn-row">
+            <button class="btn btn-primary" onclick="startDownload()">Download &amp; Go Offline</button>
+            <button class="btn btn-ghost" onclick="stayOnline()">Stay Online</button>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 2: Downloading -->
+<div class="screen hidden" id="screen-download">
+    <div class="card">
+        <div class="dl-header">
+            <div class="dl-title">Caching Area Data</div>
+            <div class="dl-badge" id="dl-badge">Locating…</div>
+        </div>
+        <div class="location-info" id="location-info">
+            <span>📡</span>
+            <span>Getting your location…</span>
+        </div>
+        <div class="dl-items" id="dl-items"></div>
+        <div class="total-progress">
+            <div class="total-progress-row">
+                <span class="total-label">Overall Progress</span>
+                <span class="total-pct" id="total-pct">0%</span>
+            </div>
+            <div class="total-bar-track">
+                <div class="total-bar-fill" id="total-bar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 3: Ready -->
+<div class="screen hidden" id="screen-ready">
+    <div class="card">
+        <div class="logo">
+            <div class="logo-mark">🛡️</div>
+            <div class="logo-name">TosTrip</div>
+        </div>
+        <div class="ready-badge">
+            <div class="ready-dot"></div>
+            <div>
+                <div class="ready-title">Offline Ready ✓</div>
+                <div class="ready-sub" id="ready-sub">All data cached successfully</div>
+            </div>
+        </div>
+        <div class="cache-stats" id="cache-stats"></div>
+        <div class="nearby-heading">📍 Cached Nearby Places</div>
+        <div class="nearby-list" id="nearby-list"></div>
+        <button class="btn btn-primary" style="width:100%" onclick="startAdventure()">Start Your Adventure →</button>
+    </div>
+</div>
+
+<script>
+window.offlineCache = { location:null, pois:[], maps:null, emergency:null, trails:null, timestamp:null };
+
+// Floaters
+const FLOATERS = ['🗺️','📍','🧭','⛰️','🏕️','🌲','🏔️','⛺','🌊','🦅'];
+const floatersEl = document.getElementById('floaters');
+FLOATERS.forEach((icon,i) => {
+    const el = document.createElement('div');
+    el.className = 'floater';
+    el.textContent = icon;
+    el.style.left = (Math.random()*90+5)+'%';
+    el.style.animationDuration = (Math.random()*10+12)+'s';
+    el.style.animationDelay = (i*1.5)+'s';
+    floatersEl.appendChild(el);
+});
+
+const CATEGORIES = [
+    { id:'maps', icon:'🗺️', name:'Map Tiles', sub:'Topographic + satellite', size:'18.4 MB', duration:3200, color:'rgba(0,229,195,0.15)' },
+    { id:'pois', icon:'📍', name:'Points of Interest', sub:'Restaurants, hotels, sights', size:'4.1 MB', duration:2000, color:'rgba(255,179,71,0.15)' },
+    { id:'trails', icon:'🥾', name:'Trails & Routes', sub:'Hiking, cycling, walking', size:'6.8 MB', duration:2500, color:'rgba(100,180,255,0.15)' },
+    { id:'emergency', icon:'🚨', name:'Emergency Services', sub:'Hospitals, police, fire', size:'0.9 MB', duration:1200, color:'rgba(255,92,92,0.15)' },
+    { id:'weather', icon:'🌤️', name:'72-hr Weather Forecast', sub:'Hourly temperature & alerts', size:'1.2 MB', duration:1400, color:'rgba(160,120,255,0.15)' }
+];
+
+const POI_TEMPLATES = [
+    { type:'🏨', cat:'Hotel', names:['Mountain Lodge','Valley Inn','Summit Stay','Riverside Hotel','Hillside Resort'] },
+    { type:'🍽️', cat:'Restaurant', names:['The Local Kitchen','Trail Eats','Base Camp Grill','Ridge View Diner','Forest Bistro'] },
+    { type:'⛽', cat:'Gas Station', names:['Shell Station','BP Roadside','Total Fuel Stop','Highland Petrol','Quick Fuel'] },
+    { type:'🏥', cat:'Medical', names:['District Hospital','Valley Clinic','Mountain Medical','Community Health','Emergency Center'] },
+    { type:'🌲', cat:'Park', names:['National Forest Trail','Valley Nature Reserve','Summit Park','Riverside Walk','Echo Trail'] },
+    { type:'⛺', cat:'Campsite', names:['Pine Ridge Camp','Stargazer Site','Riverside Pitch','Summit Bivouac','Forest Camp'] },
+    { type:'🛒', cat:'Store', names:['Mountain Supplies','Trail Shop','Explorer Gear','Valley Mart','Outdoor Depot'] },
+    { type:'💧', cat:'Water Source', names:['Clean Spring','River Fill Point','Trail Water Station','Filtered Tap','Freshwater Point'] }
+];
+
+function generatePOIs(lat, lng) {
+    const pois = [];
+    for (let i = 0; i < 14; i++) {
+        const tmpl = POI_TEMPLATES[i % POI_TEMPLATES.length];
+        const nameIdx = Math.floor(Math.random()*tmpl.names.length);
+        const dist = parseFloat((Math.random()*4.5+0.3).toFixed(1));
+        const bearing = ['N','NE','E','SE','S','SW','W','NW'][Math.floor(Math.random()*8)];
+        pois.push({
+            id:i, icon:tmpl.type, cat:tmpl.cat, name:tmpl.names[nameIdx],
+            dist, bearing, rating:(Math.random()*1.5+3.5).toFixed(1)
+        });
+    }
+    return pois.sort((a,b)=>a.dist-b.dist);
+}
+
+function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+}
+
+function stayOnline() {
+    const badge = document.querySelector('.signal-badge');
+    badge.style.transition = 'all 0.3s';
+    badge.style.background = 'rgba(57,217,138,0.15)';
+    badge.style.borderColor = 'rgba(57,217,138,0.3)';
+    badge.querySelector('.signal-label').style.color = '#39d98a';
+    badge.querySelector('.signal-label').textContent = 'Staying online — tap anytime to cache';
+    setTimeout(()=>{
+        badge.style.background='';
+        badge.style.borderColor='';
+        badge.querySelector('.signal-label').style.color='';
+        badge.querySelector('.signal-label').textContent='Weak signal detected in your area';
+    }, 3000);
+}
+
+function startDownload() {
+    showScreen('screen-download');
+    buildDownloadItems();
+    detectLocationThenDownload();
+}
+
+function buildDownloadItems() {
+    const container = document.getElementById('dl-items');
+    container.innerHTML = '';
+    CATEGORIES.forEach(cat => {
+        const div = document.createElement('div');
+        div.className = 'dl-item';
+        div.id = 'dlitem-'+cat.id;
+        div.innerHTML =
+            '<div class="dl-item-top">'+
+                '<div class="dl-item-left">'+
+                    '<div class="dl-icon" style="background:'+cat.color+'">'+cat.icon+'</div>'+
+                    '<div>'+
+                        '<div class="dl-item-name">'+cat.name+'</div>'+
+                        '<div class="dl-item-sub">'+cat.sub+'</div>'+
+                    '</div>'+
+                '</div>'+
+                '<div class="dl-item-right">'+
+                    '<span class="dl-size">'+cat.size+'</span>'+
+                    '<span class="dl-status-icon" id="status-'+cat.id+'">⏳</span>'+
+                '</div>'+
+            '</div>'+
+            '<div class="progress-bar-track">'+
+                '<div class="progress-bar-fill" id="bar-'+cat.id+'" style="width:0%"></div>'+
+            '</div>';
+        container.appendChild(div);
+    });
+}
+
+function detectLocationThenDownload() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            pos => onLocation(pos.coords.latitude, pos.coords.longitude, false),
+            () => onLocation(11.5564+(Math.random()-0.5)*0.05, 104.9282+(Math.random()-0.5)*0.05, true),
+            { timeout:5000 }
+        );
+    } else {
+        onLocation(11.5564, 104.9282, true);
+    }
+}
+
+function onLocation(lat, lng, approx) {
+    window.offlineCache.location = { lat, lng };
+    const info = document.getElementById('location-info');
+    info.innerHTML =
+        '<span>📡</span>'+
+        '<strong>'+lat.toFixed(4)+', '+lng.toFixed(4)+'</strong>'+
+        '<span style="margin-left:auto;font-size:0.75rem;color:var(--text-muted)">'+
+            (approx ? 'Approx location' : 'GPS locked')+
+        '</span>';
+    document.getElementById('dl-badge').textContent = 'Downloading…';
+    beginSequentialDownload();
+}
+
+async function beginSequentialDownload() {
+    const totalWeight = CATEGORIES.reduce((s,c)=>s+c.duration,0);
+    let cumulative = 0;
+    for (let i=0; i<CATEGORIES.length; i++) {
+        const cat = CATEGORIES[i];
+        const item = document.getElementById('dlitem-'+cat.id);
+        const bar = document.getElementById('bar-'+cat.id);
+        const statusIcon = document.getElementById('status-'+cat.id);
+        item.classList.add('downloading');
+        statusIcon.textContent = '⬇️';
+        const prevPct = (cumulative/totalWeight)*100;
+        await animateBar(bar, cat.duration, pct => {
+            const overall = prevPct + (pct/100)*(cat.duration/totalWeight)*100;
+            setTotalProgress(Math.min(100, overall));
+        });
+        item.classList.remove('downloading');
+        item.classList.add('done');
+        bar.classList.add('done');
+        bar.style.width = '100%';
+        statusIcon.textContent = '✅';
+        cumulative += cat.duration;
+        setTotalProgress(Math.min(100,(cumulative/totalWeight)*100));
+        // Store data
+        if (cat.id==='maps') window.offlineCache.maps = { tiles:'cached', zoom:[10,16] };
+        if (cat.id==='pois') window.offlineCache.pois = generatePOIs(window.offlineCache.location.lat, window.offlineCache.location.lng);
+        if (cat.id==='emergency') window.offlineCache.emergency = { sos:'112', hospital:'District General', police:'Local Station' };
+        if (cat.id==='trails') window.offlineCache.trails = { count:23, cached:true };
+        if (cat.id==='weather') window.offlineCache.weather = { forecast:'72hr', temp:'24C', alert:null };
+    }
+    window.offlineCache.timestamp = new Date().toISOString();
+    document.getElementById('dl-badge').textContent = 'Complete ✓';
+    setTotalProgress(100);
+    setTimeout(showReadyScreen, 700);
+}
+
+function animateBar(bar, duration, onProgress) {
+    return new Promise(resolve => {
+        const steps = 60;
+        const interval = duration/steps;
+        let step = 0;
+        const timer = setInterval(()=>{
+            step++;
+            const t = step/steps;
+            const ease = t<0.5 ? 2*t*t : -1+(4-2*t)*t;
+            bar.style.width = (ease*100)+'%';
+            onProgress(ease*100);
+            if (step>=steps) { clearInterval(timer); resolve(); }
+        }, interval);
+    });
+}
+
+function setTotalProgress(pct) {
+    document.getElementById('total-pct').textContent = Math.round(pct)+'%';
+    document.getElementById('total-bar').style.width = pct+'%';
+}
+
+function showReadyScreen() {
+    const pois = window.offlineCache.pois;
+    const stats = [
+        { val:pois.length+'+', label:'Places cached' },
+        { val:'~32 MB', label:'Data saved' },
+        { val:'5 km', label:'Coverage radius' }
+    ];
+    document.getElementById('cache-stats').innerHTML = stats.map(s=>
+        '<div class="cache-stat">'+
+            '<div class="cache-stat-val">'+s.val+'</div>'+
+            '<div class="cache-stat-label">'+s.label+'</div>'+
+        '</div>'
+    ).join('');
+    document.getElementById('ready-sub').textContent =
+        pois.length+' places cached \u2022 Maps (5 km radius) \u2022 Emergency contacts';
+    const listEl = document.getElementById('nearby-list');
+    listEl.innerHTML = '';
+    pois.slice(0,10).forEach((poi,i)=>{
+        const item = document.createElement('div');
+        item.className = 'nearby-item';
+        item.style.animationDelay = (i*0.06)+'s';
+        const badgeBg = poi.cat==='Medical' ? 'rgba(255,92,92,0.15)' :
+                        (poi.cat==='Park'||poi.cat==='Campsite') ? 'rgba(57,217,138,0.15)' :
+                        'rgba(0,229,195,0.1)';
+        item.innerHTML =
+            '<div class="nearby-type-badge" style="background:'+badgeBg+'">'+poi.icon+'</div>'+
+            '<div class="nearby-info">'+
+                '<div class="nearby-name">'+poi.name+'</div>'+
+                '<div class="nearby-meta">'+
+                    '<span>'+poi.cat+'</span><span>·</span>'+
+                    '<span>'+poi.dist+' km '+poi.bearing+'</span><span>·</span>'+
+                    '<span>⭐ '+poi.rating+'</span>'+
+                '</div>'+
+            '</div>'+
+            '<div class="cached-chip">✓ saved</div>';
+        listEl.appendChild(item);
+    });
+    showScreen('screen-ready');
+}
+
+function startAdventure() {
+    document.body.style.transition = 'opacity 0.5s';
+    document.body.style.opacity = '0';
+    setTimeout(()=>{ window.location.href = 'triallll.html'; }, 500);
+}
+</script>
+</body>
+</html>
