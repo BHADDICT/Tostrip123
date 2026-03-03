@@ -9,11 +9,11 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --p:#667eea; --pd:#4f63d2; --ps:#f0f0fd; --pm:#ddd5fb;
-  --gold:#f59e0b; --green:#10b981; --red:#ef4444; --orange:#f97316;
-  --ink:#111827; --ink2:#374151; --ink3:#6b7280; --ink4:#9ca3af;
-  --line:#e5e7eb; --bg:#fff; --bg2:#f9fafb; --bg3:#f3f4f6;
-  --r-xs:6px; --r-sm:10px; --r-md:16px; --r-lg:22px; --r-xl:30px;
+  --p:#667eea;--pd:#4f63d2;--ps:#f0f0fd;--pm:#ddd5fb;
+  --gold:#f59e0b;--green:#10b981;--red:#ef4444;--orange:#f97316;
+  --ink:#111827;--ink2:#374151;--ink3:#6b7280;--ink4:#9ca3af;
+  --line:#e5e7eb;--bg:#fff;--bg2:#f9fafb;--bg3:#f3f4f6;
+  --r-xs:6px;--r-sm:10px;--r-md:16px;--r-lg:22px;--r-xl:30px;
   --sh-sm:0 1px 4px rgba(0,0,0,.07);
   --sh-md:0 4px 20px rgba(0,0,0,.09);
   --sh-lg:0 12px 48px rgba(0,0,0,.13);
@@ -56,14 +56,11 @@ button{font-family:inherit;cursor:pointer}
 .hero-stats{display:flex;gap:28px;flex-wrap:wrap;padding-top:24px;border-top:1px solid var(--line)}
 .hs-num{font-size:24px;font-weight:800;color:var(--ink);font-family:'Playfair Display',serif}
 .hs-lbl{font-size:12px;color:var(--ink4);margin-top:2px;font-weight:500}
-
-/* hero visual */
 .hero-visual{position:relative;height:440px}
 .hv-main{position:absolute;top:0;left:0;right:55px;bottom:55px;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-lg)}
 .hv-main img{width:100%;height:100%}
 .hv-sm{position:absolute;bottom:0;right:0;width:170px;height:170px;border-radius:var(--r-md);overflow:hidden;box-shadow:var(--sh-lg);border:4px solid #fff}
 .hv-sm img{width:100%;height:100%}
-/* floating guide card */
 .hv-card{position:absolute;top:20px;right:10px;background:#fff;border-radius:var(--r-md);padding:14px 16px;box-shadow:var(--sh-lg);min-width:190px;border:1.5px solid var(--line)}
 .hv-card-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .hv-av{width:40px;height:40px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--ps);border:2px solid var(--pm)}
@@ -74,7 +71,6 @@ button{font-family:inherit;cursor:pointer}
 .hv-rating{display:flex;align-items:center;gap:5px}
 .hv-stars{color:var(--gold);font-size:12px}
 .hv-rc{font-size:11px;color:var(--ink4)}
-/* availability dot */
 .hv-avail{position:absolute;bottom:18px;left:18px;background:#fff;border-radius:100px;padding:6px 14px;box-shadow:var(--sh-md);display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--ink2)}
 .avail-dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;animation:pulse-dot 1.8s infinite}
 @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
@@ -118,8 +114,6 @@ button{font-family:inherit;cursor:pointer}
 .guide-card{background:var(--bg);border:1.5px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);transition:all .3s;display:flex;flex-direction:column}
 .guide-card:hover{box-shadow:var(--sh-lg);transform:translateY(-3px);border-color:var(--pm)}
 .guide-card.hidden{display:none}
-
-/* photo */
 .gc-photo{position:relative;height:220px;overflow:hidden}
 .gc-photo img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
 .guide-card:hover .gc-photo img{transform:scale(1.05)}
@@ -128,8 +122,6 @@ button{font-family:inherit;cursor:pointer}
 .avail-yes{background:rgba(16,185,129,.15);color:#059669;border:1px solid rgba(16,185,129,.3)}
 .avail-busy{background:rgba(245,158,11,.15);color:#d97706;border:1px solid rgba(245,158,11,.3)}
 .gc-city-pill{position:absolute;bottom:12px;left:12px;display:flex;align-items:center;gap:5px;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:100px}
-
-/* body */
 .gc-body{padding:20px;flex:1;display:flex;flex-direction:column}
 .gc-name-row{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px}
 .gc-name{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--ink)}
@@ -139,25 +131,17 @@ button{font-family:inherit;cursor:pointer}
 .gc-reviews{font-size:11px;color:var(--ink4)}
 .gc-tagline{font-size:13px;color:var(--p);font-weight:600;margin-bottom:10px;font-style:italic}
 .gc-bio{font-size:13px;color:var(--ink3);line-height:1.65;margin-bottom:14px;flex:1}
-
-/* languages */
 .gc-langs{display:flex;align-items:center;gap:6px;margin-bottom:12px;flex-wrap:wrap}
 .gc-langs-lbl{font-size:11px;font-weight:700;color:var(--ink4);text-transform:uppercase;letter-spacing:.5px}
 .lang-pill{font-size:11px;font-weight:600;padding:3px 8px;border-radius:100px;background:var(--bg3);color:var(--ink2)}
-
-/* specialties */
 .gc-specs{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
 .spec-tag{display:flex;align-items:center;gap:4px;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:700;background:var(--ps);color:var(--pd)}
-
-/* pricing */
 .gc-pricing{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;padding:14px;background:var(--bg2);border-radius:var(--r-sm);border:1px solid var(--line)}
 .price-opt{text-align:center}
 .price-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink4);margin-bottom:3px}
 .price-val{font-size:20px;font-weight:800;color:var(--ink);font-family:'Playfair Display',serif;line-height:1}
 .price-dur{font-size:10px;color:var(--ink4);margin-top:2px}
 .price-divider{width:1px;background:var(--line);align-self:stretch}
-
-/* actions */
 .gc-actions{display:flex;gap:8px}
 .btn-book{flex:1;padding:11px;border-radius:var(--r-sm);background:var(--p);border:none;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 3px 12px rgba(102,126,234,.28);transition:all .22s}
 .btn-book:hover{background:var(--pd);transform:translateY(-1px);box-shadow:0 6px 20px rgba(102,126,234,.38)}
@@ -179,7 +163,6 @@ button{font-family:inherit;cursor:pointer}
 .why-icon{width:44px;height:44px;border-radius:var(--r-sm);background:var(--ps);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;border:1.5px solid var(--pm)}
 .why-item h4{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:3px}
 .why-item p{font-size:13px;color:var(--ink3);line-height:1.55}
-/* why image grid */
 .why-imgs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:12px;height:420px}
 .wi{border-radius:var(--r-md);overflow:hidden}
 .wi img{width:100%;height:100%}
@@ -214,82 +197,175 @@ button{font-family:inherit;cursor:pointer}
 .test-name{font-size:14px;font-weight:700;color:var(--ink)}
 .test-info{font-size:12px;color:var(--ink4)}
 
-/* ── MODALS ── */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(17,24,39,.52);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;padding:20px}
+/* ════════════════════════════════════════════
+   BOOKING MODAL — 3-STEP
+════════════════════════════════════════════ */
+.modal-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(17,24,39,.55);backdrop-filter:blur(10px);
+  z-index:9999;align-items:center;justify-content:center;padding:20px;
+}
 .modal-overlay.open{display:flex}
-.modal-box{background:var(--bg);border-radius:var(--r-xl);max-width:560px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 28px 80px rgba(0,0,0,.2);animation:popIn .26s cubic-bezier(.16,1,.3,1)}
-@keyframes popIn{from{opacity:0;transform:scale(.92) translateY(14px)}to{opacity:1;transform:scale(1) translateY(0)}}
 
-/* book modal head */
-.mh-book{background:linear-gradient(135deg,#4f63d2 0%,#667eea 100%);padding:28px 32px;border-radius:var(--r-xl) var(--r-xl) 0 0;position:relative}
-.mh-book-top{display:flex;align-items:center;gap:14px;margin-bottom:4px}
-.mh-guide-av{width:52px;height:52px;border-radius:50%;border:3px solid rgba(255,255,255,.4);overflow:hidden;flex-shrink:0;background:var(--pm)}
-.mh-guide-av img{width:100%;height:100%}
-.mh-book h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:2px}
+.modal-box{
+  background:var(--bg);border-radius:var(--r-xl);
+  max-width:560px;width:100%;max-height:94vh;overflow:hidden;
+  display:flex;flex-direction:column;
+  box-shadow:0 32px 90px rgba(0,0,0,.22);
+  animation:popIn .28s cubic-bezier(.16,1,.3,1);
+}
+@keyframes popIn{from{opacity:0;transform:scale(.9) translateY(18px)}to{opacity:1;transform:scale(1) translateY(0)}}
+
+/* ── BOOKING MODAL HEADER ── */
+.mh-book{
+  background:linear-gradient(135deg,#4f63d2 0%,#667eea 60%,#7c8ef0 100%);
+  padding:26px 28px 22px;position:relative;flex-shrink:0;
+}
+.mh-book-top{display:flex;align-items:center;gap:13px;margin-bottom:18px}
+.mh-guide-av{width:54px;height:54px;border-radius:50%;border:3px solid rgba(255,255,255,.45);overflow:hidden;flex-shrink:0;background:var(--pm)}
+.mh-guide-av img{width:100%;height:100%;object-fit:cover}
+.mh-book h2{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:#fff;margin-bottom:2px;line-height:1.2}
 .mh-book h2 span{color:#fde68a}
-.mh-book p{font-size:13px;color:rgba(255,255,255,.75)}
-.mh-book .modal-close{background:rgba(255,255,255,.18);color:#fff}
-.mh-book .modal-close:hover{background:rgba(255,255,255,.3)}
+.mh-book p{font-size:12px;color:rgba(255,255,255,.72);font-weight:500}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.18);border:none;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;cursor:pointer;transition:all .2s}
+.modal-close:hover{background:rgba(255,255,255,.32)}
 
-/* msg modal head */
-.mh-msg{background:var(--bg2);border-bottom:1.5px solid var(--line);padding:28px 32px;border-radius:var(--r-xl) var(--r-xl) 0 0;position:relative}
-.mh-msg-row{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+/* step bar */
+.step-bar{display:flex;align-items:center;gap:0}
+.step-item{display:flex;align-items:center;gap:0;flex:1}
+.step-item:last-child{flex:0}
+.step-dot{width:28px;height:28px;border-radius:50%;border:2px solid rgba(255,255,255,.35);background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:rgba(255,255,255,.6);flex-shrink:0;transition:all .3s;position:relative;z-index:1}
+.step-dot.done{background:rgba(255,255,255,.9);border-color:rgba(255,255,255,.9);color:var(--pd)}
+.step-dot.active{background:#fff;border-color:#fff;color:var(--pd);box-shadow:0 0 0 4px rgba(255,255,255,.25)}
+.step-label{font-size:10px;font-weight:700;color:rgba(255,255,255,.55);margin-top:5px;text-align:center;position:absolute;white-space:nowrap;top:100%;left:50%;transform:translateX(-50%)}
+.step-dot-wrap{display:flex;flex-direction:column;align-items:center;position:relative;padding-bottom:18px}
+.step-line{flex:1;height:2px;background:rgba(255,255,255,.2);margin:0 4px;margin-bottom:18px;transition:background .3s}
+.step-line.done{background:rgba(255,255,255,.75)}
+
+/* modal body */
+.modal-body{flex:1;overflow-y:auto;padding:24px 28px 28px}
+.modal-body::-webkit-scrollbar{width:4px}
+.modal-body::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
+
+.step-panel{display:none;animation:fadeSlide .22s ease}
+.step-panel.active{display:block}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.panel-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.panel-sub{font-size:13px;color:var(--ink4);margin-bottom:20px}
+
+/* duration cards */
+.dur-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.dur-card{border:2px solid var(--line);border-radius:var(--r-md);padding:16px 14px;cursor:pointer;transition:all .22s;background:var(--bg);position:relative;overflow:hidden}
+.dur-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(102,126,234,.05),rgba(102,126,234,0));opacity:0;transition:opacity .2s}
+.dur-card:hover{border-color:var(--p);transform:translateY(-1px)}
+.dur-card:hover::before{opacity:1}
+.dur-card.sel{border-color:var(--p);background:var(--ps);transform:translateY(-2px);box-shadow:0 4px 20px rgba(102,126,234,.15)}
+.dur-card.sel::before{opacity:1}
+.dur-check{position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;border:2px solid var(--line);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;transition:all .22s}
+.dur-card.sel .dur-check{background:var(--p);border-color:var(--p)}
+.dur-emoji{font-size:22px;margin-bottom:8px}
+.dur-name{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.dur-time{font-size:11px;color:var(--ink4);margin-bottom:10px}
+.dur-price{font-family:'Playfair Display',serif;font-size:24px;font-weight:800;color:var(--p)}
+.dur-save{font-size:10px;font-weight:700;color:var(--green);background:#f0fdf4;border:1px solid #bbf7d0;padding:2px 7px;border-radius:100px;margin-top:4px;display:inline-block}
+
+/* activities */
+.acts-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--ink4);margin-bottom:10px}
+.acts-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:20px}
+.act-chip{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1.5px solid var(--line);border-radius:var(--r-sm);cursor:pointer;transition:all .18s;font-size:13px;font-weight:600;color:var(--ink3);background:var(--bg);user-select:none}
+.act-chip:hover{border-color:var(--p);color:var(--p);background:var(--ps)}
+.act-chip.on{border-color:var(--p);color:var(--pd);background:var(--ps)}
+.act-chip i{width:14px;text-align:center;font-size:12px}
+
+/* form fields */
+.fg{margin-bottom:14px}
+.fl{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);margin-bottom:6px}
+.fl .req{color:var(--red)}
+.fi{width:100%;padding:11px 14px;border-radius:var(--r-sm);border:1.5px solid var(--line);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);outline:none;background:var(--bg);transition:border-color .2s,box-shadow .2s}
+.fi:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(102,126,234,.1)}
+.fi::placeholder{color:var(--ink4)}
+.err-msg{font-size:11px;color:var(--red);margin-top:4px;font-weight:600;display:none}
+.fg.has-err .err-msg{display:block}
+.fg.has-err .fi{border-color:var(--red);box-shadow:0 0 0 3px rgba(239,68,68,.08)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+textarea.fi{resize:vertical;min-height:82px}
+
+/* review step */
+.review-header{background:linear-gradient(135deg,var(--ps) 0%,rgba(221,213,251,.3) 100%);border:1.5px solid var(--pm);border-radius:var(--r-md);padding:16px 18px;margin-bottom:18px;display:flex;align-items:center;gap:14px}
+.rev-av{width:46px;height:46px;border-radius:50%;overflow:hidden;border:2px solid var(--pm);flex-shrink:0}
+.rev-av img{width:100%;height:100%;object-fit:cover}
+.rev-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.rev-city{font-size:12px;color:var(--ink3)}
+.review-rows{display:flex;flex-direction:column;gap:0;margin-bottom:18px;border:1.5px solid var(--line);border-radius:var(--r-md);overflow:hidden}
+.rev-row{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.rev-row:last-child{border-bottom:none}
+.rev-row i{color:var(--p);font-size:13px;margin-top:2px;width:16px;text-align:center;flex-shrink:0}
+.rev-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink4);margin-bottom:2px}
+.rev-val{font-size:14px;font-weight:600;color:var(--ink)}
+.rev-acts{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.rev-act-tag{font-size:11px;font-weight:700;background:var(--ps);color:var(--pd);padding:2px 8px;border-radius:100px}
+
+/* price summary */
+.price-summary{background:var(--bg2);border:1.5px solid var(--line);border-radius:var(--r-md);padding:14px 16px;margin-bottom:18px}
+.ps-row{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--ink3);margin-bottom:8px}
+.ps-row:last-child{margin-bottom:0;padding-top:10px;border-top:1px solid var(--line);font-weight:700;color:var(--ink);font-size:16px}
+.ps-row:last-child .ps-val{font-family:'Playfair Display',serif;font-size:22px;color:var(--p)}
+
+/* refund note */
+.refund-note{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:var(--r-sm);padding:12px 16px;display:flex;gap:9px;font-size:13px;color:#166534;line-height:1.55;margin-bottom:18px;align-items:flex-start}
+.refund-note i{flex-shrink:0;margin-top:1px;color:#16a34a}
+
+/* buttons */
+.btn-row{display:flex;gap:8px;margin-top:4px}
+.btn-next{flex:1;padding:13px;border-radius:var(--r-sm);background:var(--p);border:none;color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 4px 16px rgba(102,126,234,.28);transition:all .22s}
+.btn-next:hover{background:var(--pd);transform:translateY(-1px);box-shadow:0 6px 22px rgba(102,126,234,.38)}
+.btn-next:disabled{opacity:.6;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-back-step{padding:13px 16px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--bg);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--ink3);cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s}
+.btn-back-step:hover{border-color:var(--p);color:var(--p)}
+
+/* success */
+.success-state{text-align:center;padding:20px 0 10px}
+.success-icon{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:28px;color:#fff;box-shadow:0 8px 28px rgba(16,185,129,.28);animation:bounceIn .5s cubic-bezier(.16,1,.3,1)}
+@keyframes bounceIn{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+.success-state h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.success-state p{font-size:14px;color:var(--ink3);line-height:1.65;max-width:340px;margin:0 auto 22px}
+.success-detail{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 18px;text-align:left;margin-bottom:20px}
+.sd-row{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid var(--line)}
+.sd-row:last-child{border-bottom:none}
+.sd-lbl{color:var(--ink4);font-weight:600}
+.sd-val{color:var(--ink);font-weight:700}
+.btn-done{width:100%;padding:13px;border-radius:var(--r-sm);background:var(--p);border:none;color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 4px 16px rgba(102,126,234,.25);transition:all .2s}
+.btn-done:hover{background:var(--pd)}
+
+/* ════════════════════════════════════════════
+   CHAT MODAL
+════════════════════════════════════════════ */
+.chat-modal-box{
+  background:var(--bg);border-radius:var(--r-xl);
+  max-width:520px;width:100%;max-height:92vh;overflow:hidden;
+  display:flex;flex-direction:column;
+  box-shadow:0 32px 90px rgba(0,0,0,.22);
+  animation:popIn .28s cubic-bezier(.16,1,.3,1);
+}
+.mh-msg{background:var(--bg2);border-bottom:1.5px solid var(--line);padding:24px 28px;position:relative;flex-shrink:0}
+.mh-msg-row{display:flex;align-items:center;gap:14px;margin-bottom:4px}
 .mh-msg-av{width:52px;height:52px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid var(--pm);background:var(--ps)}
-.mh-msg-av img{width:100%;height:100%}
+.mh-msg-av img{width:100%;height:100%;object-fit:cover}
 .mh-msg h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink)}
 .mh-msg h2 span{color:var(--p)}
 .mh-msg p{font-size:13px;color:var(--ink3)}
 .mh-msg .modal-close{background:var(--bg3);color:var(--ink3)}
 .mh-msg .modal-close:hover{background:var(--line)}
-
-.modal-close{position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:all .2s}
-
-/* modal body */
-.m-body{padding:28px 32px}
-.sum-bar{background:var(--ps);border:1.5px solid var(--pm);border-radius:var(--r-sm);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.sum-name{font-size:15px;font-weight:700;color:var(--ink)}
-.sum-dur{font-size:12px;color:var(--ink4);margin-top:2px}
-.sum-price{font-size:24px;font-weight:800;color:var(--p);font-family:'Playfair Display',serif}
-.dur-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
-.dur-opt{border:2px solid var(--line);border-radius:var(--r-md);padding:14px;cursor:pointer;position:relative;transition:all .2s;background:var(--bg)}
-.dur-opt.sel{border-color:var(--p);background:var(--ps)}
-.dur-opt:hover{border-color:var(--p)}
-.dur-opt input{position:absolute;opacity:0}
-.dur-chk{position:absolute;top:10px;right:10px;width:18px;height:18px;border-radius:50%;border:2px solid var(--line);background:var(--bg);display:flex;align-items:center;justify-content:center;transition:all .2s}
-.dur-opt.sel .dur-chk{background:var(--p);border-color:var(--p)}
-.dur-chk i{font-size:8px;color:#fff;display:none}
-.dur-opt.sel .dur-chk i{display:block}
-.dur-lbl{font-size:13px;font-weight:700;color:var(--ink)}
-.dur-sub{font-size:11px;color:var(--ink4);margin-top:2px}
-.dur-price{font-size:20px;font-weight:800;color:var(--p);margin-top:8px;font-family:'Playfair Display',serif}
-
-/* activities checkboxes */
-.activities-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
-.act-cb{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:var(--r-sm);border:1.5px solid var(--line);cursor:pointer;transition:all .2s;font-size:13px;font-weight:600;color:var(--ink2)}
-.act-cb:hover{border-color:var(--p);background:var(--ps)}
-.act-cb input{accent-color:var(--p);width:14px;height:14px}
-.act-cb.checked{border-color:var(--p);background:var(--ps);color:var(--pd)}
-
-.fg{margin-bottom:16px}
-.fl{display:block;font-size:13px;font-weight:600;color:var(--ink3);margin-bottom:7px}
-.fl .req{color:var(--red)}
-.fi{width:100%;padding:12px 14px;border-radius:var(--r-sm);border:1.5px solid var(--line);outline:none;font-family:inherit;font-size:14px;color:var(--ink);transition:border-color .2s,box-shadow .2s;background:var(--bg)}
-.fi:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(102,126,234,.1)}
-.fi::placeholder{color:var(--ink4)}
-.f-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.f-ta{resize:vertical;min-height:88px}
-.ok-note{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:var(--r-xs);padding:12px 16px;display:flex;gap:9px;font-size:13px;color:#166534;line-height:1.5;margin-bottom:18px}
-.ok-note i{flex-shrink:0;margin-top:1px}
-.m-btn{width:100%;padding:14px;border-radius:var(--r-sm);border:none;color:#fff;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:all .2s}
-.m-btn.purple{background:var(--p);box-shadow:0 4px 16px rgba(102,126,234,.28)}
-.m-btn.purple:hover{background:var(--pd)}
-.m-btn.dark{background:var(--ink);box-shadow:0 4px 14px rgba(0,0,0,.15)}
-.m-btn.dark:hover{background:var(--ink2)}
-
-/* msg topics */
+.chat-body{flex:1;overflow-y:auto;padding:24px 28px 28px}
+.chat-body::-webkit-scrollbar{width:4px}
+.chat-body::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
 .topic-row{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
 .t-chip{padding:6px 13px;border-radius:100px;border:1.5px solid var(--line);background:var(--bg);font-size:12px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .18s}
 .t-chip:hover,.t-chip.sel{border-color:var(--p);color:var(--p);background:var(--ps)}
+.chat-submit-btn{width:100%;padding:13px;border-radius:var(--r-sm);background:var(--ink);border:none;color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 4px 14px rgba(0,0,0,.15);transition:all .2s;margin-top:4px}
+.chat-submit-btn:hover{background:var(--ink2)}
+.chat-submit-btn:disabled{opacity:.6;cursor:not-allowed}
 
 /* ── FOOTER ── */
 .footer{background:#1a1f4e;color:rgba(255,255,255,.55);padding:44px 28px 28px}
@@ -297,7 +373,7 @@ button{font-family:inherit;cursor:pointer}
 .footer-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:20px}
 .footer-logo img{height:32px;filter:brightness(0) invert(1);opacity:.8}
 .footer-logo-text{font-family:'Playfair Display',serif;font-size:20px;color:rgba(255,255,255,.8)}
-.footer-nav{display:flex;gap:20px}
+.footer-nav{display:flex;gap:20px;list-style:none}
 .footer-nav a{font-size:14px;color:rgba(255,255,255,.5);transition:color .2s}
 .footer-nav a:hover{color:#fff}
 .footer-bot{border-top:1px solid rgba(255,255,255,.1);padding-top:18px;text-align:center;font-size:13px;color:rgba(255,255,255,.3)}
@@ -311,7 +387,6 @@ button{font-family:inherit;cursor:pointer}
   .why-imgs{display:none}
   .how-inner{grid-template-columns:1fr 1fr;gap:24px}
   .how-step{border-right:none;padding-bottom:20px;border-bottom:1px dashed var(--line)}
-  .how-step:nth-child(2n){border-right:none}
   .how-step:last-child{border-bottom:none}
   .test-grid{grid-template-columns:1fr 1fr}
 }
@@ -322,20 +397,21 @@ button{font-family:inherit;cursor:pointer}
   .guides-grid{grid-template-columns:1fr}
   .search-inner{flex-wrap:wrap}
   .f-row{grid-template-columns:1fr}
-  .dur-grid{grid-template-columns:1fr 1fr}
-  .activities-grid{grid-template-columns:1fr}
+  .acts-grid{grid-template-columns:1fr}
   .test-grid{grid-template-columns:1fr}
   .how-inner{grid-template-columns:1fr 1fr}
 }
 @media(max-width:480px){
   .hero-stats{gap:16px}
-  .guides-grid{grid-template-columns:1fr}
+  .modal-box,.chat-modal-box{border-radius:var(--r-lg)}
+  .mh-book,.mh-msg{padding:20px 20px 18px}
+  .modal-body,.chat-body{padding:20px 20px 24px}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ═══════ NAV ═══════ -->
 <nav class="nav" id="mainNav">
   <div class="nav-inner">
     <a href="index.html" class="logo">
@@ -355,7 +431,7 @@ button{font-family:inherit;cursor:pointer}
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ═══════ HERO ═══════ -->
 <section class="hero">
   <div class="hero-inner">
     <div>
@@ -402,7 +478,7 @@ button{font-family:inherit;cursor:pointer}
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
+<!-- ═══════ HOW IT WORKS ═══════ -->
 <div class="how-section">
   <div class="how-inner">
     <div class="how-step"><div class="how-num">1</div><h4>Browse Friends</h4><p>Filter by city, interest, and language to find your match</p></div>
@@ -412,7 +488,7 @@ button{font-family:inherit;cursor:pointer}
   </div>
 </div>
 
-<!-- SEARCH + FILTER -->
+<!-- ═══════ SEARCH + FILTER ═══════ -->
 <div class="search-bar">
   <div class="search-inner">
     <div class="search-input-wrap">
@@ -439,7 +515,7 @@ button{font-family:inherit;cursor:pointer}
   </div>
 </div>
 
-<!-- GUIDES GRID -->
+<!-- ═══════ GUIDES GRID ═══════ -->
 <div class="guides-section">
   <div class="guides-header">
     <h2>Meet Your Local Friends</h2>
@@ -448,7 +524,7 @@ button{font-family:inherit;cursor:pointer}
 
   <div class="guides-grid" id="guidesGrid">
 
-    <!-- ── GUIDE 1: SOKHA ── -->
+    <!-- GUIDE 1: SOKHA -->
     <div class="guide-card" data-city="phnom-penh" data-tags="food nightlife history" data-rating="5.0" data-half="25" data-full="45" data-reviews="84">
       <div class="gc-photo">
         <img src="./imgg/keolocal.jpg" alt="Sokha">
@@ -488,7 +564,7 @@ button{font-family:inherit;cursor:pointer}
       </div>
     </div>
 
-    <!-- ── GUIDE 2: DARA ── -->
+    <!-- GUIDE 2: DARA -->
     <div class="guide-card" data-city="siem-reap" data-tags="temples history photography" data-rating="4.9" data-half="30" data-full="55" data-reviews="112">
       <div class="gc-photo">
         <img src="./imgg/keofri.jpg" alt="Dara">
@@ -528,7 +604,7 @@ button{font-family:inherit;cursor:pointer}
       </div>
     </div>
 
-    <!-- ── GUIDE 3: VIRAK ── -->
+    <!-- GUIDE 3: VIRAK -->
     <div class="guide-card" data-city="kampot" data-tags="food photography" data-rating="4.8" data-half="28" data-full="50" data-reviews="67">
       <div class="gc-photo">
         <img src="./imgg/pic.JPG" alt="Virak">
@@ -567,7 +643,7 @@ button{font-family:inherit;cursor:pointer}
       </div>
     </div>
 
-    <!-- ── GUIDE 4: MALY ── -->
+    <!-- GUIDE 4: MALY -->
     <div class="guide-card" data-city="phnom-penh" data-tags="food photography nightlife" data-rating="5.0" data-half="27" data-full="48" data-reviews="93">
       <div class="gc-photo">
         <img src="./imgg/tour.jpg" alt="Maly">
@@ -607,7 +683,7 @@ button{font-family:inherit;cursor:pointer}
       </div>
     </div>
 
-    <!-- ── GUIDE 5: RITH ── -->
+    <!-- GUIDE 5: RITH -->
     <div class="guide-card" data-city="siem-reap" data-tags="temples food history" data-rating="4.9" data-half="32" data-full="58" data-reviews="78">
       <div class="gc-photo">
         <img src="./imgg/tour1.jpg" alt="Rith">
@@ -647,7 +723,7 @@ button{font-family:inherit;cursor:pointer}
       </div>
     </div>
 
-    <!-- ── GUIDE 6: LINDA ── -->
+    <!-- GUIDE 6: LINDA -->
     <div class="guide-card" data-city="phnom-penh" data-tags="history food" data-rating="4.8" data-half="24" data-full="44" data-reviews="56">
       <div class="gc-photo">
         <img src="./imgg/tour2.jpg" alt="Linda">
@@ -687,7 +763,7 @@ button{font-family:inherit;cursor:pointer}
       </div>
     </div>
 
-    <!-- ── GUIDE 7: CHAN ── -->
+    <!-- GUIDE 7: CHAN -->
     <div class="guide-card" data-city="kampot" data-tags="food photography nightlife" data-rating="4.9" data-half="26" data-full="46" data-reviews="41">
       <div class="gc-photo">
         <img src="./imgg/koh.jpg" alt="Chan">
@@ -726,7 +802,7 @@ button{font-family:inherit;cursor:pointer}
       </div>
     </div>
 
-    <!-- ── GUIDE 8: PHEARA ── -->
+    <!-- GUIDE 8: PHEARA -->
     <div class="guide-card" data-city="siem-reap" data-tags="temples photography nightlife" data-rating="4.9" data-half="29" data-full="52" data-reviews="60">
       <div class="gc-photo">
         <img src="./imgg/trip3.JPG" alt="Pheara">
@@ -748,7 +824,7 @@ button{font-family:inherit;cursor:pointer}
           <span class="lang-pill">🇪🇸 Spanish</span>
         </div>
         <div class="gc-specs">
-          <span class="spec-tag"><i class="fas fa-sunrise"></i> Sunrise Tours</span>
+          <span class="spec-tag"><i class="fas fa-sun"></i> Sunrise Tours</span>
           <span class="spec-tag"><i class="fas fa-gopuram"></i> Temples</span>
           <span class="spec-tag"><i class="fas fa-camera"></i> Photography</span>
           <span class="spec-tag"><i class="fas fa-moon"></i> Night Walks</span>
@@ -776,7 +852,7 @@ button{font-family:inherit;cursor:pointer}
   </div>
 </div>
 
-<!-- WHY SECTION -->
+<!-- ═══════ WHY SECTION ═══════ -->
 <div class="why-section">
   <div class="why-inner">
     <div class="why-text">
@@ -810,7 +886,7 @@ button{font-family:inherit;cursor:pointer}
   </div>
 </div>
 
-<!-- FAQ -->
+<!-- ═══════ FAQ ═══════ -->
 <div class="faq-section">
   <div class="sec-lbl"><i class="fas fa-question-circle"></i> Common Questions</div>
   <h2>Before You Book</h2>
@@ -840,7 +916,7 @@ button{font-family:inherit;cursor:pointer}
   </div>
 </div>
 
-<!-- TESTIMONIALS -->
+<!-- ═══════ TESTIMONIALS ═══════ -->
 <div class="test-section">
   <div class="test-inner">
     <div class="sec-lbl"><i class="fas fa-quote-left"></i> Guest Stories</div>
@@ -855,7 +931,7 @@ button{font-family:inherit;cursor:pointer}
       <div class="test-card">
         <div class="test-guide-tag"><i class="fas fa-user-circle"></i> Dara Chann · Siem Reap</div>
         <div class="test-stars">★★★★★</div>
-        <p class="test-q">I'd done Angkor twice before with group tours and felt nothing. Dara took me alone, pre-dawn, to a temple I'd never seen, sat down beside a 1,000-year-old carving and told me who carved it and why. I cried. Genuinely.</p>
+        <p class="test-q">I'd done Angkor twice before with group tours and felt nothing. Dara took me alone, pre-dawn, to a temple I'd never seen, sat down beside a 1,000-year-old carving and told me who carved it and why. I was moved to tears.</p>
         <div class="test-author"><div class="test-av">S</div><div><div class="test-name">Sarah L.</div><div class="test-info">🇺🇸 USA · Solo traveller</div></div></div>
       </div>
       <div class="test-card">
@@ -868,67 +944,207 @@ button{font-family:inherit;cursor:pointer}
   </div>
 </div>
 
-<!-- BOOKING MODAL -->
+<!-- ═══════════════════════════════════════════
+     BOOKING MODAL — 3-STEP
+═══════════════════════════════════════════ -->
 <div class="modal-overlay" id="bookModal">
   <div class="modal-box">
+
+    <!-- HEADER -->
     <div class="mh-book">
       <div class="mh-book-top">
-        <div class="mh-guide-av"><img id="bm-av" src="" alt=""></div>
+        <div class="mh-guide-av"><img id="bm-av" src="" alt="Guide"></div>
         <div>
-          <h2>Book <span id="bm-name">Guide</span></h2>
+          <h2>Book <span id="bm-name">Guide Name</span></h2>
           <p id="bm-city">City · TosTrip Local Friend</p>
         </div>
       </div>
-      <button class="modal-close" onclick="document.getElementById('bookModal').classList.remove('open')"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="m-body">
-      <div class="sum-bar">
-        <div><div class="sum-name" id="bm-sn">Guide Name</div><div class="sum-dur" id="bm-sd">Half Day · ~4 hours</div></div>
-        <div class="sum-price" id="bm-sp">$25</div>
+      <button class="modal-close" onclick="closeBookModal()"><i class="fas fa-times"></i></button>
+      <!-- STEP BAR -->
+      <div class="step-bar">
+        <div class="step-item">
+          <div class="step-dot-wrap">
+            <div class="step-dot active" id="sd1">1<span class="step-label">Plan</span></div>
+          </div>
+          <div class="step-line" id="sl1"></div>
+        </div>
+        <div class="step-item">
+          <div class="step-dot-wrap">
+            <div class="step-dot" id="sd2">2<span class="step-label">Details</span></div>
+          </div>
+          <div class="step-line" id="sl2"></div>
+        </div>
+        <div class="step-item">
+          <div class="step-dot-wrap">
+            <div class="step-dot" id="sd3">3<span class="step-label">Review</span></div>
+          </div>
+        </div>
       </div>
-      <form id="bookForm" onsubmit="submitBook(event)">
-        <label class="fl" style="margin-bottom:10px">Choose Duration</label>
-        <div class="dur-grid" id="bm-dur-grid"></div>
-
-        <label class="fl" style="margin-bottom:10px">What would you like to do? <span style="font-weight:400;color:var(--ink4)">(optional)</span></label>
-        <div class="activities-grid" id="actGrid">
-          <label class="act-cb" onclick="this.classList.toggle('checked')"><input type="checkbox" value="Street Food"> 🍜 Street Food Tour</label>
-          <label class="act-cb" onclick="this.classList.toggle('checked')"><input type="checkbox" value="Temples"> 🛕 Temples & Ruins</label>
-          <label class="act-cb" onclick="this.classList.toggle('checked')"><input type="checkbox" value="Markets"> 🛍️ Local Markets</label>
-          <label class="act-cb" onclick="this.classList.toggle('checked')"><input type="checkbox" value="Photography"> 📸 Photography</label>
-          <label class="act-cb" onclick="this.classList.toggle('checked')"><input type="checkbox" value="Nightlife"> 🌙 Night Out</label>
-          <label class="act-cb" onclick="this.classList.toggle('checked')"><input type="checkbox" value="Nature"> 🌿 Nature & Outdoors</label>
-        </div>
-
-        <div class="fg"><label class="fl">Full Name <span class="req">*</span></label><input type="text" id="b-name" class="fi" placeholder="Your full name" required></div>
-        <div class="f-row">
-          <div class="fg"><label class="fl">Email <span class="req">*</span></label><input type="email" id="b-email" class="fi" placeholder="you@email.com" required></div>
-          <div class="fg"><label class="fl">Phone</label><input type="tel" id="b-phone" class="fi" placeholder="+855 12 345 678"></div>
-        </div>
-        <div class="f-row">
-          <div class="fg"><label class="fl">Date <span class="req">*</span></label><input type="date" id="b-date" class="fi" required></div>
-          <div class="fg"><label class="fl">Group Size</label><select id="b-pax" class="fi"><option>1 person</option><option selected>2 people</option><option>3 people</option><option>4 people</option><option>5+ people</option></select></div>
-        </div>
-        <div class="fg"><label class="fl">Anything else?</label><textarea id="b-notes" class="fi f-ta" placeholder="Languages you speak, mobility needs, specific places you'd love to visit…"></textarea></div>
-        <div class="ok-note"><i class="fas fa-shield-alt"></i><span><strong>Free cancellation</strong> up to 48 hours before your booking. Full refund guaranteed.</span></div>
-        <button type="submit" class="m-btn purple"><i class="fas fa-check-circle"></i> Confirm Booking</button>
-      </form>
     </div>
-  </div>
+
+    <!-- BODY -->
+    <div class="modal-body" id="bookModalBody">
+
+      <!-- STEP 1: Plan -->
+      <div class="step-panel active" id="sp1">
+        <div class="panel-title">Choose Your Day</div>
+        <div class="panel-sub">Pick a duration and the things you'd love to do.</div>
+        <div class="dur-grid" id="bm-dur-grid"></div>
+        <div class="acts-title">What interests you? <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink4)">(pick any)</span></div>
+        <div class="acts-grid">
+          <div class="act-chip" onclick="toggleAct(this,'Street Food')"><i class="fas fa-utensils"></i> Street Food</div>
+          <div class="act-chip" onclick="toggleAct(this,'Temples')"><i class="fas fa-gopuram"></i> Temples</div>
+          <div class="act-chip" onclick="toggleAct(this,'Markets')"><i class="fas fa-shopping-bag"></i> Markets</div>
+          <div class="act-chip" onclick="toggleAct(this,'Photography')"><i class="fas fa-camera"></i> Photography</div>
+          <div class="act-chip" onclick="toggleAct(this,'Nightlife')"><i class="fas fa-moon"></i> Night Out</div>
+          <div class="act-chip" onclick="toggleAct(this,'History')"><i class="fas fa-landmark"></i> History</div>
+          <div class="act-chip" onclick="toggleAct(this,'Nature')"><i class="fas fa-leaf"></i> Nature</div>
+          <div class="act-chip" onclick="toggleAct(this,'Hidden Gems')"><i class="fas fa-map-marked-alt"></i> Hidden Gems</div>
+        </div>
+        <div class="btn-row">
+          <button class="btn-next" onclick="goStep(2)">Next: Your Info <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Details -->
+      <div class="step-panel" id="sp2">
+        <div class="panel-title">Your Details</div>
+        <div class="panel-sub">So your friend knows who to meet.</div>
+        <div class="fg" id="fg-name">
+          <label class="fl">Full Name <span class="req">*</span></label>
+          <input type="text" id="b-name" class="fi" placeholder="Your full name">
+          <div class="err-msg">Please enter your full name.</div>
+        </div>
+        <div class="f-row">
+          <div class="fg" id="fg-email">
+            <label class="fl">Email <span class="req">*</span></label>
+            <input type="email" id="b-email" class="fi" placeholder="you@email.com">
+            <div class="err-msg">Please enter a valid email.</div>
+          </div>
+          <div class="fg">
+            <label class="fl">Phone</label>
+            <input type="tel" id="b-phone" class="fi" placeholder="+855 12 345 678">
+          </div>
+        </div>
+        <div class="f-row">
+          <div class="fg" id="fg-date">
+            <label class="fl">Date <span class="req">*</span></label>
+            <input type="date" id="b-date" class="fi">
+            <div class="err-msg">Please pick a date.</div>
+          </div>
+          <div class="fg">
+            <label class="fl">Group Size</label>
+            <select id="b-pax" class="fi">
+              <option>1 person</option>
+              <option selected>2 people</option>
+              <option>3 people</option>
+              <option>4 people</option>
+              <option>5+ people</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg">
+          <label class="fl">Anything to know?</label>
+          <textarea id="b-notes" class="fi" style="resize:vertical;min-height:82px" placeholder="Languages, dietary needs, mobility, special spots you'd love to visit…"></textarea>
+        </div>
+        <div class="btn-row">
+          <button class="btn-back-step" onclick="goStep(1)"><i class="fas fa-arrow-left"></i> Back</button>
+          <button class="btn-next" onclick="validateStep2()">Review Booking <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Review -->
+      <div class="step-panel" id="sp3">
+        <div class="panel-title">Confirm Your Booking</div>
+        <div class="panel-sub">Everything look right? Hit confirm and you're set.</div>
+        <div class="review-header">
+          <div class="rev-av"><img id="rev-av" src="" alt=""></div>
+          <div>
+            <div class="rev-name" id="rev-name">Guide Name</div>
+            <div class="rev-city" id="rev-city">City · TosTrip Local Friend</div>
+          </div>
+        </div>
+        <div class="review-rows">
+          <div class="rev-row">
+            <i class="fas fa-calendar-alt"></i>
+            <div><div class="rev-lbl">Date</div><div class="rev-val" id="rev-date">—</div></div>
+          </div>
+          <div class="rev-row">
+            <i class="fas fa-clock"></i>
+            <div><div class="rev-lbl">Duration</div><div class="rev-val" id="rev-dur">Half Day · ~4 hours</div></div>
+          </div>
+          <div class="rev-row">
+            <i class="fas fa-users"></i>
+            <div><div class="rev-lbl">Group Size</div><div class="rev-val" id="rev-pax">2 people</div></div>
+          </div>
+          <div class="rev-row" id="rev-acts-row">
+            <i class="fas fa-heart"></i>
+            <div>
+              <div class="rev-lbl">Activities</div>
+              <div class="rev-acts" id="rev-acts-list"></div>
+            </div>
+          </div>
+          <div class="rev-row">
+            <i class="fas fa-user"></i>
+            <div><div class="rev-lbl">Name</div><div class="rev-val" id="rev-guestname">—</div></div>
+          </div>
+          <div class="rev-row">
+            <i class="fas fa-envelope"></i>
+            <div><div class="rev-lbl">Email</div><div class="rev-val" id="rev-email">—</div></div>
+          </div>
+        </div>
+        <div class="price-summary">
+          <div class="ps-row"><span id="ps-dur-label">Half Day</span><span>$<span id="ps-price">25</span></span></div>
+          <div class="ps-row"><span>Service fee</span><span>Included</span></div>
+          <div class="ps-row"><strong>Total due</strong><span class="ps-val">$<span id="ps-total">25</span></span></div>
+        </div>
+        <div class="refund-note">
+          <i class="fas fa-shield-alt"></i>
+          <span><strong>Free cancellation</strong> up to 48 hours before your booking. Full refund, no questions asked.</span>
+        </div>
+        <div class="btn-row">
+          <button class="btn-back-step" onclick="goStep(2)"><i class="fas fa-arrow-left"></i> Back</button>
+          <button class="btn-next" id="confirmBtn" onclick="submitBooking()"><i class="fas fa-check-circle"></i> Confirm Booking</button>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="step-panel" id="sp-success">
+        <div class="success-state">
+          <div class="success-icon"><i class="fas fa-check"></i></div>
+          <h3>You're All Set! 🎉</h3>
+          <p>Your booking request has been sent to <strong id="suc-name">Guide</strong>. Check your email for confirmation — they'll reach out within a few hours.</p>
+          <div class="success-detail">
+            <div class="sd-row"><span class="sd-lbl">Friend</span><span class="sd-val" id="suc-guide">—</span></div>
+            <div class="sd-row"><span class="sd-lbl">Date</span><span class="sd-val" id="suc-date">—</span></div>
+            <div class="sd-row"><span class="sd-lbl">Duration</span><span class="sd-val" id="suc-dur">—</span></div>
+            <div class="sd-row"><span class="sd-lbl">Total</span><span class="sd-val" id="suc-total">—</span></div>
+          </div>
+          <button class="btn-done" onclick="closeBookModal()"><i class="fas fa-home"></i> Back to Friends</button>
+        </div>
+      </div>
+
+    </div><!-- /modal-body -->
+  </div><!-- /modal-box -->
 </div>
 
-<!-- CHAT MODAL -->
+<!-- ═══════════════════════════════════════════
+     CHAT MODAL
+═══════════════════════════════════════════ -->
 <div class="modal-overlay" id="chatModal">
-  <div class="modal-box">
+  <div class="chat-modal-box">
     <div class="mh-msg">
       <div class="mh-msg-row">
         <div class="mh-msg-av"><img id="cm-av" src="" alt=""></div>
-        <div><h2>Chat with <span id="cm-name">Guide</span></h2><p id="cm-city">Ask anything before you book</p></div>
+        <div>
+          <h2>Chat with <span id="cm-name">Guide</span></h2>
+          <p id="cm-city">Ask anything before you book</p>
+        </div>
       </div>
-      <button class="modal-close" onclick="document.getElementById('chatModal').classList.remove('open')"><i class="fas fa-times"></i></button>
+      <button class="modal-close" onclick="closeChatModal()"><i class="fas fa-times"></i></button>
     </div>
-    <div class="m-body">
-      <label class="fl" style="margin-bottom:10px">Quick topics — tap to add to your message</label>
+    <div class="chat-body">
+      <label class="fl" style="margin-bottom:10px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3)">Quick topics — tap to add to your message</label>
       <div class="topic-row">
         <button type="button" class="t-chip" onclick="addTopic(this,'What areas do you usually take people to?')">🗺️ Areas covered?</button>
         <button type="button" class="t-chip" onclick="addTopic(this,'Do you have a motorbike or can we walk?')">🛵 Transport?</button>
@@ -938,17 +1154,26 @@ button{font-family:inherit;cursor:pointer}
         <button type="button" class="t-chip" onclick="addTopic(this,'I am travelling with kids — is that okay?')">👶 Kids welcome?</button>
         <button type="button" class="t-chip" onclick="addTopic(this,'Can we plan the day together in advance?')">📝 Plan ahead?</button>
       </div>
-      <form id="chatForm" onsubmit="submitChat(event)">
-        <div class="fg"><label class="fl">Your Name <span class="req">*</span></label><input type="text" id="c-name" class="fi" placeholder="Your name" required></div>
-        <div class="fg"><label class="fl">Email <span class="req">*</span></label><input type="email" id="c-email" class="fi" placeholder="you@email.com" required></div>
-        <div class="fg"><label class="fl">Your Message <span class="req">*</span></label><textarea id="c-msg" class="fi f-ta" style="min-height:130px" placeholder="Hi! I'm visiting next week and I'd love to explore the city with a local friend. I was wondering…" required></textarea></div>
-        <button type="submit" class="m-btn dark"><i class="fas fa-paper-plane"></i> Send Message</button>
-      </form>
+      <div class="fg">
+        <label class="fl" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3)">Your Name <span style="color:var(--red)">*</span></label>
+        <input type="text" id="c-name" class="fi" placeholder="Your name">
+      </div>
+      <div class="fg">
+        <label class="fl" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3)">Email <span style="color:var(--red)">*</span></label>
+        <input type="email" id="c-email" class="fi" placeholder="you@email.com">
+      </div>
+      <div class="fg">
+        <label class="fl" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3)">Your Message <span style="color:var(--red)">*</span></label>
+        <textarea id="c-msg" class="fi" style="resize:vertical;min-height:110px" placeholder="Hi! I'm visiting next week and I'd love to explore the city with a local friend. I was wondering…"></textarea>
+      </div>
+      <button class="chat-submit-btn" id="chatSubmitBtn" onclick="submitChat()">
+        <i class="fas fa-paper-plane"></i> Send Message
+      </button>
     </div>
   </div>
 </div>
 
-<!-- FOOTER -->
+<!-- ═══════ FOOTER ═══════ -->
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-top">
@@ -956,189 +1181,427 @@ button{font-family:inherit;cursor:pointer}
         <img src="./imgg/loko.png" alt="TosTrip" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
         <span class="footer-logo-text" style="display:none">TosTrip</span>
       </div>
-      <div class="footer-nav">
-              <li><a href="index.html">Home</a></li>
-      <li><a href="livelikelocal.html">Live Like a Local</a></li>
-      <li><a href="rentafriend.html" class="active">Rent a Friend</a></li>
-      <li><a href="workshop.html">Workshops</a></li>
-      </div>
+      <ul class="footer-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="livelikelocal.html">Live Like a Local</a></li>
+        <li><a href="rentafriend.html">Rent a Friend</a></li>
+        <li><a href="workshop.html">Workshops</a></li>
+      </ul>
     </div>
     <div class="footer-bot">© 2025 TosTrip · Rent a Friend · Made with ❤️ in Cambodia</div>
   </div>
 </footer>
 
+<!-- ═══════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════ -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
-const EJ_KEY='SmoLQAp-ij_aoJbAd',EJ_SVC='service_9ogox5a',EJ_TPL='template_0pi47tp';
-if(typeof emailjs!=='undefined')emailjs.init(EJ_KEY);
+/* ══════════════════════════════════════════════
+   ⚙️  EMAILJS CONFIG  — fill in when ready
+   ══════════════════════════════════════════════
+   1. Go to https://www.emailjs.com/
+   2. Replace the three values below with yours
+   3. Set EJ_DEMO_MODE = false to go live
+   ══════════════════════════════════════════════ */
+const EJ_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // e.g. 'SmoLQAp-ij_aoJbAd'
+const EJ_SERVICE_ID  = 'YOUR_SERVICE_ID';   // e.g. 'service_9ogox5a'
+const EJ_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. 'template_0pi47tp'
+const EJ_DEMO_MODE   = true;               // ← set false once EmailJS is connected
 
-/* nav scroll */
-window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',scrollY>30));
-document.getElementById('b-date').min=new Date().toISOString().split('T')[0];
+// Uncomment when ready:
+// if (typeof emailjs !== 'undefined') emailjs.init(EJ_PUBLIC_KEY);
 
-/* ── FILTER & SEARCH ── */
-let activeFilter='all', searchTerm='';
+/* ══════════════════════════════════════════════
+   NAV
+══════════════════════════════════════════════ */
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', scrollY > 30);
+});
 
-function filterGuides(type, btn){
+/* ══════════════════════════════════════════════
+   FILTER & SEARCH
+══════════════════════════════════════════════ */
+let activeFilter = 'all', searchTerm = '';
+
+function filterGuides(type, btn) {
   activeFilter = type;
-  document.querySelectorAll('.fc').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.fc').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   applyFilters();
 }
 
-function liveSearch(val){
+function liveSearch(val) {
   searchTerm = val.toLowerCase();
   applyFilters();
 }
 
-function applyFilters(){
+function applyFilters() {
   const cards = document.querySelectorAll('.guide-card');
   let shown = 0;
-  cards.forEach(c=>{
-    const city    = c.dataset.city || '';
-    const tags    = c.dataset.tags || '';
-    const nameEl  = c.querySelector('.gc-name');
-    const bioEl   = c.querySelector('.gc-bio');
-    const name    = nameEl ? nameEl.textContent.toLowerCase() : '';
-    const bio     = bioEl  ? bioEl.textContent.toLowerCase()  : '';
-
-    const matchFilter = activeFilter==='all' || city===activeFilter || tags.includes(activeFilter);
+  cards.forEach(c => {
+    const city   = c.dataset.city || '';
+    const tags   = c.dataset.tags || '';
+    const name   = (c.querySelector('.gc-name')?.textContent || '').toLowerCase();
+    const bio    = (c.querySelector('.gc-bio')?.textContent  || '').toLowerCase();
+    const matchFilter = activeFilter === 'all' || city === activeFilter || tags.includes(activeFilter);
     const matchSearch = !searchTerm || name.includes(searchTerm) || bio.includes(searchTerm) || tags.includes(searchTerm);
-
     const show = matchFilter && matchSearch;
     c.classList.toggle('hidden', !show);
-    if(show) shown++;
+    if (show) shown++;
   });
   document.getElementById('showing-count').textContent = shown;
-  document.getElementById('emptyState').style.display = shown===0 ? 'block' : 'none';
+  document.getElementById('emptyState').style.display = shown === 0 ? 'block' : 'none';
 }
 
-/* ── SORT ── */
-function sortGuides(by){
-  const grid = document.getElementById('guidesGrid');
+function sortGuides(by) {
+  const grid  = document.getElementById('guidesGrid');
   const cards = [...grid.querySelectorAll('.guide-card')];
-  cards.sort((a,b)=>{
-    if(by==='rating') return parseFloat(b.dataset.rating)-parseFloat(a.dataset.rating);
-    if(by==='price-low') return parseInt(a.dataset.half)-parseInt(b.dataset.half);
-    if(by==='price-high') return parseInt(b.dataset.half)-parseInt(a.dataset.half);
-    if(by==='reviews') return parseInt(b.dataset.reviews)-parseInt(a.dataset.reviews);
+  cards.sort((a, b) => {
+    if (by === 'rating')     return parseFloat(b.dataset.rating)  - parseFloat(a.dataset.rating);
+    if (by === 'price-low')  return parseInt(a.dataset.half)       - parseInt(b.dataset.half);
+    if (by === 'price-high') return parseInt(b.dataset.half)       - parseInt(a.dataset.half);
+    if (by === 'reviews')    return parseInt(b.dataset.reviews)    - parseInt(a.dataset.reviews);
   });
-  cards.forEach(c=>grid.appendChild(c));
+  cards.forEach(c => grid.appendChild(c));
 }
 
-/* ── WISHLIST ── */
-function toggleHeart(btn){
+/* ══════════════════════════════════════════════
+   WISHLIST
+══════════════════════════════════════════════ */
+function toggleHeart(btn) {
   btn.classList.toggle('liked');
-  btn.innerHTML=btn.classList.contains('liked')?'<i class="fas fa-heart"></i>':'<i class="far fa-heart"></i>';
+  btn.innerHTML = btn.classList.contains('liked')
+    ? '<i class="fas fa-heart"></i>'
+    : '<i class="far fa-heart"></i>';
 }
 
-/* ── FAQ ── */
-function toggleFaq(el){
+/* ══════════════════════════════════════════════
+   FAQ
+══════════════════════════════════════════════ */
+function toggleFaq(el) {
   el.parentElement.classList.toggle('open');
 }
 
-/* ── BOOKING MODAL ── */
-let bk={};
-function openBook(name, city, half, full, img){
-  bk={name,city,half,full,img,selType:'half',selPrice:half};
-  document.getElementById('bm-av').src = img;
-  document.getElementById('bm-name').textContent = name;
-  document.getElementById('bm-city').textContent = city+' · TosTrip Local Friend';
-  document.getElementById('bm-sn').textContent = name;
-  updateSum('half', half);
-  document.getElementById('bm-dur-grid').innerHTML=`
-    <div class="dur-opt sel" onclick="pickDur('half',${half},this)">
-      <input type="radio" name="dur" checked>
-      <div class="dur-chk"><i class="fas fa-check"></i></div>
-      <div class="dur-lbl">🌅 Half Day</div>
-      <div class="dur-sub">~4 hours together</div>
+/* ══════════════════════════════════════════════
+   BOOKING MODAL — STATE
+══════════════════════════════════════════════ */
+let BK = { name:'', city:'', half:0, full:0, img:'', selType:'half', selPrice:0, acts:[] };
+
+function openBook(name, city, half, full, img) {
+  BK = { name, city, half, full, img, selType:'half', selPrice:half, acts:[] };
+
+  document.getElementById('bm-av').src           = img;
+  document.getElementById('bm-name').textContent  = name;
+  document.getElementById('bm-city').textContent  = city + ' · TosTrip Local Friend';
+  document.getElementById('b-date').min           = new Date().toISOString().split('T')[0];
+
+  // reset activity chips
+  document.querySelectorAll('.act-chip').forEach(c => c.classList.remove('on'));
+
+  // build duration cards
+  document.getElementById('bm-dur-grid').innerHTML = `
+    <div class="dur-card sel" onclick="pickDur('half',${half},this)">
+      <div class="dur-check"><i class="fas fa-check"></i></div>
+      <div class="dur-emoji">🌅</div>
+      <div class="dur-name">Half Day</div>
+      <div class="dur-time">~4 hours together</div>
       <div class="dur-price">$${half}</div>
     </div>
-    <div class="dur-opt" onclick="pickDur('full',${full},this)">
-      <input type="radio" name="dur">
-      <div class="dur-chk"><i class="fas fa-check"></i></div>
-      <div class="dur-lbl">☀️ Full Day</div>
-      <div class="dur-sub">~8 hours together</div>
+    <div class="dur-card" onclick="pickDur('full',${full},this)">
+      <div class="dur-check"><i class="fas fa-check"></i></div>
+      <div class="dur-emoji">☀️</div>
+      <div class="dur-name">Full Day</div>
+      <div class="dur-time">~8 hours together</div>
       <div class="dur-price">$${full}</div>
+      <div class="dur-save">Best value</div>
     </div>`;
-  document.getElementById('bookModal').classList.add('open');
-}
-function pickDur(type,price,el){
-  bk.selType=type; bk.selPrice=price;
-  document.querySelectorAll('#bm-dur-grid .dur-opt').forEach(o=>o.classList.remove('sel'));
-  el.classList.add('sel');
-  updateSum(type,price);
-}
-function updateSum(type,price){
-  document.getElementById('bm-sd').textContent = type==='half'?'Half Day · ~4 hours':'Full Day · ~8 hours';
-  document.getElementById('bm-sp').textContent = '$'+price;
-}
-document.getElementById('bookModal').addEventListener('click',e=>{if(e.target===document.getElementById('bookModal'))document.getElementById('bookModal').classList.remove('open')});
 
-function submitBook(e){
-  e.preventDefault();
-  const activities = [...document.querySelectorAll('#actGrid input:checked')].map(i=>i.value).join(', ')||'Not specified';
-  const btn=e.target.querySelector('.m-btn');
-  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending…';btn.disabled=true;
-  const p={
-    user_name:document.getElementById('b-name').value,
-    user_email:document.getElementById('b-email').value,
-    phone:document.getElementById('b-phone').value||'Not provided',
-    booking_date:document.getElementById('b-date').value,
-    message:(document.getElementById('b-notes').value||'No notes')+'\nActivities: '+activities,
-    request_type:'Rent a Friend – Booking',
-    friend_name:bk.name,
-    duration:bk.selType+' — $'+bk.selPrice,
-    price:bk.selPrice,
-    lifestyle:bk.city,
-    people:document.getElementById('b-pax').value
-  };
-  if(typeof emailjs!=='undefined'){
-    emailjs.send(EJ_SVC,EJ_TPL,p).then(()=>window.location.href='thankyou.html').catch(err=>{alert('Error: '+(err.text||err.message));btn.innerHTML='<i class="fas fa-check-circle"></i> Confirm Booking';btn.disabled=false});
+  goStep(1, false);
+  document.getElementById('bookModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeBookModal() {
+  document.getElementById('bookModal').classList.remove('open');
+  document.body.style.overflow = '';
+  setTimeout(() => {
+    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('sp1').classList.add('active');
+  }, 300);
+}
+
+document.getElementById('bookModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('bookModal')) closeBookModal();
+});
+
+/* ══════════════════════════════════════════════
+   BOOKING — DURATION
+══════════════════════════════════════════════ */
+function pickDur(type, price, el) {
+  BK.selType  = type;
+  BK.selPrice = price;
+  document.querySelectorAll('#bm-dur-grid .dur-card').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+/* ══════════════════════════════════════════════
+   BOOKING — ACTIVITIES
+══════════════════════════════════════════════ */
+function toggleAct(el, val) {
+  el.classList.toggle('on');
+  if (el.classList.contains('on')) {
+    if (!BK.acts.includes(val)) BK.acts.push(val);
   } else {
-    alert('Demo: Booking with '+bk.name+' received!');
-    btn.innerHTML='<i class="fas fa-check-circle"></i> Confirm Booking';btn.disabled=false;
+    BK.acts = BK.acts.filter(a => a !== val);
   }
 }
 
-/* ── CHAT MODAL ── */
-let cm={};
-function openChat(name, city, img){
-  cm={name,city,img};
-  document.getElementById('cm-av').src = img;
-  document.getElementById('cm-name').textContent = name;
-  document.getElementById('cm-city').textContent = city+' · Ask anything before you book';
-  document.querySelectorAll('.t-chip').forEach(c=>c.classList.remove('sel'));
-  document.getElementById('c-msg').value='';
-  document.getElementById('chatModal').classList.add('open');
+/* ══════════════════════════════════════════════
+   BOOKING — STEP NAVIGATION
+══════════════════════════════════════════════ */
+function goStep(n, scroll = true) {
+  ['sp1','sp2','sp3','sp-success'].forEach((id, i) => {
+    document.getElementById(id).classList.toggle('active', i === n - 1);
+  });
+  [1,2,3].forEach(i => {
+    const dot = document.getElementById('sd' + i);
+    dot.classList.remove('active','done');
+    if (i < n) dot.classList.add('done');
+    if (i === n) dot.classList.add('active');
+  });
+  [1,2].forEach(i => {
+    document.getElementById('sl' + i).classList.toggle('done', i < n);
+  });
+  if (scroll) document.getElementById('bookModalBody').scrollTo({ top:0, behavior:'smooth' });
 }
-document.getElementById('chatModal').addEventListener('click',e=>{if(e.target===document.getElementById('chatModal'))document.getElementById('chatModal').classList.remove('open')});
 
-function addTopic(btn,text){
-  btn.classList.toggle('sel');
-  const ta=document.getElementById('c-msg');
-  if(btn.classList.contains('sel')){ta.value=ta.value?ta.value.trimEnd()+'\n'+text:text}
-  else{ta.value=ta.value.replace('\n'+text,'').replace(text,'').trim()}
+/* ══════════════════════════════════════════════
+   BOOKING — STEP 2 VALIDATION
+══════════════════════════════════════════════ */
+function validateStep2() {
+  const name  = document.getElementById('b-name').value.trim();
+  const email = document.getElementById('b-email').value.trim();
+  const date  = document.getElementById('b-date').value;
+
+  setFgErr('fg-name',  !name);
+  setFgErr('fg-email', !email || !email.includes('@'));
+  setFgErr('fg-date',  !date);
+
+  if (!name || !email || !email.includes('@') || !date) return;
+
+  buildReview();
+  goStep(3);
 }
 
-function submitChat(e){
-  e.preventDefault();
-  const btn=e.target.querySelector('.m-btn');
-  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending…';btn.disabled=true;
-  const p={
-    user_name:document.getElementById('c-name').value,
-    user_email:document.getElementById('c-email').value,
-    request_type:'Rent a Friend – Message',
-    message:document.getElementById('c-msg').value,
-    friend_name:cm.name,
-    lifestyle:cm.city,
-    booking_date:'N/A',duration:'N/A',price:'N/A',phone:'N/A',people:'N/A'
-  };
-  if(typeof emailjs!=='undefined'){
-    emailjs.send(EJ_SVC,EJ_TPL,p).then(()=>window.location.href='thankyou.html').catch(err=>{alert('Error: '+(err.text||err.message));btn.innerHTML='<i class="fas fa-paper-plane"></i> Send Message';btn.disabled=false});
+function setFgErr(id, hasErr) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('has-err', hasErr);
+}
+
+['b-name','b-email','b-date'].forEach(id => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.addEventListener('input', () => {
+    const fgId = 'fg-' + id.replace('b-','');
+    const fg = document.getElementById(fgId);
+    if (fg) fg.classList.remove('has-err');
+  });
+});
+
+/* ══════════════════════════════════════════════
+   BOOKING — BUILD REVIEW PANEL
+══════════════════════════════════════════════ */
+function buildReview() {
+  const rawDate = document.getElementById('b-date').value;
+  const fmtDate = rawDate
+    ? new Date(rawDate + 'T00:00:00').toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' })
+    : '—';
+  const durLabel = BK.selType === 'half' ? 'Half Day · ~4 hours' : 'Full Day · ~8 hours';
+
+  document.getElementById('rev-av').src              = BK.img;
+  document.getElementById('rev-name').textContent    = BK.name;
+  document.getElementById('rev-city').textContent    = BK.city + ' · TosTrip Local Friend';
+  document.getElementById('rev-date').textContent    = fmtDate;
+  document.getElementById('rev-dur').textContent     = durLabel;
+  document.getElementById('rev-pax').textContent     = document.getElementById('b-pax').value;
+  document.getElementById('rev-guestname').textContent = document.getElementById('b-name').value;
+  document.getElementById('rev-email').textContent   = document.getElementById('b-email').value;
+
+  const actsEl  = document.getElementById('rev-acts-list');
+  const actsRow = document.getElementById('rev-acts-row');
+  if (BK.acts.length) {
+    actsEl.innerHTML = BK.acts.map(a => `<span class="rev-act-tag">${a}</span>`).join('');
+    actsRow.style.display = 'flex';
   } else {
-    alert('Demo: Message to '+cm.name+' sent!');
-    btn.innerHTML='<i class="fas fa-paper-plane"></i> Send Message';btn.disabled=false;
+    actsRow.style.display = 'none';
+  }
+
+  document.getElementById('ps-dur-label').textContent = BK.selType === 'half' ? 'Half Day' : 'Full Day';
+  document.getElementById('ps-price').textContent     = BK.selPrice;
+  document.getElementById('ps-total').textContent     = BK.selPrice;
+}
+
+/* ══════════════════════════════════════════════
+   BOOKING — SUBMIT
+══════════════════════════════════════════════ */
+function submitBooking() {
+  const btn = document.getElementById('confirmBtn');
+  btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Sending…';
+  btn.disabled  = true;
+
+  const rawDate = document.getElementById('b-date').value;
+  const fmtDate = rawDate
+    ? new Date(rawDate + 'T00:00:00').toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' })
+    : '—';
+  const durLabel = BK.selType === 'half' ? 'Half Day · ~4 hours' : 'Full Day · ~8 hours';
+
+  /* ── EmailJS template params ─────────────────
+     Adjust keys to match your EmailJS template
+  ──────────────────────────────────────────── */
+  const params = {
+    user_name:    document.getElementById('b-name').value,
+    user_email:   document.getElementById('b-email').value,
+    phone:        document.getElementById('b-phone').value  || 'Not provided',
+    friend_name:  BK.name,
+    city:         BK.city,
+    booking_date: fmtDate,
+    duration:     durLabel,
+    price:        '$' + BK.selPrice,
+    people:       document.getElementById('b-pax').value,
+    activities:   BK.acts.length ? BK.acts.join(', ') : 'Not specified',
+    notes:        document.getElementById('b-notes').value || 'None',
+    request_type: 'Rent a Friend – Booking',
+    lifestyle:    BK.city,
+    message:      (document.getElementById('b-notes').value || 'No additional notes') +
+                  '\nActivities: ' + (BK.acts.join(', ') || 'None')
+  };
+
+  if (EJ_DEMO_MODE) {
+    // Demo: simulate network delay, then show success
+    setTimeout(() => showBookingSuccess(fmtDate, durLabel), 1500);
+  } else {
+    emailjs.send(EJ_SERVICE_ID, EJ_TEMPLATE_ID, params)
+      .then(() => showBookingSuccess(fmtDate, durLabel))
+      .catch(err => {
+        alert('Something went wrong: ' + (err.text || err.message));
+        btn.innerHTML = '<i class="fas fa-check-circle"></i> Confirm Booking';
+        btn.disabled  = false;
+      });
+  }
+}
+
+function showBookingSuccess(fmtDate, durLabel) {
+  document.getElementById('suc-name').textContent  = BK.name;
+  document.getElementById('suc-guide').textContent = BK.name;
+  document.getElementById('suc-date').textContent  = fmtDate;
+  document.getElementById('suc-dur').textContent   = durLabel;
+  document.getElementById('suc-total').textContent = '$' + BK.selPrice;
+
+  [1,2,3].forEach(i => {
+    const dot = document.getElementById('sd' + i);
+    dot.classList.remove('active');
+    dot.classList.add('done');
+    const labels = ['Plan','Details','Review'];
+    dot.innerHTML = `<i class="fas fa-check" style="font-size:10px"></i><span class="step-label">${labels[i-1]}</span>`;
+  });
+  [1,2].forEach(i => document.getElementById('sl' + i).classList.add('done'));
+
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('sp-success').classList.add('active');
+  document.getElementById('bookModalBody').scrollTo({ top:0, behavior:'smooth' });
+
+  const btn = document.getElementById('confirmBtn');
+  btn.innerHTML = '<i class="fas fa-check-circle"></i> Confirm Booking';
+  btn.disabled  = false;
+}
+
+/* ══════════════════════════════════════════════
+   CHAT MODAL
+══════════════════════════════════════════════ */
+let CM = {};
+
+function openChat(name, city, img) {
+  CM = { name, city, img };
+  document.getElementById('cm-av').src            = img;
+  document.getElementById('cm-name').textContent   = name;
+  document.getElementById('cm-city').textContent   = city + ' · Ask anything before you book';
+  document.querySelectorAll('.t-chip').forEach(c => c.classList.remove('sel'));
+  document.getElementById('c-msg').value  = '';
+  document.getElementById('c-name').value = '';
+  document.getElementById('c-email').value = '';
+  document.getElementById('chatModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeChatModal() {
+  document.getElementById('chatModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('chatModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('chatModal')) closeChatModal();
+});
+
+function addTopic(btn, text) {
+  btn.classList.toggle('sel');
+  const ta = document.getElementById('c-msg');
+  if (btn.classList.contains('sel')) {
+    ta.value = ta.value ? ta.value.trimEnd() + '\n' + text : text;
+  } else {
+    ta.value = ta.value.replace('\n' + text, '').replace(text, '').trim();
+  }
+}
+
+function submitChat() {
+  const name  = document.getElementById('c-name').value.trim();
+  const email = document.getElementById('c-email').value.trim();
+  const msg   = document.getElementById('c-msg').value.trim();
+
+  if (!name || !email || !msg) {
+    alert('Please fill in your name, email, and message.');
+    return;
+  }
+
+  const btn = document.getElementById('chatSubmitBtn');
+  btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Sending…';
+  btn.disabled  = true;
+
+  const params = {
+    user_name:    name,
+    user_email:   email,
+    request_type: 'Rent a Friend – Message',
+    message:      msg,
+    friend_name:  CM.name,
+    lifestyle:    CM.city,
+    city:         CM.city,
+    booking_date: 'N/A',
+    duration:     'N/A',
+    price:        'N/A',
+    phone:        'N/A',
+    people:       'N/A',
+    activities:   'N/A',
+    notes:        'N/A'
+  };
+
+  if (EJ_DEMO_MODE) {
+    setTimeout(() => {
+      closeChatModal();
+      alert('✅ Message sent to ' + CM.name + '! (Demo mode — connect EmailJS to go live)');
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+      btn.disabled  = false;
+    }, 1200);
+  } else {
+    emailjs.send(EJ_SERVICE_ID, EJ_TEMPLATE_ID, params)
+      .then(() => {
+        closeChatModal();
+        window.location.href = 'thankyou.html';
+      })
+      .catch(err => {
+        alert('Error: ' + (err.text || err.message));
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+        btn.disabled  = false;
+      });
   }
 }
 </script>
