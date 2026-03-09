@@ -444,6 +444,38 @@ button{font-family:inherit;cursor:pointer}
 .tr-desc{font-size:10px;color:var(--ink4);margin-bottom:8px;line-height:1.4}
 .tr-price{font-family:'Playfair Display',serif;font-size:17px;font-weight:800;line-height:1}
 .tr-free{font-size:11px;font-weight:800;color:var(--green)}
+/* ── INSURANCE ADD-ON ── */
+.insurance-section{margin-bottom:20px}
+.insurance-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--ink4);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.insurance-label .opt-badge{font-size:10px;font-weight:700;background:#fef9c3;color:#854d0e;border:1px solid #fde68a;padding:2px 8px;border-radius:100px;text-transform:none;letter-spacing:0}
+.ins-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ins-card{border:2px solid var(--line);border-radius:var(--r-md);padding:14px 12px 12px;cursor:pointer;transition:all .22s;background:var(--bg);text-align:center;position:relative;overflow:hidden}
+.ins-card:hover{transform:translateY(-1px)}
+.ins-check{position:absolute;top:7px;right:7px;width:18px;height:18px;border-radius:50%;border:2px solid var(--line);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;transition:all .22s}
+.ins-card.sel .ins-check{background:var(--p);border-color:var(--p)}
+.ins-card.ins-none.sel{border-color:#10b981;background:#f0fdf4}
+.ins-card.ins-none.sel .ins-check{background:#10b981;border-color:#10b981}
+.ins-card.ins-forte:hover{border-color:#0ea5e9}
+.ins-card.ins-forte.sel{border-color:#0ea5e9;background:#f0f9ff}
+.ins-card.ins-forte.sel .ins-check{background:#0ea5e9;border-color:#0ea5e9}
+.ins-card.ins-aia:hover{border-color:#dc2626}
+.ins-card.ins-aia.sel{border-color:#dc2626;background:#fff5f5}
+.ins-card.ins-aia.sel .ins-check{background:#dc2626;border-color:#dc2626}
+.ins-logo-wrap{height:34px;display:flex;align-items:center;justify-content:center;margin-bottom:7px}
+.ins-logo-text{font-size:16px;font-weight:900;letter-spacing:-.5px;line-height:1}
+.ins-forte-logo{color:#0369a1}
+.ins-aia-logo{color:#dc2626}
+.ins-name{font-size:11px;font-weight:800;color:var(--ink);margin-bottom:2px}
+.ins-cover{font-size:10px;color:var(--ink4);margin-bottom:7px;line-height:1.4}
+.ins-price{font-family:'Playfair Display',serif;font-size:16px;font-weight:800;line-height:1}
+.ins-free{font-size:11px;font-weight:800;color:var(--green)}
+.ins-features{display:flex;flex-direction:column;gap:3px;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line);text-align:left}
+.ins-feat{font-size:10px;color:var(--ink3);display:flex;align-items:flex-start;gap:4px;line-height:1.35}
+.ins-feat i{color:var(--green);font-size:9px;margin-top:1px;flex-shrink:0}
+.rev-ins-tag{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:3px 10px;border-radius:100px}
+.rev-ins-tag.ins-none-tag{background:#f0fdf4;color:#059669}
+.rev-ins-tag.ins-forte-tag{background:#f0f9ff;color:#0369a1}
+.rev-ins-tag.ins-aia-tag{background:#fff5f5;color:#dc2626}
 /* colour themes per card */
 .tr-card.none-card.sel{border-color:#10b981;background:#f0fdf4}
 .tr-card.none-card.sel .tr-check{background:#10b981;border-color:#10b981}
@@ -566,6 +598,8 @@ textarea.fi{resize:vertical;min-height:82px}
   .f-row{grid-template-columns:1fr}
   .acts-grid{grid-template-columns:1fr}
   .transport-grid{grid-template-columns:repeat(2,1fr)}
+  .ins-grid{grid-template-columns:1fr 1fr}
+  .ins-card.ins-none{grid-column:1/-1}
   .test-grid{grid-template-columns:1fr}
   .how-inner{grid-template-columns:1fr 1fr}
   .pcta-inner{flex-direction:column;text-align:center}
@@ -1472,7 +1506,61 @@ textarea.fi{resize:vertical;min-height:82px}
               <div class="tr-price" style="color:#4f63d2">+$35</div>
             </div>
           </div>
-        </div>
+        </div><!-- /transport-section -->
+
+        <!-- INSURANCE ADD-ON -->
+        <div class="insurance-section">
+          <div class="insurance-label">
+            <i class="fas fa-shield-alt"></i> Travel Insurance <span class="opt-badge">Optional</span>
+          </div>
+          <div class="ins-grid">
+
+            <!-- No Insurance -->
+            <div class="ins-card ins-none sel" onclick="pickInsurance(this,'none','No Insurance',0)">
+              <div class="ins-check"><i class="fas fa-check"></i></div>
+              <div class="ins-logo-wrap"><span style="font-size:26px">🚫</span></div>
+              <div class="ins-name">No Insurance</div>
+              <div class="ins-cover">I'll skip for now</div>
+              <div class="ins-price ins-free">Free</div>
+            </div>
+
+            <!-- Forte -->
+            <div class="ins-card ins-forte" onclick="pickInsurance(this,'forte','Forte Insurance',5)">
+              <div class="ins-check"><i class="fas fa-check"></i></div>
+              <div class="ins-logo-wrap">
+                <span class="ins-logo-text ins-forte-logo">FORTE</span>
+              </div>
+              <div class="ins-name">Forte Insurance</div>
+              <div class="ins-cover">Essential day coverage</div>
+              <div class="ins-price" style="color:#0369a1">+$5 <span style="font-size:10px;font-weight:600;color:var(--ink4)">/day</span></div>
+              <div class="ins-features">
+                <div class="ins-feat"><i class="fas fa-check-circle"></i> Medical up to $5,000</div>
+                <div class="ins-feat"><i class="fas fa-check-circle"></i> Trip cancellation</div>
+                <div class="ins-feat"><i class="fas fa-check-circle"></i> Personal accident</div>
+                <div class="ins-feat"><i class="fas fa-check-circle"></i> Lost belongings</div>
+              </div>
+            </div>
+
+            <!-- AIA -->
+            <div class="ins-card ins-aia" onclick="pickInsurance(this,'aia','AIA Insurance',9)">
+              <div class="ins-check"><i class="fas fa-check"></i></div>
+              <div class="ins-logo-wrap">
+                <span class="ins-logo-text ins-aia-logo">AIA</span>
+              </div>
+              <div class="ins-name">AIA Insurance</div>
+              <div class="ins-cover">Premium full-day cover</div>
+              <div class="ins-price" style="color:#dc2626">+$9 <span style="font-size:10px;font-weight:600;color:var(--ink4)">/day</span></div>
+              <div class="ins-features">
+                <div class="ins-feat"><i class="fas fa-check-circle"></i> Medical up to $20,000</div>
+                <div class="ins-feat"><i class="fas fa-check-circle"></i> Emergency evacuation</div>
+                <div class="ins-feat"><i class="fas fa-check-circle"></i> 24/7 hotline support</div>
+                <div class="ins-feat"><i class="fas fa-check-circle"></i> Adventure activities</div>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- /insurance-section -->
+
         <div class="btn-row">
           <button class="btn-next" onclick="goStep(2)">Next: Your Info <i class="fas fa-arrow-right"></i></button>
         </div>
@@ -1538,12 +1626,14 @@ textarea.fi{resize:vertical;min-height:82px}
           <div class="rev-row"><i class="fas fa-users"></i><div><div class="rev-lbl">Group Size</div><div class="rev-val" id="rev-pax">2 people</div></div></div>
           <div class="rev-row" id="rev-acts-row"><i class="fas fa-heart"></i><div><div class="rev-lbl">Activities</div><div class="rev-acts" id="rev-acts-list"></div></div></div>
           <div class="rev-row" id="rev-transport-row"><i class="fas fa-route"></i><div><div class="rev-lbl">Transport</div><div id="rev-transport-val"><span class="rev-transport-tag">🚶 On My Own · Free</span></div></div></div>
+          <div class="rev-row" id="rev-ins-row"><i class="fas fa-shield-alt"></i><div><div class="rev-lbl">Insurance</div><div id="rev-ins-val"><span class="rev-ins-tag ins-none-tag">🚫 No Insurance</span></div></div></div>
           <div class="rev-row"><i class="fas fa-user"></i><div><div class="rev-lbl">Name</div><div class="rev-val" id="rev-guestname">—</div></div></div>
           <div class="rev-row"><i class="fas fa-envelope"></i><div><div class="rev-lbl">Email</div><div class="rev-val" id="rev-email">—</div></div></div>
         </div>
         <div class="price-summary">
           <div class="ps-row"><span id="ps-dur-label">Half Day</span><span>$<span id="ps-price">25</span></span></div>
           <div class="ps-row" id="ps-transport-row" style="display:none"><span>Transport<span class="ps-t-badge" id="ps-transport-badge">Tuk-Tuk</span></span><span>+$<span id="ps-transport-price">0</span></span></div>
+          <div class="ps-row" id="ps-ins-row" style="display:none"><span>Insurance<span class="ps-t-badge" id="ps-ins-badge">Forte</span></span><span>+$<span id="ps-ins-price">0</span></span></div>
           <div class="ps-row"><span>Service fee</span><span>Included</span></div>
           <div class="ps-row"><strong>Total due</strong><span class="ps-val">$<span id="ps-total">25</span></span></div>
         </div>
@@ -1689,9 +1779,9 @@ function toggleHeart(btn) {
 }
 function toggleFaq(el) { el.parentElement.classList.toggle('open'); }
 
-let BK = { name:'',city:'',half:0,full:0,img:'',selType:'half',selPrice:0,acts:[],transport:'none',transportName:'On My Own',transportPrice:0 };
+let BK = { name:'',city:'',half:0,full:0,img:'',selType:'half',selPrice:0,acts:[],transport:'none',transportName:'On My Own',transportPrice:0,insurance:'none',insuranceName:'No Insurance',insurancePrice:0 };
 function openBook(name,city,half,full,img) {
-  BK = {name,city,half,full,img,selType:'half',selPrice:half,acts:[],transport:'none',transportName:'On My Own',transportPrice:0};
+  BK = {name,city,half,full,img,selType:'half',selPrice:half,acts:[],transport:'none',transportName:'On My Own',transportPrice:0,insurance:'none',insuranceName:'No Insurance',insurancePrice:0};
   document.getElementById('bm-av').src = img;
   document.getElementById('bm-name').textContent = name;
   document.getElementById('bm-city').textContent = city+' · TosTrip Local Friend';
@@ -1701,6 +1791,10 @@ function openBook(name,city,half,full,img) {
   document.querySelectorAll('.tr-card').forEach(c => c.classList.remove('sel'));
   const noneCard = document.querySelector('.tr-card.none-card');
   if (noneCard) noneCard.classList.add('sel');
+  // reset insurance cards — default to "no insurance"
+  document.querySelectorAll('.ins-card').forEach(c => c.classList.remove('sel'));
+  const insNoneCard = document.querySelector('.ins-card.ins-none');
+  if (insNoneCard) insNoneCard.classList.add('sel');
   document.getElementById('bm-dur-grid').innerHTML = `
     <div class="dur-card sel" onclick="pickDur('half',${half},this)">
       <div class="dur-check"><i class="fas fa-check"></i></div>
@@ -1740,6 +1834,11 @@ function pickDur(type,price,el) {
 function pickTransport(el,type,name,price) {
   BK.transport=type; BK.transportName=name; BK.transportPrice=price;
   document.querySelectorAll('.tr-card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+}
+function pickInsurance(el,type,name,price) {
+  BK.insurance=type; BK.insuranceName=name; BK.insurancePrice=price;
+  document.querySelectorAll('.ins-card').forEach(c=>c.classList.remove('sel'));
   el.classList.add('sel');
 }
 function toggleAct(el,val) {
@@ -1808,7 +1907,7 @@ function buildReview() {
     : `${tEmoji} ${BK.transportName} · +$${BK.transportPrice}`;
   document.getElementById('rev-transport-val').innerHTML=`<span class="rev-transport-tag">${tLabel}</span>`;
   // price summary
-  const total = BK.selPrice + BK.transportPrice;
+  const total = BK.selPrice + BK.transportPrice + BK.insurancePrice;
   document.getElementById('ps-dur-label').textContent=BK.selType==='half'?'Half Day':'Full Day';
   document.getElementById('ps-price').textContent=BK.selPrice;
   document.getElementById('ps-total').textContent=total;
@@ -1818,6 +1917,19 @@ function buildReview() {
     document.getElementById('ps-transport-price').textContent=BK.transportPrice;
     trRow.style.display='flex';
   } else { trRow.style.display='none'; }
+  // insurance review row
+  const insEmoji={none:'🚫',forte:'🛡️',aia:'❤️'}[BK.insurance]||'🚫';
+  const insTagClass={none:'ins-none-tag',forte:'ins-forte-tag',aia:'ins-aia-tag'}[BK.insurance]||'ins-none-tag';
+  const insLabel = BK.insurancePrice===0
+    ? `${insEmoji} ${BK.insuranceName}`
+    : `${insEmoji} ${BK.insuranceName} · +$${BK.insurancePrice}/day`;
+  document.getElementById('rev-ins-val').innerHTML=`<span class="rev-ins-tag ${insTagClass}">${insLabel}</span>`;
+  const insRow=document.getElementById('ps-ins-row');
+  if (BK.insurancePrice>0) {
+    document.getElementById('ps-ins-badge').textContent=BK.insuranceName;
+    document.getElementById('ps-ins-price').textContent=BK.insurancePrice;
+    insRow.style.display='flex';
+  } else { insRow.style.display='none'; }
 }
 function submitBooking() {
   const btn=document.getElementById('confirmBtn');
@@ -1826,7 +1938,7 @@ function submitBooking() {
   const rawDate=document.getElementById('b-date').value;
   const fmtDate=rawDate?new Date(rawDate+'T00:00:00').toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'}):'—';
   const durLabel=BK.selType==='half'?'Half Day · ~4 hours':'Full Day · ~8 hours';
-  const total = BK.selPrice + BK.transportPrice;
+  const total = BK.selPrice + BK.transportPrice + BK.insurancePrice;
   if (EJ_DEMO_MODE) {
     setTimeout(()=>showBookingSuccess(fmtDate,durLabel,total),1500);
   }
