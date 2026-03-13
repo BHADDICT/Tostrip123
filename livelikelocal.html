@@ -23,8 +23,6 @@ body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--bg);over
 a{text-decoration:none;color:inherit}
 img{display:block;width:100%;object-fit:cover}
 button{font-family:inherit;cursor:pointer}
-
-/* NAV */
 .nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1.5px solid var(--line);transition:box-shadow .3s}
 .nav.scrolled{box-shadow:var(--sh-md)}
 .nav-inner{max-width:1280px;margin:0 auto;padding:0 28px;height:66px;display:flex;align-items:center;justify-content:space-between;gap:16px}
@@ -37,8 +35,6 @@ button{font-family:inherit;cursor:pointer}
 .btn-back{padding:9px 20px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--bg);font-size:14px;font-weight:600;color:var(--ink2);display:flex;align-items:center;gap:7px;transition:all .2s}
 .btn-back:hover{border-color:var(--p);color:var(--p)}
 .hamburger{display:none;background:none;border:none;font-size:22px;color:var(--ink3)}
-
-/* HERO */
 .hero{margin-top:66px;background:var(--bg);padding:60px 28px 0;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-80px;right:-100px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(102,126,234,.09) 0%,transparent 68%);pointer-events:none}
 .hero::after{content:'';position:absolute;bottom:-40px;left:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.06) 0%,transparent 70%);pointer-events:none}
@@ -60,8 +56,6 @@ button{font-family:inherit;cursor:pointer}
 .hero-stats{display:flex;gap:28px;flex-wrap:wrap;padding-top:24px;border-top:1px solid var(--line)}
 .hs-num{font-size:26px;font-weight:800;color:var(--ink);font-family:'Playfair Display',serif}
 .hs-lbl{font-size:12px;color:var(--ink4);margin-top:2px;font-weight:500}
-
-/* hero collage */
 .hero-collage{position:relative;height:460px}
 .hc-main{position:absolute;top:0;left:0;right:50px;bottom:50px;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-lg)}
 .hc-main img{width:100%;height:100%}
@@ -71,8 +65,6 @@ button{font-family:inherit;cursor:pointer}
 .hc-pill-ico{width:36px;height:36px;border-radius:var(--r-sm);background:var(--ps);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
 .hc-pill-v{font-size:15px;font-weight:800;color:var(--ink)}
 .hc-pill-s{font-size:11px;color:var(--ink4)}
-
-/* HOW IT WORKS */
 .how-bar{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:40px 28px}
 .how-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0}
 .how-step{padding:0 24px;text-align:center;border-right:1px dashed var(--line)}
@@ -80,27 +72,19 @@ button{font-family:inherit;cursor:pointer}
 .how-n{width:44px;height:44px;border-radius:50%;background:var(--bg);border:2px solid var(--pm);color:var(--p);font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
 .how-step h4{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:5px}
 .how-step p{font-size:12px;color:var(--ink3);line-height:1.55}
-
-/* FILTER */
 .filter-bar{background:var(--bg);border-bottom:1.5px solid var(--line);position:sticky;top:66px;z-index:800;padding:0 28px}
 .filter-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:8px;overflow-x:auto;padding:13px 0;scrollbar-width:none}
 .filter-inner::-webkit-scrollbar{display:none}
 .f-chip{flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 18px;border-radius:100px;border:1.5px solid var(--line);background:var(--bg);font-size:13px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .2s;white-space:nowrap}
 .f-chip:hover{border-color:var(--p);color:var(--p)}
 .f-chip.active{background:var(--p);border-color:var(--p);color:#fff}
-
-/* FAMILIES */
 .families-section{max-width:1280px;margin:0 auto;padding:56px 28px}
 .families-section>h2{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--ink);margin-bottom:6px}
 .families-section>p{font-size:15px;color:var(--ink3);margin-bottom:44px}
-
-/* FAMILY CARD */
 .fc{background:var(--bg);border:1.5px solid var(--line);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-sm);margin-bottom:48px;transition:box-shadow .3s}
 .fc:hover{box-shadow:var(--sh-lg)}
 .fc.hidden{display:none}
 .fc-top{display:grid;grid-template-columns:400px 1fr}
-
-/* gallery */
 .fc-gallery{position:relative;min-height:400px;overflow:hidden}
 .fc-gallery-img{width:100%;height:100%;object-fit:cover;transition:transform .55s}
 .fc:hover .fc-gallery-img{transform:scale(1.04)}
@@ -114,8 +98,6 @@ button{font-family:inherit;cursor:pointer}
 .lp-fishing{background:rgba(14,165,233,.28)}
 .lp-artisan{background:rgba(251,146,60,.28)}
 .lp-urban{background:rgba(167,139,250,.28)}
-
-/* info panel */
 .fc-info{padding:36px 40px;display:flex;flex-direction:column;justify-content:space-between}
 .fc-name{font-family:'Playfair Display',serif;font-size:29px;font-weight:800;color:var(--ink);margin-bottom:5px}
 .fc-loc{font-size:14px;color:var(--ink3);display:flex;align-items:center;gap:6px;margin-bottom:16px}
@@ -137,8 +119,6 @@ button{font-family:inherit;cursor:pointer}
 .fc-score{font-size:26px;font-weight:800;color:var(--ink);font-family:'Playfair Display',serif}
 .fc-stars{color:var(--gold);font-size:14px;letter-spacing:1px}
 .fc-rcount{font-size:13px;color:var(--ink4)}
-
-/* ── TIER LOCKING ── */
 .fc-tag.tier-full{position:relative;transition:all .3s}
 .fc:not(.show-full) .fc-tag.tier-full{opacity:.42;filter:grayscale(.8);cursor:default;}
 .fc:not(.show-full) .fc-tag.tier-full::after{content:'🔒';font-size:10px;margin-left:3px;}
@@ -156,8 +136,6 @@ button{font-family:inherit;cursor:pointer}
 .unlock-banner{display:flex;align-items:center;gap:10px;background:linear-gradient(90deg,var(--ps) 0%,#fff 100%);border:1.5px dashed var(--pm);border-radius:var(--r-sm);padding:11px 16px;margin-top:14px;font-size:13px;color:var(--p);font-weight:600;transition:opacity .3s,max-height .3s;}
 .unlock-banner i{font-size:15px;flex-shrink:0}
 .fc.show-full .unlock-banner{display:none}
-
-/* food section */
 .fc-food{border-top:1.5px solid var(--line);background:var(--bg2);padding:32px 40px}
 .fc-food-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:22px;gap:12px}
 .fc-food-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:10px}
@@ -173,8 +151,6 @@ button{font-family:inherit;cursor:pointer}
 .fp.spicy{background:#fef2f2;color:#dc2626}
 .fp.vegan{background:#f0fdf4;color:#16a34a}
 .fp.sweet{background:#fffbeb;color:#d97706}
-
-/* BOOKING ROW */
 .fc-booking{border-top:1.5px solid var(--line);padding:26px 40px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;background:var(--bg)}
 .fc-price-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--ink4)}
 .fc-price-val{font-size:32px;font-weight:800;color:var(--ink);font-family:'Playfair Display',serif;line-height:1}
@@ -190,8 +166,6 @@ button{font-family:inherit;cursor:pointer}
 .btn-wish{width:43px;height:43px;border-radius:50%;border:1.5px solid var(--line);background:var(--bg);font-size:16px;color:var(--ink4);display:flex;align-items:center;justify-content:center;transition:all .2s}
 .btn-wish:hover{color:var(--red);border-color:var(--red)}
 .btn-wish.liked{color:var(--red);border-color:var(--red);background:#fff5f5}
-
-/* TESTIMONIALS */
 .test-section{background:var(--bg2);border-top:1.5px solid var(--line);padding:60px 28px}
 .test-inner{max-width:1280px;margin:0 auto}
 .sec-lbl{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--p);margin-bottom:8px}
@@ -206,11 +180,9 @@ button{font-family:inherit;cursor:pointer}
 .test-av{width:40px;height:40px;border-radius:50%;flex-shrink:0;background:var(--ps);color:var(--p);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800}
 .test-name{font-size:14px;font-weight:700;color:var(--ink)}
 .test-info{font-size:12px;color:var(--ink4)}
-
-/* MODALS */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(17,24,39,.52);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;padding:20px}
 .modal-overlay.open{display:flex}
-.modal-box{background:var(--bg);border-radius:var(--r-xl);max-width:560px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 28px 80px rgba(0,0,0,.2);animation:popIn .26s cubic-bezier(.16,1,.3,1)}
+.modal-box{background:var(--bg);border-radius:var(--r-xl);max-width:600px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 28px 80px rgba(0,0,0,.2);animation:popIn .26s cubic-bezier(.16,1,.3,1)}
 @keyframes popIn{from{opacity:0;transform:scale(.92) translateY(14px)}to{opacity:1;transform:scale(1) translateY(0)}}
 .mh-book{background:linear-gradient(135deg,#4f63d2 0%,#667eea 100%);padding:28px 32px;border-radius:var(--r-xl) var(--r-xl) 0 0;position:relative}
 .mh-book h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:3px}
@@ -263,8 +235,6 @@ button{font-family:inherit;cursor:pointer}
 .topic-row{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
 .t-chip{padding:6px 14px;border-radius:100px;border:1.5px solid var(--line);background:var(--bg);font-size:12px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .18s}
 .t-chip:hover,.t-chip.sel{border-color:var(--p);color:var(--p);background:var(--ps)}
-
-/* FOOTER */
 .footer{background:#1a1f4e;color:rgba(255,255,255,.55);padding:44px 28px 28px}
 .footer-inner{max-width:1280px;margin:0 auto}
 .footer-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:20px}
@@ -274,8 +244,6 @@ button{font-family:inherit;cursor:pointer}
 .footer-nav a{font-size:14px;color:rgba(255,255,255,.5);transition:color .2s}
 .footer-nav a:hover{color:#fff}
 .footer-bot{border-top:1px solid rgba(255,255,255,.1);padding-top:18px;text-align:center;font-size:13px;color:rgba(255,255,255,.3)}
-
-/* ── OVERNIGHT HOUSING SECTION ── */
 .fc-housing{border-top:1.5px solid var(--line);background:var(--bg);padding:32px 40px;display:none;animation:fadeSlideIn .35s ease;}
 @keyframes fadeSlideIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
 .fc.show-overnight .fc-housing{display:block}
@@ -283,15 +251,11 @@ button{font-family:inherit;cursor:pointer}
 .fc-housing-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:10px}
 .fc-housing-title i{color:var(--p)}
 .fc-housing-sub{font-size:13px;color:var(--ink4);margin-top:3px}
-.overnight-note{display:none}
 .housing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
 .housing-photo{position:relative;border-radius:var(--r-md);overflow:hidden;aspect-ratio:4/3;border:1.5px solid var(--line);background:var(--bg3);cursor:pointer;transition:all .25s;box-shadow:var(--sh-sm);}
 .housing-photo:hover{box-shadow:var(--sh-md);transform:translateY(-3px)}
 .housing-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
 .housing-photo:hover img{transform:scale(1.07)}
-.housing-photo-del{position:absolute;top:7px;right:7px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.55);border:none;color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;cursor:pointer;z-index:5;}
-.housing-photo:hover .housing-photo-del{opacity:1}
-.housing-photo-del:hover{background:var(--red)}
 .housing-photo-cap{position:absolute;bottom:0;left:0;right:0;padding:6px 10px;background:linear-gradient(to top,rgba(0,0,0,.65) 0%,transparent 100%);font-size:11px;color:#fff;font-weight:600;}
 .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:10000;align-items:center;justify-content:center;padding:20px}
 .lightbox.open{display:flex}
@@ -306,7 +270,59 @@ button{font-family:inherit;cursor:pointer}
 .overnight-note{display:flex;align-items:center;gap:10px;background:#fffbeb;border:1.5px solid #fde68a;border-radius:var(--r-sm);padding:12px 16px;font-size:13px;color:#92400e;font-weight:600;margin-bottom:20px;}
 .overnight-note i{color:var(--gold);font-size:16px;flex-shrink:0}
 
-/* RESPONSIVE */
+/* ── TRANSPORT ADD-ON ── */
+.addon-section{margin-bottom:22px}
+.addon-divider{height:1px;background:var(--line);margin:20px 0}
+.addon-section-title{font-size:12px;font-weight:800;color:var(--ink3);text-transform:uppercase;letter-spacing:.9px;margin-bottom:11px;display:flex;align-items:center;gap:7px}
+.addon-section-title i{color:var(--p);font-size:11px}
+.transport-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.transport-opt{border:1.5px solid var(--line);border-radius:var(--r-md);padding:11px 13px;cursor:pointer;position:relative;transition:all .2s;background:var(--bg);display:flex;align-items:center;gap:10px}
+.transport-opt.sel{border-color:var(--p);background:var(--ps)}
+.transport-opt:hover{border-color:var(--p)}
+.transport-ico{width:34px;height:34px;border-radius:8px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;transition:background .2s}
+.transport-opt.sel .transport-ico{background:var(--pm)}
+.transport-details{flex:1;min-width:0}
+.transport-name{font-size:13px;font-weight:700;color:var(--ink);line-height:1.2}
+.transport-sub{font-size:10px;color:var(--ink4);margin-top:1px}
+.transport-price{font-size:12px;font-weight:800;color:var(--p);white-space:nowrap;margin-left:auto;padding-left:6px}
+.transport-chk{position:absolute;top:7px;right:7px;width:15px;height:15px;border-radius:50%;border:1.5px solid var(--line);background:var(--bg);display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.transport-opt.sel .transport-chk{background:var(--p);border-color:var(--p)}
+.transport-chk i{font-size:7px;color:#fff;display:none}
+.transport-opt.sel .transport-chk i{display:block}
+.no-transport{grid-column:1/-1;border:1.5px dashed var(--line);border-radius:var(--r-md);padding:9px 13px;cursor:pointer;display:flex;align-items:center;gap:9px;background:var(--bg);transition:all .2s;font-size:13px;color:var(--ink3);font-weight:600}
+.no-transport.sel{border-color:var(--p);color:var(--p);background:var(--ps)}
+.no-transport:hover{border-color:var(--p)}
+
+/* ── INSURANCE ADD-ON ── */
+.insurance-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:8px}
+.ins-card{border:1.5px solid var(--line);border-radius:var(--r-md);padding:14px;cursor:pointer;position:relative;transition:all .2s;background:var(--bg)}
+.ins-card:hover{border-color:var(--p)}
+.ins-card.sel{border-color:var(--p);background:var(--ps)}
+.ins-logo-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.ins-badge{padding:3px 9px;border-radius:100px;font-size:10px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+.ins-badge.forte{background:#fff3e0;color:#e65100}
+.ins-badge.aia{background:#e8f5e9;color:#1b5e20}
+.ins-price{font-size:13px;font-weight:800;color:var(--p)}
+.ins-name{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.ins-covers{display:flex;flex-direction:column;gap:3px;margin-bottom:8px}
+.ins-cover-item{font-size:10px;color:var(--ink3);display:flex;align-items:flex-start;gap:5px;line-height:1.4}
+.ins-cover-item i{color:var(--green);font-size:9px;flex-shrink:0;margin-top:2px}
+.ins-disclaimer{font-size:9px;color:var(--ink4);line-height:1.4;border-top:1px solid var(--line);padding-top:6px;margin-top:4px}
+.ins-chk{position:absolute;top:10px;right:10px;width:16px;height:16px;border-radius:4px;border:1.5px solid var(--line);background:var(--bg);display:flex;align-items:center;justify-content:center;transition:all .2s}
+.ins-card.sel .ins-chk{background:var(--p);border-color:var(--p)}
+.ins-chk i{font-size:8px;color:#fff;display:none}
+.ins-card.sel .ins-chk i{display:block}
+.no-insurance{border:1.5px dashed var(--line);border-radius:var(--r-md);padding:9px 13px;cursor:pointer;display:flex;align-items:center;gap:9px;background:var(--bg);transition:all .2s;font-size:13px;color:var(--ink3);font-weight:600}
+.no-insurance.sel{border-color:var(--p);color:var(--p);background:var(--ps)}
+.no-insurance:hover{border-color:var(--p)}
+
+/* ── BOOKING TOTAL BAR ── */
+.booking-total-bar{background:linear-gradient(90deg,var(--ps) 0%,rgba(221,213,251,.2) 100%);border:1.5px solid var(--pm);border-radius:var(--r-md);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;margin-top:4px}
+.bt-lbl{font-size:11px;font-weight:800;color:var(--ink3);text-transform:uppercase;letter-spacing:.6px}
+.bt-breakdown{font-size:11px;color:var(--ink4);margin-top:3px;max-width:260px;line-height:1.4}
+.bt-total{font-size:28px;font-weight:800;color:var(--p);font-family:'Playfair Display',serif;line-height:1;text-align:right}
+.bt-per{font-size:11px;color:var(--ink4);font-family:'DM Sans',sans-serif;text-align:right}
+
 @media(max-width:1024px){
   .hero-inner{grid-template-columns:1fr}
   .hero-collage{height:300px}
@@ -319,6 +335,7 @@ button{font-family:inherit;cursor:pointer}
   .test-grid{grid-template-columns:1fr 1fr}
   .food-grid{grid-template-columns:repeat(2,1fr)}
   .housing-grid{grid-template-columns:repeat(2,1fr)}
+  .insurance-grid{grid-template-columns:1fr}
 }
 @media(max-width:768px){
   .nav-links{display:none}
@@ -328,6 +345,8 @@ button{font-family:inherit;cursor:pointer}
   .dur-tabs{flex-wrap:wrap}
   .f-row{grid-template-columns:1fr}
   .test-grid{grid-template-columns:1fr}
+  .transport-grid{grid-template-columns:1fr}
+  .no-transport{grid-column:1}
 }
 @media(max-width:480px){
   .food-grid{grid-template-columns:1fr}
@@ -359,7 +378,6 @@ button{font-family:inherit;cursor:pointer}
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
     <div>
@@ -394,7 +412,6 @@ button{font-family:inherit;cursor:pointer}
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
 <div class="how-bar">
   <div class="how-grid">
     <div class="how-step"><div class="how-n">1</div><h4>Pick a Family</h4><p>Browse four lifestyles, read their stories, see the food</p></div>
@@ -404,7 +421,6 @@ button{font-family:inherit;cursor:pointer}
   </div>
 </div>
 
-<!-- FILTER -->
 <div class="filter-bar">
   <div class="filter-inner">
     <button class="f-chip active" onclick="filterFamilies('all',this)">🏡 All Families</button>
@@ -415,12 +431,11 @@ button{font-family:inherit;cursor:pointer}
   </div>
 </div>
 
-<!-- FAMILIES -->
 <div class="families-section">
   <h2>Meet Your Host Families</h2>
   <p>Four real Cambodian families. Four completely different lives. One unforgettable day.</p>
 
-  <!-- ══════════════ FAMILY 1: Pu nak ══════════════ -->
+  <!-- FAMILY 1: Pu nak -->
   <div class="fc" data-lifestyle="farming" data-family="chea">
     <div class="fc-top">
       <div class="fc-gallery">
@@ -498,7 +513,7 @@ button{font-family:inherit;cursor:pointer}
     </div>
   </div>
 
-  <!-- ══════════════ FAMILY 2: Enoch ══════════════ -->
+  <!-- FAMILY 2: Enoch -->
   <div class="fc" data-lifestyle="fishing" data-family="pov">
     <div class="fc-top">
       <div class="fc-gallery">
@@ -572,7 +587,7 @@ button{font-family:inherit;cursor:pointer}
     </div>
   </div>
 
-  <!-- ══════════════ FAMILY 3: SOPHEAK ══════════════ -->
+  <!-- FAMILY 3: SOPHEAK -->
   <div class="fc" data-lifestyle="artisan" data-family="sopheak">
     <div class="fc-top">
       <div class="fc-gallery">
@@ -646,7 +661,7 @@ button{font-family:inherit;cursor:pointer}
     </div>
   </div>
 
-</div><!-- /families-section -->
+</div>
 
 <!-- TESTIMONIALS -->
 <div class="test-section">
@@ -661,7 +676,7 @@ button{font-family:inherit;cursor:pointer}
   </div>
 </div>
 
-<!-- BOOKING MODAL -->
+<!-- ══ BOOKING MODAL ══ -->
 <div class="modal-overlay" id="bookModal">
   <div class="modal-box">
     <div class="mh-book">
@@ -675,9 +690,119 @@ button{font-family:inherit;cursor:pointer}
         <div><div class="sum-name" id="bm-sn">Family Name</div><div class="sum-dur" id="bm-sd">Half Day Experience</div></div>
         <div class="sum-price" id="bm-sp">$35</div>
       </div>
+
       <form id="bookForm" onsubmit="submitBook(event)">
         <label class="fl" style="margin-bottom:10px">Choose Duration</label>
         <div class="dur-grid" id="bm-dur"></div>
+
+        <div class="addon-divider"></div>
+
+        <!-- TRANSPORT OPTIONS -->
+        <div class="addon-section">
+          <div class="addon-section-title"><i class="fas fa-route"></i> Transport to the Family</div>
+          <div class="transport-grid" id="transport-grid">
+            <div class="no-transport sel" onclick="pickTransport('none',0,this)">
+              <span style="font-size:16px">🚶</span>
+              <span>I'll arrange my own transport</span>
+              <span style="margin-left:auto;font-size:12px;font-weight:800;color:var(--ink4)">Free</span>
+            </div>
+            <div class="transport-opt" onclick="pickTransport('tuk-tuk',12,this)">
+              <div class="transport-ico">🛺</div>
+              <div class="transport-details">
+                <div class="transport-name">Tuk Tuk</div>
+                <div class="transport-sub">Classic · Up to 3 people</div>
+              </div>
+              <div class="transport-price">+$12</div>
+              <div class="transport-chk"><i class="fas fa-check"></i></div>
+            </div>
+            <div class="transport-opt" onclick="pickTransport('motorbike',8,this)">
+              <div class="transport-ico">🏍️</div>
+              <div class="transport-details">
+                <div class="transport-name">Motorbike</div>
+                <div class="transport-sub">Fast · Solo rider</div>
+              </div>
+              <div class="transport-price">+$8</div>
+              <div class="transport-chk"><i class="fas fa-check"></i></div>
+            </div>
+            <div class="transport-opt" onclick="pickTransport('bicycle',5,this)">
+              <div class="transport-ico">🚲</div>
+              <div class="transport-details">
+                <div class="transport-name">Bicycle</div>
+                <div class="transport-sub">Scenic · Eco-friendly</div>
+              </div>
+              <div class="transport-price">+$5</div>
+              <div class="transport-chk"><i class="fas fa-check"></i></div>
+            </div>
+            <div class="transport-opt" onclick="pickTransport('e-bike',10,this)">
+              <div class="transport-ico">⚡</div>
+              <div class="transport-details">
+                <div class="transport-name">Electric Bike</div>
+                <div class="transport-sub">Smooth · Zero emission</div>
+              </div>
+              <div class="transport-price">+$10</div>
+              <div class="transport-chk"><i class="fas fa-check"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="addon-divider"></div>
+
+        <!-- INSURANCE ADD-ONS -->
+        <div class="addon-section">
+          <div class="addon-section-title"><i class="fas fa-shield-alt"></i> Travel Insurance <span style="font-size:10px;font-weight:500;color:var(--ink4);text-transform:none;letter-spacing:0;margin-left:2px">(optional)</span></div>
+          <div class="insurance-grid" id="insurance-grid">
+            <div class="ins-card" onclick="pickInsurance('forte',6,this)">
+              <div class="ins-chk"><i class="fas fa-check"></i></div>
+              <div class="ins-logo-row">
+                <span class="ins-badge forte">FORTE</span>
+                <span class="ins-price">+$6/person</span>
+              </div>
+              <div class="ins-name">Forte Basic Cover</div>
+              <div class="ins-covers">
+                <div class="ins-cover-item"><i class="fas fa-check-circle"></i> Medical emergency up to $5,000</div>
+                <div class="ins-cover-item"><i class="fas fa-check-circle"></i> Trip cancellation protection</div>
+                <div class="ins-cover-item"><i class="fas fa-check-circle"></i> Personal accident cover</div>
+                <div class="ins-cover-item"><i class="fas fa-check-circle"></i> 24/7 Cambodia hotline support</div>
+              </div>
+              <div class="ins-disclaimer">Forte Insurance (Cambodia) Plc. Subject to policy terms & conditions. Not affiliated with TosTrip.</div>
+            </div>
+            <div class="ins-card" onclick="pickInsurance('aia',9,this)">
+              <div class="ins-chk"><i class="fas fa-check"></i></div>
+              <div class="ins-logo-row">
+                <span class="ins-badge aia">AIA</span>
+                <span class="ins-price">+$9/person</span>
+              </div>
+              <div class="ins-name">AIA Travel Plus</div>
+              <div class="ins-covers">
+                <div class="ins-cover-item"><i class="fas fa-check-circle"></i> Medical emergency up to $15,000</div>
+                <div class="ins-cover-item"><i class="fas fa-check-circle"></i> Trip cancellation & interruption</div>
+                <div class="ins-cover-item"><i class="fas fa-check-circle"></i> Baggage loss & delay cover</div>
+                <div class="ins-cover-item"><i class="fas fa-check-circle"></i> Emergency evacuation included</div>
+              </div>
+              <div class="ins-disclaimer">AIA (Cambodia) Life Insurance Plc. Subject to policy terms & conditions. Not affiliated with TosTrip.</div>
+            </div>
+          </div>
+          <div class="no-insurance sel" id="no-insurance-btn" onclick="pickInsurance('none',0,this)">
+            <span style="font-size:15px">🚫</span>
+            <span>No insurance — I'll travel without cover</span>
+            <span style="margin-left:auto;font-size:12px;font-weight:800;color:var(--ink4)">Free</span>
+          </div>
+        </div>
+
+        <div class="addon-divider"></div>
+
+        <!-- BOOKING TOTAL -->
+        <div class="booking-total-bar">
+          <div>
+            <div class="bt-lbl">Your Total</div>
+            <div class="bt-breakdown" id="bk-breakdown">Experience only</div>
+          </div>
+          <div style="text-align:right">
+            <div class="bt-total" id="bk-total-price">$35</div>
+            <div class="bt-per">/person</div>
+          </div>
+        </div>
+
         <div class="fg"><label class="fl">Full Name <span class="req">*</span></label><input type="text" id="b-name" class="fi" placeholder="Your full name" required></div>
         <div class="f-row">
           <div class="fg"><label class="fl">Email <span class="req">*</span></label><input type="email" id="b-email" class="fi" placeholder="you@email.com" required></div>
@@ -726,7 +851,6 @@ button{font-family:inherit;cursor:pointer}
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-top">
@@ -737,8 +861,8 @@ button{font-family:inherit;cursor:pointer}
       <div class="footer-nav">
         <a href="index.html">Home</a>
         <a href="livelikelocal.html">Live like a local</a>
-        <a href="us.html">About</a>
-        <a href="us.html">Contact</a>
+        <a href="about.html">About</a>
+        <a href="about.html">Contact</a>
       </div>
     </div>
     <div class="footer-bot">© 2025 TosTrip · Live Like a Local · Made with ❤️ in Cambodia</div>
@@ -756,25 +880,18 @@ button{font-family:inherit;cursor:pointer}
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
-/* ══════════════════════════════════════
-   EMAILJS CREDENTIALS
-══════════════════════════════════════ */
 const EJ_KEY = 'f6HV0gopdt8FE-mw7';
 const EJ_SVC = 'service_xum7qyo';
 const EJ_TPL = 'template_a9e8je3';
 if (typeof emailjs !== 'undefined') emailjs.init(EJ_KEY);
 
-/* ── NAV SCROLL ── */
 window.addEventListener('scroll', () =>
   document.getElementById('mainNav').classList.toggle('scrolled', scrollY > 30));
 
-/* ── DATE MIN ── */
 document.getElementById('b-date').min = new Date().toISOString().split('T')[0];
 
-/* ── GALLERY SWAP ── */
 function swapImg(id, src) { document.getElementById(id).src = src; }
 
-/* ── FILTER ── */
 function filterFamilies(type, btn) {
   document.querySelectorAll('.f-chip').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
@@ -782,7 +899,6 @@ function filterFamilies(type, btn) {
     c.classList.toggle('hidden', type !== 'all' && c.dataset.lifestyle !== type));
 }
 
-/* ── TIER UNLOCK ── */
 function setDur(fam, price, lbl, btn) {
   const el = document.getElementById('pv-' + fam);
   if (el) el.innerHTML = `$${price} <span>/person</span>`;
@@ -830,7 +946,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeLightboxForced();
 });
 
-/* ── WISHLIST ── */
 function toggleWish(btn) {
   btn.classList.toggle('liked');
   btn.innerHTML = btn.classList.contains('liked')
@@ -839,33 +954,85 @@ function toggleWish(btn) {
 }
 
 /* ══════════════════════════════════════
-   BOOKING MODAL
+   BOOKING MODAL — with transport & insurance
 ══════════════════════════════════════ */
 let bk = {};
+
 function openBook(family, icon, ls, half, full, night) {
-  bk = { family, icon, ls, half, full, night, selType: 'half', selPrice: half };
+  bk = { family, icon, ls, half, full, night, selType: 'half', selPrice: half,
+         transport: 'none', transportPrice: 0, transportLabel: 'Own transport',
+         insurance: 'none', insurancePrice: 0, insuranceLabel: 'No insurance' };
   document.getElementById('bm-icon').textContent = icon;
   document.getElementById('bm-name').textContent = family;
   document.getElementById('bm-ls').textContent = ls + ' · TosTrip Experience';
   document.getElementById('bm-sn').textContent = family;
   updateSum('half', half);
+
+  /* reset transport */
+  document.querySelectorAll('#transport-grid .transport-opt').forEach(o => o.classList.remove('sel'));
+  document.querySelector('#transport-grid .no-transport').classList.add('sel');
+  /* reset insurance */
+  document.querySelectorAll('#insurance-grid .ins-card').forEach(c => c.classList.remove('sel'));
+  document.getElementById('no-insurance-btn').classList.add('sel');
+
   document.getElementById('bm-dur').innerHTML = `
     <div class="dur-opt sel" onclick="pickDur('half',${half},this)"><input type="radio" name="dur" checked><div class="dur-chk"><i class="fas fa-check"></i></div><div class="dur-lbl">🌅 Half Day</div><div class="dur-sub">~4 hours</div><div class="dur-price">$${half}</div></div>
     <div class="dur-opt" onclick="pickDur('full',${full},this)"><input type="radio" name="dur"><div class="dur-chk"><i class="fas fa-check"></i></div><div class="dur-lbl">☀️ Full Day</div><div class="dur-sub">~8 hours</div><div class="dur-price">$${full}</div></div>
     <div class="dur-opt dur-full" onclick="pickDur('night',${night},this)"><input type="radio" name="dur"><div class="dur-chk"><i class="fas fa-check"></i></div><div class="dur-lbl">🌙 Overnight Stay</div><div class="dur-sub">Arrive afternoon, leave next morning</div><div class="dur-price">$${night}</div></div>`;
+
+  updateTotal();
   document.getElementById('bookModal').classList.add('open');
 }
+
 function pickDur(type, price, el) {
   bk.selType = type; bk.selPrice = price;
   document.querySelectorAll('#bm-dur .dur-opt').forEach(o => o.classList.remove('sel'));
   el.classList.add('sel');
   updateSum(type, price);
+  updateTotal();
 }
+
 function updateSum(type, price) {
   const l = { half: 'Half Day Experience', full: 'Full Day Experience', night: 'Overnight Stay' };
   document.getElementById('bm-sd').textContent = l[type];
   document.getElementById('bm-sp').textContent = '$' + price;
 }
+
+/* ── TRANSPORT PICK ── */
+function pickTransport(type, price, el) {
+  bk.transport = type;
+  bk.transportPrice = price;
+  const labels = { 'none': 'Own transport', 'tuk-tuk': 'Tuk Tuk (+$12)', 'motorbike': 'Motorbike (+$8)', 'bicycle': 'Bicycle (+$5)', 'e-bike': 'Electric Bike (+$10)' };
+  bk.transportLabel = labels[type] || type;
+  /* deselect all */
+  document.querySelectorAll('#transport-grid .transport-opt, #transport-grid .no-transport').forEach(o => o.classList.remove('sel'));
+  el.classList.add('sel');
+  updateTotal();
+}
+
+/* ── INSURANCE PICK ── */
+function pickInsurance(type, price, el) {
+  bk.insurance = type;
+  bk.insurancePrice = price;
+  const labels = { 'none': 'No insurance', 'forte': 'Forte Basic Cover (+$6)', 'aia': 'AIA Travel Plus (+$9)' };
+  bk.insuranceLabel = labels[type] || type;
+  /* deselect all */
+  document.querySelectorAll('#insurance-grid .ins-card, #no-insurance-btn').forEach(o => o.classList.remove('sel'));
+  el.classList.add('sel');
+  updateTotal();
+}
+
+/* ── LIVE TOTAL ── */
+function updateTotal() {
+  const total = bk.selPrice + bk.transportPrice + bk.insurancePrice;
+  document.getElementById('bk-total-price').textContent = '$' + total;
+
+  const parts = ['Experience: $' + bk.selPrice];
+  if (bk.transportPrice > 0) parts.push(bk.transportLabel);
+  if (bk.insurancePrice > 0) parts.push(bk.insuranceLabel);
+  document.getElementById('bk-breakdown').textContent = parts.join(' · ');
+}
+
 document.getElementById('bookModal').addEventListener('click', e => {
   if (e.target === document.getElementById('bookModal'))
     document.getElementById('bookModal').classList.remove('open');
@@ -884,10 +1051,9 @@ function submitBook(e) {
   const date  = document.getElementById('b-date').value;
   const pax   = document.getElementById('b-pax').value;
   const notes = document.getElementById('b-notes').value || '';
-
   const durLabel = { half: 'Half Day', full: 'Full Day', night: 'Overnight Stay' }[bk.selType];
+  const total = bk.selPrice + bk.transportPrice + bk.insurancePrice;
 
-  /* EmailJS payload — matches your template variables */
   const payload = {
     user_name:    name,
     user_email:   email,
@@ -897,18 +1063,21 @@ function submitBook(e) {
     request_type: 'Live Like a Local – Booking',
     friend_name:  bk.family,
     duration:     durLabel + ' — $' + bk.selPrice,
-    price:        bk.selPrice,
+    price:        total,
     lifestyle:    bk.ls,
-    people:       pax
+    people:       pax,
+    transport:    bk.transportLabel,
+    insurance:    bk.insuranceLabel
   };
 
-  /* thankyou.html URL with all booking data as params */
   const params = new URLSearchParams({
     family:    bk.family,
     lifestyle: bk.ls,
     icon:      bk.icon,
     duration:  durLabel,
-    price:     bk.selPrice,
+    price:     total,
+    transport: bk.transportLabel,
+    insurance: bk.insuranceLabel,
     name:      name,
     email:     email,
     phone:     phone,
@@ -927,7 +1096,6 @@ function submitBook(e) {
         btn.disabled = false;
       });
   } else {
-    /* Demo fallback — still redirects with data */
     window.location.href = redirectURL;
   }
 }
@@ -949,7 +1117,6 @@ document.getElementById('msgModal').addEventListener('click', e => {
   if (e.target === document.getElementById('msgModal'))
     document.getElementById('msgModal').classList.remove('open');
 });
-
 function addTopic(btn, text) {
   btn.classList.toggle('sel');
   const ta = document.getElementById('m-msg');
@@ -960,13 +1127,11 @@ function addTopic(btn, text) {
   }
 }
 
-/* ── SUBMIT MESSAGE ── */
 function submitMsg(e) {
   e.preventDefault();
   const btn = e.target.querySelector('.m-btn');
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
   btn.disabled = true;
-
   const payload = {
     user_name:    document.getElementById('m-name').value,
     user_email:   document.getElementById('m-email').value,
@@ -980,7 +1145,6 @@ function submitMsg(e) {
     phone:        'N/A',
     people:       'N/A'
   };
-
   if (typeof emailjs !== 'undefined') {
     emailjs.send(EJ_SVC, EJ_TPL, payload)
       .then(() => { window.location.href = 'thankyou.html'; })
