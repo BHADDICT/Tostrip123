@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — TosTrip</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --p:#667eea;--pd:#4f63d2;--ps:#f0f0fd;--pm:#ddd5fb;
+  --green:#10b981;--red:#ef4444;
+  --ink:#111827;--ink2:#374151;--ink3:#6b7280;--ink4:#9ca3af;
+  --line:#e5e7eb;--bg:#fff;--bg2:#f9fafb;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--bg)}
+a{text-decoration:none;color:var(--p)}
+a:hover{text-decoration:underline}
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1.5px solid var(--line)}
+.nav-inner{max-width:900px;margin:0 auto;padding:0 28px;height:66px;display:flex;align-items:center;justify-content:space-between}
+.logo-text{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--p)}
+.btn-back{padding:9px 20px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);font-size:14px;font-weight:600;color:var(--ink2);display:flex;align-items:center;gap:7px;cursor:pointer;transition:all .2s}
+.btn-back:hover{border-color:var(--p);color:var(--p)}
+
+.policy-hero{margin-top:66px;background:linear-gradient(135deg,#059669 0%,#34d399 100%);padding:56px 28px 48px;text-align:center}
+.policy-hero .badge{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;padding:5px 16px;border-radius:100px;margin-bottom:18px}
+.policy-hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,48px);font-weight:800;color:#fff;margin-bottom:12px}
+.policy-hero p{font-size:15px;color:rgba(255,255,255,.85);max-width:540px;margin:0 auto}
+.policy-meta{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:22px;flex-wrap:wrap}
+.policy-meta span{display:flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,.75);font-weight:500}
+
+.policy-wrap{max-width:780px;margin:0 auto;padding:56px 28px 80px}
+.toc{background:var(--bg2);border:1.5px solid var(--line);border-radius:16px;padding:24px 28px;margin-bottom:48px}
+.toc h3{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--ink3);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.toc ol{padding-left:18px;display:flex;flex-direction:column;gap:7px}
+.toc li a{font-size:14px;font-weight:600;color:var(--p)}
+
+.policy-section{margin-bottom:48px;scroll-margin-top:90px}
+.policy-section h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink);padding-bottom:10px;border-bottom:2px solid #d1fae5;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.policy-section h2 i{color:var(--green);font-size:18px}
+.policy-section h3{font-size:16px;font-weight:700;color:var(--ink);margin:20px 0 10px}
+.policy-section p{font-size:15px;color:var(--ink2);line-height:1.8;margin-bottom:14px}
+.policy-section ul,.policy-section ol{padding-left:22px;margin-bottom:14px;display:flex;flex-direction:column;gap:8px}
+.policy-section li{font-size:15px;color:var(--ink2);line-height:1.7}
+.policy-section li strong{color:var(--ink)}
+
+.data-table{width:100%;border-collapse:collapse;margin:18px 0;border-radius:12px;overflow:hidden;border:1.5px solid var(--line)}
+.data-table th{background:var(--bg2);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:var(--ink3);padding:12px 16px;text-align:left;border-bottom:1.5px solid var(--line)}
+.data-table td{font-size:14px;color:var(--ink2);padding:12px 16px;border-bottom:1px solid var(--line);line-height:1.6;vertical-align:top}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:nth-child(even) td{background:var(--bg2)}
+
+.right-chip{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:800}
+.right-chip.green{background:#d1fae5;color:#065f46}
+.right-chip.blue{background:#dbeafe;color:#1e40af}
+.right-chip.red{background:#fee2e2;color:#991b1b}
+
+.highlight-box{background:#ecfdf5;border:1.5px solid #a7f3d0;border-radius:12px;padding:18px 22px;margin:18px 0;font-size:14px;color:#065f46;line-height:1.7;font-weight:500}
+.highlight-box i{margin-right:8px}
+.warn-box{background:#fffbeb;border:1.5px solid #fde68a;border-radius:12px;padding:18px 22px;margin:18px 0;font-size:14px;color:#92400e;line-height:1.7}
+.warn-box i{margin-right:8px;color:#d97706}
+
+.contact-card{background:var(--bg2);border:1.5px solid var(--line);border-radius:16px;padding:28px;display:flex;gap:18px;align-items:flex-start;margin-top:20px}
+.contact-ico{width:48px;height:48px;border-radius:12px;background:#d1fae5;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.contact-card h4{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.contact-card p,.contact-card a{font-size:14px;color:var(--ink3);line-height:1.6}
+
+.policy-footer{background:#1a1f4e;color:rgba(255,255,255,.45);padding:28px;text-align:center;font-size:13px}
+.policy-footer a{color:rgba(255,255,255,.6)}
+.policy-footer a:hover{color:#fff}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo-text">TosTrip</a>
+    <a href="livelikelocal.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back</a>
+  </div>
+</nav>
+
+<div class="policy-hero">
+  <div class="badge"><i class="fas fa-lock"></i> Privacy</div>
+  <h1>Privacy Policy</h1>
+  <p>We value your privacy. Here's exactly what data we collect, why we collect it, and how we protect it.</p>
+  <div class="policy-meta">
+    <span><i class="fas fa-calendar-alt"></i> Effective: 1 January 2025</span>
+    <span><i class="fas fa-sync-alt"></i> Last updated: June 2025</span>
+    <span><i class="fas fa-map-marker-alt"></i> Cambodia</span>
+  </div>
+</div>
+
+<div class="policy-wrap">
+
+  <div class="toc">
+    <h3><i class="fas fa-list"></i> Table of Contents</h3>
+    <ol>
+      <li><a href="#p1">Who We Are</a></li>
+      <li><a href="#p2">Data We Collect</a></li>
+      <li><a href="#p3">Why We Collect Your Data</a></li>
+      <li><a href="#p4">How We Use Your Data</a></li>
+      <li><a href="#p5">Data Sharing</a></li>
+      <li><a href="#p6">Cookies &amp; Tracking</a></li>
+      <li><a href="#p7">Data Retention</a></li>
+      <li><a href="#p8">Your Rights</a></li>
+      <li><a href="#p9">Data Security</a></li>
+      <li><a href="#p10">Children's Privacy</a></li>
+      <li><a href="#p11">Changes to This Policy</a></li>
+      <li><a href="#p12">Contact &amp; Complaints</a></li>
+    </ol>
+  </div>
+
+  <div class="highlight-box"><i class="fas fa-shield-alt"></i> TosTrip does not sell your personal data to third parties. Ever. We collect only what is necessary to deliver your experience and keep you informed.</div>
+
+  <!-- P1 -->
+  <div class="policy-section" id="p1">
+    <h2><i class="fas fa-building"></i> 1. Who We Are</h2>
+    <p>TosTrip ("we", "us", "our") is a cultural travel platform based in Cambodia that connects travellers with local host families. We operate the website at tostrip.com and any related booking services.</p>
+    <p>For the purposes of data protection, TosTrip is the data controller of any personal information you provide to us.</p>
+  </div>
+
+  <!-- P2 -->
+  <div class="policy-section" id="p2">
+    <h2><i class="fas fa-database"></i> 2. Data We Collect</h2>
+    <p>We collect the following categories of personal data:</p>
+    <table class="data-table">
+      <thead><tr><th>Data Type</th><th>Examples</th><th>When Collected</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Identity Data</strong></td><td>Full name</td><td>Booking &amp; messaging forms</td></tr>
+        <tr><td><strong>Contact Data</strong></td><td>Email address, phone number</td><td>Booking &amp; messaging forms</td></tr>
+        <tr><td><strong>Booking Data</strong></td><td>Experience date, number of guests, duration, preferences, dietary needs</td><td>Booking form</td></tr>
+        <tr><td><strong>Financial Data</strong></td><td>Payment amount, selected add-ons (transport, insurance type)</td><td>Checkout process</td></tr>
+        <tr><td><strong>Communication Data</strong></td><td>Messages sent to host families via our platform</td><td>Message form</td></tr>
+        <tr><td><strong>Technical Data</strong></td><td>IP address, browser type, device type, pages visited</td><td>Automatically on site visit</td></tr>
+        <tr><td><strong>Usage Data</strong></td><td>Clicks, time on page, filter selections</td><td>Automatically on site visit</td></tr>
+      </tbody>
+    </table>
+    <p>We do <strong>not</strong> collect sensitive data such as racial origin, religion, health records, or biometric data unless you voluntarily disclose a dietary restriction or medical condition relevant to your experience.</p>
+  </div>
+
+  <!-- P3 -->
+  <div class="policy-section" id="p3">
+    <h2><i class="fas fa-question-circle"></i> 3. Why We Collect Your Data</h2>
+    <p>We collect personal data on the following legal bases:</p>
+    <ul>
+      <li><span class="right-chip green">Contract</span> — To process your booking and deliver the experience you've purchased.</li>
+      <li><span class="right-chip blue">Legitimate Interest</span> — To improve our platform, prevent fraud, and maintain security.</li>
+      <li><span class="right-chip green">Consent</span> — To send you marketing emails or newsletters (only when you opt in).</li>
+      <li><span class="right-chip red">Legal Obligation</span> — To comply with Cambodian tax and business regulations.</li>
+    </ul>
+  </div>
+
+  <!-- P4 -->
+  <div class="policy-section" id="p4">
+    <h2><i class="fas fa-cogs"></i> 4. How We Use Your Data</h2>
+    <p>Your personal data may be used to:</p>
+    <ul>
+      <li>Confirm and manage your booking or inquiry</li>
+      <li>Send booking confirmation emails and reminders</li>
+      <li>Coordinate your experience with the host family</li>
+      <li>Process payments and optional insurance/transport add-ons</li>
+      <li>Respond to your questions and support requests</li>
+      <li>Send you post-experience review requests (one email only)</li>
+      <li>Improve our platform based on anonymised usage analytics</li>
+      <li>Comply with legal or regulatory requirements</li>
+    </ul>
+    <p>We will <strong>not</strong> use your data for automated decision-making or profiling that produces significant legal effects.</p>
+  </div>
+
+  <!-- P5 -->
+  <div class="policy-section" id="p5">
+    <h2><i class="fas fa-share-alt"></i> 5. Data Sharing</h2>
+    <p>We share your data only where necessary and with appropriate protections in place:</p>
+    <ul>
+      <li><strong>Host Families:</strong> We share your name, booking date, number of guests, dietary needs, and any special requests with the relevant host family to prepare your experience.</li>
+      <li><strong>EmailJS:</strong> We use EmailJS to transmit booking and message confirmations. Your submitted form data passes through their servers to deliver emails.</li>
+      <li><strong>Insurance Providers:</strong> If you opt in to travel insurance, relevant booking data is shared with Forte Insurance (Cambodia) Plc. or AIA (Cambodia) Life Insurance Plc. to facilitate your policy.</li>
+      <li><strong>Legal Authorities:</strong> We may disclose data if required to do so by law or valid government request.</li>
+    </ul>
+    <div class="warn-box"><i class="fas fa-exclamation-triangle"></i> We do not share, sell, or rent your personal data to advertisers, data brokers, or any other third parties for their own commercial purposes.</div>
+  </div>
+
+  <!-- P6 -->
+  <div class="policy-section" id="p6">
+    <h2><i class="fas fa-cookie-bite"></i> 6. Cookies &amp; Tracking</h2>
+    <p>We use cookies and similar technologies to:</p>
+    <ul>
+      <li><strong>Essential cookies:</strong> Enable core site functionality (no consent required).</li>
+      <li><strong>Analytics cookies:</strong> Understand how visitors use our site (anonymised). We use Google Analytics or equivalent.</li>
+      <li><strong>Preference cookies:</strong> Remember your language and filter selections.</li>
+    </ul>
+    <p>You can control cookies through your browser settings. Disabling analytics cookies will not affect your ability to book.</p>
+  </div>
+
+  <!-- P7 -->
+  <div class="policy-section" id="p7">
+    <h2><i class="fas fa-history"></i> 7. Data Retention</h2>
+    <p>We retain personal data for as long as necessary to fulfil the purposes it was collected for, including legal and accounting requirements:</p>
+    <ul>
+      <li><strong>Booking records:</strong> 7 years (Cambodian tax law requirement)</li>
+      <li><strong>Message inquiries:</strong> 12 months from date of receipt</li>
+      <li><strong>Marketing consent records:</strong> Until you withdraw consent</li>
+      <li><strong>Technical/log data:</strong> 90 days rolling</li>
+    </ul>
+    <p>After the retention period, your data is securely deleted or anonymised.</p>
+  </div>
+
+  <!-- P8 -->
+  <div class="policy-section" id="p8">
+    <h2><i class="fas fa-user-shield"></i> 8. Your Rights</h2>
+    <p>You have the following rights regarding your personal data:</p>
+    <ul>
+      <li><strong>Access:</strong> Request a copy of the data we hold about you.</li>
+      <li><strong>Correction:</strong> Ask us to correct inaccurate or incomplete data.</li>
+      <li><strong>Erasure:</strong> Request deletion of your data (subject to legal retention obligations).</li>
+      <li><strong>Restriction:</strong> Ask us to stop processing your data in certain circumstances.</li>
+      <li><strong>Portability:</strong> Receive your data in a machine-readable format.</li>
+      <li><strong>Objection:</strong> Object to processing based on legitimate interests.</li>
+      <li><strong>Withdraw Consent:</strong> Withdraw marketing consent at any time by emailing us or clicking "unsubscribe" in any email.</li>
+    </ul>
+    <p>To exercise any of these rights, email <a href="mailto:privacy@tostrip.com">privacy@tostrip.com</a>. We will respond within 30 days.</p>
+  </div>
+
+  <!-- P9 -->
+  <div class="policy-section" id="p9">
+    <h2><i class="fas fa-lock"></i> 9. Data Security</h2>
+    <p>We implement appropriate technical and organisational measures to protect your personal data against unauthorised access, loss, or disclosure, including:</p>
+    <ul>
+      <li>HTTPS encryption on all pages</li>
+      <li>Secure, access-controlled email transmission (EmailJS)</li>
+      <li>Limited internal access to personal data on a need-to-know basis</li>
+      <li>Regular review of our data handling practices</li>
+    </ul>
+    <p>No method of internet transmission is 100% secure. If you become aware of a security concern, please contact us immediately at <a href="mailto:security@tostrip.com">security@tostrip.com</a>.</p>
+  </div>
+
+  <!-- P10 -->
+  <div class="policy-section" id="p10">
+    <h2><i class="fas fa-child"></i> 10. Children's Privacy</h2>
+    <p>Our Services are directed at adults aged 18 and over. We do not knowingly collect personal data from individuals under 18. If a child is included as part of a group booking, their data is provided by the responsible adult guest, and handled accordingly.</p>
+    <p>If you believe we have inadvertently collected data from a minor, please contact us and we will delete it promptly.</p>
+  </div>
+
+  <!-- P11 -->
+  <div class="policy-section" id="p11">
+    <h2><i class="fas fa-sync-alt"></i> 11. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. When we make material changes, we will update the "Last updated" date at the top of this page and, where appropriate, notify you by email.</p>
+    <p>Continued use of our Services after any changes constitutes your acceptance of the updated policy.</p>
+  </div>
+
+  <!-- P12 -->
+  <div class="policy-section" id="p12">
+    <h2><i class="fas fa-envelope"></i> 12. Contact &amp; Complaints</h2>
+    <p>For any privacy questions, data requests, or complaints, please contact:</p>
+    <div class="contact-card">
+      <div class="contact-ico">🔒</div>
+      <div>
+        <h4>TosTrip — Privacy Team</h4>
+        <p>Email: <a href="mailto:privacy@tostrip.com">privacy@tostrip.com</a></p>
+        <p>General: <a href="mailto:hello@tostrip.com">hello@tostrip.com</a></p>
+        <p>Phone / WhatsApp: <a href="tel:+85512345678">+855 12 345 678</a></p>
+        <p>Based in Phnom Penh &amp; Siem Reap, Cambodia</p>
+      </div>
+    </div>
+    <p style="margin-top:20px">For our booking rules, please review our <a href="terms.html">Terms &amp; Conditions</a>.</p>
+  </div>
+
+</div>
+
+<div class="policy-footer">
+  © 2025 TosTrip · <a href="terms.html">Terms &amp; Conditions</a> · <a href="privacy.html">Privacy Policy</a> · Made with ❤️ in Cambodia
+</div>
+
+</body>
+</html>
