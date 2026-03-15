@@ -158,7 +158,28 @@ button { font-family: inherit; cursor: pointer; }
   width: 1px; height: 36px;
   background: rgba(255,255,255,.2);
 }
-
+.dur-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.dur-opt {
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 10px 12px;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color .15s, background .15s;
+}
+.dur-opt.sel {
+  border-color: var(--primary, #7c3aed);
+  background: #f5f3ff;
+}
+.dur-opt-label { font-size: 13px; font-weight: 600; }
+.dur-opt-price { font-size: 14px; font-weight: 800; margin-top: 2px; color: var(--primary, #7c3aed); }
+.consent-err { display: none; font-size: 12px; color: #dc2626; margin-top: 4px; }
+.consent-err.show { display: flex; align-items: center; gap: 6px; }
 /* ============================================================
    SECTION SHELL
 ============================================================ */
@@ -1006,10 +1027,7 @@ button { font-family: inherit; cursor: pointer; }
 <section class="hero" id="home">
   <div class="hero-bg"></div>
   <div class="hero-content">
-    <div class="hero-badge">
-      <i class="fas fa-star"></i>
-      <span data-i18n="hero.badge">Cambodia at your fingertip</span>
-    </div>
+
     <h1>
       <span style="color:#fff" data-i18n="hero.h1a">Discover Cambodia</span><br>
       <span class="h1-gold" data-i18n="hero.h1b">Like a Local</span>
@@ -1110,7 +1128,7 @@ button { font-family: inherit; cursor: pointer; }
       <div class="pkg-card">
         <a href="rentafriend.html" style="text-decoration:none;color:inherit;">
           <div class="pkg-img">
-            <img src="./imgg/yu2.jpg" alt="Rent a Friend">
+            <img src="./imgg/yu4.jpg" alt="Rent a Friend">
             <span class="pkg-tag" data-i18n="pkg.friend.tag">Unique</span>
           </div>
         </a>
@@ -1142,45 +1160,123 @@ button { font-family: inherit; cursor: pointer; }
      LOCAL DESTINATIONS (toggle)
 ============================================================ -->
 <div id="localSection" class="toggle-section" style="background:var(--surface);padding:48px 24px;">
-  <div style="max-width:1280px;margin:0 auto;">
-    <div class="section-header-row">
+  <div style="max-width:1200px;margin:0 auto">
+
+    <!-- Header -->
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px;gap:16px;flex-wrap:wrap">
       <div>
-        <div class="section-label"><i class="fas fa-compass"></i> <span data-i18n="dest.label">Live Like a Local</span></div>
-        <h2 class="section-title" data-i18n="dest.title">Choose Your Destination</h2>
-      </div>
-      <button onclick="toggleSection('localSection')" style="background:none;border:1.5px solid var(--border);padding:8px 18px;border-radius:var(--r-sm);font-size:14px;font-weight:600;cursor:pointer;color:var(--text-600);">
-        <i class="fas fa-times"></i> <span data-i18n="dest.close">Close</span>
-      </button>
-    </div>
-    <div class="dest-scroll">
-      <a href="livelikelocal.html" style="flex-shrink:0">
-        <div class="dest-chip">
-          <img src="./imgg/pp2.JPG" alt="Siem Reap">
-          <div class="dest-chip-badge" data-i18n="dest.available">Available</div>
-          <div class="dest-chip-overlay"><div class="dest-chip-name">Siem Reap</div></div>
+        <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-600);margin-bottom:6px">
+          <i class="fas fa-compass"></i> Live like a local
         </div>
-      </a>
-      <div class="dest-chip" style="flex-shrink:0">
-        <img src="./imgg/pic.JPG" alt="Phnom Penh">
-        <div class="dest-chip-overlay"><div class="dest-chip-name">Phnom Penh</div></div>
+        <h2 style="font-size:28px;font-weight:700;margin:0;color:var(--text-900,#111)">Stay with a real Cambodian family</h2>
+        <p style="font-size:15px;color:var(--text-600);margin:6px 0 0">Four families. Four completely different lives. One unforgettable day.</p>
       </div>
-      <div class="dest-chip" style="flex-shrink:0">
-        <img src="./imgg/trip3.JPG" alt="Kampot">
-        <div class="dest-chip-overlay"><div class="dest-chip-name">Kampot</div></div>
-      </div>
-      <div class="dest-chip locked" style="flex-shrink:0">
-        <img src="./imgg/koh.jpg" alt="Koh Rong">
-        <div class="dest-chip-overlay"><div class="dest-chip-name">Koh Rong</div><span class="chip-soon" data-i18n="dest.soon">Coming Soon</span></div>
-      </div>
-      <div class="dest-chip locked" style="flex-shrink:0">
-        <img src="./imgg/kep.jpg" alt="Kep">
-        <div class="dest-chip-overlay"><div class="dest-chip-name">Kep</div><span class="chip-soon" data-i18n="dest.soon">Coming Soon</span></div>
-      </div>
+      <a href="livelikelocal.html" style="font-size:14px;font-weight:600;color:var(--primary,#16a34a);text-decoration:underline;text-underline-offset:3px">See all families →</a>
     </div>
+
+    <!-- Family cards -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px">
+
+      <!-- Pu Nak / Farming -->
+      <div class="teaser-card" style="border:1.5px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .2s">
+        <div style="position:relative;height:200px;overflow:hidden">
+          <img src="./imgg/puvin2.jpg" alt="Pu Nak Family" style="width:100%;height:100%;object-fit:cover;display:block">
+          <span style="position:absolute;top:12px;left:12px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:var(--r-sm);background:rgba(236,253,245,.95);color:#065f46"><i class="fas fa-seedling"></i> Farming Life</span>
+          <span style="position:absolute;top:12px;right:12px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:var(--r-sm);background:rgba(255,255,255,.92);color:#111">★ 4.9 · 72 stays</span>
+        </div>
+        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:8px">
+          <div style="font-size:16px;font-weight:700;color:var(--text-900,#111)">The Pu Nak family</div>
+          <div style="font-size:13px;color:var(--text-600)"><i class="fas fa-map-marker-alt"></i> Siem Reap · Rice farmers since 1968</div>
+          <p style="font-size:13px;color:var(--text-600);line-height:1.55;margin:0;flex:1">Wake before sunrise with Grandpa Rith, tend the paddy fields, receive a monk water blessing at Angkor Wat, and cook over a wood fire as a family.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">
+            <span style="font-size:11px;padding:3px 8px;border-radius:6px;background:#f3f4f6;color:var(--text-600)">Rice farming</span>
+            <span style="font-size:11px;padding:3px 8px;border-radius:6px;background:#f3f4f6;color:var(--text-600)">Buffalo care</span>
+            <span style="font-size:11px;padding:3px 8px;border-radius:6px;background:#f3f4f6;color:var(--text-600)">Angkor Wat tour</span>
+            <span style="font-size:11px;padding:3px 8px;border-radius:6px;background:#f3f4f6;color:var(--text-600)">Pottery workshop</span>
+          </div>
+        </div>
+        <div style="padding:0 16px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <div>
+            <div style="font-size:11px;color:var(--text-600)">Starting from</div>
+            <div style="font-size:20px;font-weight:700;color:var(--text-900,#111)">$35 <span style="font-size:13px;font-weight:400;color:var(--text-600)">/ person</span></div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn-msg" onclick="openMsg('Pu Nak Family','🌾','Farming Life')" style="background:none;border:1.5px solid var(--border);font-size:13px;font-weight:600;padding:8px 14px;border-radius:var(--r-sm);cursor:pointer">Message</button>
+            <button class="btn-book" onclick="openBook('Pu Nak Family','🌾','Farming Life',35,60,95)" style="background:#111;color:#fff;border:none;font-size:13px;font-weight:600;padding:8px 18px;border-radius:var(--r-sm);cursor:pointer">Book now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Enoch / Fishing -->
+      <div class="teaser-card" style="border:1.5px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .2s">
+        <div style="position:relative;height:200px;overflow:hidden">
+          <img src="./imgg/test1.jpg" alt="Enoch Family" style="width:100%;height:100%;object-fit:cover;display:block">
+          <span style="position:absolute;top:12px;left:12px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:var(--r-sm);background:rgba(240,249,255,.95);color:#075985"><i class="fas fa-fish"></i> Fishing Village</span>
+          <span style="position:absolute;top:12px;right:12px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:var(--r-sm);background:rgba(255,255,255,.92);color:#111">★ 5.0 · 48 stays</span>
+        </div>
+        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:8px">
+          <div style="font-size:16px;font-weight:700;color:var(--text-900,#111)">The Enoch family</div>
+          <div style="font-size:13px;color:var(--text-600)"><i class="fas fa-map-marker-alt"></i> Tonlé Sap · Floating village fishermen</div>
+          <p style="font-size:13px;color:var(--text-600);line-height:1.55;margin:0;flex:1">Cruise wooden boats through floating homes, visit a school on water, cook a Khmer feast, then share dishes with neighbors by boat.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">
+            <span style="font-size:11px;padding:3px 8px;border-radius:6px;background:#f3f4f6;color:var(--text-600)">Boat village tour</span>
+            <span style="font-size:11px;padding:3px 8px;border-radius:6px;background:#f3f4f6;color:var(--text-600)">Floating school</span>
+            <span style="font-size:11px;padding:3px 8px;border-radius:6px;background:#f3f4f6;color:var(--text-600)">Khmer cooking</span>
+            <span style="font-size:11px;padding:3px 8px;border-radius:6px;background:#f3f4f6;color:var(--text-600)">Community sharing</span>
+          </div>
+        </div>
+        <div style="padding:0 16px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <div>
+            <div style="font-size:11px;color:var(--text-600)">Starting from</div>
+            <div style="font-size:20px;font-weight:700;color:var(--text-900,#111)">$42 <span style="font-size:13px;font-weight:400;color:var(--text-600)">/ person</span></div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn-msg" onclick="openMsg('Pov Family','🎣','Fishing Village')" style="background:none;border:1.5px solid var(--border);font-size:13px;font-weight:600;padding:8px 14px;border-radius:var(--r-sm);cursor:pointer">Message</button>
+            <button class="btn-book" onclick="openBook('Pov Family','🎣','Fishing Village',42,70,110)" style="background:#111;color:#fff;border:none;font-size:13px;font-weight:600;padding:8px 18px;border-radius:var(--r-sm);cursor:pointer">Book now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sopheak / Artisan -->
+      <div class="teaser-card" style="border:1.5px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .2s">
+        <div style="position:relative;height:200px;overflow:hidden">
+          <img src="./imgg/ke.jpg" alt="Sopheak Family" style="width:100%;height:100%;object-fit:cover;display:block">
+          <span style="position:absolute;top:12px;left:12px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:var(--r-sm);background:rgba(255,247,237,.95);color:#92400e"><i class="fas fa-palette"></i> Artisan Craft</span>
+          <span style="position:absolute;top:12px;right:12px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:var(--r-sm);background:rgba(255,255,255,.92);color:#111">★ 4.8 · 61 stays</span>
+        </div>
+        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:8px">
+          <div style="font-size:16px;font-weight:700;color:var(--text-900,#111)">Kleng Ek Pu vin</div>
+          <div style="font-size:13px;color:var(--text-600)"><i class="fas fa-map-marker-alt"></i> Siem Reap · 4th-generation silk weavers</div>
+          <p style="font-size:13px;color:var(--text-600);line-height:1.55;margin:0;flex:1">Try the loom, learn natural plant dyeing, paint a krama scarf — then sit in the courtyard for a morning feast Bopha prepares while you weave.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">
+            <span style="font-size:11px;padding:3px 8px;border-radius:6px;background:#f3f4f6;color:var(--text-600)">Silk weaving</span>
+            <span style="font-size:11px;padding:3px 8px;border-radius:6px;background:#f3f4f6;color:var(--text-600)">Plant dyeing</span>
+            <span style="font-size:11px;padding:3px 8px;border-radius:6px;background:#f3f4f6;color:var(--text-600)">Take-home craft</span>
+            <span style="font-size:11px;padding:3px 8px;border-radius:6px;background:#f3f4f6;color:var(--text-600)">Khmer snacks</span>
+          </div>
+        </div>
+        <div style="padding:0 16px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <div>
+            <div style="font-size:11px;color:var(--text-600)">Starting from</div>
+            <div style="font-size:20px;font-weight:700;color:var(--text-900,#111)">$38 <span style="font-size:13px;font-weight:400;color:var(--text-600)">/ person</span></div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn-msg" onclick="openMsg('Sopheak Family','🏺','Artisan Craft')" style="background:none;border:1.5px solid var(--border);font-size:13px;font-weight:600;padding:8px 14px;border-radius:var(--r-sm);cursor:pointer">Message</button>
+            <button class="btn-book" onclick="openBook('Sopheak Family','🏺','Artisan Craft',38,65,100)" style="background:#111;color:#fff;border:none;font-size:13px;font-weight:600;padding:8px 18px;border-radius:var(--r-sm);cursor:pointer">Book now</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom banner -->
+    <div style="margin-top:28px;background:#f9fafb;border:1.5px solid var(--border);border-radius:14px;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <p style="font-size:14px;color:var(--text-600);margin:0">All experiences include <strong style="color:#111">meals cooked together</strong>, local transport, and a <strong style="color:#111">personal host guide</strong>. Half-day, full-day &amp; overnight options available.</p>
+      <a href="livelikelocal.html" style="background:none;border:1.5px solid var(--border);font-size:14px;font-weight:600;padding:9px 20px;border-radius:var(--r-sm);cursor:pointer;color:#111;text-decoration:none;white-space:nowrap">Browse all families →</a>
+    </div>
+
   </div>
 </div>
-
-
 <!-- ============================================================
      RENT A FRIEND CARDS (toggle)
 ============================================================ -->
@@ -1665,7 +1761,52 @@ button { font-family: inherit; cursor: pointer; }
     <div class="success-state" id="rentSuccess"></div>
   </div>
 </div>
+<!-- ============================================================
+     PARTNERS
+============================================================ -->
+<section style="background:var(--surface);padding:56px 24px;border-top:1px solid var(--border);">
+  <div style="max-width:1280px;margin:0 auto;">
 
+    <div style="text-align:center;margin-bottom:36px;">
+      <div class="section-label" style="justify-content:center;">
+        <i class="fas fa-handshake"></i> Our Partners
+      </div>
+      <h2 class="section-title" style="text-align:center;">Trusted by local leaders</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;align-items:center;">
+
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:88px;">
+        <img src="./img/partner1.png" alt="Partner 1" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
+      </div>
+
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:88px;">
+        <img src="./img/partner2.png" alt="Partner 2" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
+      </div>
+
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:88px;">
+        <img src="./img/partner3.png" alt="Partner 3" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
+      </div>
+
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:88px;">
+        <img src="./img/partner4.png" alt="Partner 4" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
+      </div>
+
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:88px;">
+        <img src="./img/partner5.png" alt="Partner 5" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
+      </div>
+
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:88px;">
+        <img src="./img/partner6.png" alt="Partner 6" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
+      </div>
+
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:88px;">
+        <img src="./img/fote.png" alt="Forte" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
+      </div>
+
+    </div>
+  </div>
+</section>
 
 <!-- ============================================================
      ✦ CHAT WITH GUIDE MODAL
@@ -1956,65 +2097,614 @@ How can I help you today?</span>
 
 <script>
 /* ============================================================
+   TOSTRIP — MAIN JS
+   All functionality in one file. Load order:
+   1. emailjs CDN
+   2. translations.js
+   3. translator.js
+   4. chatbot.js
+   5. THIS FILE (main.js) — replaces booking.js + inline <script>
+============================================================ */
+
+/* ============================================================
    EMAILJS CONFIG
 ============================================================ */
-const EMAILJS_PUBLIC_KEY       = 'YOUR_PUBLIC_KEY';
-const EMAILJS_SERVICE_ID       = 'YOUR_SERVICE_ID';
+const EMAILJS_PUBLIC_KEY        = 'YOUR_PUBLIC_KEY';
+const EMAILJS_SERVICE_ID        = 'YOUR_SERVICE_ID';
 const EMAILJS_TEMPLATE_BOOKING  = 'YOUR_BOOKING_TEMPLATE';
 const EMAILJS_TEMPLATE_CHAT     = 'YOUR_CHAT_TEMPLATE';
 const EMAILJS_TEMPLATE_WORKSHOP = 'YOUR_WORKSHOP_TEMPLATE';
-const EMAILJS_TEMPLATE_NEWSLETTER='YOUR_NEWSLETTER_TEMPLATE';
+const EMAILJS_TEMPLATE_NEWSLETTER = 'YOUR_NEWSLETTER_TEMPLATE';
 
 if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
   emailjs.init(EMAILJS_PUBLIC_KEY);
 }
 
 /* ============================================================
-   COOKIES
+   LIVE LIKE A LOCAL — INJECT BOOKING MODAL
+   Self-contained: builds and injects #bookModal into the DOM.
 ============================================================ */
-function setCookie(n,v,d){const e=new Date(Date.now()+d*864e5).toUTCString();document.cookie=n+'='+v+';expires='+e+';path=/;SameSite=Lax';}
-function getCookie(n){return document.cookie.split('; ').reduce((a,p)=>{const[k,v]=p.split('=');return k===n?v:a;},null);}
+(function injectBookModal() {
+  const html = `
+  <div class="modal-overlay" id="bookModal">
+    <div class="modal-box" style="max-width:600px;">
 
-document.addEventListener('DOMContentLoaded',()=>{
-  const b=document.getElementById('cookie-banner');
-  if(getCookie('tosTripCookiesAccepted')!=='true') b.style.display='flex';
-  document.getElementById('cookie-accept').addEventListener('click',()=>{
-    setCookie('tosTripCookiesAccepted','true',365); b.style.display='none';
+      <!-- HEAD -->
+      <div class="modal-head">
+        <div class="modal-head-row">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="guide-avatar" id="bm-icon"
+              style="font-size:22px;width:48px;height:48px;background:rgba(255,255,255,.2);">🌾</div>
+            <div>
+              <h2 style="margin:0 0 2px;font-size:20px;">Book <span id="bm-name">Family</span></h2>
+              <p id="bm-ls" style="margin:0;opacity:.75;font-size:13px;">TosTrip Experience</p>
+            </div>
+          </div>
+          <button class="modal-close" onclick="closeBookModal()"><i class="fas fa-times"></i></button>
+        </div>
+
+        <!-- Step bar -->
+        <div style="display:flex;align-items:center;gap:0;margin-top:18px;" id="bk-steps-bar">
+          <div class="step-item active" id="bk-step1-ind">
+            <div class="step-circle">1</div>
+            <div class="step-label">Duration</div>
+          </div>
+          <div class="step-item" id="bk-step2-ind">
+            <div class="step-circle">2</div>
+            <div class="step-label">Your Details</div>
+          </div>
+          <div class="step-item" id="bk-step3-ind">
+            <div class="step-circle">3</div>
+            <div class="step-label">Confirm</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── STEP 1: Duration + Add-ons ──────────────────────── -->
+      <div class="modal-body" id="bk-step1-body">
+
+        <div class="form-group">
+          <label class="form-label">Choose Your Experience Duration <span>*</span></label>
+          <div id="bm-dur" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;"></div>
+        </div>
+
+        <!-- Transport -->
+        <div class="form-group">
+          <label class="form-label">Transport <span class="opt">(Optional add-on)</span></label>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+            <div class="dur-opt no-transport sel"
+              onclick="bkPickTransport('none',0,this)"
+              style="cursor:pointer;padding:10px;text-align:center;border:1.5px solid var(--border);border-radius:var(--r-sm);transition:all .2s;">
+              <div style="font-size:18px;margin-bottom:4px;">🚶</div>
+              <div style="font-size:12px;font-weight:700;">Self Arrange</div>
+              <div style="font-size:13px;font-weight:800;color:var(--blue);">Free</div>
+            </div>
+            <div class="dur-opt transport-opt"
+              onclick="bkPickTransport('tuk',8,this)"
+              style="cursor:pointer;padding:10px;text-align:center;border:1.5px solid var(--border);border-radius:var(--r-sm);transition:all .2s;">
+              <div style="font-size:18px;margin-bottom:4px;">🛺</div>
+              <div style="font-size:12px;font-weight:700;">Tuk-Tuk</div>
+              <div style="font-size:13px;font-weight:800;color:var(--blue);">+$8</div>
+            </div>
+            <div class="dur-opt transport-opt"
+              onclick="bkPickTransport('car',15,this)"
+              style="cursor:pointer;padding:10px;text-align:center;border:1.5px solid var(--border);border-radius:var(--r-sm);transition:all .2s;">
+              <div style="font-size:18px;margin-bottom:4px;">🚗</div>
+              <div style="font-size:12px;font-weight:700;">Private Car</div>
+              <div style="font-size:13px;font-weight:800;color:var(--blue);">+$15</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Insurance -->
+        <div class="form-group">
+          <label class="form-label">Travel Insurance <span class="opt">(Optional)</span></label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div class="dur-opt ins-card sel" id="no-insurance-btn"
+              onclick="bkPickInsurance('none',0,this)"
+              style="cursor:pointer;padding:12px;border:1.5px solid var(--border);border-radius:var(--r-sm);transition:all .2s;">
+              <div style="font-size:13px;font-weight:700;margin-bottom:2px;">No Insurance</div>
+              <div style="font-size:12px;color:var(--text-400);">I'll manage myself</div>
+              <div style="font-size:14px;font-weight:800;color:var(--blue);margin-top:4px;">Free</div>
+            </div>
+            <div class="dur-opt ins-card"
+              onclick="bkPickInsurance('basic',5,this)"
+              style="cursor:pointer;padding:12px;border:1.5px solid var(--border);border-radius:var(--r-sm);transition:all .2s;">
+              <div style="font-size:13px;font-weight:700;margin-bottom:2px;">Basic Cover</div>
+              <div style="font-size:12px;color:var(--text-400);">Accident &amp; medical</div>
+              <div style="font-size:14px;font-weight:800;color:var(--blue);margin-top:4px;">+$5</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Price preview -->
+        <div style="background:var(--blue-light);border:1.5px solid #bfdbfe;border-radius:var(--r-sm);
+          padding:14px 16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+          <div>
+            <div style="font-size:12px;color:var(--blue-dark);font-weight:600;">Price per person</div>
+            <div style="font-size:11px;color:var(--text-400);margin-top:2px;" id="bk-breakdown">Experience $0</div>
+          </div>
+          <div style="font-size:28px;font-weight:800;color:var(--blue);font-family:'Playfair Display',serif;"
+            id="bk-total-price">$0</div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="modal-btn" onclick="bkGoStep2()">
+            Continue <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── STEP 2: Your Details ─────────────────────────────── -->
+      <div class="modal-body" id="bk-step2-body" style="display:none;">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Full Name <span>*</span></label>
+            <input type="text" id="b-name" class="form-input" placeholder="Your full name">
+            <div class="field-error" id="err-b-name">Please enter your name.</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone <span>*</span></label>
+            <input type="tel" id="b-phone" class="form-input" placeholder="+855 12 345 678">
+            <div class="field-error" id="err-b-phone">Please enter your phone number.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email <span>*</span></label>
+          <input type="email" id="b-email" class="form-input" placeholder="you@email.com">
+          <div class="field-error" id="err-b-email">Please enter a valid email.</div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Date <span>*</span></label>
+            <input type="date" id="b-date" class="form-input">
+            <div class="field-error" id="err-b-date">Please choose a date.</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Number of Guests <span>*</span></label>
+            <div class="stepper">
+              <button type="button" onclick="bkStepperChange(-1)">−</button>
+              <div class="stepper-val" id="b-pax-val">1</div>
+              <button type="button" onclick="bkStepperChange(1)">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Special Requests <span class="opt">(Optional)</span></label>
+          <textarea id="b-notes" class="form-input form-textarea" rows="3"
+            placeholder="Dietary needs, mobility concerns, language preferences…"></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="modal-btn-outline" onclick="bkGoStep1()">
+            <i class="fas fa-arrow-left"></i> Back
+          </button>
+          <button type="button" class="modal-btn" onclick="bkGoStep3()">
+            Continue <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── STEP 3: Confirm & Pay ────────────────────────────── -->
+      <div class="modal-body" id="bk-step3-body" style="display:none;">
+        <div class="summary-card">
+          <div class="summary-card-head"><i class="fas fa-receipt"></i> Booking Summary</div>
+          <div class="summary-rows">
+            <div class="summary-row">
+              <span class="s-label"><i class="fas fa-home"></i> Family</span>
+              <span class="s-val" id="bk-sum-family">—</span>
+            </div>
+            <div class="summary-row">
+              <span class="s-label"><i class="fas fa-clock"></i> Duration</span>
+              <span class="s-val" id="bk-sum-duration">—</span>
+            </div>
+            <div class="summary-row">
+              <span class="s-label"><i class="fas fa-calendar"></i> Date</span>
+              <span class="s-val" id="bk-sum-date">—</span>
+            </div>
+            <div class="summary-row">
+              <span class="s-label"><i class="fas fa-users"></i> Guests</span>
+              <span class="s-val" id="bk-sum-guests">—</span>
+            </div>
+            <div class="summary-row">
+              <span class="s-label"><i class="fas fa-shuttle-van"></i> Transport</span>
+              <span class="s-val" id="bk-sum-transport">—</span>
+            </div>
+            <div class="summary-row">
+              <span class="s-label"><i class="fas fa-shield-alt"></i> Insurance</span>
+              <span class="s-val" id="bk-sum-insurance">—</span>
+            </div>
+          </div>
+          <div class="summary-total">
+            <div class="t-label">Total Amount</div>
+            <div class="t-price" id="bk-sum-total">$0</div>
+          </div>
+        </div>
+
+        <!-- Payment method -->
+        <div class="form-group">
+          <label class="form-label">Payment Method <span>*</span></label>
+          <div class="payment-methods" id="bk-payment-methods">
+            <div class="pm-option selected" data-pm="onsite" onclick="bkSelectPM(this)">
+              <i class="fas fa-money-bill-wave"></i> Pay on Site
+            </div>
+            <div class="pm-option" data-pm="card" onclick="bkSelectPM(this)">
+              <i class="fas fa-credit-card"></i> Credit Card
+            </div>
+            <div class="pm-option" data-pm="aba" onclick="bkSelectPM(this)">
+              <i class="fas fa-university"></i> ABA / Wing
+            </div>
+            <div class="pm-option" data-pm="paypal" onclick="bkSelectPM(this)">
+              <i class="fab fa-paypal"></i> PayPal
+            </div>
+          </div>
+        </div>
+
+        <!-- Consent -->
+        <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;">
+          <input type="checkbox" id="b-consent"
+            style="margin-top:3px;cursor:pointer;width:16px;height:16px;accent-color:var(--blue);"
+            onchange="handleConsent('b-consent','b-submit-btn','b-consent-err')">
+          <label for="b-consent"
+            style="font-size:13px;color:var(--text-600);line-height:1.5;cursor:pointer;">
+            I agree to TosTrip's
+            <a href="#" style="color:var(--blue);text-decoration:underline;">Terms of Service</a> and
+            <a href="#" style="color:var(--blue);text-decoration:underline;">Cancellation Policy</a>.
+            Free cancellation up to 24 hours before the experience.
+          </label>
+        </div>
+        <div id="b-consent-err"
+          style="display:none;font-size:12px;color:var(--red);margin-bottom:12px;align-items:center;gap:6px;">
+          <i class="fas fa-exclamation-circle"></i> Please accept the terms to continue.
+        </div>
+
+        <div class="info-box">
+          <i class="fas fa-info-circle"></i>
+          <div>You'll receive a confirmation email within 2 hours.
+            Payment is collected on-site unless you chose card/online above.</div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="modal-btn-outline" onclick="bkGoStep2()">
+            <i class="fas fa-arrow-left"></i> Back
+          </button>
+          <button type="button" class="modal-btn" id="b-submit-btn" disabled onclick="submitBook()">
+            <i class="fas fa-check-circle"></i> Confirm Booking
+          </button>
+        </div>
+      </div>
+
+      <!-- ── SUCCESS ──────────────────────────────────────────── -->
+      <div class="success-state" id="bk-success"></div>
+
+    </div>
+  </div>`;
+
+  document.body.insertAdjacentHTML('beforeend', html);
+
+  // Close on overlay click
+  document.getElementById('bookModal').addEventListener('click', function (e) {
+    if (e.target === this) closeBookModal();
+  });
+})();
+
+/* ── Live Like a Local state ──────────────────────────────── */
+let bk = {
+  family: '', icon: '', lifestyle: '',
+  prices: { half: 0, full: 0, overnight: 0 },
+  selected: 'half', basePrice: 0,
+  transport: 0, insurance: 0,
+  transportLabel: 'Self Arrange',
+  insuranceLabel: 'None',
+  pax: 1,
+  selectedPM: 'onsite'
+};
+
+function openBook(family, icon, lifestyle, half, full, overnight) {
+  bk = {
+    family, icon, lifestyle,
+    prices: { half, full, overnight },
+    selected: 'half', basePrice: half,
+    transport: 0, insurance: 0,
+    transportLabel: 'Self Arrange',
+    insuranceLabel: 'None',
+    pax: 1,
+    selectedPM: 'onsite'
+  };
+
+  document.getElementById('bm-icon').textContent = icon;
+  document.getElementById('bm-name').textContent = family;
+  document.getElementById('bm-ls').textContent   = lifestyle + ' · TosTrip Experience';
+
+  // Duration options
+  const durations = [
+    { key: 'half',      emoji: '🌅', label: 'Half Day',  sub: '4–5 hours',       price: half },
+    { key: 'full',      emoji: '☀️', label: 'Full Day',  sub: '8–10 hours',      price: full },
+    { key: 'overnight', emoji: '🌙', label: 'Overnight', sub: 'Stay & breakfast', price: overnight }
+  ];
+  document.getElementById('bm-dur').innerHTML = durations.map(d => `
+    <div class="dur-opt ${d.key === 'half' ? 'sel' : ''}"
+         onclick="bkPickDur('${d.key}', ${d.price}, this)"
+         style="cursor:pointer;padding:12px;text-align:center;border:1.5px solid var(--border);
+                border-radius:var(--r-sm);transition:all .2s;">
+      <div style="font-size:20px;margin-bottom:4px;">${d.emoji}</div>
+      <div style="font-size:12px;font-weight:700;">${d.label}</div>
+      <div style="font-size:11px;color:var(--text-400);margin:2px 0 6px;">${d.sub}</div>
+      <div style="font-size:18px;font-weight:800;color:var(--blue);">$${d.price}</div>
+    </div>`).join('');
+
+  // Reset add-ons
+  document.querySelectorAll('.transport-opt').forEach(el => el.classList.remove('sel'));
+  document.querySelector('.no-transport')?.classList.add('sel');
+  document.querySelectorAll('.ins-card').forEach(el => el.classList.remove('sel'));
+  document.getElementById('no-insurance-btn')?.classList.add('sel');
+
+  // Reset payment
+  document.querySelectorAll('#bk-payment-methods .pm-option').forEach((o, i) => {
+    o.classList.toggle('selected', i === 0);
   });
 
-  // Prevent past dates
-  const today=new Date().toISOString().split('T')[0];
-  ['bookingDate','wsDate','chatDateFrom','chatDateTo'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el) el.min=today;
+  // Reset consent & button
+  const cb = document.getElementById('b-consent');
+  if (cb) cb.checked = false;
+  const btn = document.getElementById('b-submit-btn');
+  if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-check-circle"></i> Confirm Booking'; }
+  document.getElementById('b-consent-err').style.display = 'none';
+
+  // Reset pax
+  bk.pax = 1;
+  document.getElementById('b-pax-val').textContent = '1';
+
+  // Set min date to tomorrow
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const dateInput = document.getElementById('b-date');
+  if (dateInput) { dateInput.min = tomorrow.toISOString().split('T')[0]; dateInput.value = ''; }
+
+  bkUpdateTotal();
+  bkSetStep(1);
+  document.getElementById('bookModal').classList.add('open');
+}
+
+function bkPickDur(key, price, el) {
+  bk.selected  = key;
+  bk.basePrice = price;
+  document.querySelectorAll('#bm-dur .dur-opt').forEach(e => e.classList.remove('sel'));
+  el.classList.add('sel');
+  bkUpdateTotal();
+}
+
+function bkPickTransport(type, price, el) {
+  bk.transport = price;
+  const labels = { none: 'Self Arrange', tuk: 'Tuk-Tuk (+$8)', car: 'Private Car (+$15)' };
+  bk.transportLabel = labels[type];
+  document.querySelectorAll('.transport-opt, .no-transport').forEach(e => e.classList.remove('sel'));
+  el.classList.add('sel');
+  bkUpdateTotal();
+}
+
+function bkPickInsurance(type, price, el) {
+  bk.insurance = price;
+  const labels = { none: 'None', basic: 'Basic Cover (+$5)' };
+  bk.insuranceLabel = labels[type];
+  document.querySelectorAll('.ins-card').forEach(e => e.classList.remove('sel'));
+  el.classList.add('sel');
+  bkUpdateTotal();
+}
+
+function bkSelectPM(el) {
+  document.querySelectorAll('#bk-payment-methods .pm-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  bk.selectedPM = el.dataset.pm;
+}
+
+function bkStepperChange(delta) {
+  bk.pax = Math.max(1, Math.min(20, bk.pax + delta));
+  document.getElementById('b-pax-val').textContent = bk.pax;
+}
+
+function bkUpdateTotal() {
+  const total = bk.basePrice + bk.transport + bk.insurance;
+  document.getElementById('bk-total-price').textContent = '$' + total;
+  const parts = ['Experience $' + bk.basePrice];
+  if (bk.transport > 0) parts.push('Transport +$' + bk.transport);
+  if (bk.insurance > 0) parts.push('Insurance +$' + bk.insurance);
+  document.getElementById('bk-breakdown').textContent = parts.join(' · ');
+}
+
+function bkSetStep(n) {
+  [1, 2, 3].forEach(i => {
+    document.getElementById('bk-step' + i + '-body').style.display = i === n ? 'block' : 'none';
+    document.getElementById('bk-step' + i + '-ind').className =
+      'step-item' + (i < n ? ' done' : i === n ? ' active' : '');
+  });
+  document.getElementById('bk-steps-bar').style.display = 'flex';
+}
+
+function bkGoStep1() { bkSetStep(1); }
+function bkGoStep2() { bkSetStep(2); }
+
+function bkGoStep3() {
+  const name  = document.getElementById('b-name').value.trim();
+  const email = document.getElementById('b-email').value.trim();
+  const phone = document.getElementById('b-phone').value.trim();
+  const date  = document.getElementById('b-date').value;
+  let ok = true;
+
+  function bkE(id) { document.getElementById(id)?.classList.add('error'); document.getElementById('err-' + id)?.classList.add('show'); ok = false; }
+  function bkC(id) { document.getElementById(id)?.classList.remove('error'); document.getElementById('err-' + id)?.classList.remove('show'); }
+
+  if (!name)  bkE('b-name');  else bkC('b-name');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) bkE('b-email'); else bkC('b-email');
+  if (!phone) bkE('b-phone'); else bkC('b-phone');
+  if (!date)  bkE('b-date');  else bkC('b-date');
+  if (!ok) return;
+
+  const durLabels  = { half: 'Half Day (4–5 hrs)', full: 'Full Day (8–10 hrs)', overnight: 'Overnight Stay' };
+  const dateDisplay = new Date(date + 'T00:00:00').toLocaleDateString('en-US',
+    { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
+  const total = (bk.basePrice + bk.transport + bk.insurance) * bk.pax;
+
+  document.getElementById('bk-sum-family').textContent    = bk.family + ' ' + bk.icon;
+  document.getElementById('bk-sum-duration').textContent  = durLabels[bk.selected] + ' — $' + bk.basePrice + '/person';
+  document.getElementById('bk-sum-date').textContent      = dateDisplay;
+  document.getElementById('bk-sum-guests').textContent    = bk.pax + ' person' + (bk.pax > 1 ? 's' : '');
+  document.getElementById('bk-sum-transport').textContent = bk.transportLabel;
+  document.getElementById('bk-sum-insurance').textContent = bk.insuranceLabel;
+  document.getElementById('bk-sum-total').textContent     = '$' + total;
+
+  bkSetStep(3);
+}
+
+function handleConsent(cbId, btnId, errId) {
+  const checked = document.getElementById(cbId).checked;
+  const btn = document.getElementById(btnId);
+  if (btn) btn.disabled = !checked;
+  document.getElementById(errId).style.display = checked ? 'none' : 'flex';
+}
+
+function submitBook() {
+  const btn = document.getElementById('b-submit-btn');
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
+  btn.disabled  = true;
+
+  const total = (bk.basePrice + bk.transport + bk.insurance) * bk.pax;
+  const payload = {
+    family: bk.family, lifestyle: bk.lifestyle, duration: bk.selected,
+    basePrice: bk.basePrice, transport: bk.transport, insurance: bk.insurance,
+    total, pax: bk.pax, payment: bk.selectedPM,
+    name:  document.getElementById('b-name').value.trim(),
+    email: document.getElementById('b-email').value.trim(),
+    phone: document.getElementById('b-phone').value.trim(),
+    date:  document.getElementById('b-date').value,
+    notes: document.getElementById('b-notes').value.trim(),
+  };
+
+  console.log('Live Like a Local booking payload:', payload);
+  // 👉 Replace with real API/EmailJS call when ready
+
+  setTimeout(() => showBookSuccess(payload), 1200);
+}
+
+function showBookSuccess(p) {
+  document.getElementById('bk-step3-body').style.display  = 'none';
+  document.getElementById('bk-steps-bar').style.display   = 'none';
+  const durLabels = { half: 'Half Day', full: 'Full Day', overnight: 'Overnight' };
+  const s = document.getElementById('bk-success');
+  s.innerHTML = `
+    <div class="success-icon">✓</div>
+    <h3>Booking Confirmed! 🎉</h3>
+    <p>Your request for <strong>${p.family}</strong> has been sent.
+      You'll receive a confirmation at <strong>${p.email}</strong> within 2 hours.</p>
+    <div class="success-meta">
+      <div class="success-meta-row"><span class="sk">Family</span><span class="sv">${p.family}</span></div>
+      <div class="success-meta-row"><span class="sk">Experience</span><span class="sv">${durLabels[p.duration]}</span></div>
+      <div class="success-meta-row"><span class="sk">Date</span><span class="sv">${p.date}</span></div>
+      <div class="success-meta-row"><span class="sk">Guests</span><span class="sv">${p.pax} person${p.pax > 1 ? 's' : ''}</span></div>
+      <div class="success-meta-row"><span class="sk">Total</span>
+        <span class="sv" style="color:var(--blue);font-size:16px;">$${p.total}</span></div>
+    </div>
+    <button class="modal-btn" style="max-width:260px;" onclick="closeBookModal()">
+      <i class="fas fa-check"></i> Done
+    </button>`;
+  s.classList.add('show');
+}
+
+function closeBookModal() {
+  document.getElementById('bookModal').classList.remove('open');
+  ['b-name','b-email','b-phone','b-notes'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+    document.getElementById(id)?.classList.remove('error');
+    document.getElementById('err-' + id)?.classList.remove('show');
+  });
+  const d = document.getElementById('b-date');
+  if (d) d.value = '';
+  const s = document.getElementById('bk-success');
+  s.classList.remove('show');
+  s.innerHTML = '';
+  bk.pax = 1;
+  document.getElementById('b-pax-val').textContent = '1';
+  const btn = document.getElementById('b-submit-btn');
+  if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-check-circle"></i> Confirm Booking'; }
+}
+
+/* ── Message shortcut for family cards ──────────────────────────────── */
+function openMsg(family, icon, lifestyle) {
+  if (typeof openChatModal === 'function') {
+    openChatModal({ name: family, city: 'Siem Reap', langs: 'EN, KH' });
+  } else {
+    alert('Contact us at info@tostrip.com to reach ' + family);
+  }
+}
+
+/* ============================================================
+   COOKIES
+============================================================ */
+function setCookie(n, v, d) {
+  const e = new Date(Date.now() + d * 864e5).toUTCString();
+  document.cookie = n + '=' + v + ';expires=' + e + ';path=/;SameSite=Lax';
+}
+function getCookie(n) {
+  return document.cookie.split('; ').reduce((a, p) => {
+    const [k, v] = p.split('='); return k === n ? v : a;
+  }, null);
+}
+
+/* ============================================================
+   DOM READY
+============================================================ */
+document.addEventListener('DOMContentLoaded', () => {
+  // Cookie banner
+  const b = document.getElementById('cookie-banner');
+  if (b && getCookie('tosTripCookiesAccepted') !== 'true') b.style.display = 'flex';
+  document.getElementById('cookie-accept')?.addEventListener('click', () => {
+    setCookie('tosTripCookiesAccepted', 'true', 365);
+    document.getElementById('cookie-banner').style.display = 'none';
+  });
+
+  // Prevent past dates on all modals
+  const today = new Date().toISOString().split('T')[0];
+  ['bookingDate', 'wsDate', 'chatDateFrom', 'chatDateTo'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.min = today;
+  });
+
+  // Newsletter form
+  document.getElementById('newsletterForm')?.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const btn = document.getElementById('nlBtn');
+    const sending = (window.t && t('bk.sending')) || 'Sending…';
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ' + sending;
+    btn.disabled  = true;
+    setTimeout(showNlSuccess, 800);
+  });
+
+  // Close modal overlays on background click (existing modals in HTML)
+  document.querySelectorAll('.modal-overlay').forEach(m => {
+    m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
   });
 });
 
 /* ============================================================
    NAV
 ============================================================ */
-window.addEventListener('scroll',()=>{
-  document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>30);
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 30);
 });
-function toggleMobileNav(){document.getElementById('navLinks').classList.toggle('open');}
+function toggleMobileNav() { document.getElementById('navLinks').classList.toggle('open'); }
 
 /* ============================================================
-   LANGUAGE  — delegates heavy lifting to translator.js
+   LANGUAGE
 ============================================================ */
-function toggleLang(){document.getElementById('langMenu').classList.toggle('open');}
+function toggleLang() { document.getElementById('langMenu').classList.toggle('open'); }
 
 function setLang(code, label) {
-  // Update button label
   document.getElementById('langBtn').innerHTML =
     '<i class="fas fa-globe"></i> ' + label +
     ' <i class="fas fa-chevron-down" style="font-size:10px"></i>';
   document.getElementById('langMenu').classList.remove('open');
   localStorage.setItem('lang', code);
-
-  // Apply all data-i18n translations
   if (window.applyLang) applyLang(code);
-
-  // Refresh chatbot welcome message
   const wb = document.getElementById('botWelcomeBubble');
   const wl = document.getElementById('botWelcomeLabel');
   if (wb && window.t) wb.innerHTML = t('bot.welcome', code);
@@ -2023,116 +2713,103 @@ function setLang(code, label) {
 
 document.addEventListener('click', e => {
   const w = document.querySelector('.lang-wrapper');
-  if (w && !w.contains(e.target)) document.getElementById('langMenu').classList.remove('open');
+  if (w && !w.contains(e.target)) document.getElementById('langMenu')?.classList.remove('open');
 });
 
 /* ============================================================
    SECTION TOGGLE
 ============================================================ */
-function toggleSection(id){
-  const el=document.getElementById(id);
-  const wasHidden=el.style.display==='none'||el.style.display==='';
-  ['localSection','friendSection'].forEach(s=>{document.getElementById(s).style.display='none';});
-  if(wasHidden){el.style.display='block';setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),50);}
+function toggleSection(id) {
+  const el = document.getElementById(id);
+  const wasHidden = el.style.display === 'none' || el.style.display === '';
+  ['localSection', 'friendSection'].forEach(s => {
+    document.getElementById(s).style.display = 'none';
+  });
+  if (wasHidden) {
+    el.style.display = 'block';
+    setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  }
 }
 
 /* ============================================================
    GALLERY FILTER
 ============================================================ */
-function filterClients(city,btn){
-  document.querySelectorAll('.cf-tab').forEach(b=>b.classList.remove('active'));
+function filterClients(city, btn) {
+  document.querySelectorAll('.cf-tab').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('.cg-item').forEach(item=>{
-    item.classList.toggle('hidden',city!=='all'&&item.dataset.city!==city);
+  document.querySelectorAll('.cg-item').forEach(item => {
+    item.classList.toggle('hidden', city !== 'all' && item.dataset.city !== city);
   });
 }
 
 /* ============================================================
    NEWSLETTER
 ============================================================ */
-document.getElementById('newsletterForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  const email = document.getElementById('nlEmail').value.trim();
-  const btn   = document.getElementById('nlBtn');
-  const sending = (window.t && t('bk.sending')) || 'Sending…';
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ' + sending;
-  btn.disabled  = true;
-  setTimeout(showNlSuccess, 800);
-});
-
-function showNlSuccess(){
+function showNlSuccess() {
   document.getElementById('newsletterForm').style.display = 'none';
   const el = document.getElementById('nlSuccess');
   el.style.display = 'block';
-  // Update text to current language
   const thanks = (window.t && t('news.thanks')) || "You're subscribed! 🎉";
   el.innerHTML = '<i class="fas fa-check-circle"></i> ' + thanks;
 }
 
 /* ============================================================
-   MODAL SYSTEM
+   SHARED MODAL HELPERS
 ============================================================ */
-function closeModal(id){
+function closeModal(id) {
   document.getElementById(id).classList.remove('open');
-  if(id==='rentModal')     resetRentModal();
-  if(id==='chatModal')     resetChatModal();
-  if(id==='workshopModal') resetWorkshopModal();
-}
-document.querySelectorAll('.modal-overlay').forEach(m=>{
-  m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');});
-});
-
-/* ============================================================
-   STEPPER
-============================================================ */
-const stepperData={pax:{val:1,min:1,max:20},ws:{val:1,min:1,max:30}};
-function stepperChange(key,delta){
-  const d=stepperData[key];
-  d.val=Math.max(d.min,Math.min(d.max,d.val+delta));
-  if(key==='pax') document.getElementById('paxVal').textContent=d.val;
-  if(key==='ws'){document.getElementById('wsParticipantsVal').textContent=d.val;updateWsTotal();}
+  if (id === 'rentModal')     resetRentModal();
+  if (id === 'chatModal')     resetChatModal();
+  if (id === 'workshopModal') resetWorkshopModal();
 }
 
 /* ============================================================
-   FORM HELPERS
+   SHARED FORM HELPERS
 ============================================================ */
-function showErr(id,msg){
-  const inp=document.getElementById(id);
-  const err=document.getElementById('err-'+id);
-  if(inp) inp.classList.add('error');
-  if(err){if(msg)err.textContent=msg;err.classList.add('show');}
+const stepperData = { pax: { val: 1, min: 1, max: 20 }, ws: { val: 1, min: 1, max: 30 } };
+
+function stepperChange(key, delta) {
+  const d = stepperData[key];
+  d.val = Math.max(d.min, Math.min(d.max, d.val + delta));
+  if (key === 'pax') document.getElementById('paxVal').textContent = d.val;
+  if (key === 'ws')  { document.getElementById('wsParticipantsVal').textContent = d.val; updateWsTotal(); }
 }
-function clearErr(id){
-  const inp=document.getElementById(id);
-  const err=document.getElementById('err-'+id);
-  if(inp) inp.classList.remove('error');
-  if(err) err.classList.remove('show');
+
+function showErr(id, msg) {
+  const inp = document.getElementById(id);
+  const err = document.getElementById('err-' + id);
+  if (inp) inp.classList.add('error');
+  if (err) { if (msg) err.textContent = msg; err.classList.add('show'); }
 }
-function validateEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);}
-function val(id){return document.getElementById(id)?.value.trim()||'';}
+function clearErr(id) {
+  document.getElementById(id)?.classList.remove('error');
+  document.getElementById('err-' + id)?.classList.remove('show');
+}
+function validateEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+function val(id) { return document.getElementById(id)?.value.trim() || ''; }
 
 /* ============================================================
-   ✦ RENT A FRIEND MODAL
+   RENT A FRIEND MODAL
 ============================================================ */
-let currentFriend={};
-let selectedDuration='half';
-let selectedPM='onsite';
+let currentFriend  = {};
+let selectedDuration = 'half';
+let selectedPM     = 'onsite';
 
-function openRentModal(guide){
-  currentFriend=guide;
-  selectedDuration='half';
-  stepperData.pax.val=1;
-  document.getElementById('paxVal').textContent='1';
+function openRentModal(guide) {
+  currentFriend    = guide;
+  selectedDuration = 'half';
+  stepperData.pax.val = 1;
+  document.getElementById('paxVal').textContent = '1';
 
-  document.getElementById('rentFriendName').textContent=guide.name;
-  document.getElementById('guideAvatarLetter').textContent=guide.name[0];
-  document.getElementById('guideStripName').textContent=guide.name;
-  document.getElementById('guideStripMeta').textContent=guide.city+' · '+guide.langs;
+  document.getElementById('rentFriendName').textContent  = guide.name;
+  document.getElementById('guideAvatarLetter').textContent = guide.name[0];
+  document.getElementById('guideStripName').textContent  = guide.name;
+  document.getElementById('guideStripMeta').textContent  = guide.city + ' · ' + guide.langs;
 
   const halfLabel = window.t ? t('bk.half') : 'Half Day (4 hours)';
   const fullLabel = window.t ? t('bk.full') : 'Full Day (8 hours)';
 
-  document.getElementById('durationPicker').innerHTML=`
+  document.getElementById('durationPicker').innerHTML = `
     <div class="dur-option selected" data-d="half" onclick="selectDuration(this,'half')">
       <div class="dur-icon">🌅</div>
       <div class="dur-label">${halfLabel}</div>
@@ -2152,259 +2829,259 @@ function openRentModal(guide){
   document.getElementById('rentModal').classList.add('open');
 }
 
-function selectDuration(el,key){
-  selectedDuration=key;
-  document.querySelectorAll('#durationPicker .dur-option').forEach(o=>o.classList.remove('selected'));
+function selectDuration(el, key) {
+  selectedDuration = key;
+  document.querySelectorAll('#durationPicker .dur-option').forEach(o => o.classList.remove('selected'));
   el.classList.add('selected');
 }
 
-function selectPM(el){
-  document.querySelectorAll('.pm-option').forEach(o=>o.classList.remove('selected'));
+function selectPM(el) {
+  document.querySelectorAll('.pm-option').forEach(o => o.classList.remove('selected'));
   el.classList.add('selected');
-  selectedPM=el.dataset.pm;
+  selectedPM = el.dataset.pm;
 }
 
-function rentGoStep1(init){
-  document.getElementById('rentStep1').style.display='block';
-  document.getElementById('rentStep2').style.display='none';
+function rentGoStep1(init) {
+  document.getElementById('rentStep1').style.display = 'block';
+  document.getElementById('rentStep2').style.display = 'none';
   document.getElementById('rentSuccess').classList.remove('show');
-  document.getElementById('rentStepsBar').style.display='flex';
-  document.getElementById('rentStep1Ind').className='step-item active';
-  document.getElementById('rentStep2Ind').className='step-item';
-  if(!init){['bookingName','bookingEmail','bookingPhone','bookingDate'].forEach(id=>clearErr(id));}
+  document.getElementById('rentStepsBar').style.display = 'flex';
+  document.getElementById('rentStep1Ind').className = 'step-item active';
+  document.getElementById('rentStep2Ind').className = 'step-item';
+  if (!init) ['bookingName','bookingEmail','bookingPhone','bookingDate'].forEach(id => clearErr(id));
 }
 
-function rentGoStep2(){
-  let ok=true;
-  if(!val('bookingName')){showErr('bookingName');ok=false;}else clearErr('bookingName');
-  if(!validateEmail(val('bookingEmail'))){showErr('bookingEmail');ok=false;}else clearErr('bookingEmail');
-  if(!val('bookingPhone')){showErr('bookingPhone');ok=false;}else clearErr('bookingPhone');
-  if(!val('bookingDate')){showErr('bookingDate');ok=false;}else clearErr('bookingDate');
-  if(!ok) return;
+function rentGoStep2() {
+  let ok = true;
+  if (!val('bookingName'))              { showErr('bookingName');  ok = false; } else clearErr('bookingName');
+  if (!validateEmail(val('bookingEmail'))) { showErr('bookingEmail'); ok = false; } else clearErr('bookingEmail');
+  if (!val('bookingPhone'))             { showErr('bookingPhone'); ok = false; } else clearErr('bookingPhone');
+  if (!val('bookingDate'))              { showErr('bookingDate');  ok = false; } else clearErr('bookingDate');
+  if (!ok) return;
 
-  const pax=stepperData.pax.val;
+  const pax      = stepperData.pax.val;
   const halfLabel = window.t ? t('bk.half') : 'Half Day (4h)';
   const fullLabel = window.t ? t('bk.full') : 'Full Day (8h)';
-  const durLabel=selectedDuration==='half' ? halfLabel : fullLabel;
-  const priceEach=selectedDuration==='half'?currentFriend.half:currentFriend.full;
-  const total=priceEach*pax;
-  const dateDisplay=new Date(val('bookingDate')+'T00:00:00').toLocaleDateString('en-US',{weekday:'short',day:'numeric',month:'long',year:'numeric'});
+  const durLabel  = selectedDuration === 'half' ? halfLabel : fullLabel;
+  const priceEach = selectedDuration === 'half' ? currentFriend.half : currentFriend.full;
+  const total     = priceEach * pax;
+  const dateDisplay = new Date(val('bookingDate') + 'T00:00:00').toLocaleDateString('en-US',
+    { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
 
-  document.getElementById('sum-guide').textContent=currentFriend.name;
-  document.getElementById('sum-city').textContent=currentFriend.city;
-  document.getElementById('sum-date').textContent=dateDisplay;
-  document.getElementById('sum-duration').textContent=durLabel+' ($'+priceEach+'/person)';
-  document.getElementById('sum-pax').textContent=pax+' person'+(pax>1?'s':'');
-  document.getElementById('sum-total').textContent='$'+total;
+  document.getElementById('sum-guide').textContent    = currentFriend.name;
+  document.getElementById('sum-city').textContent     = currentFriend.city;
+  document.getElementById('sum-date').textContent     = dateDisplay;
+  document.getElementById('sum-duration').textContent = durLabel + ' ($' + priceEach + '/person)';
+  document.getElementById('sum-pax').textContent      = pax + ' person' + (pax > 1 ? 's' : '');
+  document.getElementById('sum-total').textContent    = '$' + total;
 
-  document.getElementById('rentStep1').style.display='none';
-  document.getElementById('rentStep2').style.display='block';
-  document.getElementById('rentStep1Ind').className='step-item done';
-  document.getElementById('rentStep2Ind').className='step-item active';
+  document.getElementById('rentStep1').style.display = 'none';
+  document.getElementById('rentStep2').style.display = 'block';
+  document.getElementById('rentStep1Ind').className  = 'step-item done';
+  document.getElementById('rentStep2Ind').className  = 'step-item active';
 }
 
-function confirmRentBooking(){
-  const btn=document.getElementById('rentConfirmBtn');
+function confirmRentBooking() {
+  const btn     = document.getElementById('rentConfirmBtn');
   const sending = window.t ? t('bk.sending') : 'Sending…';
-  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> '+sending;
-  btn.disabled=true;
-  const pax=stepperData.pax.val;
-  const priceEach=selectedDuration==='half'?currentFriend.half:currentFriend.full;
-  const total=priceEach*pax;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ' + sending;
+  btn.disabled  = true;
+  const pax      = stepperData.pax.val;
+  const priceEach = selectedDuration === 'half' ? currentFriend.half : currentFriend.full;
+  const total    = priceEach * pax;
   const halfLabel = window.t ? t('bk.half') : 'Half Day (4 hours)';
   const fullLabel = window.t ? t('bk.full') : 'Full Day (8 hours)';
-  const durLabel=selectedDuration==='half' ? halfLabel : fullLabel;
-  setTimeout(()=>showRentSuccess(pax,durLabel,total), 1200);
+  const durLabel  = selectedDuration === 'half' ? halfLabel : fullLabel;
+  setTimeout(() => showRentSuccess(pax, durLabel, total), 1200);
 }
 
-function showRentSuccess(pax,durLabel,total){
-  document.getElementById('rentStep1').style.display='none';
-  document.getElementById('rentStep2').style.display='none';
-  document.getElementById('rentStepsBar').style.display='none';
-  const s=document.getElementById('rentSuccess');
-  s.innerHTML=`
+function showRentSuccess(pax, durLabel, total) {
+  document.getElementById('rentStep1').style.display   = 'none';
+  document.getElementById('rentStep2').style.display   = 'none';
+  document.getElementById('rentStepsBar').style.display = 'none';
+  const s = document.getElementById('rentSuccess');
+  s.innerHTML = `
     <div class="success-icon">✓</div>
     <h3>Booking Confirmed! 🎉</h3>
-    <p>Your booking request has been sent. <strong>${currentFriend.name}</strong> will reach out within 2 hours to confirm.</p>
+    <p>Your booking request has been sent. <strong>${currentFriend.name}</strong> will reach out within 2 hours.</p>
     <div class="success-meta">
       <div class="success-meta-row"><span class="sk">Guide</span><span class="sv">${currentFriend.name} — ${currentFriend.city}</span></div>
       <div class="success-meta-row"><span class="sk">Date</span><span class="sv">${val('bookingDate')}</span></div>
       <div class="success-meta-row"><span class="sk">Duration</span><span class="sv">${durLabel}</span></div>
       <div class="success-meta-row"><span class="sk">Guests</span><span class="sv">${pax} person(s)</span></div>
-      <div class="success-meta-row"><span class="sk">Total</span><span class="sv" style="color:var(--blue);font-size:16px">$${total}</span></div>
+      <div class="success-meta-row"><span class="sk">Total</span>
+        <span class="sv" style="color:var(--blue);font-size:16px">$${total}</span></div>
     </div>
     <button class="modal-btn" style="max-width:280px" onclick="closeModal('rentModal')">Close</button>`;
   s.classList.add('show');
 }
 
-function resetRentModal(){
+function resetRentModal() {
   document.getElementById('rentSuccess').classList.remove('show');
   rentGoStep1(true);
-  ['bookingName','bookingEmail','bookingPhone','bookingDate','bookingActivities'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el) el.value='';
+  ['bookingName','bookingEmail','bookingPhone','bookingDate','bookingActivities'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
     clearErr(id);
   });
-  stepperData.pax.val=1;
-  document.getElementById('paxVal').textContent='1';
-  selectedPM='onsite';
-  document.querySelectorAll('.pm-option').forEach((o,i)=>{o.classList.toggle('selected',i===0);});
-  const btn=document.getElementById('rentConfirmBtn');
-  if(btn){btn.innerHTML='<i class="fas fa-check-circle"></i> '+(window.t?t('bk.confirm'):'Confirm Booking');btn.disabled=false;}
-}
-
-/* ============================================================
-   ✦ CHAT MODAL
-============================================================ */
-let currentChatType='email';
-
-function openChatModal(guide){
-  document.getElementById('chatFriendName').textContent=guide.name;
-  document.getElementById('chatGuideAvatar').textContent=guide.name[0];
-  document.getElementById('chatGuideStripName').textContent=guide.name;
-  document.getElementById('chatGuideStripMeta').textContent=guide.city+' · '+guide.langs;
-  document.getElementById('chatModal').classList.add('open');
-}
-
-function selectChatType(btn){
-  document.querySelectorAll('.ct-tab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
-  currentChatType=btn.dataset.ct;
-  const map={email:'Email Address',whatsapp:'WhatsApp Number',telegram:'Telegram Username'};
-  const phmap={email:'you@email.com',whatsapp:'+855 12 345 678',telegram:'@yourusername'};
-  const lbl=document.getElementById('chatContactLabel');
-  const inp=document.getElementById('chatContact');
-  lbl.innerHTML=map[currentChatType]+' <span>*</span>';
-  inp.placeholder=phmap[currentChatType];
-  inp.value='';
-}
-
-function updateCharCount(){
-  const len=document.getElementById('chatMessage').value.length;
-  const el=document.getElementById('charCounter');
-  el.textContent=len+' / 500';
-  el.className='char-counter'+(len>450?' warn':'')+(len>=500?' limit':'');
-}
-
-function sendChatMessage(){
-  let ok=true;
-  if(!val('chatName')){showErr('chatName');ok=false;}else clearErr('chatName');
-  if(!val('chatContact')){showErr('chatContact');ok=false;}else clearErr('chatContact');
-  if(!val('chatMessage')){showErr('chatMessage');ok=false;}else clearErr('chatMessage');
-  if(!ok) return;
-
-  const btn=document.querySelector('#chatActions .modal-btn');
-  const sending = window.t ? t('ch.sending') : 'Sending…';
-  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> '+sending;
-  btn.disabled=true;
-  setTimeout(showChatSuccess, 1000);
-}
-
-function showChatSuccess(){
-  document.getElementById('chatSuccess').style.display='block';
-  document.getElementById('chatActions').style.display='none';
-}
-
-function resetChatModal(){
-  document.getElementById('chatSuccess').style.display='none';
-  document.getElementById('chatActions').style.display='flex';
-  ['chatName','chatContact','chatDateFrom','chatDateTo','chatMessage'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el) el.value='';
-    clearErr(id);
-  });
-  currentChatType='email';
-  document.querySelectorAll('.ct-tab').forEach((t,i)=>t.classList.toggle('active',i===0));
-  document.getElementById('chatContactLabel').innerHTML='Email Address <span>*</span>';
-  document.getElementById('chatContact').placeholder='you@email.com';
-  document.getElementById('charCounter').textContent='0 / 500';
-  const btn=document.querySelector('#chatActions .modal-btn');
-  if(btn){
-    const sendLabel = window.t ? t('ch.send') : 'Send Message';
-    btn.innerHTML='<i class="fas fa-paper-plane"></i> '+sendLabel;
-    btn.disabled=false;
+  stepperData.pax.val = 1;
+  document.getElementById('paxVal').textContent = '1';
+  selectedPM = 'onsite';
+  document.querySelectorAll('.pm-option').forEach((o, i) => o.classList.toggle('selected', i === 0));
+  const btn = document.getElementById('rentConfirmBtn');
+  if (btn) {
+    btn.innerHTML = '<i class="fas fa-check-circle"></i> ' + (window.t ? t('bk.confirm') : 'Confirm Booking');
+    btn.disabled  = false;
   }
 }
 
 /* ============================================================
-   ✦ WORKSHOP MODAL
+   CHAT WITH GUIDE MODAL
 ============================================================ */
-let currentWorkshop={};
+let currentChatType = 'email';
 
-function openWorkshopModal(ws){
-  currentWorkshop=ws;
-  stepperData.ws.val=1;
-  document.getElementById('wsParticipantsVal').textContent='1';
-  document.getElementById('wsModalName').textContent=ws.name;
-  document.getElementById('wsModalTitle').textContent=ws.title;
-  document.getElementById('wsEmoji').textContent=ws.emoji;
-  document.getElementById('wsStripName').textContent=ws.name;
-  document.getElementById('wsStripMeta').textContent=ws.location+' · '+ws.duration;
-  document.getElementById('wsTypeBadge').textContent=ws.type;
+function openChatModal(guide) {
+  document.getElementById('chatFriendName').textContent    = guide.name;
+  document.getElementById('chatGuideAvatar').textContent   = guide.name[0];
+  document.getElementById('chatGuideStripName').textContent = guide.name;
+  document.getElementById('chatGuideStripMeta').textContent = guide.city + ' · ' + guide.langs;
+  document.getElementById('chatModal').classList.add('open');
+}
+
+function selectChatType(btn) {
+  document.querySelectorAll('.ct-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  currentChatType = btn.dataset.ct;
+  const map   = { email: 'Email Address', whatsapp: 'WhatsApp Number', telegram: 'Telegram Username' };
+  const phmap = { email: 'you@email.com', whatsapp: '+855 12 345 678', telegram: '@yourusername' };
+  document.getElementById('chatContactLabel').innerHTML = map[currentChatType] + ' <span>*</span>';
+  const inp = document.getElementById('chatContact');
+  inp.placeholder = phmap[currentChatType];
+  inp.value = '';
+}
+
+function updateCharCount() {
+  const len = document.getElementById('chatMessage').value.length;
+  const el  = document.getElementById('charCounter');
+  el.textContent = len + ' / 500';
+  el.className = 'char-counter' + (len > 450 ? ' warn' : '') + (len >= 500 ? ' limit' : '');
+}
+
+function sendChatMessage() {
+  let ok = true;
+  if (!val('chatName'))    { showErr('chatName');    ok = false; } else clearErr('chatName');
+  if (!val('chatContact')) { showErr('chatContact'); ok = false; } else clearErr('chatContact');
+  if (!val('chatMessage')) { showErr('chatMessage'); ok = false; } else clearErr('chatMessage');
+  if (!ok) return;
+  const btn = document.querySelector('#chatActions .modal-btn');
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ' + (window.t ? t('ch.sending') : 'Sending…');
+  btn.disabled  = true;
+  setTimeout(showChatSuccess, 1000);
+}
+
+function showChatSuccess() {
+  document.getElementById('chatSuccess').style.display  = 'block';
+  document.getElementById('chatActions').style.display  = 'none';
+}
+
+function resetChatModal() {
+  document.getElementById('chatSuccess').style.display = 'none';
+  document.getElementById('chatActions').style.display = 'flex';
+  ['chatName','chatContact','chatDateFrom','chatDateTo','chatMessage'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+    clearErr(id);
+  });
+  currentChatType = 'email';
+  document.querySelectorAll('.ct-tab').forEach((t, i) => t.classList.toggle('active', i === 0));
+  document.getElementById('chatContactLabel').innerHTML = 'Email Address <span>*</span>';
+  document.getElementById('chatContact').placeholder   = 'you@email.com';
+  document.getElementById('charCounter').textContent   = '0 / 500';
+  const btn = document.querySelector('#chatActions .modal-btn');
+  if (btn) {
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> ' + (window.t ? t('ch.send') : 'Send Message');
+    btn.disabled  = false;
+  }
+}
+
+/* ============================================================
+   WORKSHOP MODAL
+============================================================ */
+let currentWorkshop = {};
+
+function openWorkshopModal(ws) {
+  currentWorkshop = ws;
+  stepperData.ws.val = 1;
+  document.getElementById('wsParticipantsVal').textContent = '1';
+  document.getElementById('wsModalName').textContent  = ws.name;
+  document.getElementById('wsModalTitle').textContent = ws.title;
+  document.getElementById('wsEmoji').textContent      = ws.emoji;
+  document.getElementById('wsStripName').textContent  = ws.name;
+  document.getElementById('wsStripMeta').textContent  = ws.location + ' · ' + ws.duration;
+  document.getElementById('wsTypeBadge').textContent  = ws.type;
   updateWsTotal();
   resetWorkshopModal(true);
   document.getElementById('workshopModal').classList.add('open');
 }
 
-function updateWsTotal(){
-  const p=stepperData.ws.val*(currentWorkshop.price||0);
-  const el=document.getElementById('wsTotal');
-  if(el) el.textContent='$'+p;
+function updateWsTotal() {
+  const p  = stepperData.ws.val * (currentWorkshop.price || 0);
+  const el = document.getElementById('wsTotal');
+  if (el) el.textContent = '$' + p;
 }
 
-function confirmWorkshop(){
-  let ok=true;
-  if(!val('wsName')){showErr('wsName');ok=false;}else clearErr('wsName');
-  if(!validateEmail(val('wsEmail'))){showErr('wsEmail');ok=false;}else clearErr('wsEmail');
-  if(!val('wsDate')){showErr('wsDate');ok=false;}else clearErr('wsDate');
-  if(!ok) return;
-
-  const btn=document.getElementById('wsBookBtn');
-  const sending = window.t ? t('bk.sending') : 'Sending…';
-  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> '+sending;
-  btn.disabled=true;
-  const participants=stepperData.ws.val;
-  const total=participants*(currentWorkshop.price||0);
-  setTimeout(()=>showWorkshopSuccess(participants,total), 1200);
+function confirmWorkshop() {
+  let ok = true;
+  if (!val('wsName'))               { showErr('wsName');  ok = false; } else clearErr('wsName');
+  if (!validateEmail(val('wsEmail'))) { showErr('wsEmail'); ok = false; } else clearErr('wsEmail');
+  if (!val('wsDate'))               { showErr('wsDate');  ok = false; } else clearErr('wsDate');
+  if (!ok) return;
+  const btn = document.getElementById('wsBookBtn');
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ' + (window.t ? t('bk.sending') : 'Sending…');
+  btn.disabled  = true;
+  const participants = stepperData.ws.val;
+  const total = participants * (currentWorkshop.price || 0);
+  setTimeout(() => showWorkshopSuccess(participants, total), 1200);
 }
 
-function showWorkshopSuccess(participants,total){
-  document.getElementById('wsFormBody').style.display='none';
-  const s=document.getElementById('wsSuccess');
-  s.innerHTML=`
+function showWorkshopSuccess(participants, total) {
+  document.getElementById('wsFormBody').style.display = 'none';
+  const s = document.getElementById('wsSuccess');
+  s.innerHTML = `
     <div class="success-icon">✓</div>
     <h3>Request Sent! 🎉</h3>
-    <p>Your booking request for <strong>${currentWorkshop.name}</strong> has been received. You'll hear back within 24 hours.</p>
+    <p>Your booking request for <strong>${currentWorkshop.name}</strong> has been received.
+      You'll hear back within 24 hours.</p>
     <div class="success-meta">
       <div class="success-meta-row"><span class="sk">Workshop</span><span class="sv">${currentWorkshop.name}</span></div>
       <div class="success-meta-row"><span class="sk">Location</span><span class="sv">${currentWorkshop.location}</span></div>
       <div class="success-meta-row"><span class="sk">Date</span><span class="sv">${val('wsDate')}</span></div>
       <div class="success-meta-row"><span class="sk">Participants</span><span class="sv">${participants} person(s)</span></div>
-      <div class="success-meta-row"><span class="sk">Total</span><span class="sv" style="color:var(--blue);font-size:16px">$${total}</span></div>
+      <div class="success-meta-row"><span class="sk">Total</span>
+        <span class="sv" style="color:var(--blue);font-size:16px">$${total}</span></div>
     </div>
     <button class="modal-btn" style="max-width:280px" onclick="closeModal('workshopModal')">Close</button>`;
   s.classList.add('show');
 }
 
-function resetWorkshopModal(skipStateReset){
-  if(!skipStateReset){
-    document.getElementById('wsFormBody').style.display='block';
+function resetWorkshopModal(skipStateReset) {
+  if (!skipStateReset) {
+    document.getElementById('wsFormBody').style.display = 'block';
     document.getElementById('wsSuccess').classList.remove('show');
-    document.getElementById('wsSuccess').innerHTML='';
-    ['wsName','wsEmail','wsPhone','wsDate','wsRequests'].forEach(id=>{
-      const el=document.getElementById(id);
-      if(el) el.value='';
+    document.getElementById('wsSuccess').innerHTML = '';
+    ['wsName','wsEmail','wsPhone','wsDate','wsRequests'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
       clearErr(id);
     });
-    const lvl=document.getElementById('wsLevel');
-    if(lvl) lvl.value='';
-    stepperData.ws.val=1;
-    document.getElementById('wsParticipantsVal').textContent='1';
-    const btn=document.getElementById('wsBookBtn');
-    if(btn){
-      const confirmLabel = window.t ? t('bk.confirm') : 'Request Booking';
-      btn.innerHTML='<i class="fas fa-check-circle"></i> '+confirmLabel;
-      btn.disabled=false;
+    const lvl = document.getElementById('wsLevel');
+    if (lvl) lvl.value = '';
+    stepperData.ws.val = 1;
+    document.getElementById('wsParticipantsVal').textContent = '1';
+    const btn = document.getElementById('wsBookBtn');
+    if (btn) {
+      btn.innerHTML = '<i class="fas fa-check-circle"></i> ' + (window.t ? t('bk.confirm') : 'Request Booking');
+      btn.disabled  = false;
     }
   }
 }
@@ -2412,14 +3089,15 @@ function resetWorkshopModal(skipStateReset){
 /* ============================================================
    CHATBOT
 ============================================================ */
-let botOpen=false;
-function toggleChatbot(){
-  botOpen=!botOpen;
-  document.getElementById('chatbotWindow').classList.toggle('open',botOpen);
+let botOpen = false;
+
+function toggleChatbot() {
+  botOpen = !botOpen;
+  document.getElementById('chatbotWindow').classList.toggle('open', botOpen);
 }
 
-function quickAsk(type){
-  const keyMap={
+function quickAsk(type) {
+  const keyMap = {
     emergency:    'bot.r.emergency',
     destinations: 'bot.r.dest',
     packages:     'bot.r.pkg',
@@ -2429,44 +3107,44 @@ function quickAsk(type){
   addBotMsg(reply);
 }
 
-function addBotMsg(text){
-  const msgs=document.getElementById('cbotMsgs');
-  const typing=document.createElement('div');
-  typing.className='msg bot';
-  typing.innerHTML='<div class="msg-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>';
+function addBotMsg(text) {
+  const msgs   = document.getElementById('cbotMsgs');
+  const typing = document.createElement('div');
+  typing.className = 'msg bot';
+  typing.innerHTML = '<div class="msg-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>';
   msgs.appendChild(typing);
-  msgs.scrollTop=msgs.scrollHeight;
-  setTimeout(()=>{
+  msgs.scrollTop = msgs.scrollHeight;
+  setTimeout(() => {
     typing.remove();
     const label = window.t ? t('bot.lbl') : 'TosTrip AI';
-    const el=document.createElement('div');
-    el.className='msg bot';
-    el.innerHTML='<div class="msg-bubble"><div class="msg-label"><i class="fas fa-robot"></i> '+label+'</div>'+text+'</div>';
+    const el = document.createElement('div');
+    el.className = 'msg bot';
+    el.innerHTML = '<div class="msg-bubble"><div class="msg-label"><i class="fas fa-robot"></i> ' + label + '</div>' + text + '</div>';
     msgs.appendChild(el);
-    msgs.scrollTop=msgs.scrollHeight;
-  },900);
+    msgs.scrollTop = msgs.scrollHeight;
+  }, 900);
 }
 
-function sendBot(){
-  const inp=document.getElementById('cbotInput');
-  const v=inp.value.trim();
-  if(!v) return;
-  const msgs=document.getElementById('cbotMsgs');
-  const user=document.createElement('div');
-  user.className='msg user';
-  user.innerHTML='<div class="msg-bubble">'+v+'</div>';
+function sendBot() {
+  const inp = document.getElementById('cbotInput');
+  const v   = inp.value.trim();
+  if (!v) return;
+  const msgs = document.getElementById('cbotMsgs');
+  const user = document.createElement('div');
+  user.className = 'msg user';
+  user.innerHTML = '<div class="msg-bubble">' + v + '</div>';
   msgs.appendChild(user);
-  inp.value='';
-  msgs.scrollTop=msgs.scrollHeight;
+  inp.value = '';
+  msgs.scrollTop = msgs.scrollHeight;
 
-  const lv=v.toLowerCase();
-  let replyKey='bot.r.default';
-  if(lv.includes('emergency')||lv.includes('help')||lv.includes('danger')) replyKey='bot.r.emergency';
-  else if(lv.includes('destination')||lv.includes('where')||lv.includes('city')) replyKey='bot.r.dest';
-  else if(lv.includes('package')||lv.includes('tour')||lv.includes('price')||lv.includes('cost')) replyKey='bot.r.pkg';
-  else if(lv.includes('contact')||lv.includes('phone')||lv.includes('email')) replyKey='bot.r.contact';
-  else if(lv.includes('siem')||lv.includes('angkor')) replyKey='bot.r.siemreap';
-  else if(lv.includes('offline')) replyKey='bot.r.offline';
+  const lv = v.toLowerCase();
+  let replyKey = 'bot.r.default';
+  if      (lv.includes('emergency') || lv.includes('help') || lv.includes('danger')) replyKey = 'bot.r.emergency';
+  else if (lv.includes('destination') || lv.includes('where') || lv.includes('city')) replyKey = 'bot.r.dest';
+  else if (lv.includes('package') || lv.includes('tour') || lv.includes('price') || lv.includes('cost')) replyKey = 'bot.r.pkg';
+  else if (lv.includes('contact') || lv.includes('phone') || lv.includes('email')) replyKey = 'bot.r.contact';
+  else if (lv.includes('siem') || lv.includes('angkor')) replyKey = 'bot.r.siemreap';
+  else if (lv.includes('offline')) replyKey = 'bot.r.offline';
 
   const reply = window.t ? t(replyKey) : "I'm not sure about that, but you can contact us at info@tostrip.com";
   addBotMsg(reply);
