@@ -3,38 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Title (VERY important for Google ranking) -->
-  <title>Tostrip – Travel Cambodia with Locals | Real Experiences</title>
-
-  <!-- SEO Description -->
-  <meta name="description" content="Travel Cambodia differently with Tostrip. Meet real locals, build friendships, and experience authentic culture beyond tourism.">
-
-  <!-- Keywords (less important but ok to include) -->
-  <meta name="keywords" content="Cambodia travel, local guides Cambodia, Phnom Penh experiences, Siem Reap locals, authentic travel">
-
-  <!-- Author -->
-  <meta name="author" content="Tostrip">
-
-  <!-- Favicon (your logo) -->
-  <link rel="icon" type="image/png" href="loko.png">
-
-  <!-- Open Graph (for sharing on social media) -->
-  <meta property="og:title" content="Tostrip – Travel Cambodia with Locals">
-  <meta property="og:description" content="Not just travel. Build real friendships in Cambodia.">
-  <meta property="og:image" content="https://tostrip.co/loko.png">
-  <meta property="og:url" content="https://tostrip.co">
-  <meta property="og:type" content="website">
-
-  <!-- Twitter Card -->
-<!-- Favicon (browser tab icon) -->
-<link rel="icon" type="image/png" href="./imgg/loko.png">
-
-<!-- Open Graph (Facebook preview) -->
-<meta property="og:title" content="Tostrip – Travel Cambodia with Locals">
-<meta property="og:description" content="Meet locals. Experience Cambodia for real.">
-<meta property="og:image" content="https://tostrip.co/imgg/loko.png">
-<meta property="og:url" content="https://tostrip.co">
-<meta property="og:type" content="website">
+<title>TosTrip — Cambodia Travel Platform</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -573,7 +542,26 @@ button { font-family: inherit; cursor: pointer; }
 .cg-item:hover { transform: scale(1.02); box-shadow: var(--shadow-lg); z-index: 2; }
 .cg-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
 .cg-item:hover img { transform: scale(1.06); }
-.cg-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.78) 0%, rgba(0,0,0,.1) 55%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; opacity: 0; transition: opacity .3s; }
+.cg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.78) 0%,
+    rgba(0,0,0,.3) 55%,
+    transparent 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+  opacity: 1; /* always visible */
+}
+
+/* ❌ remove this completely */
+.cg-item:hover .cg-overlay {
+  opacity: 1;
+}
 .cg-item:hover .cg-overlay { opacity: 1; }
 .cg-info { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
 .cg-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--blue); border: 2px solid var(--white); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--white); flex-shrink: 0; }
@@ -1094,7 +1082,7 @@ button { font-family: inherit; cursor: pointer; }
 ============================================================ -->
 <div class="about-inner" style="max-width:1280px;margin:0 auto;padding:80px 24px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
   <div class="about-image">
-    <img src="yu5.jpg" alt="About TosTrip" style="height:100%;width:100%;object-fit:cover;">
+    <img src="./img/yu5.jpg" alt="About TosTrip" style="height:100%;width:100%;object-fit:cover;">
   </div>
   <div class="about-text">
     <div class="section-label" style="color:var(--gold)"><i class="fas fa-heart"></i></div>
@@ -1159,7 +1147,7 @@ button { font-family: inherit; cursor: pointer; }
       <div class="pkg-card">
         <a href="rentafriend.html" style="text-decoration:none;color:inherit;">
           <div class="pkg-img">
-            <img src="./imgg/cwe1.jpg" alt="Rent a Friend">
+            <img src="./img/yu4.jpg" alt="Rent a Friend">
             <span class="pkg-tag" data-i18n="pkg.friend.tag">Unique</span>
           </div>
         </a>
@@ -1610,14 +1598,14 @@ button { font-family: inherit; cursor: pointer; }
       </div>
     </div>
     <div class="clients-grid" id="clientsGrid">
-      <div class="cg-item cg-tall" data-city="siemreap"><img src="./imgg/test89.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">S</div><div><div class="cg-name">Sarah M.</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> Siem Reap</div></div></div><div class="cg-quote" data-i18n="rev.sarah">"The most authentic experience I've ever had!"</div><div class="cg-stars">★★★★★</div></div></div>
+      <div class="cg-item cg-tall" data-city="siemreap"><img src="./imgg/rainer.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">S</div><div><div class="cg-name">Rainer Scotland</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> Siem Reap</div></div></div><div class="cg-quote" data-i18n="rev.sarah">"The most authentic experience I've ever had! I tested live like a local. It's really nice to have a good time with pu nak"</div><div class="cg-stars">★★★★★</div></div></div>
       <div class="cg-item"          data-city="phnompenh"><img src="./imgg/test2.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">L</div><div><div class="cg-name">Lucas B.</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> Phnom Penh</div></div></div><div class="cg-quote" data-i18n="rev.lucas">"Sokha showed us places no guidebook mentions."</div><div class="cg-stars">★★★★★</div></div></div>
-      <div class="cg-item cg-wide"  data-city="kampot">   <img src="./imgg/test1.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">A</div><div><div class="cg-name">Amara K.</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> Kampot</div></div></div><div class="cg-quote" data-i18n="rev.amara">"Kayaking at sunrise with Virak — absolutely magical."</div><div class="cg-stars">★★★★★</div></div></div>
+      <div class="cg-item cg-wide"  data-city="siemreap">   <img src="./imgg/test1.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">A</div><div><div class="cg-name">Kamini Vee Malaysia</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> siemreap</div></div></div><div class="cg-quote" data-i18n="rev.amara">"floating village is so magical, not to mention how E-Noch treated me"</div><div class="cg-stars">★★★★★</div></div></div>
       <div class="cg-item"          data-city="siemreap"><img src="./imgg/test4.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">J</div><div><div class="cg-name">James T.</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> Siem Reap</div></div></div><div class="cg-quote" data-i18n="rev.james">"Living like a local for a day changed my perspective."</div><div class="cg-stars">★★★★★</div></div></div>
-      <div class="cg-item cg-tall"  data-city="phnompenh"><img src="./imgg/test5.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">M</div><div><div class="cg-name">Marie F.</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> Phnom Penh</div></div></div><div class="cg-quote" data-i18n="rev.marie">"My local friend became a real friend for life."</div><div class="cg-stars">★★★★★</div></div></div>
+      <div class="cg-item cg-tall"  data-city="phnompenh"><img src="./imgg/test5.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">M</div><div><div class="cg-name">Martin</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> Phnom Penh</div></div></div><div class="cg-quote" data-i18n="rev.marie">"My local friend became a real friend for life."</div><div class="cg-stars">★★★★★</div></div></div>
       <div class="cg-item cg-wide"  data-city="siemreap"><img src="./imgg/test6.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">R</div><div><div class="cg-name">Ravi P.</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> Siem Reap</div></div></div><div class="cg-quote" data-i18n="rev.ravi">"Dara's temple stories gave me goosebumps."</div><div class="cg-stars">★★★★★</div></div></div>
-      <div class="cg-item"          data-city="kampot">   <img src="./imgg/test7.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">E</div><div><div class="cg-name">Elena V.</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> Kampot</div></div></div><div class="cg-quote" data-i18n="rev.elena">"10/10 would rent a friend again!"</div><div class="cg-stars">★★★★★</div></div></div>
-      <div class="cg-item"          data-city="phnompenh"><img src="./imgg/test8.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">K</div><div><div class="cg-name">Kenji H.</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> Phnom Penh</div></div></div><div class="cg-quote" data-i18n="rev.kenji">"The street food tour was the highlight of my trip."</div><div class="cg-stars">★★★★★</div></div></div>
+      <div class="cg-item"          data-city="kampot">   <img src="./imgg/test7.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">E</div><div><div class="cg-name">Elena V.</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> Kampot</div></div></div><div class="cg-quote" data-i18n="rev.elena">"crowded landmark"</div><div class="cg-stars">★★★★★</div></div></div>
+      <div class="cg-item"          data-city="phnompenh"><img src="./imgg/test8.jpg" alt=""><div class="cg-overlay"><div class="cg-info"><div class="cg-avatar">K</div><div><div class="cg-name">Kenji H.</div><div class="cg-location"><i class="fas fa-map-marker-alt"></i> Phnom Penh</div></div></div><div class="cg-quote" data-i18n="rev.kenji">"its always in packaged tours"</div><div class="cg-stars">★★★★★</div></div></div>
     </div>
     <div class="cg-cta-row">
       <div class="cg-cta-card">
@@ -1807,32 +1795,32 @@ button { font-family: inherit; cursor: pointer; }
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;align-items:center;">
 
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:88px;">
-        <img src="./img/partner1.png" alt="Partner 1" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:100px;">
+        <img src="./imgg/partner.jpg" alt="Partner 1" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
       </div>
 
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:88px;">
-        <img src="./img/partner2.png" alt="Partner 2" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:100px;">
+        <img src="./imgg/partner1.jpg" alt="Partner 2" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
       </div>
 
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:88px;">
-        <img src="./img/partner3.png" alt="Partner 3" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:100px;">
+        <img src="./imgg/partner3.jpg" alt="Partner 3" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
       </div>
 
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:88px;">
-        <img src="./img/partner4.png" alt="Partner 4" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:100px;">
+        <img src="./imgg/partner4.jpg" alt="Partner 4" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
       </div>
 
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:88px;">
-        <img src="./img/partner5.png" alt="Partner 5" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:100px;">
+        <img src="./imgg/partner5.jpg" alt="Partner 5" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
       </div>
 
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:88px;">
-        <img src="./img/partner6.png" alt="Partner 6" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:100px;">
+        <img src="./imgg/partner6.jpg" alt="Partner 6" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
       </div>
 
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:88px;">
-        <img src="./img/fote.png" alt="Forte" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;display:flex;align-items:center;justify-content:center;min-height:100px;">
+        <img src="./imgg/forte.jpg" alt="Forte" style="max-height:48px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;transition:all .2s;" onmouseover="this.style.filter='none';this.style.opacity='1'" onmouseout="this.style.filter='grayscale(1)';this.style.opacity='.7'">
       </div>
 
     </div>
