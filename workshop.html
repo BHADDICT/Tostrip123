@@ -219,9 +219,11 @@ a{text-decoration:none;color:inherit}img{display:block;width:100%;object-fit:cov
 .nak-discount-pill{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#166534,#15803d);color:#bbf7d0;font-size:12px;font-weight:700;padding:7px 14px;border-radius:100px;margin-bottom:26px;letter-spacing:.02em}
 .nak-discount-pill i{font-size:13px}
 .nak-exp-header{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(26,18,8,.38);margin-bottom:14px}
-.nak-card{background:#fff;border:1px solid var(--nak-border);border-radius:8px;padding:20px 22px;margin-bottom:12px;display:grid;grid-template-columns:40px 1fr auto;gap:14px;align-items:start;transition:box-shadow .2s,border-color .2s;cursor:pointer;position:relative}
+.nak-card{background:#fff;border:1px solid var(--nak-border);border-radius:8px;padding:20px 22px;margin-bottom:12px;display:grid;grid-template-columns:54px 1fr auto;gap:14px;align-items:start;transition:box-shadow .2s,border-color .2s;cursor:pointer;position:relative}
 .nak-card:hover{box-shadow:0 4px 24px rgba(200,146,42,.13);border-color:rgba(200,146,42,.5)}
-.nak-card-icon{width:40px;height:40px;border-radius:50%;background:var(--nak-cream);border:1px solid var(--nak-border);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.nak-card-icon{width:54px;height:54px;border-radius:50%;background:var(--nak-cream);border:1px solid var(--nak-border);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;overflow:hidden;position:relative}
+.nak-card-icon img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.nak-card-icon-emoji{display:none;align-items:center;justify-content:center;width:100%;height:100%;font-size:20px}
 .nak-card-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--nak-dark);margin-bottom:3px;line-height:1.2}
 .nak-card-meta{font-size:11px;color:rgba(26,18,8,.48);margin-bottom:6px}
 .nak-card-meta strong{color:var(--nak-gold);font-weight:600}
@@ -241,6 +243,20 @@ a{text-decoration:none;color:inherit}img{display:block;width:100%;object-fit:cov
 .nak-quote-block::before{content:'\201C';font-family:'Cormorant Garamond',serif;font-size:56px;color:var(--nak-gold);position:absolute;top:-8px;left:14px;line-height:1;opacity:.45}
 .nak-quote-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;line-height:1.65;color:rgba(249,244,236,.83);padding-left:8px}
 .nak-quote-attr{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--nak-gold);margin-top:9px;padding-left:8px}
+.vg-progress{margin-top:4px}
+.vg-progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.vg-progress-top span:first-child{font-size:11.5px;font-weight:700;color:var(--nak-dark)}
+.vg-progress-pct{font-size:11px;font-weight:700;color:var(--nak-gold)}
+.vg-progress-track{height:6px;background:rgba(200,146,42,.15);border-radius:100px;overflow:hidden}
+.vg-progress-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--nak-gold),var(--nak-gold-lt));transition:width .5s}
+.nak-card-foot-row{grid-column:1/-1;display:flex;gap:8px;margin-top:12px}
+.nak-card-foot-row .nak-book-btn{margin-top:0}
+.nak-book-btn-ghost{flex:0 0 auto;padding:10px 16px;border-radius:4px;background:#fff;border:1.5px solid var(--nak-border);color:var(--nak-dark);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.02em;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;white-space:nowrap}
+.nak-book-btn-ghost:hover{border-color:var(--nak-gold);color:var(--nak-gold)}
+.nak-book-btn-ghost:disabled{opacity:.6;cursor:default}
+.nak-stat-row{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:26px}
+.nak-stat-num{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:var(--nak-dark);line-height:1}
+.nak-stat-lbl{font-size:10.5px;color:rgba(26,18,8,.5);margin-top:2px;max-width:120px;line-height:1.35}
 
 /* REFERRAL SECTION */
 .ref-section{background:var(--bg2);border-top:1.5px solid var(--line);border-bottom:1.5px solid var(--line);padding:72px 28px}
@@ -393,7 +409,7 @@ a{text-decoration:none;color:inherit}img{display:block;width:100%;object-fit:cov
   .sess-grid{grid-template-columns:1fr}
   .rb-form{flex-wrap:wrap}.rb-input{width:100%}
   .ref-banner-inner{flex-direction:column;align-items:flex-start}
-  .nak-card{grid-template-columns:36px 1fr}
+  .nak-card{grid-template-columns:44px 1fr}
   .nak-card-right{grid-column:2;justify-self:start}
 }
 @media(max-width:480px){
@@ -450,7 +466,7 @@ a{text-decoration:none;color:inherit}img{display:block;width:100%;object-fit:cov
       </div>
     </div>
     <div class="hero-visual">
-      <div class="hv-bg"><img src="./imgg/pot.jpg" alt="Workshop"></div>
+      <div class="hv-bg"><img src="./img/cook3.png" alt="Workshop"></div>
       <div class="hv-card hv-card1">
         <div class="hvc-label"><span class="live-dot">Live</span> · Happening now</div>
         <div class="hvc-title">Cambodian Village Cooking Class · Siem Reap</div>
@@ -543,7 +559,7 @@ a{text-decoration:none;color:inherit}img{display:block;width:100%;object-fit:cov
   <!-- FEATURED: COOKING CLASS -->
   <div class="feat-card">
     <div class="fc-img">
-      <img src="./imgg/cooking123.jpg" alt="Cooking Class">
+      <img src="./img/cook4.png" alt="Cooking Class">
       <div class="fc-badges">
         <span class="ev-badge b-cooking">🍲 Cooking</span>
         <span class="ev-badge b-hot">🔥 Selling Fast</span>
@@ -577,117 +593,106 @@ a{text-decoration:none;color:inherit}img{display:block;width:100%;object-fit:cov
   </div>
 </div>
 
-<!-- ════ CHEF NAK × TOSTRIP COLLABORATION ════ -->
-<section class="nak-section" id="chef-nak-collab">
+<!-- ════ DOUN KOK VILLAGE × TOSTRIP ════ -->
+<section class="nak-section" id="doun-kok-village">
   <div class="nak-inner">
     <div class="nak-divider">
       <div class="nak-divider-line"></div>
-      <div class="nak-divider-label">✦ Latest Collaboration</div>
+      <div class="nak-divider-label">✦ Proof of Concept — Our First Pilot</div>
       <div class="nak-divider-line"></div>
     </div>
 
-    <div class="nak-badge">TosTrip <span>×</span> Chef Nak — Exclusive Partnership</div>
+    <div class="nak-badge">TosTrip <span>×</span> Doun Kok Village — Community Partnership</div>
 
     <div class="nak-grid">
       <!-- LEFT -->
       <div>
-        <div class="nak-eyebrow">Cambodia's Leading Culinary Voice</div>
-        <h2 class="nak-name">Chef<br><em>Nak</em></h2>
-        <div class="nak-title-sub">Rotanak Ros — Award-Winning Chef & Cultural Ambassador</div>
+        <div class="nak-eyebrow">Phnom Penh's Riverside Village</div>
+        <h2 class="nak-name">Doun Kok<br><em>Village</em></h2>
+        <div class="nak-title-sub">Where travelers cook, eat & live alongside local families</div>
 
-        <div class="nak-discount-pill">
-          <i class="fas fa-tag"></i>
-          Book through TosTrip and save <strong style="margin:0 4px">$5</strong> on every Chef Nak experience — exclusively here.
+        <div class="nak-stat-row">
+          <div><div class="nak-stat-num">34</div><div class="nak-stat-lbl">total participants in our pilot workshop</div></div>
+          <div><div class="nak-stat-num">14+20</div><div class="nak-stat-lbl">foreign travelers + local villagers, cooking side by side</div></div>
         </div>
 
-        <p class="nak-desc">We've partnered with Cambodia's most celebrated chef to bring you rare, intimate culinary experiences. Chef Nak has spent decades preserving royal Cambodian recipes, training under master cooks, and sharing the country's flavours with the world — featured in the NYT, BBC, Financial Times, and more.</p>
+        <p class="nak-desc">TosTrip ran its first pilot experience in Doun Kok village: a hands-on Num Banh Chok cooking workshop, cooked live by a local chef, bringing together travelers and villagers around Cambodia's national dish. It tested our full model end-to-end — discovery, booking, host coordination — and proved an authentic, community-rooted experience travelers are eager to book. Food has no border.</p>
 
         <div class="nak-press">
-          <div class="nak-press-label">As seen in</div>
-          <span class="nak-press-item">New York Times</span>
+          <div class="nak-press-label">Travelers came from</div>
+          <span class="nak-press-item">Timor-Leste</span>
           <span class="nak-press-dot"></span>
-          <span class="nak-press-item">BBC</span>
+          <span class="nak-press-item">Singapore</span>
           <span class="nak-press-dot"></span>
-          <span class="nak-press-item">Financial Times</span>
+          <span class="nak-press-item">Malaysia</span>
           <span class="nak-press-dot"></span>
-          <span class="nak-press-item">Robb Report</span>
-          <span class="nak-press-dot"></span>
-          <span class="nak-press-item">Condé Nast</span>
+          <span class="nak-press-item">Jamaica</span>
         </div>
 
         <div class="nak-cta-row">
-          <a href="#nak-experiences" class="nak-btn-primary">View Chef Nak Experiences →</a>
-          <a href="https://www.chefnak.com" target="_blank" rel="noopener" class="nak-btn-secondary">Visit chefnak.com ↗</a>
+          <a href="#village-experiences" class="nak-btn-primary">View Doun Kok Experiences →</a>
+          <a href="likelocal.html" class="nak-btn-secondary">Live Like a Local ↗</a>
         </div>
       </div>
 
       <!-- RIGHT: Cards -->
-      <div id="nak-experiences">
-        <div class="nak-exp-header">Exclusive Experiences · $5 off when booked via TosTrip</div>
+      <div id="village-experiences">
+        <div class="nak-exp-header">Doun Kok Village Experiences · Book direct with the community</div>
 
         <div class="nak-card">
-          <div class="nak-card-icon">🍽️</div>
+          <div class="nak-card-icon">
+            <img src="./img/mark.jpg" alt="Doun Kok village chef" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="nak-card-icon-emoji">👨‍🍳</span>
+          </div>
           <div>
-            <div class="nak-card-title">Private Home Dining with Chef Nak</div>
-            <div class="nak-card-meta">Chef Nak's Heritage Home · Phnom Penh &nbsp;·&nbsp; <strong>Evenings</strong> &nbsp;·&nbsp; Max 10</div>
-            <div class="nak-card-desc">An intimate multi-course dinner of royal Cambodian recipes, cooked and served by Chef Nak herself in her heritage home. Seasonal, rare, and completely unrepeatable.</div>
+            <div class="nak-card-title">Book a Private Village Chef</div>
+            <div class="nak-card-meta">Doun Kok Village · Phnom Penh &nbsp;·&nbsp; <strong>Full day</strong> &nbsp;·&nbsp; Runs at 10 people</div>
+            <div class="nak-card-desc">Hire a local village chef for a full day of hands-on Khmer cooking — Num Banh Chok and more, taught the way it's cooked at home. This workshop is confirmed once 10 people have joined.</div>
           </div>
           <div class="nak-card-right">
-            <div class="nak-card-price-orig">$95</div>
-            <div class="nak-card-price">$90 <span>/person</span></div>
-            <div class="nak-card-savings">Save $5 via TosTrip</div>
-            <div class="nak-card-tag nak-tag-exclusive">Exclusive</div>
+            <div class="nak-card-price">$10 <span>/person/day</span></div>
+            <div class="nak-card-tag nak-tag-limited" id="chefTag">4 more to unlock</div>
           </div>
           <div class="nak-card-foot">
-            <button class="nak-book-btn" onclick="openNakModal('Private Home Dining with Chef Nak','🍽️','Chef Nak\'s Heritage Home','Phnom Penh',90,'3–4 hrs',10)">
-              <i class="fas fa-ticket-alt"></i> Book via TosTrip — $5 off
-            </button>
+            <div class="vg-progress">
+              <div class="vg-progress-top"><span id="chefInterestLabel">6 of 10 people interested</span><span class="vg-progress-pct" id="chefInterestPct">60%</span></div>
+              <div class="vg-progress-track"><div class="vg-progress-fill" id="chefProgressFill" style="width:60%"></div></div>
+            </div>
+            <div class="nak-card-foot-row">
+              <button class="nak-book-btn-ghost" id="interestBtn" onclick="addInterest()">
+                <i class="fas fa-hand-point-up"></i> I'm interested
+              </button>
+              <button class="nak-book-btn" style="flex:1" onclick="openModal('Private Village Chef — Doun Kok Village','👨‍🍳','cooking','Doun Kok Village Chef','Phnom Penh',10,'Full day',10,null)">
+                <i class="fas fa-ticket-alt"></i> Reserve my spot — $10/day
+              </button>
+            </div>
           </div>
         </div>
 
         <div class="nak-card">
-          <div class="nak-card-icon">👩‍🍳</div>
+          <div class="nak-card-icon">
+            <img src="./img/aunty-steav.jpg" alt="Aunty Steav" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+         
+          </div>
           <div>
-            <div class="nak-card-title">Market-to-Table Private Cooking Class</div>
-            <div class="nak-card-meta">Chef Nak's Kitchen · Siem Reap &nbsp;·&nbsp; <strong>Morning</strong> &nbsp;·&nbsp; Max 6</div>
-            <div class="nak-card-desc">Start at the local market with Chef Nak, then cook a full Khmer feast together using ancestral techniques in her open kitchen.</div>
+            <div class="nak-card-title">Live Like a Local — Pu Seila's Home</div>
+            <div class="nak-card-meta">Doun Kok Village · Phnom Penh &nbsp;·&nbsp; <strong>Full day</strong> &nbsp;·&nbsp; Host: Aunty Steav</div>
+            <div class="nak-card-desc">Spend a full day living like a local with Pu seila — cook together, eat family-style, and experience real riverside village life in Doun Kok.</div>
           </div>
           <div class="nak-card-right">
-            <div class="nak-card-price-orig">$75</div>
-            <div class="nak-card-price">$70 <span>/person</span></div>
-            <div class="nak-card-savings">Save $5 via TosTrip</div>
-            <div class="nak-card-tag nak-tag-limited">Few seats left</div>
+            <div class="nak-card-price">$25 <span>/day</span></div>
+            <div class="nak-card-tag nak-tag-exclusive">Homestay host</div>
           </div>
           <div class="nak-card-foot">
-            <button class="nak-book-btn" onclick="openNakModal('Market-to-Table Cooking Class','👩‍🍳','Chef Nak\'s Kitchen','Siem Reap',70,'3 hrs',6)">
-              <i class="fas fa-ticket-alt"></i> Book via TosTrip — $5 off
-            </button>
-          </div>
-        </div>
-
-        <div class="nak-card">
-          <div class="nak-card-icon">🛏️</div>
-          <div>
-            <div class="nak-card-title">Luxury Cultural Stay Package</div>
-            <div class="nak-card-meta">Chef Nak Heritage Homestay · Siem Reap &nbsp;·&nbsp; <strong>1–3 nights</strong></div>
-            <div class="nak-card-desc">Stay in Chef Nak's traditional wooden home with daily home-cooked meals, a private cooking class, and access to her recipe library.</div>
-          </div>
-          <div class="nak-card-right">
-            <div class="nak-card-price-orig">$280</div>
-            <div class="nak-card-price">$275 <span>/night</span></div>
-            <div class="nak-card-savings">Save $5 via TosTrip</div>
-            <div class="nak-card-tag nak-tag-exclusive">Exclusive</div>
-          </div>
-          <div class="nak-card-foot">
-            <button class="nak-book-btn" onclick="openNakModal('Luxury Cultural Stay','🛏️','Chef Nak Heritage Homestay','Siem Reap',275,'per night',2)">
-              <i class="fas fa-ticket-alt"></i> Book via TosTrip — $5 off
+            <button class="nak-book-btn" onclick="openModal('Live Like a Local — Aunty Steav\'s Home','🏡','cooking','Aunty Steav · Doun Kok Village','Phnom Penh',25,'Full day',6,null)">
+              <i class="fas fa-ticket-alt"></i> Book with Pu seila — $25/day
             </button>
           </div>
         </div>
 
         <div class="nak-quote-block">
-          <p class="nak-quote-text">I am dedicated to elevating and sharing the vibrant flavours and rich cultural heritage of Cambodian cuisine with the world.</p>
-          <div class="nak-quote-attr">— Chef Nak (Rotanak Ros)</div>
+          <p class="nak-quote-text">Food has no border — when the pot is on the fire in Doun Kok, everyone finds a seat at the table.</p>
+          <div class="nak-quote-attr">— From our first pilot workshop</div>
         </div>
       </div>
     </div>
@@ -1105,6 +1110,36 @@ let discountFlat = 0;  // flat $ discount per ticket (for TOSTRIP2026 type)
 let nakDiscount = 0;   // flat $ discount per ticket for Chef Nak
 let curBooking = {};
 let myCode = '';
+
+/* DOUN KOK VILLAGE — CHEF INTEREST COUNTER */
+const CHEF_NEEDED = 10;
+let chefInterestCount = parseInt(sessionStorage.getItem('chefInterestCount')) || 6;
+
+function renderChefProgress(){
+  const pct = Math.min(100, Math.round((chefInterestCount / CHEF_NEEDED) * 100));
+  document.getElementById('chefInterestLabel').textContent = chefInterestCount + ' of ' + CHEF_NEEDED + ' people interested';
+  document.getElementById('chefInterestPct').textContent = pct + '%';
+  document.getElementById('chefProgressFill').style.width = pct + '%';
+  const tag = document.getElementById('chefTag');
+  tag.textContent = chefInterestCount >= CHEF_NEEDED ? 'Workshop confirmed! 🎉' : (CHEF_NEEDED - chefInterestCount) + ' more to unlock';
+}
+
+function addInterest(){
+  const btn = document.getElementById('interestBtn');
+  if(sessionStorage.getItem('joinedChefInterest')){
+    toast('You\'re already on the list!', 'check-circle');
+    return;
+  }
+  chefInterestCount = Math.min(CHEF_NEEDED, chefInterestCount + 1);
+  sessionStorage.setItem('chefInterestCount', chefInterestCount);
+  sessionStorage.setItem('joinedChefInterest', '1');
+  renderChefProgress();
+  btn.innerHTML = '<i class="fas fa-check"></i> You\'re counted in!';
+  btn.disabled = true;
+  toast('Thanks — you\'re on the list!', 'check-circle');
+}
+
+window.addEventListener('load', renderChefProgress);
 
 /* NAV */
 window.addEventListener('scroll',()=>
