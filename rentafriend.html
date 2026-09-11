@@ -36,6 +36,8 @@ button{font-family:inherit;cursor:pointer}
 .nav-links a:hover,.nav-links a.active{color:var(--p);background:var(--ps)}
 .btn-back{padding:9px 20px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--bg);font-size:14px;font-weight:600;color:var(--ink2);display:flex;align-items:center;gap:7px;transition:all .2s}
 .btn-back:hover{border-color:var(--p);color:var(--p)}
+.btn-register-nav{padding:9px 18px;border-radius:var(--r-sm);border:none;background:var(--p);color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;gap:7px;box-shadow:0 3px 12px rgba(102,126,234,.28);transition:all .2s;white-space:nowrap}
+.btn-register-nav:hover{background:var(--pd);transform:translateY(-1px)}
 .hamburger{display:none;background:none;border:none;font-size:22px;color:var(--ink3)}
 
 /* ── HERO ── */
@@ -74,6 +76,10 @@ button{font-family:inherit;cursor:pointer}
 .hv-avail{position:absolute;bottom:18px;left:18px;background:#fff;border-radius:100px;padding:6px 14px;box-shadow:var(--sh-md);display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--ink2)}
 .avail-dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;animation:pulse-dot 1.8s infinite}
 @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+.hv-main-locked{position:absolute;top:0;left:0;right:55px;bottom:55px;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-lg);background:linear-gradient(135deg,var(--p) 0%,#7c8ef0 100%);display:flex;align-items:center;justify-content:center;font-size:72px;color:rgba(255,255,255,.45)}
+.hv-lock-icon{width:40px;height:40px;border-radius:50%;background:var(--ps);border:2px solid var(--pm);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--p);flex-shrink:0}
+.btn-hero-register{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:100px;background:var(--p);color:#fff;font-size:14px;font-weight:700;border:none;box-shadow:0 4px 18px rgba(102,126,234,.3);margin-bottom:24px;transition:all .2s}
+.btn-hero-register:hover{background:var(--pd);transform:translateY(-1px)}
 
 /* ── HOW IT WORKS ── */
 .how-section{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:44px 28px}
@@ -109,6 +115,16 @@ button{font-family:inherit;cursor:pointer}
 .result-count{font-size:14px;color:var(--ink3)}
 .result-count strong{color:var(--ink)}
 .guides-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+
+/* ── LOCKED SECTION ── */
+.locked-section{max-width:1280px;margin:0 auto;padding:20px 28px 80px}
+.locked-inner{max-width:640px;margin:0 auto;text-align:center;background:var(--bg2);border:1.5px dashed var(--pm);border-radius:var(--r-xl);padding:56px 40px}
+.locked-icon{width:64px;height:64px;border-radius:50%;background:var(--ps);border:1.5px solid var(--pm);color:var(--p);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 20px}
+.locked-inner h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--ink);line-height:1.25;margin-bottom:14px}
+.locked-inner h2 em{font-style:italic;color:var(--p)}
+.locked-inner p{font-size:14.5px;color:var(--ink3);line-height:1.7;margin-bottom:26px}
+.btn-register-cta{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:100px;background:var(--p);color:#fff;font-size:14px;font-weight:700;border:none;box-shadow:0 4px 18px rgba(102,126,234,.3);transition:all .2s}
+.btn-register-cta:hover{background:var(--pd);transform:translateY(-1px)}
 
 /* ── GUIDE CARD ── */
 .guide-card{background:var(--bg);border:1.5px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);transition:all .3s;display:flex;flex-direction:column}
@@ -194,9 +210,12 @@ button{font-family:inherit;cursor:pointer}
 /* ── partner grid ── */
 .partners-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(2,1fr);
   gap:28px;
   margin-bottom:40px;
+  max-width:840px;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 /* ── partner card ── */
@@ -362,7 +381,7 @@ button{font-family:inherit;cursor:pointer}
 .test-inner{max-width:1280px;margin:0 auto}
 .sec-lbl{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--p);margin-bottom:8px}
 .sec-title{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--ink);margin-bottom:28px}
-.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.test-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:840px;margin:0 auto}
 .test-card{background:var(--bg);border:1.5px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);transition:all .25s}
 .test-card:hover{box-shadow:var(--sh-md);border-color:var(--pm)}
 .test-guide-tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;background:var(--ps);color:var(--p);padding:3px 10px;border-radius:100px;margin-bottom:10px}
@@ -629,6 +648,7 @@ textarea.fi{resize:vertical;min-height:82px}
       <li><a href="about.html">About</a></li>
     </ul>
     <div style="display:flex;align-items:center;gap:10px">
+      <button class="btn-register-nav" onclick="openRegister()"><i class="fas fa-user-plus"></i> Apply as a Friend</button>
       <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back</a>
       <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><i class="fas fa-bars"></i></button>
     </div>
@@ -647,36 +667,31 @@ textarea.fi{resize:vertical;min-height:82px}
       <div class="hero-badge"><i class="fas fa-user-friends"></i> Local Companion Service</div>
       <h1>Your <em>Personal</em><br><span class="accent">Cambodian Friend</span><br>for the Day</h1>
       <p class="hero-desc">Not a tour guide. Not a driver. A real local who shows you their city the way they'd show a friend — the hidden spots, the honest restaurants, the stories no guidebook has.</p>
+      <button class="btn-hero-register" onclick="openRegister()"><i class="fas fa-user-plus"></i> Apply to Become a Local Friend</button>
       <div class="hero-trust">
         <span class="htrust"><i class="fas fa-shield-alt"></i> 100% Verified</span>
-        <span class="htrust"><i class="fas fa-comments"></i> Chat Before Booking</span>
-        <span class="htrust"><i class="fas fa-undo"></i> Free Cancellation</span>
+        <span class="htrust"><i class="fas fa-user-plus"></i> Applications Open</span>
+        <span class="htrust"><i class="fas fa-hourglass-half"></i> Launching Soon</span>
         <span class="htrust"><i class="fas fa-wifi"></i> Works Offline</span>
       </div>
       <div class="hero-stats">
-        <div><div class="hs-num">50+</div><div class="hs-lbl">Local Friends</div></div>
         <div><div class="hs-num">3</div><div class="hs-lbl">Cities</div></div>
-        <div><div class="hs-num">4.9★</div><div class="hs-lbl">Avg Rating</div></div>
-        <div><div class="hs-num">800+</div><div class="hs-lbl">Day Trips Done</div></div>
+        <div><div class="hs-num">100%</div><div class="hs-lbl">Verified Process</div></div>
+        <div><div class="hs-num">Soon</div><div class="hs-lbl">Local Friends Live</div></div>
       </div>
     </div>
     <div class="hero-visual">
-      <div class="hv-main"><img src="julie.jpg" alt="Local guide"></div>
-      <div class="hv-sm"><img src="./imgg/biu2.jpg" alt="Guide friend"></div>
+      <div class="hv-main hv-main-locked"><i class="fas fa-map-marked-alt"></i></div>
       <div class="hv-card">
         <div class="hv-card-top">
-          <div class="hv-av"><img src="./imgg/biu1.jpg" alt=""></div>
-          <div><div class="hv-name">Sokha K.</div><div class="hv-loc">Beltei Tours</div></div>
+          <div class="hv-lock-icon"><i class="fas fa-user-lock"></i></div>
+          <div><div class="hv-name">Profiles Coming Soon</div><div class="hv-loc">Verification in progress</div></div>
         </div>
-        <div class="hv-badge"><i class="fas fa-check-circle"></i> Verified Friend</div>
-        <div class="hv-rating">
-          <span class="hv-stars">★★★★★</span>
-          <span class="hv-rc">5.0 · 84 trips</span>
-        </div>
+        <div class="hv-badge"><i class="fas fa-shield-alt"></i> Every Friend Gets Verified</div>
       </div>
       <div class="hv-avail">
         <span class="avail-dot"></span>
-        12 friends available today
+        Applications open now
       </div>
     </div>
   </div>
@@ -692,444 +707,14 @@ textarea.fi{resize:vertical;min-height:82px}
   </div>
 </div>
 
-<!-- SEARCH + FILTER -->
-<div class="search-bar">
-  <div class="search-inner">
-    <div class="search-input-wrap">
-      <i class="fas fa-search"></i>
-      <input type="text" class="search-input" id="searchInput" placeholder="Search by name or specialty…" oninput="liveSearch(this.value)">
-    </div>
-    <div class="filter-chips">
-      <button class="fc active" onclick="filterGuides('all',this)">All <span class="count-badge" id="cnt-all">8</span></button>
-      <button class="fc" onclick="filterGuides('phnom-penh',this)">📍 Beltei Tours</button>
-      <button class="fc" onclick="filterGuides('siem-reap',this)">📍 Neak Siemreap</button>
-      <button class="fc" onclick="filterGuides('CWE',this)">📍 CWE</button>
-      <button class="fc" onclick="filterGuides('food',this)">🍜 Food Tours</button>
-      <button class="fc" onclick="filterGuides('temples',this)">🛕 Temples</button>
-      <button class="fc" onclick="filterGuides('nightlife',this)">🌙 Nightlife</button>
-      <button class="fc" onclick="filterGuides('photography',this)">📸 Photography</button>
-      <button class="fc" onclick="filterGuides('history',this)">📚 History</button>
-    </div>
-    <select class="sort-select" onchange="sortGuides(this.value)">
-      <option value="rating">Sort: Top Rated</option>
-      <option value="price-low">Price: Low to High</option>
-      <option value="price-high">Price: High to Low</option>
-      <option value="reviews">Most Reviews</option>
-    </select>
-  </div>
-</div>
-
-<!-- GUIDES GRID -->
-<div class="guides-section">
-  <div class="guides-header">
-    <h2>Meet Your Local Friends</h2>
-    <div class="result-count">Showing <strong id="showing-count">8</strong> friends</div>
-  </div>
-  <div class="guides-grid" id="guidesGrid">
-
-    <!-- GUIDE 1: SOKHA -->
-    <div class="guide-card" data-city="phnom-penh" data-tags="food nightlife history" data-rating="5.0" data-half="25" data-full="45" data-reviews="84">
-      <div class="gc-photo">
-        <img src="./imgg/biu2.jpg" alt="Sokha">
-        <div class="gc-verified"><i class="fas fa-check-circle"></i> Verified</div>
-        <div class="gc-avail avail-yes">● Available</div>
-        <div class="gc-city-pill"><i class="fas fa-map-marker-alt"></i> Beltei Tours</div>
-      </div>
-      <div class="gc-body">
-        <div class="gc-name-row">
-          <div class="gc-name">Sokha Keo</div>
-          <div class="gc-rating"><span class="gc-score">5.0</span><span class="gc-stars">★</span><span class="gc-reviews">(84)</span></div>
-        </div>
-        <div class="gc-tagline">"I'll show you the Beltei Tours tourists never find"</div>
-        <p class="gc-bio">Born and raised in BKK1, Sokha knows every street food cart, rooftop bar, and hidden pagoda in the city. She's a food blogger by night and your best friend by day. Fluent in English and French, endlessly enthusiastic.</p>
-        <div class="gc-langs">
-          <span class="gc-langs-lbl">Languages</span>
-          <span class="lang-pill">🇰🇭 Khmer</span>
-          <span class="lang-pill">🇬🇧 English</span>
-          <span class="lang-pill">🇫🇷 French</span>
-        </div>
-        <div class="gc-specs">
-          <span class="spec-tag"><i class="fas fa-utensils"></i> Street Food</span>
-          <span class="spec-tag"><i class="fas fa-moon"></i> Nightlife</span>
-          <span class="spec-tag"><i class="fas fa-landmark"></i> History</span>
-          <span class="spec-tag"><i class="fas fa-shopping-bag"></i> Markets</span>
-        </div>
-        <div class="gc-pricing">
-          <div class="price-opt"><div class="price-lbl">Half Day</div><div class="price-val">$25</div><div class="price-dur">~4 hrs</div></div>
-          <div class="price-divider"></div>
-          <div class="price-opt"><div class="price-lbl">Full Day</div><div class="price-val">$45</div><div class="price-dur">~8 hrs</div></div>
-        </div>
-        <div class="gc-actions">
-          <button class="btn-book" onclick="openBook('Sokha Keo','Beltei Tours',25,45,'./imgg/keolocal.jpg')"><i class="fas fa-calendar-check"></i> Book</button>
-          <button class="btn-chat" onclick="openChat('Sokha Keo','Beltei Tours','./imgg/keolocal.jpg')"><i class="fas fa-comment-dots"></i> Chat</button>
-          <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- GUIDE 2: DARA -->
-    <div class="guide-card" data-city="siem-reap" data-tags="temples history photography" data-rating="4.9" data-half="30" data-full="55" data-reviews="112">
-      <div class="gc-photo">
-        <img src="./imgg/biu3.jpg" alt="Dara">
-        <div class="gc-verified"><i class="fas fa-check-circle"></i> Verified</div>
-        <div class="gc-avail avail-yes">● Available</div>
-        <div class="gc-city-pill"><i class="fas fa-map-marker-alt"></i> Neak Siemreap</div>
-      </div>
-      <div class="gc-body">
-        <div class="gc-name-row">
-          <div class="gc-name">Dara Chann</div>
-          <div class="gc-rating"><span class="gc-score">4.9</span><span class="gc-stars">★</span><span class="gc-reviews">(112)</span></div>
-        </div>
-        <div class="gc-tagline">"Angkor isn't a monument — it's a living story"</div>
-        <p class="gc-bio">Dara studied Khmer history at the Royal University and spent 8 years working at Angkor Conservation. He'll take you to temples that aren't in any guidebook and explain 1,000-year-old carvings like they happened yesterday.</p>
-        <div class="gc-langs">
-          <span class="gc-langs-lbl">Languages</span>
-          <span class="lang-pill">🇰🇭 Khmer</span>
-          <span class="lang-pill">🇬🇧 English</span>
-          <span class="lang-pill">🇯🇵 Japanese</span>
-        </div>
-        <div class="gc-specs">
-          <span class="spec-tag"><i class="fas fa-gopuram"></i> Temples</span>
-          <span class="spec-tag"><i class="fas fa-camera"></i> Photography</span>
-          <span class="spec-tag"><i class="fas fa-book-open"></i> History</span>
-          <span class="spec-tag"><i class="fas fa-bicycle"></i> Cycling</span>
-        </div>
-        <div class="gc-pricing">
-          <div class="price-opt"><div class="price-lbl">Half Day</div><div class="price-val">$30</div><div class="price-dur">~4 hrs</div></div>
-          <div class="price-divider"></div>
-          <div class="price-opt"><div class="price-lbl">Full Day</div><div class="price-val">$55</div><div class="price-dur">~8 hrs</div></div>
-        </div>
-        <div class="gc-actions">
-          <button class="btn-book" onclick="openBook('Dara Chann','Neak Siemreap',30,55,'./imgg/keofri.jpg')"><i class="fas fa-calendar-check"></i> Book</button>
-          <button class="btn-chat" onclick="openChat('Dara Chann','Neak Siemreap','./imgg/keofri.jpg')"><i class="fas fa-comment-dots"></i> Chat</button>
-          <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- GUIDE 3: VIRAK -->
-    <div class="guide-card" data-city="CWE" data-tags="food photography" data-rating="4.8" data-half="28" data-full="50" data-reviews="67">
-      <div class="gc-photo">
-        <img src="./imgg/biu67.jpg" alt="Virak">
-        <div class="gc-verified"><i class="fas fa-check-circle"></i> Verified</div>
-        <div class="gc-avail avail-busy">◐ Busy Today</div>
-        <div class="gc-city-pill"><i class="fas fa-map-marker-alt"></i> CWE</div>
-      </div>
-      <div class="gc-body">
-        <div class="gc-name-row">
-          <div class="gc-name">Virak Sorn</div>
-          <div class="gc-rating"><span class="gc-score">4.8</span><span class="gc-stars">★</span><span class="gc-reviews">(67)</span></div>
-        </div>
-        <div class="gc-tagline">"CWE is slow on purpose — let me show you why"</div>
-        <p class="gc-bio">Virak grew up on a pepper farm outside CWE and moved back from Beltei Tours to share what he calls "the last quiet corner of Cambodia." Kayaking the river, cycling the salt flats, watching the sunset from Bokor Hill.</p>
-        <div class="gc-langs">
-          <span class="gc-langs-lbl">Languages</span>
-          <span class="lang-pill">🇰🇭 Khmer</span>
-          <span class="lang-pill">🇬🇧 English</span>
-        </div>
-        <div class="gc-specs">
-          <span class="spec-tag"><i class="fas fa-water"></i> Kayaking</span>
-          <span class="spec-tag"><i class="fas fa-camera"></i> Photography</span>
-          <span class="spec-tag"><i class="fas fa-leaf"></i> Pepper Farm</span>
-          <span class="spec-tag"><i class="fas fa-bicycle"></i> Cycling</span>
-        </div>
-        <div class="gc-pricing">
-          <div class="price-opt"><div class="price-lbl">Half Day</div><div class="price-val">$28</div><div class="price-dur">~4 hrs</div></div>
-          <div class="price-divider"></div>
-          <div class="price-opt"><div class="price-lbl">Full Day</div><div class="price-val">$50</div><div class="price-dur">~8 hrs</div></div>
-        </div>
-        <div class="gc-actions">
-          <button class="btn-book" onclick="openBook('Virak Sorn','CWE',28,50,'./imgg/pic.JPG')"><i class="fas fa-calendar-check"></i> Book</button>
-          <button class="btn-chat" onclick="openChat('Virak Sorn','CWE','./imgg/pic.JPG')"><i class="fas fa-comment-dots"></i> Chat</button>
-          <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- GUIDE 4: MALY -->
-    <div class="guide-card" data-city="phnom-penh" data-tags="food photography nightlife" data-rating="5.0" data-half="27" data-full="48" data-reviews="93">
-      <div class="gc-photo">
-        <img src="./imgg/biu1.jpg" alt="Maly">
-        <div class="gc-verified"><i class="fas fa-check-circle"></i> Verified</div>
-        <div class="gc-avail avail-yes">● Available</div>
-        <div class="gc-city-pill"><i class="fas fa-map-marker-alt"></i> Beltei Tours</div>
-      </div>
-      <div class="gc-body">
-        <div class="gc-name-row">
-          <div class="gc-name">Maly Pich</div>
-          <div class="gc-rating"><span class="gc-score">5.0</span><span class="gc-stars">★</span><span class="gc-reviews">(93)</span></div>
-        </div>
-        <div class="gc-tagline">"The best meals in Beltei Tours have no sign outside"</div>
-        <p class="gc-bio">Maly runs a popular food Instagram and has eaten at every hidden gem in the city. She'll take you past the tourist restaurants to the plastic-stool spots where locals eat three times a day — and she knows everyone's name.</p>
-        <div class="gc-langs">
-          <span class="gc-langs-lbl">Languages</span>
-          <span class="lang-pill">🇰🇭 Khmer</span>
-          <span class="lang-pill">🇬🇧 English</span>
-          <span class="lang-pill">🇨🇳 Mandarin</span>
-        </div>
-        <div class="gc-specs">
-          <span class="spec-tag"><i class="fas fa-utensils"></i> Food Tours</span>
-          <span class="spec-tag"><i class="fas fa-camera"></i> Photography</span>
-          <span class="spec-tag"><i class="fas fa-moon"></i> Night Markets</span>
-          <span class="spec-tag"><i class="fas fa-cocktail"></i> Rooftop Bars</span>
-        </div>
-        <div class="gc-pricing">
-          <div class="price-opt"><div class="price-lbl">Half Day</div><div class="price-val">$27</div><div class="price-dur">~4 hrs</div></div>
-          <div class="price-divider"></div>
-          <div class="price-opt"><div class="price-lbl">Full Day</div><div class="price-val">$48</div><div class="price-dur">~8 hrs</div></div>
-        </div>
-        <div class="gc-actions">
-          <button class="btn-book" onclick="openBook('Maly Pich','Beltei Tours',27,48,'./imgg/tour.jpg')"><i class="fas fa-calendar-check"></i> Book</button>
-          <button class="btn-chat" onclick="openChat('Maly Pich','Beltei Tours','./imgg/tour.jpg')"><i class="fas fa-comment-dots"></i> Chat</button>
-          <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- GUIDE 5: RITH -->
-    <div class="guide-card" data-city="siem-reap" data-tags="temples food history" data-rating="4.9" data-half="32" data-full="58" data-reviews="78">
-      <div class="gc-photo">
-        <img src="./imgg/biu5.jpg" alt="Rith">
-        <div class="gc-verified"><i class="fas fa-check-circle"></i> Verified</div>
-        <div class="gc-avail avail-yes">● Available</div>
-        <div class="gc-city-pill"><i class="fas fa-map-marker-alt"></i> Neak Siemreap</div>
-      </div>
-      <div class="gc-body">
-        <div class="gc-name-row">
-          <div class="gc-name">Rith Meng</div>
-          <div class="gc-rating"><span class="gc-score">4.9</span><span class="gc-stars">★</span><span class="gc-reviews">(78)</span></div>
-        </div>
-        <div class="gc-tagline">"Neak Siemreap is so much more than Angkor Wat"</div>
-        <p class="gc-bio">Rith is the guy you want when you're tired of tourist traps. He'll take you to a family-run silk workshop, a floating village school, and a sunset boat that has room for exactly five people. No crowds, no scripts.</p>
-        <div class="gc-langs">
-          <span class="gc-langs-lbl">Languages</span>
-          <span class="lang-pill">🇰🇭 Khmer</span>
-          <span class="lang-pill">🇬🇧 English</span>
-          <span class="lang-pill">🇩🇪 German</span>
-        </div>
-        <div class="gc-specs">
-          <span class="spec-tag"><i class="fas fa-gopuram"></i> Off-path Temples</span>
-          <span class="spec-tag"><i class="fas fa-utensils"></i> Local Eats</span>
-          <span class="spec-tag"><i class="fas fa-ship"></i> River Life</span>
-          <span class="spec-tag"><i class="fas fa-tshirt"></i> Craft Villages</span>
-        </div>
-        <div class="gc-pricing">
-          <div class="price-opt"><div class="price-lbl">Half Day</div><div class="price-val">$32</div><div class="price-dur">~4 hrs</div></div>
-          <div class="price-divider"></div>
-          <div class="price-opt"><div class="price-lbl">Full Day</div><div class="price-val">$58</div><div class="price-dur">~8 hrs</div></div>
-        </div>
-        <div class="gc-actions">
-          <button class="btn-book" onclick="openBook('Rith Meng','Neak Siemreap',32,58,'./imgg/tour1.jpg')"><i class="fas fa-calendar-check"></i> Book</button>
-          <button class="btn-chat" onclick="openChat('Rith Meng','Neak Siemreap','./imgg/tour1.jpg')"><i class="fas fa-comment-dots"></i> Chat</button>
-          <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- GUIDE 6: LINDA -->
-    <div class="guide-card" data-city="phnom-penh" data-tags="history food" data-rating="4.8" data-half="24" data-full="44" data-reviews="56">
-      <div class="gc-photo">
-        <img src="./imgg/biu6.jpg" alt="Linda">
-        <div class="gc-verified"><i class="fas fa-check-circle"></i> Verified</div>
-        <div class="gc-avail avail-busy">◐ Busy Today</div>
-        <div class="gc-city-pill"><i class="fas fa-map-marker-alt"></i> Beltei Tours</div>
-      </div>
-      <div class="gc-body">
-        <div class="gc-name-row">
-          <div class="gc-name">Linda Sam</div>
-          <div class="gc-rating"><span class="gc-score">4.8</span><span class="gc-stars">★</span><span class="gc-reviews">(56)</span></div>
-        </div>
-        <div class="gc-tagline">"History isn't heavy when you hear it from a local"</div>
-        <p class="gc-bio">Linda's grandmother survived the Khmer Rouge and Linda grew up with stories others only read in books. She leads one of the most sensitive, honest, and human-centred visits to S-21 and the Killing Fields you'll ever experience.</p>
-        <div class="gc-langs">
-          <span class="gc-langs-lbl">Languages</span>
-          <span class="lang-pill">🇰🇭 Khmer</span>
-          <span class="lang-pill">🇬🇧 English</span>
-          <span class="lang-pill">🇰🇷 Korean</span>
-        </div>
-        <div class="gc-specs">
-          <span class="spec-tag"><i class="fas fa-landmark"></i> Dark History</span>
-          <span class="spec-tag"><i class="fas fa-book"></i> Cultural Context</span>
-          <span class="spec-tag"><i class="fas fa-heart"></i> Healing Stories</span>
-          <span class="spec-tag"><i class="fas fa-utensils"></i> Local Food</span>
-        </div>
-        <div class="gc-pricing">
-          <div class="price-opt"><div class="price-lbl">Half Day</div><div class="price-val">$24</div><div class="price-dur">~4 hrs</div></div>
-          <div class="price-divider"></div>
-          <div class="price-opt"><div class="price-lbl">Full Day</div><div class="price-val">$44</div><div class="price-dur">~8 hrs</div></div>
-        </div>
-        <div class="gc-actions">
-          <button class="btn-book" onclick="openBook('Linda Sam','Beltei Tours',24,44,'./imgg/biu.jpg')"><i class="fas fa-calendar-check"></i> Book</button>
-          <button class="btn-chat" onclick="openChat('Linda Sam','Beltei Tours','./imgg/biu.jpg')"><i class="fas fa-comment-dots"></i> Chat</button>
-          <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- GUIDE 7: CWE LOCAL -->
-    <div class="guide-card" data-city="phnom-penh" data-tags="history food" data-rating="4.8" data-half="24" data-full="44" data-reviews="56">
-      <div class="gc-photo">
-        <img src="./imgg/cwe.jpg" alt="CWE Guide">
-        <div class="gc-verified"><i class="fas fa-check-circle"></i> Verified</div>
-        <div class="gc-avail avail-busy">◐ Busy Today</div>
-        <div class="gc-city-pill"><i class="fas fa-map-marker-alt"></i> Beltei Tours</div>
-      </div>
-      <div class="gc-body">
-        <div class="gc-name-row">
-          <div class="gc-name">Linda Sam</div>
-          <div class="gc-rating"><span class="gc-score">4.8</span><span class="gc-stars">★</span><span class="gc-reviews">(56)</span></div>
-        </div>
-        <div class="gc-tagline">"History isn't heavy when you hear it from a local"</div>
-        <p class="gc-bio">Linda's grandmother survived the Khmer Rouge and Linda grew up with stories others only read in books. She leads one of the most sensitive, honest, and human-centred visits to S-21 and the Killing Fields you'll ever experience.</p>
-        <div class="gc-langs">
-          <span class="gc-langs-lbl">Languages</span>
-          <span class="lang-pill">🇰🇭 Khmer</span>
-          <span class="lang-pill">🇬🇧 English</span>
-          <span class="lang-pill">🇰🇷 Korean</span>
-        </div>
-        <div class="gc-specs">
-          <span class="spec-tag"><i class="fas fa-landmark"></i> Dark History</span>
-          <span class="spec-tag"><i class="fas fa-book"></i> Cultural Context</span>
-          <span class="spec-tag"><i class="fas fa-heart"></i> Healing Stories</span>
-          <span class="spec-tag"><i class="fas fa-utensils"></i> Local Food</span>
-        </div>
-        <div class="gc-pricing">
-          <div class="price-opt"><div class="price-lbl">Half Day</div><div class="price-val">$24</div><div class="price-dur">~4 hrs</div></div>
-          <div class="price-divider"></div>
-          <div class="price-opt"><div class="price-lbl">Full Day</div><div class="price-val">$44</div><div class="price-dur">~8 hrs</div></div>
-        </div>
-        <div class="gc-actions">
-          <button class="btn-book" onclick="openBook('Linda Sam','Beltei Tours',24,44,'./imgg/biu.jpg')"><i class="fas fa-calendar-check"></i> Book</button>
-          <button class="btn-chat" onclick="openChat('Linda Sam','Beltei Tours','./imgg/biu.jpg')"><i class="fas fa-comment-dots"></i> Chat</button>
-          <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- GUIDE 8: CWE1 -->
-    <div class="guide-card" data-city="phnom-penh" data-tags="history food" data-rating="4.8" data-half="24" data-full="44" data-reviews="56">
-      <div class="gc-photo">
-        <img src="./imgg/cwe1.jpg" alt="CWE Guide 2">
-        <div class="gc-verified"><i class="fas fa-check-circle"></i> Verified</div>
-        <div class="gc-avail avail-busy">◐ Busy Today</div>
-        <div class="gc-city-pill"><i class="fas fa-map-marker-alt"></i> CWE</div>
-      </div>
-      <div class="gc-body">
-        <div class="gc-name-row">
-          <div class="gc-name">Linda Sam</div>
-          <div class="gc-rating"><span class="gc-score">4.8</span><span class="gc-stars">★</span><span class="gc-reviews">(56)</span></div>
-        </div>
-        <div class="gc-tagline">"History isn't heavy when you hear it from a local"</div>
-        <p class="gc-bio">Linda's grandmother survived the Khmer Rouge and Linda grew up with stories others only read in books. She leads one of the most sensitive, honest, and human-centred visits to S-21 and the Killing Fields you'll ever experience.</p>
-        <div class="gc-langs">
-          <span class="gc-langs-lbl">Languages</span>
-          <span class="lang-pill">🇰🇭 Khmer</span>
-          <span class="lang-pill">🇬🇧 English</span>
-          <span class="lang-pill">🇰🇷 Korean</span>
-        </div>
-        <div class="gc-specs">
-          <span class="spec-tag"><i class="fas fa-landmark"></i> Dark History</span>
-          <span class="spec-tag"><i class="fas fa-book"></i> Cultural Context</span>
-          <span class="spec-tag"><i class="fas fa-heart"></i> Healing Stories</span>
-          <span class="spec-tag"><i class="fas fa-utensils"></i> Local Food</span>
-        </div>
-        <div class="gc-pricing">
-          <div class="price-opt"><div class="price-lbl">Half Day</div><div class="price-val">$24</div><div class="price-dur">~4 hrs</div></div>
-          <div class="price-divider"></div>
-          <div class="price-opt"><div class="price-lbl">Full Day</div><div class="price-val">$44</div><div class="price-dur">~8 hrs</div></div>
-        </div>
-        <div class="gc-actions">
-          <button class="btn-book" onclick="openBook('Linda Sam','Beltei Tours',24,44,'./imgg/biu.jpg')"><i class="fas fa-calendar-check"></i> Book</button>
-          <button class="btn-chat" onclick="openChat('Linda Sam','Beltei Tours','./imgg/biu.jpg')"><i class="fas fa-comment-dots"></i> Chat</button>
-          <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- GUIDE 9: CHAN -->
-    <div class="guide-card" data-city="CWE" data-tags="food photography nightlife" data-rating="4.9" data-half="26" data-full="46" data-reviews="41">
-      <div class="gc-photo">
-        <img src="./imgg/biu7.jpg" alt="Chan">
-        <div class="gc-verified"><i class="fas fa-check-circle"></i> Verified</div>
-        <div class="gc-avail avail-yes">● Available</div>
-        <div class="gc-city-pill"><i class="fas fa-map-marker-alt"></i> CWE</div>
-      </div>
-      <div class="gc-body">
-        <div class="gc-name-row">
-          <div class="gc-name">Chan Bopha</div>
-          <div class="gc-rating"><span class="gc-score">4.9</span><span class="gc-stars">★</span><span class="gc-reviews">(41)</span></div>
-        </div>
-        <div class="gc-tagline">"The river at dusk here is better than any Instagram"</div>
-        <p class="gc-bio">Chan is a photographer, a cook, and someone who's never once recommended a restaurant that disappointed. She'll drive you on her motorbike to the best durian vendor in the province, then catch the sunset from a spot only her friends know.</p>
-        <div class="gc-langs">
-          <span class="gc-langs-lbl">Languages</span>
-          <span class="lang-pill">🇰🇭 Khmer</span>
-          <span class="lang-pill">🇬🇧 English</span>
-        </div>
-        <div class="gc-specs">
-          <span class="spec-tag"><i class="fas fa-camera"></i> Photography</span>
-          <span class="spec-tag"><i class="fas fa-utensils"></i> Local Food</span>
-          <span class="spec-tag"><i class="fas fa-motorcycle"></i> Moto Rides</span>
-          <span class="spec-tag"><i class="fas fa-star-and-crescent"></i> Sunsets</span>
-        </div>
-        <div class="gc-pricing">
-          <div class="price-opt"><div class="price-lbl">Half Day</div><div class="price-val">$26</div><div class="price-dur">~4 hrs</div></div>
-          <div class="price-divider"></div>
-          <div class="price-opt"><div class="price-lbl">Full Day</div><div class="price-val">$46</div><div class="price-dur">~8 hrs</div></div>
-        </div>
-        <div class="gc-actions">
-          <button class="btn-book" onclick="openBook('Chan Bopha','CWE',26,46,'./imgg/koh.jpg')"><i class="fas fa-calendar-check"></i> Book</button>
-          <button class="btn-chat" onclick="openChat('Chan Bopha','CWE','./imgg/koh.jpg')"><i class="fas fa-comment-dots"></i> Chat</button>
-          <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- GUIDE 10: PHEARA -->
-    <div class="guide-card" data-city="siem-reap" data-tags="temples photography nightlife" data-rating="4.9" data-half="29" data-full="52" data-reviews="60">
-      <div class="gc-photo">
-        <img src="./imgg/biu8.jpg" alt="Pheara">
-        <div class="gc-verified"><i class="fas fa-check-circle"></i> Verified</div>
-        <div class="gc-avail avail-yes">● Available</div>
-        <div class="gc-city-pill"><i class="fas fa-map-marker-alt"></i> Neak Siemreap</div>
-      </div>
-      <div class="gc-body">
-        <div class="gc-name-row">
-          <div class="gc-name">Pheara Noun</div>
-          <div class="gc-rating"><span class="gc-score">4.9</span><span class="gc-stars">★</span><span class="gc-reviews">(60)</span></div>
-        </div>
-        <div class="gc-tagline">"Every Neak Siemreap sunrise at Angkor is different"</div>
-        <p class="gc-bio">Pheara wakes at 4am every morning just to watch how the light changes on the Angkor temples. She'll take you to the right reflection pool at the right moment, then spend the afternoon exploring the lesser-known Ta Nei and Beng Mealea ruins.</p>
-        <div class="gc-langs">
-          <span class="gc-langs-lbl">Languages</span>
-          <span class="lang-pill">🇰🇭 Khmer</span>
-          <span class="lang-pill">🇬🇧 English</span>
-          <span class="lang-pill">🇪🇸 Spanish</span>
-        </div>
-        <div class="gc-specs">
-          <span class="spec-tag"><i class="fas fa-sun"></i> Sunrise Tours</span>
-          <span class="spec-tag"><i class="fas fa-gopuram"></i> Temples</span>
-          <span class="spec-tag"><i class="fas fa-camera"></i> Photography</span>
-          <span class="spec-tag"><i class="fas fa-moon"></i> Night Walks</span>
-        </div>
-        <div class="gc-pricing">
-          <div class="price-opt"><div class="price-lbl">Half Day</div><div class="price-val">$29</div><div class="price-dur">~4 hrs</div></div>
-          <div class="price-divider"></div>
-          <div class="price-opt"><div class="price-lbl">Full Day</div><div class="price-val">$52</div><div class="price-dur">~8 hrs</div></div>
-        </div>
-        <div class="gc-actions">
-          <button class="btn-book" onclick="openBook('Pheara Noun','Neak Siemreap',29,52,'./imgg/trip3.JPG')"><i class="fas fa-calendar-check"></i> Book</button>
-          <button class="btn-chat" onclick="openChat('Pheara Noun','Neak Siemreap','./imgg/trip3.JPG')"><i class="fas fa-comment-dots"></i> Chat</button>
-          <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i></button>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /guides-grid -->
-  <div id="emptyState" style="display:none;text-align:center;padding:60px 20px">
-    <div style="font-size:48px;margin-bottom:16px">🔍</div>
-    <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:var(--ink);margin-bottom:8px">No friends found</h3>
-    <p style="color:var(--ink3);font-size:15px">Try a different filter or search term</p>
+<!-- LOCKED GUIDES SECTION -->
+<div class="locked-section">
+  <div class="locked-inner">
+    <div class="locked-icon"><i class="fas fa-lock"></i></div>
+    <div class="hero-badge" style="margin-bottom:18px"><i class="fas fa-hourglass-half"></i> Coming Soon</div>
+    <h2>Our Local Friends Are<br><em>Getting Ready to Meet You</em></h2>
+    <p>We're personally vetting every local friend before their profile goes live — identity checks, interviews, the works. Profiles will unlock here soon. In the meantime, know someone (or are someone) who'd be perfect for this?</p>
+    <button class="btn-register-cta" onclick="openRegister()"><i class="fas fa-user-plus"></i> Apply to Become a Local Friend</button>
   </div>
 </div>
 
@@ -1147,62 +732,6 @@ textarea.fi{resize:vertical;min-height:82px}
 
     <div class="partners-grid">
 
-      <!-- BELTEI TOURS -->
-      <div class="partner-card">
-        <div class="pc-accent" style="background:linear-gradient(135deg,#667eea,#a78bfa)"></div>
-        <div class="pc-header">
-          <div class="pc-icon-wrap" style="background:linear-gradient(135deg,#667eea,#a78bfa)">
-            <i class="fas fa-female"></i>
-          </div>
-          <div>
-            <div class="pc-org-name">Beltei Tours</div>
-            <div class="pc-location"><i class="fas fa-map-marker-alt"></i> Siemreap</div>
-          </div>
-        </div>
-        <div class="pc-mission-tag" style="background:#f5f3ff;border-color:#ddd6fe;color:#6d28d9">
-          <i class="fas fa-venus"></i> Women-Empowerment Tourism
-        </div>
-        <h3 class="pc-title">"Tourism that changes <em>her</em> future"</h3>
-        <p class="pc-desc">Beltei Tours is a Phnom Penh-based social enterprise that trains young Cambodian women from underserved communities to become confident, skilled, and economically independent through tourism. Every booking directly funds skill-building workshops, language classes, and safe housing for women entering the workforce. Beltei's model proves that travel can be a tool for gender equity — not just exploration.</p>
-        <div class="pc-pillars">
-          <div class="pc-pillar">
-            <div class="pc-pillar-icon" style="background:#f5f3ff;color:#7c3aed"><i class="fas fa-graduation-cap"></i></div>
-            <div>
-              <div class="pc-pillar-title">Vocational Training</div>
-              <div class="pc-pillar-sub">6-month guide certification program for women aged 18–30 from low-income families</div>
-            </div>
-          </div>
-          <div class="pc-pillar">
-            <div class="pc-pillar-icon" style="background:#f5f3ff;color:#7c3aed"><i class="fas fa-home"></i></div>
-            <div>
-              <div class="pc-pillar-title">Safe Housing Fund</div>
-              <div class="pc-pillar-sub">15% of every booking supports affordable housing for women in training</div>
-            </div>
-          </div>
-          <div class="pc-pillar">
-            <div class="pc-pillar-icon" style="background:#f5f3ff;color:#7c3aed"><i class="fas fa-seedling"></i></div>
-            <div>
-              <div class="pc-pillar-title">Pay-It-Forward Mentorship</div>
-              <div class="pc-pillar-sub">Graduate women mentor the next cohort — a self-sustaining circle of support</div>
-            </div>
-          </div>
-        </div>
-        <div class="pc-impact-row">
-          <div class="pc-impact-stat">
-            <div class="pc-impact-num" style="color:#7c3aed">120+</div>
-            <div class="pc-impact-lbl">Women Trained</div>
-          </div>
-          <div class="pc-impact-stat">
-            <div class="pc-impact-num" style="color:#7c3aed">88%</div>
-            <div class="pc-impact-lbl">Employment Rate</div>
-          </div>
-          <div class="pc-impact-stat">
-            <div class="pc-impact-num" style="color:#7c3aed">6 yrs</div>
-            <div class="pc-impact-lbl">In Operation</div>
-          </div>
-        </div>
-      </div>
-
       <!-- CWE -->
       <div class="partner-card">
         <div class="pc-accent" style="background:linear-gradient(135deg,#ec4899,#f97316)"></div>
@@ -1212,7 +741,7 @@ textarea.fi{resize:vertical;min-height:82px}
           </div>
           <div>
             <div class="pc-org-name">CWE</div>
-            <div class="pc-location"><i class="fas fa-map-marker-alt"></i> Siem &amp; Reap</div>
+            <div class="pc-location"><i class="fas fa-map-marker-alt"></i> Kampot &amp; Kep</div>
           </div>
         </div>
         <div class="pc-mission-tag" style="background:#fff1f2;border-color:#fecdd3;color:#be185d">
@@ -1358,9 +887,9 @@ textarea.fi{resize:vertical;min-height:82px}
       </div>
     </div>
     <div class="why-imgs">
-      <div class="wi tall"><img src="./imgg/rokhat.jpg" alt=""></div>
-      <div class="wi"><img src="./imgg/pot.jpg" alt=""></div>
-      <div class="wi"><img src="yu3.jpg" alt=""></div>
+      <div class="wi tall"><img src="./imgg/julie.jpg" alt=""></div>
+      <div class="wi"><img src="./imgg/pic.JPG" alt=""></div>
+      <div class="wi"><img src="./imgg/trip3.JPG" alt=""></div>
     </div>
   </div>
 </div>
@@ -1402,306 +931,69 @@ textarea.fi{resize:vertical;min-height:82px}
     <div class="sec-title">Days You Won't Stop Talking About</div>
     <div class="test-grid">
       <div class="test-card">
-        <div class="test-guide-tag"><i class="fas fa-user-circle"></i> Sokha Keo · Beltei Tours</div>
-        <div class="test-stars">★★★★★</div>
-        <p class="test-q">Sokha took me to a restaurant down a lane so small the tuk-tuk couldn't fit. Ten people, plastic stools, the most extraordinary fish soup. No tourist had ever been there. That was my whole trip.</p>
-        <div class="test-author"><div class="test-av">M</div><div><div class="test-name">Kamini</div><div class="test-info">Malaysia</div></div></div>
-      </div>
-      <div class="test-card">
         <div class="test-guide-tag"><i class="fas fa-user-circle"></i> Dara Chann · Neak Siemreap</div>
         <div class="test-stars">★★★★★</div>
         <p class="test-q">I'd done Angkor twice before with group tours and felt nothing. Dara took me alone, pre-dawn, to a temple I'd never seen, sat down beside a 1,000-year-old carving and told me who carved it and why. I was moved to tears.</p>
-        <div class="test-author"><div class="test-av">S</div><div><div class="test-name">Sarah L.</div><div class="test-info">Rainer· Scotland</div></div></div>
+        <div class="test-author"><div class="test-av">S</div><div><div class="test-name">Sarah L.</div><div class="test-info">🇺🇸 USA · Solo traveller</div></div></div>
       </div>
       <div class="test-card">
         <div class="test-guide-tag"><i class="fas fa-user-circle"></i> Virak Sorn · CWE</div>
         <div class="test-stars">★★★★★</div>
         <p class="test-q">We kayaked at 7am, visited his family's pepper farm at 10, ate lunch at his aunt's house, and watched the sunset from a hill no Google Maps pin exists for. Virak wasn't a guide. He was just a friend showing me his home.</p>
-        <div class="test-author"><div class="test-av">T</div><div><div class="test-name">Tom H.</div><div class="test-info">Jenny M · Timor leste</div></div></div>
+        <div class="test-author"><div class="test-av">T</div><div><div class="test-name">Tom H.</div><div class="test-info">🇳🇱 Netherlands · 2 weeks in Cambodia</div></div></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- BOOKING MODAL -->
-<div class="modal-overlay" id="bookModal">
-  <div class="modal-box">
-    <div class="mh-book">
-      <div class="mh-book-top">
-        <div class="mh-guide-av"><img id="bm-av" src="" alt="Guide"></div>
-        <div>
-          <h2>Book <span id="bm-name">Guide Name</span></h2>
-          <p id="bm-city">City · TosTrip Local Friend</p>
-        </div>
-      </div>
-      <button class="modal-close" onclick="closeBookModal()"><i class="fas fa-times"></i></button>
-      <div class="step-bar">
-        <div class="step-item">
-          <div class="step-dot-wrap">
-            <div class="step-dot active" id="sd1">1<span class="step-label">Plan</span></div>
-          </div>
-          <div class="step-line" id="sl1"></div>
-        </div>
-        <div class="step-item">
-          <div class="step-dot-wrap">
-            <div class="step-dot" id="sd2">2<span class="step-label">Details</span></div>
-          </div>
-          <div class="step-line" id="sl2"></div>
-        </div>
-        <div class="step-item">
-          <div class="step-dot-wrap">
-            <div class="step-dot" id="sd3">3<span class="step-label">Review</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal-body" id="bookModalBody">
-      <div class="step-panel active" id="sp1">
-        <div class="panel-title">Choose Your Day</div>
-        <div class="panel-sub">Pick a duration and the things you'd love to do.</div>
-        <div class="dur-grid" id="bm-dur-grid"></div>
-        <div class="acts-title">What interests you? <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink4)">(pick any)</span></div>
-        <div class="acts-grid">
-          <div class="act-chip" onclick="toggleAct(this,'Street Food')"><i class="fas fa-utensils"></i> Street Food</div>
-          <div class="act-chip" onclick="toggleAct(this,'Temples')"><i class="fas fa-gopuram"></i> Temples</div>
-          <div class="act-chip" onclick="toggleAct(this,'Markets')"><i class="fas fa-shopping-bag"></i> Markets</div>
-          <div class="act-chip" onclick="toggleAct(this,'Photography')"><i class="fas fa-camera"></i> Photography</div>
-          <div class="act-chip" onclick="toggleAct(this,'Nightlife')"><i class="fas fa-moon"></i> Night Out</div>
-          <div class="act-chip" onclick="toggleAct(this,'History')"><i class="fas fa-landmark"></i> History</div>
-          <div class="act-chip" onclick="toggleAct(this,'Nature')"><i class="fas fa-leaf"></i> Nature</div>
-          <div class="act-chip" onclick="toggleAct(this,'Hidden Gems')"><i class="fas fa-map-marked-alt"></i> Hidden Gems</div>
-        </div>
-        <!-- TRANSPORT ADD-ON -->
-        <div class="transport-section">
-          <div class="transport-label">
-            <i class="fas fa-route"></i> Add Transport <span>Optional</span>
-          </div>
-          <div class="transport-grid">
-            <div class="tr-card none-card sel" onclick="pickTransport(this,'none','On My Own',0)">
-              <div class="tr-check"><i class="fas fa-check"></i></div>
-              <div class="tr-emoji">🚶</div>
-              <div class="tr-name">On My Own</div>
-              <div class="tr-desc">Walk, grab your own tuk-tuk, or use apps</div>
-              <div class="tr-price tr-free">Free</div>
-            </div>
-            <div class="tr-card tuktuk-card" onclick="pickTransport(this,'tuktuk','Tuk-Tuk',15)">
-              <div class="tr-check"><i class="fas fa-check"></i></div>
-              <div class="tr-emoji">🛺</div>
-              <div class="tr-name">Tuk-Tuk</div>
-              <div class="tr-desc">Classic 2-seat open-air ride around the city</div>
-              <div class="tr-price" style="color:#d97706">+$15</div>
-            </div>
-            <div class="tr-card romork-card" onclick="pickTransport(this,'romork','Romork',20)">
-              <div class="tr-check"><i class="fas fa-check"></i></div>
-              <div class="tr-emoji">🏕️</div>
-              <div class="tr-name">Romork</div>
-              <div class="tr-desc">Covered carriage — perfect for groups & longer rides</div>
-              <div class="tr-price" style="color:#ea580c">+$20</div>
-            </div>
-            <div class="tr-card car-card" onclick="pickTransport(this,'car','Private Car',35)">
-              <div class="tr-check"><i class="fas fa-check"></i></div>
-              <div class="tr-emoji">🚗</div>
-              <div class="tr-name">Private Car</div>
-              <div class="tr-desc">AC, comfort, space — ideal for families or long days</div>
-              <div class="tr-price" style="color:#4f63d2">+$35</div>
-            </div>
-          </div>
-        </div><!-- /transport-section -->
-
-        <!-- INSURANCE ADD-ON -->
-        <div class="insurance-section">
-          <div class="insurance-label">
-            <i class="fas fa-shield-alt"></i> Travel Insurance <span class="opt-badge">Optional</span>
-          </div>
-          <div class="ins-grid">
-
-            <!-- No Insurance -->
-            <div class="ins-card ins-none sel" onclick="pickInsurance(this,'none','No Insurance',0)">
-              <div class="ins-check"><i class="fas fa-check"></i></div>
-              <div class="ins-logo-wrap"><span style="font-size:26px">🚫</span></div>
-              <div class="ins-name">No Insurance</div>
-              <div class="ins-cover">I'll skip for now</div>
-              <div class="ins-price ins-free">Free</div>
-            </div>
-
-            <!-- Forte -->
-            <div class="ins-card ins-forte" onclick="pickInsurance(this,'forte','Forte Insurance',5)">
-              <div class="ins-check"><i class="fas fa-check"></i></div>
-              <div class="ins-logo-wrap">
-                <span class="ins-logo-text ins-forte-logo">FORTE</span>
-              </div>
-              <div class="ins-name">Forte Insurance</div>
-              <div class="ins-cover">Essential day coverage</div>
-              <div class="ins-price" style="color:#0369a1">+$5 <span style="font-size:10px;font-weight:600;color:var(--ink4)">/day</span></div>
-              <div class="ins-features">
-                <div class="ins-feat"><i class="fas fa-check-circle"></i> Medical up to $5,000</div>
-                <div class="ins-feat"><i class="fas fa-check-circle"></i> Trip cancellation</div>
-                <div class="ins-feat"><i class="fas fa-check-circle"></i> Personal accident</div>
-                <div class="ins-feat"><i class="fas fa-check-circle"></i> Lost belongings</div>
-              </div>
-            </div>
-
-            <!-- AIA -->
-            <div class="ins-card ins-aia" onclick="pickInsurance(this,'aia','AIA Insurance',9)">
-              <div class="ins-check"><i class="fas fa-check"></i></div>
-              <div class="ins-logo-wrap">
-                <span class="ins-logo-text ins-aia-logo">AIA</span>
-              </div>
-              <div class="ins-name">AIA Insurance</div>
-              <div class="ins-cover">Premium full-day cover</div>
-              <div class="ins-price" style="color:#dc2626">+$9 <span style="font-size:10px;font-weight:600;color:var(--ink4)">/day</span></div>
-              <div class="ins-features">
-                <div class="ins-feat"><i class="fas fa-check-circle"></i> Medical up to $20,000</div>
-                <div class="ins-feat"><i class="fas fa-check-circle"></i> Emergency evacuation</div>
-                <div class="ins-feat"><i class="fas fa-check-circle"></i> 24/7 hotline support</div>
-                <div class="ins-feat"><i class="fas fa-check-circle"></i> Adventure activities</div>
-              </div>
-            </div>
-
-          </div>
-        </div><!-- /insurance-section -->
-
-        <div class="btn-row">
-          <button class="btn-next" onclick="goStep(2)">Next: Your Info <i class="fas fa-arrow-right"></i></button>
-        </div>
-      </div>
-      <div class="step-panel" id="sp2">
-        <div class="panel-title">Your Details</div>
-        <div class="panel-sub">So your friend knows who to meet.</div>
-        <div class="fg" id="fg-name">
-          <label class="fl">Full Name <span class="req">*</span></label>
-          <input type="text" id="b-name" class="fi" placeholder="Your full name">
-          <div class="err-msg">Please enter your full name.</div>
-        </div>
-        <div class="f-row">
-          <div class="fg" id="fg-email">
-            <label class="fl">Email <span class="req">*</span></label>
-            <input type="email" id="b-email" class="fi" placeholder="you@email.com">
-            <div class="err-msg">Please enter a valid email.</div>
-          </div>
-          <div class="fg">
-            <label class="fl">Phone</label>
-            <input type="tel" id="b-phone" class="fi" placeholder="+855 12 345 678">
-          </div>
-        </div>
-        <div class="f-row">
-          <div class="fg" id="fg-date">
-            <label class="fl">Date <span class="req">*</span></label>
-            <input type="date" id="b-date" class="fi">
-            <div class="err-msg">Please pick a date.</div>
-          </div>
-          <div class="fg">
-            <label class="fl">Group Size</label>
-            <select id="b-pax" class="fi">
-              <option>1 person</option>
-              <option selected>2 people</option>
-              <option>3 people</option>
-              <option>4 people</option>
-              <option>5+ people</option>
-            </select>
-          </div>
-        </div>
-        <div class="fg">
-          <label class="fl">Anything to know?</label>
-          <textarea id="b-notes" class="fi" style="resize:vertical;min-height:82px" placeholder="Languages, dietary needs, mobility, special spots you'd love to visit…"></textarea>
-        </div>
-        <div class="btn-row">
-          <button class="btn-back-step" onclick="goStep(1)"><i class="fas fa-arrow-left"></i> Back</button>
-          <button class="btn-next" onclick="validateStep2()">Review Booking <i class="fas fa-arrow-right"></i></button>
-        </div>
-      </div>
-      <div class="step-panel" id="sp3">
-        <div class="panel-title">Confirm Your Booking</div>
-        <div class="panel-sub">Everything look right? Hit confirm and you're set.</div>
-        <div class="review-header">
-          <div class="rev-av"><img id="rev-av" src="" alt=""></div>
-          <div>
-            <div class="rev-name" id="rev-name">Guide Name</div>
-            <div class="rev-city" id="rev-city">City · TosTrip Local Friend</div>
-          </div>
-        </div>
-        <div class="review-rows">
-          <div class="rev-row"><i class="fas fa-calendar-alt"></i><div><div class="rev-lbl">Date</div><div class="rev-val" id="rev-date">—</div></div></div>
-          <div class="rev-row"><i class="fas fa-clock"></i><div><div class="rev-lbl">Duration</div><div class="rev-val" id="rev-dur">Half Day · ~4 hours</div></div></div>
-          <div class="rev-row"><i class="fas fa-users"></i><div><div class="rev-lbl">Group Size</div><div class="rev-val" id="rev-pax">2 people</div></div></div>
-          <div class="rev-row" id="rev-acts-row"><i class="fas fa-heart"></i><div><div class="rev-lbl">Activities</div><div class="rev-acts" id="rev-acts-list"></div></div></div>
-          <div class="rev-row" id="rev-transport-row"><i class="fas fa-route"></i><div><div class="rev-lbl">Transport</div><div id="rev-transport-val"><span class="rev-transport-tag">🚶 On My Own · Free</span></div></div></div>
-          <div class="rev-row" id="rev-ins-row"><i class="fas fa-shield-alt"></i><div><div class="rev-lbl">Insurance</div><div id="rev-ins-val"><span class="rev-ins-tag ins-none-tag">🚫 No Insurance</span></div></div></div>
-          <div class="rev-row"><i class="fas fa-user"></i><div><div class="rev-lbl">Name</div><div class="rev-val" id="rev-guestname">—</div></div></div>
-          <div class="rev-row"><i class="fas fa-envelope"></i><div><div class="rev-lbl">Email</div><div class="rev-val" id="rev-email">—</div></div></div>
-        </div>
-        <div class="price-summary">
-          <div class="ps-row"><span id="ps-dur-label">Half Day</span><span>$<span id="ps-price">25</span></span></div>
-          <div class="ps-row" id="ps-transport-row" style="display:none"><span>Transport<span class="ps-t-badge" id="ps-transport-badge">Tuk-Tuk</span></span><span>+$<span id="ps-transport-price">0</span></span></div>
-          <div class="ps-row" id="ps-ins-row" style="display:none"><span>Insurance<span class="ps-t-badge" id="ps-ins-badge">Forte</span></span><span>+$<span id="ps-ins-price">0</span></span></div>
-          <div class="ps-row"><span>Service fee</span><span>Included</span></div>
-          <div class="ps-row"><strong>Total due</strong><span class="ps-val">$<span id="ps-total">25</span></span></div>
-        </div>
-        <div class="refund-note">
-          <i class="fas fa-shield-alt"></i>
-          <span><strong>Free cancellation</strong> up to 48 hours before your booking. Full refund, no questions asked.</span>
-        </div>
-        <div class="btn-row">
-          <button class="btn-back-step" onclick="goStep(2)"><i class="fas fa-arrow-left"></i> Back</button>
-          <button class="btn-next" id="confirmBtn" onclick="submitBooking()"><i class="fas fa-check-circle"></i> Confirm Booking</button>
-        </div>
-      </div>
-      <div class="step-panel" id="sp-success">
-        <div class="success-state">
-          <div class="success-icon"><i class="fas fa-check"></i></div>
-          <h3>You're All Set! 🎉</h3>
-          <p>Your booking request has been sent to <strong id="suc-name">Guide</strong>. Check your email for confirmation — they'll reach out within a few hours.</p>
-          <div class="success-detail">
-            <div class="sd-row"><span class="sd-lbl">Friend</span><span class="sd-val" id="suc-guide">—</span></div>
-            <div class="sd-row"><span class="sd-lbl">Date</span><span class="sd-val" id="suc-date">—</span></div>
-            <div class="sd-row"><span class="sd-lbl">Duration</span><span class="sd-val" id="suc-dur">—</span></div>
-            <div class="sd-row"><span class="sd-lbl">Total</span><span class="sd-val" id="suc-total">—</span></div>
-          </div>
-          <button class="btn-done" onclick="closeBookModal()"><i class="fas fa-home"></i> Back to Friends</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- CHAT MODAL -->
-<div class="modal-overlay" id="chatModal">
+<!-- REGISTRATION MODAL -->
+<div class="modal-overlay" id="registerModal">
   <div class="chat-modal-box">
     <div class="mh-msg">
       <div class="mh-msg-row">
-        <div class="mh-msg-av"><img id="cm-av" src="" alt=""></div>
+        <div class="mh-msg-av" style="display:flex;align-items:center;justify-content:center"><i class="fas fa-user-plus" style="color:var(--p);font-size:20px"></i></div>
         <div>
-          <h2>Chat with <span id="cm-name">Guide</span></h2>
-          <p id="cm-city">Ask anything before you book</p>
+          <h2>Become a <span>Local Friend</span></h2>
+          <p>Tell us about yourself — we'll be in touch before launch</p>
         </div>
       </div>
-      <button class="modal-close" onclick="closeChatModal()"><i class="fas fa-times"></i></button>
+      <button class="modal-close" onclick="closeRegisterModal()"><i class="fas fa-times"></i></button>
     </div>
     <div class="chat-body">
-      <label class="fl" style="margin-bottom:10px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3)">Quick topics — tap to add to your message</label>
-      <div class="topic-row">
-        <button type="button" class="t-chip" onclick="addTopic(this,'What areas do you usually take people to?')">🗺️ Areas covered?</button>
-        <button type="button" class="t-chip" onclick="addTopic(this,'Do you have a motorbike or can we walk?')">🛵 Transport?</button>
-        <button type="button" class="t-chip" onclick="addTopic(this,'What are your top 3 food recommendations?')">🍜 Food picks?</button>
-        <button type="button" class="t-chip" onclick="addTopic(this,'Is it okay if I have dietary restrictions?')">🥦 Dietary needs?</button>
-        <button type="button" class="t-chip" onclick="addTopic(this,'Can you recommend a good time of day to meet?')">⏰ Best time?</button>
-        <button type="button" class="t-chip" onclick="addTopic(this,'I am travelling with kids — is that okay?')">👶 Kids welcome?</button>
-        <button type="button" class="t-chip" onclick="addTopic(this,'Can we plan the day together in advance?')">📝 Plan ahead?</button>
+      <div class="fg">
+        <label class="fl" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3)">Full Name <span style="color:var(--red)">*</span></label>
+        <input type="text" id="r-name" class="fi" placeholder="Your full name">
+      </div>
+      <div class="f-row">
+        <div class="fg">
+          <label class="fl" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3)">Email <span style="color:var(--red)">*</span></label>
+          <input type="email" id="r-email" class="fi" placeholder="you@email.com">
+        </div>
+        <div class="fg">
+          <label class="fl" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3)">Phone</label>
+          <input type="tel" id="r-phone" class="fi" placeholder="+855 12 345 678">
+        </div>
       </div>
       <div class="fg">
-        <label class="fl" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3)">Your Name <span style="color:var(--red)">*</span></label>
-        <input type="text" id="c-name" class="fi" placeholder="Your name">
+        <label class="fl" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3)">City <span style="color:var(--red)">*</span></label>
+        <select id="r-city" class="fi">
+          <option value="">Select your city</option>
+          <option value="phnom-penh">Phnom Penh</option>
+          <option value="siem-reap">Siem Reap</option>
+          <option value="kampot-kep">Kampot &amp; Kep</option>
+          <option value="other">Somewhere else</option>
+        </select>
       </div>
       <div class="fg">
-        <label class="fl" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3)">Email <span style="color:var(--red)">*</span></label>
-        <input type="email" id="c-email" class="fi" placeholder="you@email.com">
+        <label class="fl" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3)">Languages You Speak</label>
+        <input type="text" id="r-langs" class="fi" placeholder="e.g. Khmer, English, French">
       </div>
       <div class="fg">
-        <label class="fl" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3)">Your Message <span style="color:var(--red)">*</span></label>
-        <textarea id="c-msg" class="fi" style="resize:vertical;min-height:110px" placeholder="Hi! I'm visiting next week and I'd love to explore the city with a local friend. I was wondering…"></textarea>
+        <label class="fl" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3)">Why would you be a great local friend? <span style="color:var(--red)">*</span></label>
+        <textarea id="r-bio" class="fi" style="resize:vertical;min-height:110px" placeholder="Tell us about your city, what you love showing visitors, and what makes a day with you special…"></textarea>
       </div>
-      <button class="chat-submit-btn" id="chatSubmitBtn" onclick="submitChat()">
-        <i class="fas fa-paper-plane"></i> Send Message
+      <button class="chat-submit-btn" id="registerSubmitBtn" onclick="submitRegister()">
+        <i class="fas fa-paper-plane"></i> Submit Application
       </button>
     </div>
   </div>
@@ -1726,286 +1018,46 @@ textarea.fi{resize:vertical;min-height:82px}
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
-const EJ_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
-const EJ_SERVICE_ID  = 'YOUR_SERVICE_ID';
-const EJ_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-const EJ_DEMO_MODE   = true;
+const EJ_DEMO_MODE = true;
 
 window.addEventListener('scroll', () => {
   document.getElementById('mainNav').classList.toggle('scrolled', scrollY > 30);
 });
 
-let activeFilter = 'all', searchTerm = '';
-function filterGuides(type, btn) {
-  activeFilter = type;
-  document.querySelectorAll('.fc').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  applyFilters();
-}
-function liveSearch(val) { searchTerm = val.toLowerCase(); applyFilters(); }
-function applyFilters() {
-  const cards = document.querySelectorAll('.guide-card');
-  let shown = 0;
-  cards.forEach(c => {
-    const city = c.dataset.city||'', tags = c.dataset.tags||'';
-    const name = (c.querySelector('.gc-name')?.textContent||'').toLowerCase();
-    const bio  = (c.querySelector('.gc-bio')?.textContent||'').toLowerCase();
-    const matchFilter = activeFilter==='all'||city===activeFilter||tags.includes(activeFilter);
-    const matchSearch = !searchTerm||name.includes(searchTerm)||bio.includes(searchTerm)||tags.includes(searchTerm);
-    const show = matchFilter && matchSearch;
-    c.classList.toggle('hidden', !show);
-    if (show) shown++;
-  });
-  document.getElementById('showing-count').textContent = shown;
-  document.getElementById('emptyState').style.display = shown===0?'block':'none';
-}
-function sortGuides(by) {
-  const grid = document.getElementById('guidesGrid');
-  const cards = [...grid.querySelectorAll('.guide-card')];
-  cards.sort((a,b) => {
-    if (by==='rating')     return parseFloat(b.dataset.rating)-parseFloat(a.dataset.rating);
-    if (by==='price-low')  return parseInt(a.dataset.half)-parseInt(b.dataset.half);
-    if (by==='price-high') return parseInt(b.dataset.half)-parseInt(a.dataset.half);
-    if (by==='reviews')    return parseInt(b.dataset.reviews)-parseInt(a.dataset.reviews);
-  });
-  cards.forEach(c => grid.appendChild(c));
-}
-function toggleHeart(btn) {
-  btn.classList.toggle('liked');
-  btn.innerHTML = btn.classList.contains('liked')
-    ? '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>';
-}
 function toggleFaq(el) { el.parentElement.classList.toggle('open'); }
 
-let BK = { name:'',city:'',half:0,full:0,img:'',selType:'half',selPrice:0,acts:[],transport:'none',transportName:'On My Own',transportPrice:0,insurance:'none',insuranceName:'No Insurance',insurancePrice:0 };
-function openBook(name,city,half,full,img) {
-  BK = {name,city,half,full,img,selType:'half',selPrice:half,acts:[],transport:'none',transportName:'On My Own',transportPrice:0,insurance:'none',insuranceName:'No Insurance',insurancePrice:0};
-  document.getElementById('bm-av').src = img;
-  document.getElementById('bm-name').textContent = name;
-  document.getElementById('bm-city').textContent = city+' · TosTrip Local Friend';
-  document.getElementById('b-date').min = new Date().toISOString().split('T')[0];
-  document.querySelectorAll('.act-chip').forEach(c => c.classList.remove('on'));
-  // reset transport cards — default to "none"
-  document.querySelectorAll('.tr-card').forEach(c => c.classList.remove('sel'));
-  const noneCard = document.querySelector('.tr-card.none-card');
-  if (noneCard) noneCard.classList.add('sel');
-  // reset insurance cards — default to "no insurance"
-  document.querySelectorAll('.ins-card').forEach(c => c.classList.remove('sel'));
-  const insNoneCard = document.querySelector('.ins-card.ins-none');
-  if (insNoneCard) insNoneCard.classList.add('sel');
-  document.getElementById('bm-dur-grid').innerHTML = `
-    <div class="dur-card sel" onclick="pickDur('half',${half},this)">
-      <div class="dur-check"><i class="fas fa-check"></i></div>
-      <div class="dur-emoji">🌅</div>
-      <div class="dur-name">Half Day</div>
-      <div class="dur-time">~4 hours together</div>
-      <div class="dur-price">$${half}</div>
-    </div>
-    <div class="dur-card" onclick="pickDur('full',${full},this)">
-      <div class="dur-check"><i class="fas fa-check"></i></div>
-      <div class="dur-emoji">☀️</div>
-      <div class="dur-name">Full Day</div>
-      <div class="dur-time">~8 hours together</div>
-      <div class="dur-price">$${full}</div>
-      <div class="dur-save">Best value</div>
-    </div>`;
-  goStep(1,false);
-  document.getElementById('bookModal').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeBookModal() {
-  document.getElementById('bookModal').classList.remove('open');
-  document.body.style.overflow = '';
-  setTimeout(() => {
-    document.querySelectorAll('.step-panel').forEach(p=>p.classList.remove('active'));
-    document.getElementById('sp1').classList.add('active');
-  },300);
-}
-document.getElementById('bookModal').addEventListener('click', e => {
-  if (e.target===document.getElementById('bookModal')) closeBookModal();
-});
-function pickDur(type,price,el) {
-  BK.selType=type; BK.selPrice=price;
-  document.querySelectorAll('#bm-dur-grid .dur-card').forEach(c=>c.classList.remove('sel'));
-  el.classList.add('sel');
-}
-function pickTransport(el,type,name,price) {
-  BK.transport=type; BK.transportName=name; BK.transportPrice=price;
-  document.querySelectorAll('.tr-card').forEach(c=>c.classList.remove('sel'));
-  el.classList.add('sel');
-}
-function pickInsurance(el,type,name,price) {
-  BK.insurance=type; BK.insuranceName=name; BK.insurancePrice=price;
-  document.querySelectorAll('.ins-card').forEach(c=>c.classList.remove('sel'));
-  el.classList.add('sel');
-}
-function toggleAct(el,val) {
-  el.classList.toggle('on');
-  if (el.classList.contains('on')) { if(!BK.acts.includes(val)) BK.acts.push(val); }
-  else BK.acts = BK.acts.filter(a=>a!==val);
-}
-function goStep(n,scroll=true) {
-  ['sp1','sp2','sp3','sp-success'].forEach((id,i)=>{
-    document.getElementById(id).classList.toggle('active',i===n-1);
-  });
-  [1,2,3].forEach(i=>{
-    const dot=document.getElementById('sd'+i);
-    dot.classList.remove('active','done');
-    if (i<n) dot.classList.add('done');
-    if (i===n) dot.classList.add('active');
-  });
-  [1,2].forEach(i=>document.getElementById('sl'+i).classList.toggle('done',i<n));
-  if (scroll) document.getElementById('bookModalBody').scrollTo({top:0,behavior:'smooth'});
-}
-function validateStep2() {
-  const name=document.getElementById('b-name').value.trim();
-  const email=document.getElementById('b-email').value.trim();
-  const date=document.getElementById('b-date').value;
-  setFgErr('fg-name',!name);
-  setFgErr('fg-email',!email||!email.includes('@'));
-  setFgErr('fg-date',!date);
-  if (!name||!email||!email.includes('@')||!date) return;
-  buildReview(); goStep(3);
-}
-function setFgErr(id,hasErr) {
-  const el=document.getElementById(id);
-  if (el) el.classList.toggle('has-err',hasErr);
-}
-['b-name','b-email','b-date'].forEach(id=>{
-  const el=document.getElementById(id);
-  if(!el) return;
-  el.addEventListener('input',()=>{
-    const fgId='fg-'+id.replace('b-','');
-    const fg=document.getElementById(fgId);
-    if(fg) fg.classList.remove('has-err');
-  });
-});
-function buildReview() {
-  const rawDate=document.getElementById('b-date').value;
-  const fmtDate=rawDate?new Date(rawDate+'T00:00:00').toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'}):'—';
-  const durLabel=BK.selType==='half'?'Half Day · ~4 hours':'Full Day · ~8 hours';
-  document.getElementById('rev-av').src=BK.img;
-  document.getElementById('rev-name').textContent=BK.name;
-  document.getElementById('rev-city').textContent=BK.city+' · TosTrip Local Friend';
-  document.getElementById('rev-date').textContent=fmtDate;
-  document.getElementById('rev-dur').textContent=durLabel;
-  document.getElementById('rev-pax').textContent=document.getElementById('b-pax').value;
-  document.getElementById('rev-guestname').textContent=document.getElementById('b-name').value;
-  document.getElementById('rev-email').textContent=document.getElementById('b-email').value;
-  const actsEl=document.getElementById('rev-acts-list');
-  const actsRow=document.getElementById('rev-acts-row');
-  if (BK.acts.length) {
-    actsEl.innerHTML=BK.acts.map(a=>`<span class="rev-act-tag">${a}</span>`).join('');
-    actsRow.style.display='flex';
-  } else { actsRow.style.display='none'; }
-  // transport row
-  const tEmoji={none:'🚶',tuktuk:'🛺',romork:'🏕️',car:'🚗'}[BK.transport]||'🚶';
-  const tLabel = BK.transportPrice===0
-    ? `${tEmoji} ${BK.transportName} · <span style="color:var(--green);font-weight:800">Free</span>`
-    : `${tEmoji} ${BK.transportName} · +$${BK.transportPrice}`;
-  document.getElementById('rev-transport-val').innerHTML=`<span class="rev-transport-tag">${tLabel}</span>`;
-  // price summary
-  const total = BK.selPrice + BK.transportPrice + BK.insurancePrice;
-  document.getElementById('ps-dur-label').textContent=BK.selType==='half'?'Half Day':'Full Day';
-  document.getElementById('ps-price').textContent=BK.selPrice;
-  document.getElementById('ps-total').textContent=total;
-  const trRow=document.getElementById('ps-transport-row');
-  if (BK.transportPrice>0) {
-    document.getElementById('ps-transport-badge').textContent=BK.transportName;
-    document.getElementById('ps-transport-price').textContent=BK.transportPrice;
-    trRow.style.display='flex';
-  } else { trRow.style.display='none'; }
-  // insurance review row
-  const insEmoji={none:'🚫',forte:'🛡️',aia:'❤️'}[BK.insurance]||'🚫';
-  const insTagClass={none:'ins-none-tag',forte:'ins-forte-tag',aia:'ins-aia-tag'}[BK.insurance]||'ins-none-tag';
-  const insLabel = BK.insurancePrice===0
-    ? `${insEmoji} ${BK.insuranceName}`
-    : `${insEmoji} ${BK.insuranceName} · +$${BK.insurancePrice}/day`;
-  document.getElementById('rev-ins-val').innerHTML=`<span class="rev-ins-tag ${insTagClass}">${insLabel}</span>`;
-  const insRow=document.getElementById('ps-ins-row');
-  if (BK.insurancePrice>0) {
-    document.getElementById('ps-ins-badge').textContent=BK.insuranceName;
-    document.getElementById('ps-ins-price').textContent=BK.insurancePrice;
-    insRow.style.display='flex';
-  } else { insRow.style.display='none'; }
-}
-function submitBooking() {
-  const btn=document.getElementById('confirmBtn');
-  btn.innerHTML='<i class="fas fa-circle-notch fa-spin"></i> Sending…';
-  btn.disabled=true;
-  const rawDate=document.getElementById('b-date').value;
-  const fmtDate=rawDate?new Date(rawDate+'T00:00:00').toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'}):'—';
-  const durLabel=BK.selType==='half'?'Half Day · ~4 hours':'Full Day · ~8 hours';
-  const total = BK.selPrice + BK.transportPrice + BK.insurancePrice;
-  if (EJ_DEMO_MODE) {
-    setTimeout(()=>showBookingSuccess(fmtDate,durLabel,total),1500);
-  }
-}
-function showBookingSuccess(fmtDate,durLabel,total) {
-  document.getElementById('suc-name').textContent=BK.name;
-  document.getElementById('suc-guide').textContent=BK.name;
-  document.getElementById('suc-date').textContent=fmtDate;
-  document.getElementById('suc-dur').textContent=durLabel;
-  document.getElementById('suc-total').textContent='$'+(total||BK.selPrice);
-  [1,2,3].forEach(i=>{
-    const dot=document.getElementById('sd'+i);
-    dot.classList.remove('active');dot.classList.add('done');
-    const labels=['Plan','Details','Review'];
-    dot.innerHTML=`<i class="fas fa-check" style="font-size:10px"></i><span class="step-label">${labels[i-1]}</span>`;
-  });
-  [1,2].forEach(i=>document.getElementById('sl'+i).classList.add('done'));
-  document.querySelectorAll('.step-panel').forEach(p=>p.classList.remove('active'));
-  document.getElementById('sp-success').classList.add('active');
-  document.getElementById('bookModalBody').scrollTo({top:0,behavior:'smooth'});
-  const btn=document.getElementById('confirmBtn');
-  btn.innerHTML='<i class="fas fa-check-circle"></i> Confirm Booking';
-  btn.disabled=false;
-}
-
-let CM = {};
-function openChat(name,city,img) {
-  CM={name,city,img};
-  document.getElementById('cm-av').src=img;
-  document.getElementById('cm-name').textContent=name;
-  document.getElementById('cm-city').textContent=city+' · Ask anything before you book';
-  document.querySelectorAll('.t-chip').forEach(c=>c.classList.remove('sel'));
-  document.getElementById('c-msg').value='';
-  document.getElementById('c-name').value='';
-  document.getElementById('c-email').value='';
-  document.getElementById('chatModal').classList.add('open');
+function openRegister() {
+  document.getElementById('r-name').value='';
+  document.getElementById('r-email').value='';
+  document.getElementById('r-phone').value='';
+  document.getElementById('r-city').value='';
+  document.getElementById('r-langs').value='';
+  document.getElementById('r-bio').value='';
+  document.getElementById('registerModal').classList.add('open');
   document.body.style.overflow='hidden';
 }
-function closeChatModal() {
-  document.getElementById('chatModal').classList.remove('open');
+function closeRegisterModal() {
+  document.getElementById('registerModal').classList.remove('open');
   document.body.style.overflow='';
 }
-document.getElementById('chatModal').addEventListener('click', e=>{
-  if(e.target===document.getElementById('chatModal')) closeChatModal();
+document.getElementById('registerModal').addEventListener('click', e=>{
+  if(e.target===document.getElementById('registerModal')) closeRegisterModal();
 });
-function addTopic(btn,text) {
-  btn.classList.toggle('sel');
-  const ta=document.getElementById('c-msg');
-  if(btn.classList.contains('sel')) {
-    ta.value=ta.value?ta.value.trimEnd()+'\n'+text:text;
-  } else {
-    ta.value=ta.value.replace('\n'+text,'').replace(text,'').trim();
-  }
-}
-function submitChat() {
-  const name=document.getElementById('c-name').value.trim();
-  const email=document.getElementById('c-email').value.trim();
-  const msg=document.getElementById('c-msg').value.trim();
-  if(!name||!email||!msg){alert('Please fill in your name, email, and message.');return;}
-  const btn=document.getElementById('chatSubmitBtn');
+function submitRegister() {
+  const name=document.getElementById('r-name').value.trim();
+  const email=document.getElementById('r-email').value.trim();
+  const city=document.getElementById('r-city').value;
+  const bio=document.getElementById('r-bio').value.trim();
+  if(!name||!email||!city||!bio){alert('Please fill in your name, email, city, and a short bio.');return;}
+  const btn=document.getElementById('registerSubmitBtn');
   btn.innerHTML='<i class="fas fa-circle-notch fa-spin"></i> Sending…';
   btn.disabled=true;
   if(EJ_DEMO_MODE){
     setTimeout(()=>{
-      closeChatModal();
-      alert('✅ Message sent to '+CM.name+'! (Demo mode)');
-      btn.innerHTML='<i class="fas fa-paper-plane"></i> Send Message';
+      closeRegisterModal();
+      alert('✅ Thanks '+name.split(' ')[0]+'! Your application is in. We\'ll reach out before launch. (Demo mode)');
+      btn.innerHTML='<i class="fas fa-paper-plane"></i> Submit Application';
       btn.disabled=false;
     },1200);
   }
