@@ -1487,7 +1487,7 @@ textarea.reg-in{resize:vertical;min-height:62px}
     <div class="success-body" id="successWrap" style="display:none">
       <div class="succ-ico">🎉</div>
       <h2>You're booked in!</h2>
-      <p>Confirmation is heading to your inbox. Here's your personal referral code — share it with friends and earn $5 credit every time someone books.</p>
+      <p id="succMsg">Confirmation is heading to your inbox. Here's your personal referral code — share it with friends and earn $5 credit every time someone books.</p>
       <div class="succ-code-box">
         <div class="scb-lbl">Your Referral Code</div>
         <div class="scb-code" id="succCode">TOS–????</div>
@@ -1525,6 +1525,21 @@ textarea.reg-in{resize:vertical;min-height:62px}
 <script>
 const EJ_KEY='gpdCGcS_YFBkq0RFH', EJ_SVC='service_ns14klj', EJ_TPL='template_k8n3dup';
 if(typeof emailjs!=='undefined') emailjs.init(EJ_KEY);
+
+/* ─── HOST NOTIFICATION EMAILS ───────────────────────────────────
+   When someone books a workshop listed below, a second email is sent
+   straight to that host. It uses its own EmailJS template whose
+   "To Email" field is set to {{to_email}} (see setup notes).        */
+const EJ_HOST_SVC = 'service_9ogox5a';      // EmailJS service for host emails
+const EJ_HOST_KEY = 'SmoLQAp-ij_aoJbAd';     // public key of that EmailJS account
+const EJ_TPL_HOST = 'template_l1sw4z3';      // host notification template (To Email = {{to_email}})
+const EVENT_HOSTS = {
+  'Khmer Agarwood (Oud)': {
+    host:  { name: 'Gech Horng', email: 'bungechhorng1993@gmail.com' },
+    daily: true,                       // open every day → guests pick a visit day
+    hours: '9:00 AM – 10:00 PM'
+  }
+};
 
 // ─── DISCOUNT LOGIC ──────────────────────────────────────────────
 const PCT_CODES = {
@@ -2140,6 +2155,29 @@ function _setupModal(){
 }
 
 function buildSessions(baseDate){
+  const opt = EVENT_HOSTS[curBooking.title];
+  if(opt && opt.daily){
+    // Cambodia time; after 10 PM start from tomorrow
+    const ict = new Date(Date.now() + 7*36e5);
+    const startOffset = ict.getUTCHours() >= 22 ? 1 : 0;
+    let html = '';
+    for(let i = 0; i < 4; i++){
+      const d = new Date(Date.UTC(ict.getUTCFullYear(), ict.getUTCMonth(), ict.getUTCDate() + startOffset + i));
+      const lbl = (i + startOffset) === 0 ? 'Today' : (i + startOffset) === 1 ? 'Tomorrow'
+                : d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',timeZone:'UTC'});
+      const full = d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:'UTC'});
+      html += `<div class="sess-opt" data-label="${full}" onclick="pickSess(this)">
+        <input type="radio" name="sess" value="${i}" ${i===0?'checked':''}>
+        <div class="so-date">${lbl}</div>
+        <div class="so-time">${opt.hours}</div>
+        <div class="so-seats plenty">Free · open to all</div>
+      </div>`;
+    }
+    const grid = document.getElementById('sessGrid');
+    grid.innerHTML = html;
+    grid.querySelector('.sess-opt').classList.add('sel');
+    return;
+  }
   const base = new Date(baseDate);
   const mockSeats = [8, 4, 11, 3];
   let html = '';
@@ -2200,17 +2238,31 @@ function submitBooking(e){
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Confirming…'; btn.disabled = true;
 
   const usedCode = document.getElementById('mCode').value || 'None';
+  const sel = document.querySelector('.sess-opt.sel');
+  const sessionTxt = sel
+    ? (sel.dataset.label || sel.querySelector('.so-date').textContent) + ' · ' + sel.querySelector('.so-time').textContent
+    : (curBooking.eventDate || 'On request');
+  const bookingRef = 'BK-' + Math.random().toString(36).slice(2,7).toUpperCase();
+  const guestName  = document.getElementById('bName').value.trim();
+  const guestEmail = document.getElementById('bEmail').value.trim();
+  const guestPhone = document.getElementById('bPhone').value.trim() || 'N/A';
+  const guestNotes = document.getElementById('bNotes').value.trim() || 'No requests';
+  const totalTxt   = base === 0 ? 'Free' : '$' + total.toFixed(2);
+  const hostInfo   = (EVENT_HOSTS[curBooking.title] || {}).host;
+
   const params = {
-    user_name:    document.getElementById('bName').value,
-    user_email:   document.getElementById('bEmail').value,
-    phone:        document.getElementById('bPhone').value || 'N/A',
-    booking_date: curBooking.eventDate || 'On request',
+    user_name:    guestName,
+    user_email:   guestEmail,
+    phone:        guestPhone,
+    booking_date: sessionTxt,
     message:      (document.getElementById('bNotes').value || 'No requests') +
                   '\nTickets: ' + qty +
                   '\nCode used: ' + usedCode +
                   (nakFlat > 0 ? '\nChef Nak TosTrip discount: –$' + nakFlat : '') +
                   (flatAmt > 0 ? '\nPromo discount ('+usedCode+'): –$' + flatAmt : '') +
                   (pctAmt > 0  ? '\nReferral discount: –$' + pctAmt : '') +
+                  '\nBooking ref: ' + bookingRef +
+                  (hostInfo ? '\nHost notified: ' + hostInfo.name + ' <' + hostInfo.email + '>' : '') +
                   '\nTotal: ' + (base === 0 ? 'FREE' : '$' + total) +
                   '\nReferral code generated: ' + myCode,
     request_type: curBooking.isNak ? 'Chef Nak Booking via TosTrip' : 'Workshop Booking',
@@ -2221,7 +2273,30 @@ function submitBooking(e){
     people:       qty + ' ticket(s)',
   };
 
+  // Email straight to the workshop host (never blocks the booking if it fails)
+  const sendHost = ()=>{
+    if(!hostInfo || typeof emailjs === 'undefined') return Promise.resolve();
+    return emailjs.send(EJ_HOST_SVC, EJ_TPL_HOST, {
+      to_email:    hostInfo.email,
+      to_name:     hostInfo.name,
+      reply_to:    guestEmail,
+      workshop:    curBooking.title,
+      location:    curBooking.partner + ' · ' + curBooking.city,
+      visit_date:  sessionTxt,
+      tickets:     qty,
+      total:       totalTxt,
+      guest_name:  guestName,
+      guest_email: guestEmail,
+      guest_phone: guestPhone,
+      notes:       guestNotes,
+      booking_ref: bookingRef
+    }, EJ_HOST_KEY).catch(err=>console.warn('Host email not sent:', err));
+  };
+
   const finish = ()=>{
+    document.getElementById('succMsg').innerHTML = hostInfo
+      ? `Your booking <strong>${bookingRef}</strong> for <strong>${hostEsc(sessionTxt)}</strong> is confirmed and <strong>${hostEsc(hostInfo.name)}</strong> has been notified. Here's your personal referral code — share it with friends and earn $5 credit every time someone books.`
+      : `Confirmation is heading to your inbox (ref <strong>${bookingRef}</strong>). Here's your personal referral code — share it with friends and earn $5 credit every time someone books.`;
     document.getElementById('succCode').textContent = myCode;
     document.getElementById('yourCode').textContent = myCode;
     sessionStorage.setItem('myCode', myCode);
@@ -2232,7 +2307,7 @@ function submitBooking(e){
   };
 
   if(typeof emailjs !== 'undefined'){
-    emailjs.send(EJ_SVC, EJ_TPL, params).then(finish).catch(err=>{
+    emailjs.send(EJ_SVC, EJ_TPL, params).then(sendHost).then(finish).catch(err=>{
       alert('Error: ' + (err.text || err.message));
       btn.innerHTML = '<i class="fas fa-check-circle"></i> Confirm Booking — <span id="btnTotal">$0</span>';
       btn.disabled = false;
