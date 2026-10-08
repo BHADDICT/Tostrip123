@@ -69,6 +69,37 @@ a{text-decoration:none;color:inherit}img{display:block;width:100%;object-fit:cov
 .live-dot::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--red);flex-shrink:0;animation:blink 1s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
+/* NOW ON strip (hero) */
+.now-on{display:flex;width:fit-content;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 14px 8px 12px;margin-bottom:18px;border-radius:12px;background:#fef2f2;border:1.5px solid #fecaca;color:var(--ink);font-size:13px;transition:border-color .2s,background .2s;max-width:100%}
+.now-on:hover{border-color:var(--red);background:#fff}
+.now-on strong{font-weight:700}
+.now-on-sub{color:var(--ink3)}
+.now-on i{font-size:11px;color:var(--red)}
+
+/* HERO SLIDESHOW */
+.hv-bg .hs-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.05);transition:opacity .9s ease,transform 6s ease;cursor:zoom-in}
+.hv-bg .hs-slide.active{opacity:1;transform:scale(1)}
+.hs-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,transparent 28%,transparent 60%,rgba(0,0,0,.5) 100%);pointer-events:none}
+.hs-top{position:absolute;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;align-items:center;gap:8px;z-index:2}
+.hs-live{background:#fff;padding:5px 11px;border-radius:100px;box-shadow:var(--sh-sm)}
+.hs-all{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:100px;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.45);backdrop-filter:blur(6px);color:#fff;font-size:12px;font-weight:700}
+.hs-all:hover{background:rgba(0,0,0,.65)}
+.hs-nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:none;background:rgba(255,255,255,.9);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:13px;opacity:0;transition:opacity .2s;z-index:2;box-shadow:var(--sh-md)}
+.hv-bg:hover .hs-nav,.hs-nav:focus-visible{opacity:1}
+.hs-nav.prev{left:12px}.hs-nav.next{right:12px}
+.hs-foot{position:absolute;right:14px;bottom:14px;display:flex;align-items:center;gap:10px;z-index:2}
+.hs-count{font-size:11px;font-weight:700;color:#fff;letter-spacing:.5px}
+.hs-dots{display:flex;gap:5px;flex-wrap:wrap;max-width:180px;justify-content:flex-end}
+.hs-dots button{width:7px;height:7px;border-radius:100px;border:none;padding:0;background:rgba(255,255,255,.5);transition:all .3s}
+.hs-dots button.on{width:20px;background:#fff}
+.hv-bg.single .hs-nav,.hv-bg.single .hs-dots{display:none}
+.hvc-status{color:var(--green);font-weight:700;margin-top:3px}
+.hvc-status.closed{color:var(--ink4)}
+.hvc-link{display:inline-flex;align-items:center;gap:6px;margin-top:9px;font-size:12px;font-weight:700;color:var(--p)}
+.hvc-link:hover{color:var(--pd)}
+.hvc-link i{font-size:10px}
+.hv-card1{min-width:240px}
+
 /* REFERRAL BANNER */
 .ref-banner{background:linear-gradient(135deg,#1a1f4e 0%,#2d3580 50%,#1a1f4e 100%);padding:0 28px;position:relative;overflow:hidden}
 .ref-banner::before{content:'';position:absolute;top:-50px;right:8%;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(102,126,234,.18),transparent 70%);pointer-events:none}
@@ -143,6 +174,34 @@ a{text-decoration:none;color:inherit}img{display:block;width:100%;object-fit:cov
 .btn-outline-sm:hover{border-color:var(--p);color:var(--p)}
 .fc-price{font-family:'Playfair Display',serif;font-size:28px;font-weight:800;color:var(--ink);margin-left:auto;white-space:nowrap}
 .feat-card.hidden{display:none}
+#oud-event{scroll-margin-top:140px}
+#oudImg{cursor:zoom-in;transition:opacity .25s,transform .55s}
+.fc-gallery-btn{position:absolute;top:14px;right:14px;z-index:2;display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:100px;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.45);backdrop-filter:blur(6px);color:#fff;font-size:12px;font-weight:700}
+.fc-gallery-btn:hover{background:rgba(0,0,0,.65)}
+.oud-thumbs{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;margin-bottom:14px;scrollbar-width:thin}
+.oud-thumbs:empty{display:none}
+.oud-thumb{flex:0 0 64px;height:64px;border-radius:10px;overflow:hidden;border:2px solid transparent;padding:0;background:var(--bg3);opacity:.6;transition:opacity .2s,border-color .2s}
+.oud-thumb img{width:100%;height:100%;object-fit:cover}
+.oud-thumb.on,.oud-thumb:hover,.oud-thumb:focus-visible{opacity:1;border-color:var(--p)}
+
+/* LIGHTBOX */
+.lb{position:fixed;inset:0;z-index:10000;background:rgba(10,10,16,.95);display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:60px 16px 16px}
+.lb.open{display:flex}
+.lb-fig{margin:0;width:100%;max-width:1100px;flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.lb-fig img{width:auto;max-width:100%;max-height:calc(100vh - 210px);object-fit:contain;border-radius:8px}
+.lb-fig figcaption{width:100%;display:flex;justify-content:space-between;gap:12px;font-size:13px;color:rgba(255,255,255,.75)}
+.lb-close{position:absolute;top:14px;right:14px;width:42px;height:42px;border-radius:50%;border:none;background:rgba(255,255,255,.12);color:#fff;font-size:16px}
+.lb-close:hover{background:rgba(255,255,255,.25)}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:none;background:rgba(255,255,255,.12);color:#fff;font-size:16px;z-index:1}
+.lb-nav:hover{background:rgba(255,255,255,.28)}
+.lb-nav.prev{left:16px}.lb-nav.next{right:16px}
+.lb.single .lb-nav,.lb.single .lb-thumbs{display:none}
+.lb-thumbs{display:flex;gap:8px;overflow-x:auto;max-width:100%;padding-bottom:4px}
+.lb-thumbs button{flex:0 0 58px;height:58px;padding:0;border-radius:8px;overflow:hidden;border:2px solid transparent;opacity:.5;background:#222}
+.lb-thumbs button img{width:100%;height:100%;object-fit:cover}
+.lb-thumbs button.on{opacity:1;border-color:#fff}
+:focus-visible{outline:2px solid var(--p);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.hv-bg .hs-slide{transition:opacity .3s;transform:none}}
 .fc-meta-i a{color:var(--p);text-decoration:underline}
 .oud-status-lbl{font-size:11px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;color:var(--green);margin-bottom:6px}
 .oud-status-lbl.closed{color:var(--ink4)}
@@ -497,7 +556,9 @@ textarea.reg-in{resize:vertical;min-height:62px}
 
 /* RESPONSIVE */
 @media(max-width:1024px){
-  .hero-inner{grid-template-columns:1fr}.hero-visual{display:none}
+  .hero-inner{grid-template-columns:1fr;gap:28px}.hero-visual{height:360px;order:-1}
+  .hero{padding-top:24px}
+  .hv-card1{left:12px;bottom:10px}
   .feat-card{grid-template-columns:1fr}.fc-img{height:250px}
   .wk-grid{grid-template-columns:1fr 1fr}
   .ref-inner{grid-template-columns:1fr}
@@ -527,6 +588,12 @@ textarea.reg-in{resize:vertical;min-height:62px}
   .host-pay-qr img{width:190px}
 }
 @media(max-width:480px){
+  .hero-visual{height:330px}
+  .now-on{display:none}
+  .hv-card1{min-width:0;right:12px}
+  .hs-nav{opacity:1;width:32px;height:32px}
+  .lb-nav{width:38px;height:38px}
+  .lb-nav.prev{left:6px}.lb-nav.next{right:6px}
   .countdown-row{flex-wrap:wrap}
   .fc-actions{flex-wrap:wrap}
   .succ-actions{flex-direction:column}
@@ -565,6 +632,12 @@ textarea.reg-in{resize:vertical;min-height:62px}
   <div class="hero-inner">
     <div>
       <div class="hero-crumb"><a href="index.html">Home</a><i class="fas fa-chevron-right"></i><span>Workshops & Events</span></div>
+      <a href="#oud-event" class="now-on">
+        <span class="live-dot">Now on</span>
+        <strong>Khmer Agarwood (Oud)</strong>
+        <span class="now-on-sub">Free · Chip Mong 271, Phnom Penh</span>
+        <i class="fas fa-chevron-right"></i>
+      </a>
       <div class="hero-badge"><i class="fas fa-hands-helping"></i> Hands-on Experiences</div>
       <h1>Learn. Make.<br><em>Take It Home.</em></h1>
       <p class="hero-desc">Cooking masterclasses with local families, silk weaving with master artisans, Apsara dance shows, pepper farm tours, and more — all run by the people who've done it their whole lives.</p>
@@ -581,16 +654,23 @@ textarea.reg-in{resize:vertical;min-height:62px}
       </div>
     </div>
     <div class="hero-visual">
-      <div class="hv-bg"><img src="./img/cook3.png" alt="Workshop"></div>
-      <div class="hv-card hv-card1">
-        <div class="hvc-label"><span class="live-dot">Live</span> · Happening now</div>
-        <div class="hvc-title">Khmer Agarwood (Oud) · Phnom Penh</div>
-        <div class="hvc-row"><i class="fas fa-clock" style="color:var(--green)"></i> Daily 9 AM – 10 PM · Free</div>
+      <div class="hv-bg" id="heroShow">
+        <img class="hs-slide active" src="./img/tree1.jpg" alt="Khmer Agarwood (Oud)">
+        <div class="hs-shade"></div>
+        <div class="hs-top">
+          <span class="hs-live"><span class="live-dot">Now on</span></span>
+          <button type="button" class="hs-all" onclick="lbOpen(heroIdx)"><i class="fas fa-images"></i> <span class="oud-photo-count">1 photo</span></button>
+        </div>
+        <button type="button" class="hs-nav prev" aria-label="Previous photo" onclick="heroGo(heroIdx-1,true)"><i class="fas fa-chevron-left"></i></button>
+        <button type="button" class="hs-nav next" aria-label="Next photo" onclick="heroGo(heroIdx+1,true)"><i class="fas fa-chevron-right"></i></button>
+        <div class="hs-foot"><span class="hs-count" id="heroCount">1 / 1</span><div class="hs-dots" id="heroDots"></div></div>
       </div>
-      <div class="hv-card hv-card2">
-        <div class="hvc-label">🔥 Selling Fast</div>
-        <div class="hvc-title">Apsara Dance Show</div>
-        <div class="hvc-row"><i class="fas fa-calendar" style="color:var(--p)"></i> Sat 15 Mar · 7:00 PM</div>
+      <div class="hv-card hv-card1">
+        <div class="hvc-label"><span class="live-dot">Live</span> · <span id="heroLiveTxt">Happening now</span></div>
+        <div class="hvc-title">Khmer Agarwood (Oud)</div>
+        <div class="hvc-row"><i class="fas fa-map-marker-alt" style="color:var(--p)"></i> Chip Mong 271 Mega Mall · Phnom Penh</div>
+        <div class="hvc-row hvc-status" id="heroOudStatus"><i class="fas fa-clock"></i> Daily 9 AM – 10 PM</div>
+        <a href="#oud-event" class="hvc-link">Free entry · See event <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
   </div>
@@ -637,9 +717,10 @@ textarea.reg-in{resize:vertical;min-height:62px}
 
   <!-- FEATURED (CURRENT EVENT): KHMER AGARWOOD (OUD) — Phnom Penh
        Host: Gech Horng · Telegram 081 567 864 · bungechhorng1993@gmail.com -->
-  <div class="feat-card" data-cat="craft" data-city="phnom-penh">
+  <div class="feat-card" id="oud-event" data-cat="craft" data-city="phnom-penh">
     <div class="fc-img">
-      <img id="oudImg" src="./img/tree1.jpg" alt="Khmer Agarwood (Oud)">
+      <img id="oudImg" src="./img/tree1.jpg" alt="Khmer Agarwood (Oud)" onclick="lbOpen(cardIdx)">
+      <button type="button" class="fc-gallery-btn" onclick="lbOpen(cardIdx)"><i class="fas fa-expand"></i> <span class="oud-photo-count">1 photo</span></button>
       <div class="fc-badges">
         <span class="ev-badge b-show" id="oudLiveBadge">🔴 Happening now</span>
         <span class="ev-badge b-craft">🌳 Craft</span>
@@ -656,6 +737,7 @@ textarea.reg-in{resize:vertical;min-height:62px}
       <div class="fc-partner"><div class="fc-p-ico">🌳</div><div class="fc-p-name">GECH HORNG · CHIP MONG 271 MEGA MALL · PHNOM PENH</div></div>
       <div class="fc-title">Khmer Agarwood (Oud)</div>
       <p class="fc-desc">Discover Khmer agarwood (oud), one of Cambodia's most treasured natural aromatics. Learn where it comes from, how the fragrant resin forms inside the tree, and experience its scent first-hand. Drop in any time during opening hours — it's free.</p>
+      <div class="oud-thumbs" id="oudThumbs"></div>
       <div class="fc-meta">
         <div class="fc-meta-i"><i class="fas fa-calendar"></i> Daily · now on</div>
         <div class="fc-meta-i"><i class="fas fa-clock"></i> 9:00 AM – 10:00 PM</div>
@@ -1310,6 +1392,18 @@ textarea.reg-in{resize:vertical;min-height:62px}
   </div>
 </div>
 
+<!-- ════ PHOTO LIGHTBOX (Oud event) ════ -->
+<div class="lb" id="oudLb" aria-hidden="true" onclick="if(event.target===this)lbClose()">
+  <button type="button" class="lb-close" onclick="lbClose()" aria-label="Close gallery"><i class="fas fa-times"></i></button>
+  <button type="button" class="lb-nav prev" onclick="lbGo(lbIdx-1)" aria-label="Previous photo"><i class="fas fa-chevron-left"></i></button>
+  <figure class="lb-fig">
+    <img id="lbImg" src="./img/tree1.jpg" alt="Khmer Agarwood (Oud)">
+    <figcaption><span>Khmer Agarwood (Oud) · Chip Mong 271 Mega Mall</span><span id="lbCount">1 / 1</span></figcaption>
+  </figure>
+  <button type="button" class="lb-nav next" onclick="lbGo(lbIdx+1)" aria-label="Next photo"><i class="fas fa-chevron-right"></i></button>
+  <div class="lb-thumbs" id="lbThumbs"></div>
+</div>
+
 <!-- ════ BOOKING MODAL ════ -->
 <div class="modal-overlay" id="bookModal">
   <div class="modal-box">
@@ -1476,23 +1570,133 @@ function addInterest(){
 
 window.addEventListener('load', renderChefProgress);
 
-/* OUD EVENT — rotate ./img/tree1.jpg, tree2.jpg … (missing files are skipped) */
-(function(){
-  const img = document.getElementById('oudImg'); if(!img) return;
-  const ok = [];
-  for(let n = 1; n <= 8; n++){
-    const src = './img/tree' + n + '.jpg', p = new Image();
-    p.onload = () => { ok.push(src); ok.sort((a,b)=>parseInt(a.match(/\d+/))-parseInt(b.match(/\d+/))); };
-    p.src = src;
-  }
-  let i = 0;
-  img.style.transition = 'opacity .4s';
-  setInterval(() => {
-    if(ok.length < 2) return;
-    i = (i + 1) % ok.length;
+/* ════ OUD EVENT — PHOTO GALLERY ════
+   To show more photos: save them as ./img/tree1.jpg, tree2.jpg, tree3.jpg …
+   up to tree30.jpg (missing numbers are skipped automatically).
+   Photos with other names can be listed in OUD_EXTRA_PHOTOS. */
+const OUD_PHOTO_MAX = 30;
+const OUD_EXTRA_PHOTOS = [
+  // './img/oud-shop.jpg',
+];
+let oudPhotos = ['./img/tree1.jpg'];
+let heroIdx = 0, cardIdx = 0, lbIdx = 0, heroTimer = null, cardTimer = null, heroHover = false;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function loadOudPhotos(){
+  const cands = [];
+  for(let n = 1; n <= OUD_PHOTO_MAX; n++) cands.push('./img/tree' + n + '.jpg');
+  OUD_EXTRA_PHOTOS.forEach(src => cands.push(src));
+  const found = new Array(cands.length).fill(null);
+  let left = cands.length;
+  const done = ()=>{
+    if(--left > 0) return;
+    const list = found.filter(Boolean);
+    if(list.length){ oudPhotos = list; renderOudGallery(); }
+  };
+  cands.forEach((src,i)=>{ const p = new Image(); p.onload = ()=>{ found[i] = src; done(); }; p.onerror = done; p.src = src; });
+}
+
+function renderOudGallery(){
+  const n = oudPhotos.length;
+  const show = document.getElementById('heroShow');
+  show.querySelectorAll('.hs-slide').forEach(e=>e.remove());
+  show.insertAdjacentHTML('afterbegin', oudPhotos.map((src,i)=>
+    `<img class="hs-slide${i===0?' active':''}" src="${src}" alt="Khmer Agarwood (Oud) photo ${i+1}"${i>1?' loading="lazy"':''}>`).join(''));
+  show.classList.toggle('single', n < 2);
+  document.getElementById('heroDots').innerHTML = oudPhotos.map((_,i)=>
+    `<button type="button" aria-label="Show photo ${i+1}" onclick="heroGo(${i},true)"></button>`).join('');
+  document.querySelectorAll('.oud-photo-count').forEach(e=>e.textContent = n + (n===1 ? ' photo' : ' photos'));
+  document.getElementById('oudThumbs').innerHTML = n < 2 ? '' : oudPhotos.map((src,i)=>
+    `<button type="button" class="oud-thumb" aria-label="Show photo ${i+1}" onclick="cardGo(${i},true)"><img src="${src}" alt="" loading="lazy"></button>`).join('');
+  document.getElementById('lbThumbs').innerHTML = oudPhotos.map((src,i)=>
+    `<button type="button" aria-label="Photo ${i+1}" onclick="lbGo(${i})"><img src="${src}" alt="" loading="lazy"></button>`).join('');
+  document.getElementById('oudLb').classList.toggle('single', n < 2);
+  heroGo(0); cardGo(0); startOudAutoplay();
+}
+
+function heroGo(i, user){
+  const n = oudPhotos.length; heroIdx = (i + n) % n;
+  document.querySelectorAll('#heroShow .hs-slide').forEach((e,k)=>e.classList.toggle('active', k===heroIdx));
+  document.querySelectorAll('#heroDots button').forEach((e,k)=>e.classList.toggle('on', k===heroIdx));
+  document.getElementById('heroCount').textContent = (heroIdx+1) + ' / ' + n;
+  if(user) startOudAutoplay();
+}
+
+function cardGo(i, user){
+  const n = oudPhotos.length; cardIdx = (i + n) % n;
+  const img = document.getElementById('oudImg');
+  const src = oudPhotos[cardIdx];
+  if(!img.src.endsWith(src.replace('./',''))){
     img.style.opacity = 0;
-    setTimeout(()=>{ img.src = ok[i]; img.style.opacity = 1; }, 400);
-  }, 3500);
+    setTimeout(()=>{ img.src = src; img.style.opacity = 1; }, 220);
+  }
+  const thumbs = document.querySelectorAll('.oud-thumb');
+  thumbs.forEach((e,k)=>e.classList.toggle('on', k===cardIdx));
+  if(user){
+    startOudAutoplay();
+    const box = document.getElementById('oudThumbs'), t = thumbs[cardIdx];
+    if(t) box.scrollTo({left: t.offsetLeft - box.clientWidth/2 + t.clientWidth/2, behavior:'smooth'});
+  }
+}
+
+function startOudAutoplay(){
+  clearInterval(heroTimer); clearInterval(cardTimer);
+  if(oudPhotos.length < 2 || reduceMotion) return;
+  heroTimer = setInterval(()=>{ if(!heroHover) heroGo(heroIdx+1); }, 4000);
+  cardTimer = setInterval(()=>cardGo(cardIdx+1), 5000);
+}
+
+/* Lightbox */
+function lbOpen(i){
+  const lb = document.getElementById('oudLb');
+  lb.classList.add('open'); lb.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+  lbGo(i || 0);
+  lb.querySelector('.lb-close').focus();
+}
+function lbGo(i){
+  const n = oudPhotos.length; lbIdx = (i + n) % n;
+  document.getElementById('lbImg').src = oudPhotos[lbIdx];
+  document.getElementById('lbImg').alt = 'Khmer Agarwood (Oud) photo ' + (lbIdx+1);
+  document.getElementById('lbCount').textContent = (lbIdx+1) + ' / ' + n;
+  const thumbs = document.querySelectorAll('#lbThumbs button');
+  thumbs.forEach((e,k)=>e.classList.toggle('on', k===lbIdx));
+  const box = document.getElementById('lbThumbs'), t = thumbs[lbIdx];
+  if(t) box.scrollTo({left: t.offsetLeft - box.clientWidth/2 + t.clientWidth/2, behavior:'smooth'});
+}
+function lbClose(){
+  const lb = document.getElementById('oudLb');
+  lb.classList.remove('open'); lb.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e=>{
+  if(!document.getElementById('oudLb').classList.contains('open')) return;
+  if(e.key === 'Escape') lbClose();
+  if(e.key === 'ArrowLeft') lbGo(lbIdx-1);
+  if(e.key === 'ArrowRight') lbGo(lbIdx+1);
+});
+
+/* Swipe on phones */
+function addSwipe(el, onPrev, onNext){
+  let x0 = null;
+  el.addEventListener('touchstart', e=>{ x0 = e.touches[0].clientX; }, {passive:true});
+  el.addEventListener('touchend', e=>{
+    if(x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if(Math.abs(dx) > 40) (dx > 0 ? onPrev : onNext)();
+  });
+}
+
+(function(){
+  const show = document.getElementById('heroShow');
+  show.addEventListener('mouseenter', ()=>heroHover = true);
+  show.addEventListener('mouseleave', ()=>heroHover = false);
+  show.addEventListener('click', e=>{ if(e.target.classList.contains('hs-slide')) lbOpen(heroIdx); });
+  addSwipe(show, ()=>heroGo(heroIdx-1,true), ()=>heroGo(heroIdx+1,true));
+  addSwipe(document.querySelector('#oud-event .fc-img'), ()=>cardGo(cardIdx-1,true), ()=>cardGo(cardIdx+1,true));
+  addSwipe(document.getElementById('oudLb'), ()=>lbGo(lbIdx-1), ()=>lbGo(lbIdx+1));
+  renderOudGallery();
+  loadOudPhotos();
 })();
 
 /* OUD EVENT — live open/closed status (Cambodia time, UTC+7) */
@@ -1516,6 +1720,14 @@ window.addEventListener('load', renderChefProgress);
     badge.textContent = open ? '🔴 Happening now' : '🕘 Opens 9:00 AM';
     dayLbl.textContent = open ? 'Open today' : 'Closed — opens 9:00 AM';
     fill.style.width = open ? ((secs-OPEN)/(CLOSE-OPEN)*100).toFixed(1) + '%' : '0%';
+    const hs = document.getElementById('heroOudStatus');
+    if(hs){
+      hs.innerHTML = '<i class="fas fa-clock"></i> ' + (open
+        ? 'Open now · closes in ' + h + 'h ' + pad(m) + 'm'
+        : 'Closed · opens in ' + h + 'h ' + pad(m) + 'm');
+      hs.classList.toggle('closed', !open);
+      document.getElementById('heroLiveTxt').textContent = open ? 'Happening now' : 'Opens 9:00 AM';
+    }
     row.innerHTML =
       `<div ${cls}><div class="cd-num">${pad(h)}</div><div class="cd-lbl">Hours</div></div>
        <div class="cd-sep">:</div>
