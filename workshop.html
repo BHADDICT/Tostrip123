@@ -272,6 +272,24 @@ a{text-decoration:none;color:inherit}img{display:block;width:100%;object-fit:cov
 .wk-card{background:var(--bg);border:1.5px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);transition:all .3s;display:flex;flex-direction:column}
 .wk-card:hover{box-shadow:var(--sh-lg);transform:translateY(-3px);border-color:var(--pm)}
 .wk-card.hidden{display:none}
+.wk-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px}
+.wk-tab{padding:9px 16px;border-radius:100px;border:1.5px solid var(--line);background:var(--bg);font-size:13px;font-weight:700;color:var(--ink3);display:inline-flex;align-items:center;gap:7px;transition:all .2s}
+.wk-tab:hover{border-color:var(--p);color:var(--p)}
+.wk-tab.on{background:var(--p);border-color:var(--p);color:#fff}
+.wk-tab-n{min-width:20px;padding:1px 7px;border-radius:100px;background:rgba(0,0,0,.07);font-size:11px;text-align:center}
+.wk-tab.on .wk-tab-n{background:rgba(255,255,255,.25)}
+.wk-group{margin-bottom:38px}
+.wk-group.hidden{display:none}
+.wk-group-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:12px;border-bottom:1.5px solid var(--line)}
+.wk-group-ico{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.wk-group-ico.free{background:rgba(16,185,129,.12)}
+.wk-group-ico.paid{background:rgba(107,110,205,.12)}
+.wk-group-title{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;color:var(--ink);line-height:1.2}
+.wk-group-sub{font-size:13px;color:var(--ink3);margin-top:2px}
+.wk-free-val{color:#059669}
+.wk-empty{padding:22px;border:1.5px dashed var(--line);border-radius:var(--r-lg);text-align:center;color:var(--ink3);font-size:14px}
+.wk-empty i{color:#059669;margin-right:6px}
+a.btn-save{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
 .wk-img{position:relative;height:195px;overflow:hidden}
 .wk-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
 .wk-card:hover .wk-img img{transform:scale(1.06)}
@@ -749,6 +767,8 @@ textarea.reg-in{resize:vertical;min-height:62px}
 <div class="filter-bar">
   <div class="filter-inner">
     <button class="f-chip active" onclick="filterCards('all',this)">🎪 All</button>
+    <button class="f-chip f-free" onclick="filterCards('free',this)">🎁 Free</button>
+    <button class="f-chip f-paid" onclick="filterCards('paid',this)">💵 Paid</button>
     <button class="f-chip" onclick="filterCards('cooking',this)">🍲 Cooking</button>
     <button class="f-chip" onclick="filterCards('craft',this)">🏺 Craft</button>
     <button class="f-chip" onclick="filterCards('culture',this)">💃 Shows & Culture</button>
@@ -886,112 +906,6 @@ textarea.reg-in{resize:vertical;min-height:62px}
   </div>
 </div>
 
-<!-- ════ DOUN KOK VILLAGE × TOSTRIP ════ -->
-<section class="nak-section" id="doun-kok-village">
-  <div class="nak-inner">
-    <div class="nak-divider">
-      <div class="nak-divider-line"></div>
-      <div class="nak-divider-label">✦ Proof of Concept — Our First Pilot</div>
-      <div class="nak-divider-line"></div>
-    </div>
-
-    <div class="nak-badge">TosTrip <span>×</span> Doun Kok Village — Community Partnership</div>
-
-    <div class="nak-grid">
-      <!-- LEFT -->
-      <div>
-        <div class="nak-eyebrow">Phnom Penh's Riverside Village</div>
-        <h2 class="nak-name">Doun Kok<br><em>Village</em></h2>
-        <div class="nak-title-sub">Where travelers cook, eat & live alongside local families</div>
-
-        <div class="nak-stat-row">
-          <div><div class="nak-stat-num">34</div><div class="nak-stat-lbl">total participants in our pilot workshop</div></div>
-          <div><div class="nak-stat-num">14+20</div><div class="nak-stat-lbl">foreign travelers + local villagers, cooking side by side</div></div>
-        </div>
-
-        <p class="nak-desc">TosTrip ran its first pilot experience in Doun Kok village: a hands-on Num Banh Chok cooking workshop, cooked live by a local chef, bringing together travelers and villagers around Cambodia's national dish. It tested our full model end-to-end — discovery, booking, host coordination — and proved an authentic, community-rooted experience travelers are eager to book. Food has no border.</p>
-
-        <div class="nak-press">
-          <div class="nak-press-label">Travelers came from</div>
-          <span class="nak-press-item">Timor-Leste</span>
-          <span class="nak-press-dot"></span>
-          <span class="nak-press-item">Singapore</span>
-          <span class="nak-press-dot"></span>
-          <span class="nak-press-item">Malaysia</span>
-          <span class="nak-press-dot"></span>
-          <span class="nak-press-item">Jamaica</span>
-        </div>
-
-        <div class="nak-cta-row">
-          <a href="#village-experiences" class="nak-btn-primary">View Doun Kok Experiences →</a>
-          <a href="likelocal.html" class="nak-btn-secondary">Live Like a Local ↗</a>
-        </div>
-      </div>
-
-      <!-- RIGHT: Cards -->
-      <div id="village-experiences">
-        <div class="nak-exp-header">Doun Kok Village Experiences · Book direct with the community</div>
-
-        <div class="nak-card">
-          <div class="nak-card-icon">
-            <img src="./img/mark.jpg" alt="Doun Kok village chef" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="nak-card-icon-emoji">👨‍🍳</span>
-          </div>
-          <div>
-            <div class="nak-card-title">Book a Private Village Chef</div>
-            <div class="nak-card-meta">Doun Kok Village · Phnom Penh &nbsp;·&nbsp; <strong>Full day</strong> &nbsp;·&nbsp; Runs at 10 people</div>
-            <div class="nak-card-desc">Hire a local village chef for a full day of hands-on Khmer cooking — Num Banh Chok and more, taught the way it's cooked at home. This workshop is confirmed once 10 people have joined.</div>
-          </div>
-          <div class="nak-card-right">
-            <div class="nak-card-price">$10 <span>/person/day</span></div>
-            <div class="nak-card-tag nak-tag-limited" id="chefTag">4 more to unlock</div>
-          </div>
-          <div class="nak-card-foot">
-            <div class="vg-progress">
-              <div class="vg-progress-top"><span id="chefInterestLabel">6 of 10 people interested</span><span class="vg-progress-pct" id="chefInterestPct">60%</span></div>
-              <div class="vg-progress-track"><div class="vg-progress-fill" id="chefProgressFill" style="width:60%"></div></div>
-            </div>
-            <div class="nak-card-foot-row">
-              <button class="nak-book-btn-ghost" id="interestBtn" onclick="addInterest()">
-                <i class="fas fa-hand-point-up"></i> I'm interested
-              </button>
-              <button class="nak-book-btn" style="flex:1" onclick="openModal('Private Village Chef — Doun Kok Village','👨‍🍳','cooking','Doun Kok Village Chef','Phnom Penh',10,'Full day',10,null)">
-                <i class="fas fa-ticket-alt"></i> Reserve my spot — $10/day
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="nak-card">
-          <div class="nak-card-icon">
-            <img src="./img/aunty-steav.jpg" alt="Aunty Steav" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="nak-card-icon-emoji">🏡</span>
-          </div>
-          <div>
-            <div class="nak-card-title">Live Like a Local — Pu Seila's Home</div>
-            <div class="nak-card-meta">Doun Kok Village · Phnom Penh &nbsp;·&nbsp; <strong>Full day</strong> &nbsp;·&nbsp; Host: Aunty Steav</div>
-            <div class="nak-card-desc">Spend a full day living like a local with Pu seila — cook together, eat family-style, and experience real riverside village life in Doun Kok.</div>
-          </div>
-          <div class="nak-card-right">
-            <div class="nak-card-price">$25 <span>/day</span></div>
-            <div class="nak-card-tag nak-tag-exclusive">Homestay host</div>
-          </div>
-          <div class="nak-card-foot">
-            <button class="nak-book-btn" onclick="openModal('Live Like a Local — Aunty Steav\'s Home','🏡','cooking','Aunty Steav · Doun Kok Village','Phnom Penh',25,'Full day',6,null)">
-              <i class="fas fa-ticket-alt"></i> Book with Pu seila — $25/day
-            </button>
-          </div>
-        </div>
-
-        <div class="nak-quote-block">
-          <p class="nak-quote-text">Food has no border — when the pot is on the fire in Doun Kok, everyone finds a seat at the table.</p>
-          <div class="nak-quote-attr">— From our first pilot workshop</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ════ WORKSHOPS ════ -->
 <div class="wk-section" id="siem-reap-workshops">
   <div class="wk-header">
@@ -1014,6 +928,72 @@ textarea.reg-in{resize:vertical;min-height:62px}
     <span>Use code <strong>TOSTRIP2026</strong> at checkout for <strong>$5 off</strong> any paid workshop below.</span>
   </div>
 
+  <!-- Free / Paid quick tabs -->
+  <div class="wk-tabs" role="tablist">
+    <button class="wk-tab on" data-t="all"  onclick="wkTab('all')">All <span class="wk-tab-n" id="wkNAll">0</span></button>
+    <button class="wk-tab"    data-t="free" onclick="wkTab('free')">🎁 Free <span class="wk-tab-n" id="wkNFree">0</span></button>
+    <button class="wk-tab"    data-t="paid" onclick="wkTab('paid')">💵 Paid <span class="wk-tab-n" id="wkNPaid">0</span></button>
+  </div>
+
+  <!-- ── FREE WORKSHOPS ── -->
+  <div class="wk-group" data-group="free" id="wkFree">
+    <div class="wk-group-head">
+      <div class="wk-group-ico free">🎁</div>
+      <div>
+        <div class="wk-group-title">Free Workshops &amp; Events</div>
+        <div class="wk-group-sub">No ticket price — just reserve your spot and show up.</div>
+      </div>
+    </div>
+    <div class="wk-grid" id="wkGridFree">
+
+      <!-- Khmer Agarwood (Oud) — free, 10–13 Oct 2026 -->
+      <div class="wk-card" data-cat="craft" data-city="phnom-penh" data-price="0" data-ends="2026-10-13T22:00:00+07:00">
+        <div class="wk-img">
+          <img src="./img/oud-perfume.jpg" alt="Khmer agarwood oils and perfume" onerror="this.onerror=null;this.src='./img/tree1.jpg'">
+          <span class="wk-cat b-craft">🌳 Craft</span>
+          <span class="wk-avail av-open">Free entry</span>
+        </div>
+        <div class="wk-body">
+          <div class="wk-partner">
+            <div class="wk-p-ico">🌳</div>
+            <div class="wk-p-name">Gech Horng · Chip Mong 271 · Phnom Penh</div>
+          </div>
+          <div class="wk-title">Khmer Agarwood (Oud)</div>
+          <p class="wk-desc">Smell real Khmer oud, see hand-engraved agarwood art and learn how the precious resin forms inside the tree. Drop in any time — it's free.</p>
+          <div class="wk-meta">
+            <div class="wk-mi"><i class="fas fa-calendar"></i> 10–13 Oct</div>
+            <div class="wk-mi"><i class="fas fa-clock"></i> 9 AM – 10 PM</div>
+            <div class="wk-mi"><i class="fas fa-users"></i> Open to all</div>
+          </div>
+          <div class="wk-bottom">
+            <div class="wk-price">
+              <div class="wk-price-lbl">Per person</div>
+              <div class="wk-price-val wk-free-val">Free</div>
+              <div class="wk-price-sub">No booking fee</div>
+            </div>
+            <div class="wk-btns">
+              <button class="btn-wkbook" onclick="openModal('Khmer Agarwood (Oud)','🌳','craft','Gech Horng · Chip Mong 271 Mega Mall','Phnom Penh',0,'9 AM – 10 PM','—',null)">
+                <i class="fas fa-ticket-alt"></i> Reserve
+              </button>
+              <a class="btn-save" href="#oud-event" title="See event photos"><i class="fas fa-images"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="wk-empty" id="wkFreeEmpty" hidden><i class="fas fa-gift"></i> No free workshops right now — new free events are added often, check back soon.</div>
+  </div>
+
+  <!-- ── PAID WORKSHOPS ── -->
+  <div class="wk-group" data-group="paid" id="wkPaid">
+    <div class="wk-group-head">
+      <div class="wk-group-ico paid">💵</div>
+      <div>
+        <div class="wk-group-title">Paid Workshops</div>
+        <div class="wk-group-sub">Hands-on classes with local makers. Use <strong>TOSTRIP2026</strong> for $5 off.</div>
+      </div>
+    </div>
   <div class="wk-grid" id="wkGrid">
 
     <!-- 1 Mordock Ceramic -->
@@ -1225,6 +1205,7 @@ textarea.reg-in{resize:vertical;min-height:62px}
       </div>
     </div>
 
+  </div>
   </div>
 </div>
 
@@ -1640,35 +1621,7 @@ let nakDiscount = 0;
 let curBooking = {};
 let myCode = '';
 
-/* DOUN KOK VILLAGE — CHEF INTEREST COUNTER */
-const CHEF_NEEDED = 10;
-let chefInterestCount = parseInt(sessionStorage.getItem('chefInterestCount')) || 6;
 
-function renderChefProgress(){
-  const pct = Math.min(100, Math.round((chefInterestCount / CHEF_NEEDED) * 100));
-  document.getElementById('chefInterestLabel').textContent = chefInterestCount + ' of ' + CHEF_NEEDED + ' people interested';
-  document.getElementById('chefInterestPct').textContent = pct + '%';
-  document.getElementById('chefProgressFill').style.width = pct + '%';
-  const tag = document.getElementById('chefTag');
-  tag.textContent = chefInterestCount >= CHEF_NEEDED ? 'Workshop confirmed! 🎉' : (CHEF_NEEDED - chefInterestCount) + ' more to unlock';
-}
-
-function addInterest(){
-  const btn = document.getElementById('interestBtn');
-  if(sessionStorage.getItem('joinedChefInterest')){
-    toast('You\'re already on the list!', 'check-circle');
-    return;
-  }
-  chefInterestCount = Math.min(CHEF_NEEDED, chefInterestCount + 1);
-  sessionStorage.setItem('chefInterestCount', chefInterestCount);
-  sessionStorage.setItem('joinedChefInterest', '1');
-  renderChefProgress();
-  btn.innerHTML = '<i class="fas fa-check"></i> You\'re counted in!';
-  btn.disabled = true;
-  toast('Thanks — you\'re on the list!', 'check-circle');
-}
-
-window.addEventListener('load', renderChefProgress);
 
 /* ════ OUD EVENT — PHOTO & VIDEO GALLERY ════
    PHOTOS: save as ./img/tree1.jpg, tree2.jpg … up to tree30.jpg
@@ -1681,6 +1634,9 @@ const OUD_PHOTO_MAX = 30;
 const OUD_VIDEO_MAX = 10;
 const OUD_EXTRA_MEDIA = [
   { type:'video', src:'./img/vid.mp4' },
+  { type:'img',   src:'./img/per2.jpg' },
+  { type:'img',   src:'./img/per.jpg' },
+  { type:'video', src:'./img/per3.mp4', poster:'./img/per.jpg' },
   // { type:'img',   src:'./img/oud-shop.jpg' },
   // { type:'video', src:'./video/promo.mp4', poster:'./video/promo.jpg' },
 ];
@@ -2171,28 +2127,58 @@ function buildCountdown(elId, target){
 buildCountdown('cd-apsara', '2025-03-15T19:00:00');
 buildCountdown('cd-cooking', '2025-03-16T09:00:00');
 
-/* FILTER — only the workshop grid (not the host live preview) */
+/* FILTER — workshop grids (free + paid) and ongoing events */
+const priceOf = c => {
+  if(c.dataset.price != null) return +c.dataset.price;
+  const t = (c.querySelector('.wk-price-val, .fc-price')?.textContent || '').trim().toLowerCase();
+  return t.startsWith('free') ? 0 : (parseFloat(t.replace(/[^0-9.]/g,'')) || 0);
+};
+const endedCard = c => c.dataset.ends && Date.now() > new Date(c.dataset.ends).getTime();
+function cardMatch(c, type){
+  if(endedCard(c)) return false;
+  if(type === 'all') return true;
+  if(type === 'free') return priceOf(c) === 0;
+  if(type === 'paid') return priceOf(c) > 0;
+  return c.dataset.cat === type || c.dataset.city === type;
+}
+let wkType = 'all';
 function filterCards(type, btn){
+  wkType = type;
   document.querySelectorAll('.f-chip').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
+  if(btn) btn.classList.add('active');
+  else document.querySelectorAll('.f-chip').forEach(b=>{ if((b.getAttribute('onclick')||'').includes("'"+type+"'")) b.classList.add('active'); });
+  document.querySelectorAll('.wk-tab').forEach(t=>t.classList.toggle('on', t.dataset.t === type));
   let shown = 0;
-  document.querySelectorAll('#wkGrid .wk-card').forEach(c=>{
-    const match = type==='all' || c.dataset.cat===type || c.dataset.city===type;
-    c.classList.toggle('hidden', !match);
-    if(match) shown++;
+  document.querySelectorAll('.wk-section .wk-card').forEach(c=>{
+    const m = cardMatch(c, type);
+    c.classList.toggle('hidden', !m);
+    if(m) shown++;
   });
   document.querySelectorAll('.events-wrap .feat-card').forEach(c=>{
-    const match = type==='all' || c.dataset.cat===type || c.dataset.city===type;
-    c.classList.toggle('hidden', !match);
+    c.classList.toggle('hidden', !cardMatch(c, type));
   });
+  // show/hide the Free and Paid sections
+  const freeN = document.querySelectorAll('#wkGridFree .wk-card:not(.hidden)').length;
+  const paidN = document.querySelectorAll('#wkGrid .wk-card:not(.hidden)').length;
+  document.getElementById('wkFree').classList.toggle('hidden', type === 'paid' || (!freeN && type !== 'free'));
+  document.getElementById('wkPaid').classList.toggle('hidden', type === 'free' || !paidN);
+  document.getElementById('wkFreeEmpty').hidden = !(type === 'free' && !freeN);
   document.getElementById('wkCount').textContent = shown;
 }
+function wkTab(type){ filterCards(type, null); }
+function wkCounts(){
+  const cards = [...document.querySelectorAll('.wk-section .wk-card')].filter(c=>!endedCard(c));
+  document.getElementById('wkNAll').textContent  = cards.length;
+  document.getElementById('wkNFree').textContent = cards.filter(c=>priceOf(c)===0).length;
+  document.getElementById('wkNPaid').textContent = cards.filter(c=>priceOf(c)>0).length;
+}
+document.addEventListener('DOMContentLoaded', ()=>{ wkCounts(); filterCards('all', document.querySelector('.f-chip.active')); });
 
 /* VIEW */
 function setView(mode, btn){
   document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  document.getElementById('wkGrid').classList.toggle('list', mode==='list');
+  document.querySelectorAll('.wk-section .wk-grid').forEach(g=>g.classList.toggle('list', mode==='list'));
 }
 
 /* SAVE (featured cards) */
