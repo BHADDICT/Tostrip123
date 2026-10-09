@@ -20,6 +20,7 @@
   --nak-cream:#f9f4ec;--nak-dark:#1a1208;--nak-gold:#c8922a;
   --nak-gold-lt:#e8b84b;--nak-red:#8b2e10;--nak-border:rgba(200,146,42,.25);
 }
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden}
 a{text-decoration:none;color:inherit}img{display:block;width:100%;object-fit:cover}button{font-family:inherit;cursor:pointer}
@@ -183,6 +184,57 @@ a{text-decoration:none;color:inherit}img{display:block;width:100%;object-fit:cov
 .oud-thumb{flex:0 0 64px;height:64px;border-radius:10px;overflow:hidden;border:2px solid transparent;padding:0;background:var(--bg3);opacity:.6;transition:opacity .2s,border-color .2s}
 .oud-thumb img{width:100%;height:100%;object-fit:cover}
 .oud-thumb.on,.oud-thumb:hover,.oud-thumb:focus-visible{opacity:1;border-color:var(--p)}
+
+/* VIDEO in gallery */
+.hv-bg video.hs-slide{background:#111}
+.fc-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;cursor:pointer;background:#111}
+.fc-vid.on{display:block}
+.fc-vid-badge{position:absolute;left:14px;bottom:76px;z-index:2;display:none;align-items:center;gap:6px;padding:6px 12px;border-radius:100px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;font-weight:700;pointer-events:none}
+.fc-vid-badge.on{display:inline-flex}
+.oud-thumb,.lb-thumbs button{position:relative}
+.oud-thumb video,.lb-thumbs button video{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.is-vid::after{content:'\f04b';font-family:'Font Awesome 6 Free';font-weight:900;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;background:rgba(0,0,0,.35);text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.hs-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:64px;height:64px;border-radius:50%;border:none;background:rgba(255,255,255,.92);color:var(--p);font-size:20px;display:none;align-items:center;justify-content:center;box-shadow:var(--sh-md)}
+.hv-bg.vid-on .hs-play{display:flex}
+#lbVid{max-width:100%;max-height:calc(100vh - 210px);border-radius:8px;background:#000}
+.btn-watch{color:var(--p);border-color:var(--pm)}
+
+/* WELCOME POP-UP */
+.promo{position:fixed;inset:0;z-index:9500;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(30,27,75,.55);backdrop-filter:blur(6px)}
+.promo.open{display:flex}
+.promo-box{position:relative;width:100%;max-width:820px;max-height:92vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;background:#fff;border-radius:24px;box-shadow:0 30px 90px rgba(30,27,75,.35);animation:popIn .35s cubic-bezier(.16,1,.3,1)}
+.promo-x{position:absolute;top:12px;right:12px;z-index:3;width:38px;height:38px;border-radius:50%;border:none;background:rgba(255,255,255,.95);color:var(--ink);font-size:26px;line-height:1;font-weight:400;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-md);transition:transform .2s}
+.promo-x:hover{transform:rotate(90deg);color:var(--p)}
+.promo-media{position:relative;min-height:420px;background:#1e1b4b;overflow:hidden}
+.pm-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s}
+.pm-slide.on{opacity:1}
+.promo-live{position:absolute;top:14px;left:14px;background:#fff;padding:5px 11px;border-radius:100px}
+.pm-dots{position:absolute;left:0;right:0;bottom:14px;display:flex;justify-content:center;gap:6px}
+.pm-dots button{width:8px;height:8px;border-radius:100px;border:none;padding:0;background:rgba(255,255,255,.55);transition:all .3s}
+.pm-dots button.on{width:22px;background:#fff}
+.promo-body{padding:34px 30px 28px;display:flex;flex-direction:column}
+.promo-eyebrow{font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--p);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.promo-body h3{font-family:'Playfair Display',serif;font-size:30px;font-weight:800;line-height:1.1;margin-bottom:10px}
+.promo-body p{font-size:14px;color:var(--ink3);line-height:1.65;margin-bottom:18px}
+.promo-facts{display:flex;flex-direction:column;gap:12px;margin-bottom:14px}
+.promo-facts div{display:flex;gap:12px;align-items:flex-start}
+.promo-facts i{width:34px;height:34px;border-radius:10px;background:var(--ps);color:var(--p);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.promo-facts b{display:block;font-size:14px}
+.promo-facts small{font-size:12px;color:var(--ink4)}
+.promo-status{font-size:13px;font-weight:700;color:var(--green);margin-bottom:20px;display:flex;align-items:center;gap:6px}
+.promo-status.closed{color:var(--ink4)}
+.promo-actions{margin-top:auto;display:flex;flex-direction:column;gap:10px}
+.promo-btn{padding:14px;border-radius:12px;border:none;background:var(--p);color:#fff;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 18px rgba(102,126,234,.35);transition:background .2s}
+.promo-btn:hover{background:var(--pd)}
+.promo-link{text-align:center;font-size:13px;font-weight:600;color:var(--ink3);padding:6px}
+.promo-link:hover{color:var(--p)}
+@media(max-width:700px){
+  .promo{align-items:flex-end;padding:0}
+  .promo-box{grid-template-columns:1fr;border-radius:22px 22px 0 0;max-height:94vh}
+  .promo-media{min-height:250px}
+  .promo-body{padding:22px 20px 24px}
+  .promo-body h3{font-size:25px}
+}
 
 /* LIGHTBOX */
 .lb{position:fixed;inset:0;z-index:10000;background:rgba(10,10,16,.95);display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:60px 16px 16px}
@@ -657,6 +709,7 @@ textarea.reg-in{resize:vertical;min-height:62px}
       <div class="hv-bg" id="heroShow">
         <img class="hs-slide active" src="./img/tree1.jpg" alt="Khmer Agarwood (Oud)">
         <div class="hs-shade"></div>
+        <button type="button" class="hs-play" aria-label="Play video with sound" onclick="lbOpen(heroIdx)"><i class="fas fa-play"></i></button>
         <div class="hs-top">
           <span class="hs-live"><span class="live-dot">Now on</span></span>
           <button type="button" class="hs-all" onclick="lbOpen(heroIdx)"><i class="fas fa-images"></i> <span class="oud-photo-count">1 photo</span></button>
@@ -720,6 +773,8 @@ textarea.reg-in{resize:vertical;min-height:62px}
   <div class="feat-card" id="oud-event" data-cat="craft" data-city="phnom-penh">
     <div class="fc-img">
       <img id="oudImg" src="./img/tree1.jpg" alt="Khmer Agarwood (Oud)" onclick="lbOpen(cardIdx)">
+      <video id="oudVid" class="fc-vid" muted playsinline preload="metadata" onclick="lbOpen(cardIdx)"></video>
+      <span class="fc-vid-badge" id="oudVidBadge"><i class="fas fa-volume-mute"></i> Tap for sound</span>
       <button type="button" class="fc-gallery-btn" onclick="lbOpen(cardIdx)"><i class="fas fa-expand"></i> <span class="oud-photo-count">1 photo</span></button>
       <div class="fc-badges">
         <span class="ev-badge b-show" id="oudLiveBadge">🔴 Happening now</span>
@@ -750,6 +805,7 @@ textarea.reg-in{resize:vertical;min-height:62px}
         <button class="btn-primary" onclick="openModal('Khmer Agarwood (Oud)','🌳','craft','Gech Horng · Chip Mong 271 Mega Mall','Phnom Penh',0,'9 AM – 10 PM','—',null)">
           <i class="fas fa-ticket-alt"></i> Reserve Free Spot
         </button>
+        <button type="button" class="btn-outline-sm btn-watch" id="oudWatchBtn" onclick="lbOpenVideo()" hidden><i class="fas fa-play-circle"></i> Watch video</button>
         <a class="btn-outline-sm" href="https://maps.app.goo.gl/MyvoVsYoM7Gv87ZXA?g_st=ic" target="_blank" rel="noopener"><i class="fas fa-directions"></i> Directions</a>
         <button class="btn-outline-sm" onclick="toggleSave(this)"><i class="far fa-heart"></i> Save</button>
         <div class="fc-price">Free <span>/person</span></div>
@@ -1392,12 +1448,41 @@ textarea.reg-in{resize:vertical;min-height:62px}
   </div>
 </div>
 
+<!-- ════ WELCOME POP-UP — ongoing event (Oud) ════ -->
+<div class="promo" id="oudPromo" role="dialog" aria-modal="true" aria-labelledby="promoTitle" aria-hidden="true" onclick="if(event.target===this)promoClose()">
+  <div class="promo-box">
+    <button type="button" class="promo-x" onclick="promoClose()" aria-label="Close">&times;</button>
+    <div class="promo-media" id="promoMedia">
+      <img class="pm-slide on" src="./img/tree3.jpg" alt="Khmer agarwood heartwood">
+      <video class="pm-slide" src="./img/vid.MOV" muted playsinline loop preload="metadata"></video>
+      <img class="pm-slide" src="./img/tree4.jpg" alt="Artisan carving agarwood by hand">
+      <span class="promo-live"><span class="live-dot">Now on</span></span>
+      <div class="pm-dots" id="promoDots"></div>
+    </div>
+    <div class="promo-body">
+      <div class="promo-eyebrow"><i class="fas fa-star"></i> Happening this week · Free entry</div>
+      <h3 id="promoTitle">Khmer Agarwood (Oud)</h3>
+      <p>See Cambodia's treasured aromatic wood carved by hand — and smell it for yourself.</p>
+      <div class="promo-facts">
+        <div><i class="fas fa-calendar"></i><span><b>10 – 13 October 2026</b><small>9:00 AM – 10:00 PM daily</small></span></div>
+        <div><i class="fas fa-map-marker-alt"></i><span><b>Chip Mong 271 Mega Mall</b><small>Norodom Blvd, St. 360 &amp; 370</small></span></div>
+      </div>
+      <div class="promo-status" id="promoStatus"><i class="fas fa-clock"></i> Daily 9 AM – 10 PM</div>
+      <div class="promo-actions">
+        <button type="button" class="promo-btn" onclick="promoClose();openModal('Khmer Agarwood (Oud)','🌳','craft','Gech Horng · Chip Mong 271 Mega Mall','Phnom Penh',0,'9 AM – 10 PM','—',null)"><i class="fas fa-ticket-alt"></i> Reserve Free Spot</button>
+        <a href="#oud-event" class="promo-link" onclick="promoClose()">See event details</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ════ PHOTO LIGHTBOX (Oud event) ════ -->
 <div class="lb" id="oudLb" aria-hidden="true" onclick="if(event.target===this)lbClose()">
   <button type="button" class="lb-close" onclick="lbClose()" aria-label="Close gallery"><i class="fas fa-times"></i></button>
   <button type="button" class="lb-nav prev" onclick="lbGo(lbIdx-1)" aria-label="Previous photo"><i class="fas fa-chevron-left"></i></button>
   <figure class="lb-fig">
     <img id="lbImg" src="./img/tree1.jpg" alt="Khmer Agarwood (Oud)">
+    <video id="lbVid" controls playsinline preload="metadata" hidden></video>
     <figcaption><span>Khmer Agarwood (Oud) · Chip Mong 271 Mega Mall</span><span id="lbCount">1 / 1</span></figcaption>
   </figure>
   <button type="button" class="lb-nav next" onclick="lbGo(lbIdx+1)" aria-label="Next photo"><i class="fas fa-chevron-right"></i></button>
@@ -1585,65 +1670,108 @@ function addInterest(){
 
 window.addEventListener('load', renderChefProgress);
 
-/* ════ OUD EVENT — PHOTO GALLERY ════
-   To show more photos: save them as ./img/tree1.jpg, tree2.jpg, tree3.jpg …
-   up to tree30.jpg (missing numbers are skipped automatically).
-   Photos with other names can be listed in OUD_EXTRA_PHOTOS. */
+/* ════ OUD EVENT — PHOTO & VIDEO GALLERY ════
+   PHOTOS: save as ./img/tree1.jpg, tree2.jpg … up to tree30.jpg
+           (missing numbers are skipped automatically).
+   VIDEOS: save as ./video/oud1.mp4, oud2.mp4 … up to oud10.mp4.
+           Optional cover image with the same name: ./video/oud1.jpg
+   Files with other names can be listed in OUD_EXTRA_MEDIA.
+   Keep videos short (under 1 minute) and small (under ~20 MB) so the page loads fast. */
 const OUD_PHOTO_MAX = 30;
-const OUD_EXTRA_PHOTOS = [
-  // './img/oud-shop.jpg',
+const OUD_VIDEO_MAX = 10;
+const OUD_EXTRA_MEDIA = [
+  { type:'video', src:'./img/vid.mp4' },
+  // { type:'img',   src:'./img/oud-shop.jpg' },
+  // { type:'video', src:'./video/promo.mp4', poster:'./video/promo.jpg' },
 ];
-let oudPhotos = ['./img/tree1.jpg'];
+let oudMedia = [{type:'img', src:'./img/tree1.jpg'}];
 let heroIdx = 0, cardIdx = 0, lbIdx = 0, heroTimer = null, cardTimer = null, heroHover = false;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isVid = i => oudMedia[i] && oudMedia[i].type === 'video';
 
-function loadOudPhotos(){
-  const cands = [];
-  for(let n = 1; n <= OUD_PHOTO_MAX; n++) cands.push('./img/tree' + n + '.jpg');
-  OUD_EXTRA_PHOTOS.forEach(src => cands.push(src));
-  const found = new Array(cands.length).fill(null);
-  let left = cands.length;
-  const done = ()=>{
-    if(--left > 0) return;
-    const list = found.filter(Boolean);
-    if(list.length){ oudPhotos = list; renderOudGallery(); }
-  };
-  cands.forEach((src,i)=>{ const p = new Image(); p.onload = ()=>{ found[i] = src; done(); }; p.onerror = done; p.src = src; });
+function probeImg(src){ return new Promise(r=>{ const p = new Image(); p.onload = ()=>r(true); p.onerror = ()=>r(false); p.src = src; }); }
+function probeVid(src){ return new Promise(r=>{
+  const v = document.createElement('video'); v.preload = 'metadata'; v.muted = true;
+  const t = setTimeout(()=>r(false), 8000);
+  v.onloadedmetadata = ()=>{ clearTimeout(t); r(true); };
+  v.onerror = ()=>{ clearTimeout(t); r(false); };
+  v.src = src;
+}); }
+
+async function loadOudMedia(){
+  const photos = [], vids = [];
+  for(let n = 1; n <= OUD_PHOTO_MAX; n++) photos.push({type:'img', src:'./img/tree'+n+'.jpg'});
+  for(let n = 1; n <= OUD_VIDEO_MAX; n++) vids.push({type:'video', src:'./video/oud'+n+'.mp4', poster:'./video/oud'+n+'.jpg'});
+  const all = [...photos, ...vids, ...OUD_EXTRA_MEDIA];
+  const ok = await Promise.all(all.map(m => m.type === 'video' ? probeVid(m.src) : probeImg(m.src)));
+  const found = all.filter((_,i)=>ok[i]);
+  // video covers are optional
+  await Promise.all(found.filter(m=>m.type==='video' && m.poster).map(async m=>{ if(!(await probeImg(m.poster))) delete m.poster; }));
+  if(!found.length) return;
+  // put the first video second, right after the cover photo, so people see it early
+  const fp = found.filter(m=>m.type==='img'), fv = found.filter(m=>m.type==='video');
+  oudMedia = fp.length ? [fp[0], ...fv.slice(0,1), ...fp.slice(1), ...fv.slice(1)] : fv;
+  renderOudGallery();
 }
 
+function vidTag(m, cls, extra){ return `<video class="${cls}" src="${m.src}#t=0.5" ${m.poster?`poster="${m.poster}"`:''} muted playsinline preload="metadata" ${extra||''}></video>`; }
+function thumbHTML(m){ return m.type === 'video'
+  ? (m.poster ? `<img src="${m.poster}" alt="" loading="lazy">` : vidTag(m,''))
+  : `<img src="${m.src}" alt="" loading="lazy">`; }
+
 function renderOudGallery(){
-  const n = oudPhotos.length;
+  const n = oudMedia.length;
+  const nP = oudMedia.filter(m=>m.type==='img').length, nV = n - nP;
   const show = document.getElementById('heroShow');
   show.querySelectorAll('.hs-slide').forEach(e=>e.remove());
-  show.insertAdjacentHTML('afterbegin', oudPhotos.map((src,i)=>
-    `<img class="hs-slide${i===0?' active':''}" src="${src}" alt="Khmer Agarwood (Oud) photo ${i+1}"${i>1?' loading="lazy"':''}>`).join(''));
+  show.insertAdjacentHTML('afterbegin', oudMedia.map((m,i)=> m.type === 'video'
+    ? vidTag(m, 'hs-slide'+(i===0?' active':''), 'aria-label="Khmer Agarwood (Oud) video"')
+    : `<img class="hs-slide${i===0?' active':''}" src="${m.src}" alt="Khmer Agarwood (Oud) photo ${i+1}"${i>1?' loading="lazy"':''}>`).join(''));
+  show.querySelectorAll('video.hs-slide').forEach(v=>v.addEventListener('ended', ()=>{ if(!heroHover) heroGo(heroIdx+1); }));
   show.classList.toggle('single', n < 2);
-  document.getElementById('heroDots').innerHTML = oudPhotos.map((_,i)=>
-    `<button type="button" aria-label="Show photo ${i+1}" onclick="heroGo(${i},true)"></button>`).join('');
-  document.querySelectorAll('.oud-photo-count').forEach(e=>e.textContent = n + (n===1 ? ' photo' : ' photos'));
-  document.getElementById('oudThumbs').innerHTML = n < 2 ? '' : oudPhotos.map((src,i)=>
-    `<button type="button" class="oud-thumb" aria-label="Show photo ${i+1}" onclick="cardGo(${i},true)"><img src="${src}" alt="" loading="lazy"></button>`).join('');
-  document.getElementById('lbThumbs').innerHTML = oudPhotos.map((src,i)=>
-    `<button type="button" aria-label="Photo ${i+1}" onclick="lbGo(${i})"><img src="${src}" alt="" loading="lazy"></button>`).join('');
+  document.getElementById('heroDots').innerHTML = oudMedia.map((m,i)=>
+    `<button type="button" aria-label="Show ${m.type==='video'?'video':'photo'} ${i+1}" onclick="heroGo(${i},true)"></button>`).join('');
+  const label = [nP ? nP + (nP===1?' photo':' photos') : '', nV ? nV + (nV===1?' video':' videos') : ''].filter(Boolean).join(' · ');
+  document.querySelectorAll('.oud-photo-count').forEach(e=>e.textContent = label);
+  document.getElementById('oudThumbs').innerHTML = n < 2 ? '' : oudMedia.map((m,i)=>
+    `<button type="button" class="oud-thumb${m.type==='video'?' is-vid':''}" aria-label="Show ${m.type} ${i+1}" onclick="cardGo(${i},true)">${thumbHTML(m)}</button>`).join('');
+  document.getElementById('lbThumbs').innerHTML = oudMedia.map((m,i)=>
+    `<button type="button" class="${m.type==='video'?'is-vid':''}" aria-label="${m.type} ${i+1}" onclick="lbGo(${i})">${thumbHTML(m)}</button>`).join('');
   document.getElementById('oudLb').classList.toggle('single', n < 2);
+  document.getElementById('oudWatchBtn').hidden = nV === 0;
+  const cv = document.getElementById('oudVid');
+  cv.onended = ()=>cardGo(cardIdx+1);
   heroGo(0); cardGo(0); startOudAutoplay();
 }
 
+function playMuted(v){ if(!v) return; v.muted = true; v.currentTime = 0; const p = v.play(); if(p) p.catch(()=>{}); }
+
 function heroGo(i, user){
-  const n = oudPhotos.length; heroIdx = (i + n) % n;
-  document.querySelectorAll('#heroShow .hs-slide').forEach((e,k)=>e.classList.toggle('active', k===heroIdx));
+  const n = oudMedia.length; heroIdx = (i + n) % n;
+  const slides = document.querySelectorAll('#heroShow .hs-slide');
+  slides.forEach((e,k)=>{ e.classList.toggle('active', k===heroIdx); if(e.tagName==='VIDEO' && k!==heroIdx) e.pause(); });
+  const cur = slides[heroIdx];
+  document.getElementById('heroShow').classList.toggle('vid-on', !!cur && cur.tagName==='VIDEO');
+  if(cur && cur.tagName === 'VIDEO' && !reduceMotion) playMuted(cur);
   document.querySelectorAll('#heroDots button').forEach((e,k)=>e.classList.toggle('on', k===heroIdx));
   document.getElementById('heroCount').textContent = (heroIdx+1) + ' / ' + n;
   if(user) startOudAutoplay();
 }
 
 function cardGo(i, user){
-  const n = oudPhotos.length; cardIdx = (i + n) % n;
-  const img = document.getElementById('oudImg');
-  const src = oudPhotos[cardIdx];
-  if(!img.src.endsWith(src.replace('./',''))){
-    img.style.opacity = 0;
-    setTimeout(()=>{ img.src = src; img.style.opacity = 1; }, 220);
+  const n = oudMedia.length; cardIdx = (i + n) % n;
+  const m = oudMedia[cardIdx];
+  const img = document.getElementById('oudImg'), vid = document.getElementById('oudVid');
+  if(m.type === 'video'){
+    if(!vid.src.endsWith(m.src.replace('./',''))){ vid.src = m.src; if(m.poster) vid.poster = m.poster; else vid.removeAttribute('poster'); }
+    vid.classList.add('on'); document.getElementById('oudVidBadge').classList.add('on');
+    if(!reduceMotion) playMuted(vid);
+  } else {
+    vid.pause(); vid.classList.remove('on'); document.getElementById('oudVidBadge').classList.remove('on');
+    if(!img.src.endsWith(m.src.replace('./',''))){
+      img.style.opacity = 0;
+      setTimeout(()=>{ img.src = m.src; img.style.opacity = 1; }, 220);
+    }
   }
   const thumbs = document.querySelectorAll('.oud-thumb');
   thumbs.forEach((e,k)=>e.classList.toggle('on', k===cardIdx));
@@ -1656,23 +1784,34 @@ function cardGo(i, user){
 
 function startOudAutoplay(){
   clearInterval(heroTimer); clearInterval(cardTimer);
-  if(oudPhotos.length < 2 || reduceMotion) return;
-  heroTimer = setInterval(()=>{ if(!heroHover) heroGo(heroIdx+1); }, 4000);
-  cardTimer = setInterval(()=>cardGo(cardIdx+1), 5000);
+  if(oudMedia.length < 2 || reduceMotion) return;
+  // while a video is showing, wait for it to finish (its 'ended' event moves on)
+  heroTimer = setInterval(()=>{ if(!heroHover && !isVid(heroIdx)) heroGo(heroIdx+1); }, 4000);
+  cardTimer = setInterval(()=>{ if(!isVid(cardIdx)) cardGo(cardIdx+1); }, 5000);
 }
 
-/* Lightbox */
+/* Lightbox (photos and videos) */
 function lbOpen(i){
   const lb = document.getElementById('oudLb');
   lb.classList.add('open'); lb.setAttribute('aria-hidden','false');
   document.body.style.overflow = 'hidden';
+  document.querySelectorAll('#heroShow video, #oudVid').forEach(v=>v.pause());
   lbGo(i || 0);
   lb.querySelector('.lb-close').focus();
 }
+function lbOpenVideo(){ const i = oudMedia.findIndex(m=>m.type==='video'); lbOpen(i < 0 ? 0 : i); }
 function lbGo(i){
-  const n = oudPhotos.length; lbIdx = (i + n) % n;
-  document.getElementById('lbImg').src = oudPhotos[lbIdx];
-  document.getElementById('lbImg').alt = 'Khmer Agarwood (Oud) photo ' + (lbIdx+1);
+  const n = oudMedia.length; lbIdx = (i + n) % n;
+  const m = oudMedia[lbIdx];
+  const im = document.getElementById('lbImg'), v = document.getElementById('lbVid');
+  if(m.type === 'video'){
+    im.hidden = true; v.hidden = false;
+    if(!v.src.endsWith(m.src.replace('./',''))){ v.src = m.src; if(m.poster) v.poster = m.poster; else v.removeAttribute('poster'); }
+    v.muted = false; const p = v.play(); if(p) p.catch(()=>{});
+  } else {
+    v.pause(); v.hidden = true; im.hidden = false;
+    im.src = m.src; im.alt = 'Khmer Agarwood (Oud) photo ' + (lbIdx+1);
+  }
   document.getElementById('lbCount').textContent = (lbIdx+1) + ' / ' + n;
   const thumbs = document.querySelectorAll('#lbThumbs button');
   thumbs.forEach((e,k)=>e.classList.toggle('on', k===lbIdx));
@@ -1683,6 +1822,8 @@ function lbClose(){
   const lb = document.getElementById('oudLb');
   lb.classList.remove('open'); lb.setAttribute('aria-hidden','true');
   document.body.style.overflow = '';
+  document.getElementById('lbVid').pause();
+  heroGo(heroIdx); cardGo(cardIdx);
 }
 document.addEventListener('keydown', e=>{
   if(!document.getElementById('oudLb').classList.contains('open')) return;
@@ -1709,9 +1850,63 @@ function addSwipe(el, onPrev, onNext){
   show.addEventListener('click', e=>{ if(e.target.classList.contains('hs-slide')) lbOpen(heroIdx); });
   addSwipe(show, ()=>heroGo(heroIdx-1,true), ()=>heroGo(heroIdx+1,true));
   addSwipe(document.querySelector('#oud-event .fc-img'), ()=>cardGo(cardIdx-1,true), ()=>cardGo(cardIdx+1,true));
-  addSwipe(document.getElementById('oudLb'), ()=>lbGo(lbIdx-1), ()=>lbGo(lbIdx+1));
+  addSwipe(document.getElementById('oudLb').querySelector('.lb-fig'), ()=>lbGo(lbIdx-1), ()=>lbGo(lbIdx+1));
   renderOudGallery();
-  loadOudPhotos();
+  loadOudMedia();
+})();
+
+/* ════ WELCOME POP-UP ════
+   Shows the ongoing event when someone enters the site.
+   Appears once per visit (browser tab); stops after the event ends. */
+const PROMO_END = new Date('2026-10-13T22:00:00+07:00');   // hide after the event closes
+const PROMO_DELAY = 1200;                                   // ms after page load
+let promoIdx = 0, promoTimer = null;
+
+function promoShow(i){
+  const slides = [...document.querySelectorAll('#promoMedia .pm-slide')].filter(e=>!e.dataset.bad);
+  if(!slides.length) return;
+  promoIdx = (i + slides.length) % slides.length;
+  document.querySelectorAll('#promoMedia .pm-slide').forEach(e=>{ e.classList.remove('on'); if(e.tagName==='VIDEO') e.pause(); });
+  const cur = slides[promoIdx]; cur.classList.add('on');
+  if(cur.tagName === 'VIDEO'){ cur.currentTime = 0; const p = cur.play(); if(p) p.catch(()=>{}); }
+  document.getElementById('promoDots').innerHTML = slides.length < 2 ? '' :
+    slides.map((_,k)=>`<button type="button" class="${k===promoIdx?'on':''}" aria-label="Show slide ${k+1}" onclick="promoGo(${k})"></button>`).join('');
+}
+function promoGo(i){ promoShow(i); promoAuto(); }
+function promoAuto(){
+  clearInterval(promoTimer);
+  promoTimer = setInterval(()=>{
+    const cur = document.querySelector('#promoMedia .pm-slide.on');
+    // give the video a little longer on screen
+    if(cur && cur.tagName === 'VIDEO' && cur.currentTime < 7 && !cur.paused) return;
+    promoShow(promoIdx + 1);
+  }, 3500);
+}
+function promoOpen(){
+  const el = document.getElementById('oudPromo');
+  el.classList.add('open'); el.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+  promoShow(0); promoAuto();
+  el.querySelector('.promo-x').focus();
+}
+function promoClose(){
+  const el = document.getElementById('oudPromo');
+  if(!el.classList.contains('open')) return;
+  el.classList.remove('open'); el.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+  clearInterval(promoTimer);
+  el.querySelectorAll('video').forEach(v=>v.pause());
+  try{ sessionStorage.setItem('oudPromoSeen','1'); }catch(e){}
+}
+(function(){
+  // skip any pop-up photo/video that is missing
+  document.querySelectorAll('#promoMedia .pm-slide').forEach(e=>{
+    e.addEventListener('error', ()=>{ e.dataset.bad = '1'; e.remove(); if(document.getElementById('oudPromo').classList.contains('open')) promoShow(0); });
+  });
+  document.addEventListener('keydown', e=>{ if(e.key === 'Escape') promoClose(); });
+  let seen = false; try{ seen = sessionStorage.getItem('oudPromoSeen') === '1'; }catch(e){}
+  if(seen || Date.now() > PROMO_END.getTime() || location.hash === '#host') return;
+  window.addEventListener('load', ()=>setTimeout(promoOpen, PROMO_DELAY));
 })();
 
 /* OUD EVENT — live open/closed status (Cambodia time, UTC+7) */
@@ -1735,6 +1930,13 @@ function addSwipe(el, onPrev, onNext){
     badge.textContent = open ? '🔴 Happening now' : '🕘 Opens 9:00 AM';
     dayLbl.textContent = open ? 'Open today' : 'Closed — opens 9:00 AM';
     fill.style.width = open ? ((secs-OPEN)/(CLOSE-OPEN)*100).toFixed(1) + '%' : '0%';
+    const ps = document.getElementById('promoStatus');
+    if(ps){
+      ps.innerHTML = '<i class="fas fa-clock"></i> ' + (open
+        ? 'Open now · closes in ' + h + 'h ' + pad(m) + 'm'
+        : 'Closed now · opens in ' + h + 'h ' + pad(m) + 'm');
+      ps.classList.toggle('closed', !open);
+    }
     const hs = document.getElementById('heroOudStatus');
     if(hs){
       hs.innerHTML = '<i class="fas fa-clock"></i> ' + (open
