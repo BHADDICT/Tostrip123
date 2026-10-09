@@ -1,9 +1,4 @@
-/* ============================================================
-   TosTrip translations — English · Français · ខ្មែរ (Khmer) · 中文 (Chinese)
-   To change a word: edit it here. To add a language: copy the
-   "en" block, translate it, and add its name to TOSTRIP_LANGS.
-   Missing keys automatically fall back to English.
-============================================================ */
+
 window.TOSTRIP_LANGS = { en: 'English', fr: 'Français', km: 'ខ្មែរ', zh: '中文' };
 
 window.TOSTRIP_I18N = {
