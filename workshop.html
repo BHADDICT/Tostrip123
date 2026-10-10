@@ -1599,6 +1599,7 @@ if(typeof emailjs!=='undefined') emailjs.init(EJ_KEY);
 const EJ_HOST_SVC = 'service_9ogox5a';      // EmailJS service for host emails
 const EJ_HOST_KEY = 'SmoLQAp-ij_aoJbAd';     // public key of that EmailJS account
 const EJ_TPL_HOST = 'template_l1sw4z3';      // host notification template (To Email = {{to_email}})
+const EJ_ADMIN_EMAIL = 'masitamaramsa@gmail.com';  // gets bookings for workshops that have no host listed below
 const EJ_TPL_GUEST = 'template_l1sw4z3';     // guest copy uses the same template; its To Email must be {{to_email}}
 const EVENT_HOSTS = {
   'Khmer Agarwood (Oud)': {
@@ -2473,10 +2474,14 @@ function submitBooking(e){
 
   // Email straight to the workshop host (never blocks the booking if it fails)
   const sendHost = ()=>{
-    if(!hostInfo || typeof emailjs === 'undefined') return Promise.resolve();
-    return emailjs.send(EJ_HOST_SVC, EJ_TPL_HOST, {
-      to_email:    hostInfo.email,
-      to_name:     hostInfo.name,
+    if(typeof emailjs === 'undefined') return Promise.resolve();
+    const toEmail = hostInfo ? hostInfo.email : EJ_ADMIN_EMAIL;   // no host → booking goes to TosTrip
+    const toName  = hostInfo ? hostInfo.name  : 'TosTrip';
+    // host / TosTrip booking email → template_k8n3dup (main TosTrip EmailJS account)
+    return emailjs.send(EJ_SVC, EJ_TPL, {
+      ...params,                       // old field names (user_name, booking_date, lifestyle…)
+      to_email:    toEmail,
+      to_name:     toName,
       reply_to:    guestEmail,
       workshop:    curBooking.title,
       location:    curBooking.partner + ' · ' + curBooking.city,
@@ -2496,8 +2501,10 @@ function submitBooking(e){
       date:        sessionTxt,
       duration:    curBooking.dur,
       guests:      qty,
-      message:     guestNotes + '\nTickets: ' + qty + '\nBooking ref: ' + bookingRef
-    }, EJ_HOST_KEY).catch(err=>console.warn('Host email not sent:', err));
+      message:     guestNotes + '\nTickets: ' + qty + '\nBooking ref: ' + bookingRef +
+                   (usedCode !== 'None' ? '\nCode used: ' + usedCode : '') +
+                   '\nReferral code generated: ' + myCode
+    }, EJ_KEY);
   };
 
   // Receipt straight to the guest (never blocks the booking if it fails)
@@ -2533,7 +2540,7 @@ function submitBooking(e){
   };
 
   if(typeof emailjs !== 'undefined'){
-    emailjs.send(EJ_SVC, EJ_TPL, params).then(sendHost).then(sendGuest).then(finish).catch(err=>{
+    sendHost().then(sendGuest).then(finish).catch(err=>{
       alert('Error: ' + (err.text || err.message));
       btn.innerHTML = '<i class="fas fa-check-circle"></i> Confirm Booking — <span id="btnTotal">$0</span>';
       btn.disabled = false;
