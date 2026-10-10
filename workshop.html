@@ -2508,6 +2508,7 @@ function submitBooking(e){
   };
 
   // Receipt straight to the guest (never blocks the booking if it fails)
+  let receiptError = null;
   const sendGuest = ()=>{
     if(!guestEmail || typeof emailjs === 'undefined') return Promise.resolve();
     return emailjs.send(EJ_HOST_SVC, EJ_TPL_GUEST, {
@@ -2523,13 +2524,19 @@ function submitBooking(e){
       total:       totalTxt,
       message:     guestNotes + '\nBooking ref: ' + bookingRef,
       booking_ref: bookingRef
-    }, EJ_HOST_KEY).catch(err=>console.warn('Guest receipt not sent:', err));
+    }, EJ_HOST_KEY).catch(err=>{
+      console.error('Guest receipt not sent:', err);
+      receiptError = (err && (err.text || err.message)) || 'unknown error';
+    });
   };
 
   const finish = ()=>{
     document.getElementById('succMsg').innerHTML = hostInfo
       ? `Your booking <strong>${bookingRef}</strong> for <strong>${hostEsc(sessionTxt)}</strong> is confirmed and <strong>${hostEsc(hostInfo.name)}</strong> has been notified. Here's your personal referral code — share it with friends and earn $5 credit every time someone books.`
       : `Confirmation is heading to your inbox (ref <strong>${bookingRef}</strong>). Here's your personal referral code — share it with friends and earn $5 credit every time someone books.`;
+    if (receiptError) {
+      document.getElementById('succMsg').innerHTML += `<br><br><span style="color:#b3261e">We couldn't email your receipt (${hostEsc(String(receiptError))}). Please screenshot this page; your booking ref is <strong>${bookingRef}</strong>.</span>`;
+    }
     document.getElementById('succCode').textContent = myCode;
     document.getElementById('yourCode').textContent = myCode;
     sessionStorage.setItem('myCode', myCode);
