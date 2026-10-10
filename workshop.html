@@ -1599,7 +1599,7 @@ if(typeof emailjs!=='undefined') emailjs.init(EJ_KEY);
 const EJ_HOST_SVC = 'service_9ogox5a';      // EmailJS service for host emails
 const EJ_HOST_KEY = 'SmoLQAp-ij_aoJbAd';     // public key of that EmailJS account
 const EJ_TPL_HOST = 'template_l1sw4z3';      // host notification template (To Email = {{to_email}})
-const EJ_TPL_GUEST = 'template_0pi47tp';     // guest "Booking Receipt" template (To Email = {{email}}), same account as host emails
+const EJ_TPL_GUEST = 'template_l1sw4z3';     // guest copy uses the same template; its To Email must be {{to_email}}
 const EVENT_HOSTS = {
   'Khmer Agarwood (Oud)': {
     host:  { name: 'Gech Horng', email: 'bungechhorng1993@gmail.com' },
