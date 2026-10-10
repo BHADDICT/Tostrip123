@@ -2460,6 +2460,15 @@ function submitBooking(e){
     price:        total,
     lifestyle:    curBooking.title,
     people:       qty + ' ticket(s)',
+    // same details under the names used by the purple "Workshop Booking" template
+    name:         guestName,
+    email:        guestEmail,
+    workshop:     curBooking.title,
+    venue:        curBooking.partner + ' · ' + curBooking.city,
+    date:         sessionTxt,
+    guests:       qty,
+    total:        totalTxt,
+    reply_to:     guestEmail,
   };
 
   // Email straight to the workshop host (never blocks the booking if it fails)
