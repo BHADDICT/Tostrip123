@@ -1789,17 +1789,21 @@ textarea.reg-in{resize:vertical;min-height:62px}
 const EJ_KEY='f6HV0gopdt8FE-mw7', EJ_SVC='service_xum7qyo', EJ_TPL='template_a9e8je3';   // main TosTrip template ("Contact Us")
 if(typeof emailjs!=='undefined') emailjs.init(EJ_KEY);
 
-/* ─── HOST NOTIFICATION EMAILS ───────────────────────────────────
-   Booking emails use the main TosTrip template (EJ_TPL, "Contact Us").
-   It always goes to TosTrip (the template's To Email). In that template's
-   Bcc field put {{to_email}}: when someone books a workshop listed below,
-   the host gets the same email too. Other forms send no to_email, so
-   their Bcc stays empty.                                             */
-const EJ_HOST_SVC = 'service_9ogox5a';      // EmailJS service for host emails
-const EJ_HOST_KEY = 'SmoLQAp-ij_aoJbAd';     // public key of that EmailJS account
-const EJ_TPL_HOST = 'template_l1sw4z3';      // host notification template (To Email = {{to_email}})
-const EJ_ADMIN_EMAIL = 'masitamaramsa@gmail.com';  // gets bookings for workshops that have no host listed below
-const EJ_TPL_GUEST = 'template_0pi47tp';     // guest "Booking Receipt" template (To Email = {{email}}) → goes to the person who booked
+/* ─── BOOKING EMAILS ─────────────────────────────────────────────
+   Every booking sends ONE email from the main TosTrip account
+   (EJ_SVC service_xum7qyo · EJ_TPL template_a9e8je3 · EJ_KEY):
+     To  = TosTrip (the template's To Email)
+     Bcc = {{to_email}} = the workshop host (if listed below) + the guest,
+           who gets the same email as their receipt.
+   In that template's Bcc field put {{to_email}}.
+   Other forms send no to_email, so their Bcc stays empty.            */
+// Second EmailJS account — NOT used any more (its Gmail connection expired: "Invalid grant").
+// Kept only in case you want to switch back to its "Booking Receipt" template.
+const EJ_HOST_SVC = 'service_9ogox5a';
+const EJ_HOST_KEY = 'SmoLQAp-ij_aoJbAd';
+const EJ_TPL_HOST = 'template_l1sw4z3';
+const EJ_ADMIN_EMAIL = 'masitamaramsa@gmail.com';
+const EJ_TPL_GUEST = 'template_0pi47tp';
 const EVENT_HOSTS = {
   'Khmer Agarwood (Oud)': {
     host:  { name: 'Gech Horng', email: 'bungechhorng1993@gmail.com' },
@@ -2825,12 +2829,10 @@ function submitBooking(e){
     reply_to:     guestEmail,
   };
 
-  // Email straight to the workshop host (never blocks the booking if it fails)
-  const sendHost = ()=>{
+  // ONE booking email: To = TosTrip (template's To Email) · Bcc {{to_email}} = host (if listed) + guest (their receipt)
+  const sendHost = (withGuest)=>{
     if(typeof emailjs === 'undefined') return Promise.resolve();
-    // The template's To Email is TosTrip's inbox; its Bcc field is {{to_email}}, so the host gets a copy.
-    // No host listed → to_email stays empty and only TosTrip gets the email.
-    const toEmail = hostInfo ? hostInfo.email : '';
+    const toEmail = [hostInfo ? hostInfo.email : '', withGuest ? guestEmail : ''].filter(Boolean).join(',');
     const toName  = hostInfo ? hostInfo.name  : 'TosTrip';
     // host / TosTrip booking email → template_a9e8je3 ("Contact Us", main TosTrip EmailJS account)
     return emailjs.send(EJ_SVC, EJ_TPL, {
@@ -2862,28 +2864,15 @@ function submitBooking(e){
     }, EJ_KEY);
   };
 
-  // Receipt straight to the guest (never blocks the booking if it fails)
+  // If the email with the guest's copy fails (e.g. a mistyped address), send it again without the guest
+  // so the booking still reaches TosTrip and the host — the guest is asked to screenshot instead.
   let receiptError = null;
-  const sendGuest = ()=>{
-    if(!guestEmail || typeof emailjs === 'undefined') return Promise.resolve();
-    return emailjs.send(EJ_HOST_SVC, EJ_TPL_GUEST, {
-      to_email:    guestEmail,          // in case the template's To Email uses {{to_email}}
-      email:       guestEmail,          // receipt template: To Email = {{email}}
-      name:        guestName,
-      phone:       guestPhone,
-      workshop:    curBooking.title,
-      venue:       curBooking.partner + ' · ' + curBooking.city,
-      date:        sessionTxt,
-      duration:    curBooking.dur,
-      guests:      qty,
-      total:       totalTxt,
-      message:     guestNotes + '\nBooking ref: ' + bookingRef + payerTxt,
-      booking_ref: bookingRef
-    }, EJ_HOST_KEY).catch(err=>{
-      console.error('Guest receipt not sent:', err);
-      receiptError = (err && (err.text || err.message)) || 'unknown error';
-    });
-  };
+  const sendAll = ()=> sendHost(!!guestEmail).catch(err=>{
+    if(!guestEmail) throw err;
+    console.error('Booking email with guest copy failed — retrying without it:', err);
+    receiptError = (err && (err.text || err.message)) || 'unknown error';
+    return sendHost(false);
+  });
 
   const finish = ()=>{
     document.getElementById('succMsg').innerHTML = hostInfo
@@ -2902,7 +2891,7 @@ function submitBooking(e){
   };
 
   if(typeof emailjs !== 'undefined'){
-    sendHost().then(sendGuest).then(finish).catch(err=>{
+    sendAll().then(finish).catch(err=>{
       alert('Error: ' + (err.text || err.message));
       btn.innerHTML = '<i class="fas fa-check-circle"></i> Confirm Booking — <span id="btnTotal">$0</span>';
       btn.disabled = false;
