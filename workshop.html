@@ -678,6 +678,28 @@ textarea.reg-in{resize:vertical;min-height:62px}
 .ver-thumb{position:relative;flex:0 0 64px;height:64px;border-radius:10px;overflow:hidden;border:2px solid transparent;padding:0;background:var(--bg3);opacity:.6;transition:opacity .2s,border-color .2s}
 .ver-thumb img,.ver-thumb video{width:100%;height:100%;object-fit:cover;pointer-events:none}
 .ver-thumb.on,.ver-thumb:hover,.ver-thumb:focus-visible{opacity:1;border-color:var(--p)}
+.ver-story{margin:-4px 0 16px;border:1.5px solid var(--line);border-radius:var(--r-md);background:var(--bg2)}
+.ver-story summary{cursor:pointer;list-style:none;padding:11px 14px;font-size:13px;font-weight:700;color:var(--p);display:flex;align-items:center;gap:8px}
+.ver-story summary::-webkit-details-marker{display:none}
+.ver-story summary .fa-chevron-down{margin-left:auto;font-size:11px;transition:transform .2s}
+.ver-story[open] summary .fa-chevron-down{transform:rotate(180deg)}
+.ver-story-body{padding:2px 16px 14px;font-size:13.5px;line-height:1.7;color:var(--ink2)}
+.ver-story-body p{margin-bottom:10px}
+.pay-box{background:var(--ps);border:1.5px solid var(--pm);border-radius:var(--r-sm);padding:15px 17px;margin-bottom:16px}
+.pay-h{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:800;color:var(--ink);margin-bottom:12px}
+.pay-h i{color:var(--p)}
+.pay-row{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;margin-bottom:12px}
+.pay-qr{width:150px;height:auto;border-radius:10px;background:#fff;border:1px solid var(--line)}
+.pay-qr-missing{display:none;width:150px;padding:14px 10px;border-radius:10px;background:#fff;border:1.5px dashed var(--pm);font-size:12px;line-height:1.45;color:var(--ink3);text-align:center}
+.pay-qr-missing i{display:block;font-size:22px;color:var(--p);margin-bottom:6px}
+.pay-steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.pay-steps li{display:flex;gap:9px;font-size:13px;line-height:1.45;color:var(--ink2)}
+.pay-steps li b{flex:none;width:20px;height:20px;border-radius:50%;background:var(--p);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.pay-safe{display:flex;gap:8px;font-size:12.5px;line-height:1.5;color:var(--ink3);margin-top:4px}
+.pay-safe i{color:var(--p);margin-top:2px}
+@media(max-width:480px){.pay-row{grid-template-columns:1fr}.pay-qr,.pay-qr-missing{width:190px;margin:0 auto}}
+#make1give1{scroll-margin-top:140px}
+.ver-story-sign{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:var(--p);margin-bottom:0!important}
 </style>
 </head>
 <body>
@@ -797,10 +819,54 @@ textarea.reg-in{resize:vertical;min-height:62px}
   <div class="sec-eyebrow"><span class="live-dot">Live &amp; Upcoming</span></div>
   <div class="sec-h2">Ongoing Events &amp; <em>Shows</em></div>
 
+  <!-- FEATURED (UPCOMING EVENT): MAKE 1 GIVE 1 — Secret Santa pottery at Veranda Pottery
+       Wednesday 25 November 2026 · 2:00 – 5:00 PM · 15 seats · $15, paid by ABA / KHQR in the booking form
+       Every piece becomes a Christmas gift for a child at PIO (People Improvement Organization).
+       Files in ./imgg/: make1give1.jpg (cover), make1give1.mp4 (promo video), aba-khqr-15.png (payment QR)
+       The card hides itself after the event (data-ends). -->
+  <div class="feat-card" id="make1give1" data-cat="craft" data-city="phnom-penh" data-price="15" data-ends="2026-11-25T17:00:00+07:00">
+    <div class="fc-img">
+      <img src="./imgg/make1give1.jpg" alt="Make 1 Give 1 — a Secret Santa pottery workshop" onclick="lbOpenList([{type:'video',src:'./imgg/make1give1.mp4',poster:'./imgg/make1give1.jpg'}],'Make 1 Give 1','Make 1 Give 1 · Secret Santa Pottery at Veranda Pottery',0)" style="cursor:pointer;object-position:50% 40%">
+      <button type="button" class="fc-gallery-btn" onclick="lbOpenList([{type:'video',src:'./imgg/make1give1.mp4',poster:'./imgg/make1give1.jpg'}],'Make 1 Give 1','Make 1 Give 1 · Secret Santa Pottery at Veranda Pottery',0)"><i class="fas fa-play"></i> Watch video</button>
+      <div class="fc-badges">
+        <span class="ev-badge b-featured">🎁 Give back</span>
+        <span class="ev-badge b-craft">🏺 Pottery</span>
+        <span class="ev-badge b-show">🎄 Wed 25 Nov</span>
+      </div>
+      <div class="fc-seats">
+        <div class="sb-wrap">
+          <div class="sb-top"><span class="sb-lbl">Seats</span><span class="sb-num">15 guests only</span></div>
+          <div class="sb-track"><div class="sb-fill fill-green" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-partner"><div class="fc-p-ico">🎁</div><div class="fc-p-name">TOSTRIP × VERANDA POTTERY · PHNOM PENH</div></div>
+      <div class="fc-title">Make 1 Give 1 — Secret Santa Pottery</div>
+      <p class="fc-desc">Spend an afternoon at Veranda Pottery shaping and painting your own clay piece with their potters — then give it away. You become a Secret Santa: your piece is fired, wrapped with a card from you, and delivered by the TosTrip team to a child at PIO (People Improvement Organization) before Christmas. Snacks and drinks included.</p>
+      <div class="fc-meta">
+        <div class="fc-meta-i"><i class="fas fa-calendar"></i> Wednesday 25 November 2026 · 2:00 PM</div>
+        <div class="fc-meta-i"><i class="fas fa-clock"></i> About 3 hours</div>
+        <div class="fc-meta-i"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.app.goo.gl/JDPeSfkXWXcAsByVA?g_st=ic" target="_blank" rel="noopener">Veranda Pottery, #12A St. 312, Tonle Bassac</a></div>
+        <div class="fc-meta-i"><i class="fas fa-users"></i> 15 guests only</div>
+        <div class="fc-meta-i"><i class="fas fa-cookie-bite"></i> Snacks &amp; drinks included</div>
+      </div>
+      <div class="countdown-row" id="cd-make1give1"></div>
+      <div class="fc-actions">
+        <button class="btn-primary" onclick="openModal('Make 1 Give 1 — Secret Santa Pottery','🎁','craft','TosTrip × Veranda Pottery','Phnom Penh',15,'About 3 hrs',15,'2026-11-25T14:00:00+07:00',{single:true,noDiscount:true,payQR:true})">
+          <i class="fas fa-gift"></i> Join as a Secret Santa
+        </button>
+        <button type="button" class="btn-outline-sm btn-watch" onclick="lbOpenList([{type:'video',src:'./imgg/make1give1.mp4',poster:'./imgg/make1give1.jpg'}],'Make 1 Give 1','Make 1 Give 1 · Secret Santa Pottery at Veranda Pottery',0)"><i class="fas fa-play-circle"></i> Watch video</button>
+        <button class="btn-outline-sm" onclick="toggleSave(this)"><i class="far fa-heart"></i> Save</button>
+        <div class="fc-price">$15 <span>/person</span></div>
+      </div>
+    </div>
+  </div>
+
   <!-- FEATURED: POTTERY WORKSHOP — Veranda Pottery, Phnom Penh
        Host: Jinsun · Telegram 016 783 083 · verandacoffee28112025@gmail.com
        Open 8:00 AM – 7:00 PM · max 15 guests · $15 per person
-       Photos & video in ./imgg/: pottery.jpg (cover), pottery1.jpg, pot3.jpg, pot4.jpg, pot.MOV
+       Photos & video in ./imgg/: pottery.jpg (cover), pot3.jpg, pot4.jpg, pot.MOV (pottery1.jpg is hidden, see VER_SKIP)
        New photos named pottery2.jpg … pottery30.jpg or pot1.jpg … pot30.jpg are added automatically -->
   <div class="feat-card" id="veranda-event" data-cat="craft" data-city="phnom-penh" data-price="15">
     <div class="fc-img">
@@ -823,7 +889,17 @@ textarea.reg-in{resize:vertical;min-height:62px}
     <div class="fc-body">
       <div class="fc-partner"><div class="fc-p-ico">🏺</div><div class="fc-p-name">VERANDA POTTERY · TONLE BASSAC · PHNOM PENH</div></div>
       <div class="fc-title">Pottery Workshop</div>
-      <p class="fc-desc">Watch Veranda's potters shape clay by hand, then make your own little pot, cup or ornament from local clay and paint it in your own colours. A relaxed, hands-on session at Veranda Pottery in Tonle Bassac — no experience needed.</p>
+      <p class="fc-desc">Veranda works with the villagers of Andong Russei in Kampong Chhnang, where families have made pottery for more than a thousand years, creating new designs that honour their ancestors' craft. In the pottery workshop you create something with your own hands, then rest in a warm, peaceful space with homemade bread and coffee. Every piece helps sustain the village.</p>
+      <details class="ver-story">
+        <summary><i class="fas fa-book-open"></i> Read Veranda's story <i class="fas fa-chevron-down"></i></summary>
+        <div class="ver-story-body">
+          <p>In Kampong Chhnang, Cambodia, lies Andong Russei, a village that has crafted pottery for more than a thousand years. For generations, the villagers made small traditional clay pots, shaping their lives around this ancient craft. But as modern life rushed in, their pottery sold less and less, and many had no choice but to leave behind their heritage and work in nearby factories.</p>
+          <p>Veranda was born from a wish to preserve this beautiful tradition. Together with the villagers, we create pottery with new designs while honoring the spirit of their ancestors. We are here to share the timeless culture and stories of Cambodia with the world.</p>
+          <p>On December 13, 2025, we opened our doors. Every piece of pottery you purchase becomes a part of protecting and sustaining this village.</p>
+          <p>We also prepare small homemade breads and coffee brewed with carefully selected beans. Here, you will find a warm and peaceful space to rest, and a pottery workshop where you can create something with your own hands.</p>
+          <p class="ver-story-sign">Together, in love.</p>
+        </div>
+      </details>
       <div class="ver-thumbs" id="verThumbs"></div>
       <div class="fc-meta">
         <div class="fc-meta-i"><i class="fas fa-calendar"></i> Daily</div>
@@ -832,6 +908,7 @@ textarea.reg-in{resize:vertical;min-height:62px}
         <div class="fc-meta-i"><i class="fas fa-users"></i> Max 15 guests</div>
       </div>
       <div class="oud-status-lbl" id="verStatusLbl" style="margin-bottom:16px">Open daily · 8:00 AM – 7:00 PM</div>
+      <a href="#make1give1" class="now-on" style="margin-bottom:16px"><span class="live-dot">Special</span><strong>Make 1 Give 1</strong><span class="now-on-sub">Secret Santa pottery · Wed 25 Nov · 2 PM</span><i class="fas fa-chevron-right"></i></a>
       <div class="fc-actions">
         <button class="btn-primary" onclick="openModal('Pottery Workshop','🏺','craft','Veranda Pottery · Tonle Bassac','Phnom Penh',15,'8 AM – 7 PM',15,null)">
           <i class="fas fa-ticket-alt"></i> Book Now
@@ -1064,7 +1141,7 @@ textarea.reg-in{resize:vertical;min-height:62px}
           <div class="wk-p-name">Veranda Pottery · Tonle Bassac · Phnom Penh</div>
         </div>
         <div class="wk-title">Pottery Workshop</div>
-        <p class="wk-desc">Make your own little pot, cup or ornament from local clay with Veranda's potters, then paint it. Relaxed, hands-on and beginner-friendly.</p>
+        <p class="wk-desc">Create something with your own hands at Veranda, which works with Andong Russei, a Kampong Chhnang pottery village with a thousand-year tradition. Homemade bread and coffee too.</p>
         <div class="wk-meta">
           <div class="wk-mi"><i class="fas fa-clock"></i> 8 AM – 7 PM</div>
           <div class="wk-mi"><i class="fas fa-users"></i> Max 15</div>
@@ -1598,8 +1675,8 @@ textarea.reg-in{resize:vertical;min-height:62px}
         </div>
       </div>
 
-      <label class="fl" style="margin-bottom:7px">Promo / Referral code <span style="font-weight:400;color:var(--ink4)">— TOSTRIP2026 saves $5 · referral codes save 10%</span></label>
-      <div class="ref-row">
+      <label class="fl" id="codeLbl" style="margin-bottom:7px">Promo / Referral code <span style="font-weight:400;color:var(--ink4)">— TOSTRIP2026 saves $5 · referral codes save 10%</span></label>
+      <div class="ref-row" id="codeRow">
         <div class="ref-field">
           <i class="fas fa-tag"></i>
           <input type="text" id="mCode" placeholder="e.g. TOSTRIP2026" maxlength="12" oninput="this.value=this.value.toUpperCase()">
@@ -1635,6 +1712,22 @@ textarea.reg-in{resize:vertical;min-height:62px}
           <div class="ps-row ps-disc-row" id="psDiscRow"><span id="psDiscLabel">Promo discount</span><span class="ps-green" id="psDisc">–$0.00</span></div>
           <div class="ps-row"><span>Total</span><span id="psTotal">$44.00</span></div>
         </div>
+        <!-- ABA / KHQR payment — shown only for events paid online (payQR), e.g. Make 1 Give 1.
+             Upload the QR as ./imgg/aba-khqr-15.png -->
+        <div class="pay-box" id="payBlock" style="display:none">
+          <div class="pay-h"><i class="fas fa-qrcode"></i> Pay <span id="payAmt">$15.00</span> by ABA / KHQR</div>
+          <div class="pay-row">
+            <img id="payQRImg" class="pay-qr" alt="TosTrip payment QR code" onerror="this.style.display='none';this.nextElementSibling.style.display='block';document.getElementById('bPayer').required=false">
+            <div class="pay-qr-missing"><i class="fas fa-qrcode"></i>Payment QR coming soon — confirm your booking and we'll email you how to pay.</div>
+            <ol class="pay-steps">
+              <li><b>1</b><span>Open ABA, ACLEDA, Wing or any Bakong / KHQR app.</span></li>
+              <li><b>2</b><span>Scan this QR and pay exactly <strong id="payAmt2">$15.00</strong>.</span></li>
+              <li><b>3</b><span>Type the name on your bank account below, then confirm.</span></li>
+            </ol>
+          </div>
+          <div class="fg"><label class="fl">Name on your bank account <span class="req">*</span></label><input type="text" id="bPayer" class="fi" placeholder="As shown in your banking app"></div>
+          <div class="pay-safe"><i class="fas fa-lock"></i><span>Only pay through this page on TosTrip. TosTrip will never ask for your PIN, password or OTP code.</span></div>
+        </div>
         <div class="ok-note"><i class="fas fa-shield-alt"></i><span><strong>Free cancellation</strong> up to 48 hours before your session.</span></div>
         <button type="submit" class="m-btn" id="submitBtn"><i class="fas fa-check-circle"></i> Confirm Booking — <span id="btnTotal">$44</span></button>
       </form>
@@ -1643,6 +1736,7 @@ textarea.reg-in{resize:vertical;min-height:62px}
     <div class="success-body" id="successWrap" style="display:none">
       <div class="succ-ico">🎉</div>
       <h2>You're booked in!</h2>
+      <p id="succPayNote" style="display:none"><strong>Payment:</strong> we'll match your ABA / KHQR payment to your booking and email you if anything is missing.</p>
       <p id="succMsg">Confirmation is heading to your inbox. Here's your personal referral code — share it with friends and earn $5 credit every time someone books.</p>
       <div class="succ-code-box">
         <div class="scb-lbl">Your Referral Code</div>
@@ -1704,6 +1798,9 @@ const EVENT_HOSTS = {
     daily: true,                       // open every day → guests pick a day
     hours: '8:00 AM – 7:00 PM',
     closeHour: 19                      // after 7 PM, the first day offered is tomorrow
+  },
+  'Make 1 Give 1 — Secret Santa Pottery': {
+    host:  { name: 'Jinsun (Veranda Pottery)', email: 'verandacoffee28112025@gmail.com' }
   }
 };
 
@@ -1938,14 +2035,16 @@ function addSwipe(el, onPrev, onNext){
 const VER_DIR = './imgg/';
 const VER_PHOTO_MAX = 30;
 const VER_VIDEOS = [ { type:'video', src: VER_DIR + 'pot.MOV' } ];
+const VER_SKIP = ['pottery1.jpg'];   // photos in imgg that should NOT show in the gallery
 let VER_MEDIA = [ { type:'img', src: VER_DIR + 'pottery.jpg', alt:'Pottery Workshop at Veranda Pottery' } ];
 async function verLoadMedia(){
   const photos = [{ type:'img', src: VER_DIR + 'pottery.jpg' }];
   for(let n = 1; n <= VER_PHOTO_MAX; n++) photos.push({ type:'img', src: VER_DIR + 'pottery' + n + '.jpg' });
   for(let n = 1; n <= VER_PHOTO_MAX; n++) photos.push({ type:'img', src: VER_DIR + 'pot' + n + '.jpg' });
-  const okP = await Promise.all(photos.map(m=>probeImg(m.src)));
+  const wanted = photos.filter(m=>!VER_SKIP.includes(m.src.split('/').pop()));
+  const okP = await Promise.all(wanted.map(m=>probeImg(m.src)));
   const okV = await Promise.all(VER_VIDEOS.map(m=>probeVid(m.src)));
-  const fp = photos.filter((_,i)=>okP[i]), fv = VER_VIDEOS.filter((_,i)=>okV[i]);
+  const fp = wanted.filter((_,i)=>okP[i]), fv = VER_VIDEOS.filter((_,i)=>okV[i]);
   if(!fp.length && !fv.length) return;
   fp.forEach((m,i)=>{ m.alt = 'Pottery Workshop at Veranda Pottery, photo ' + (i+1); });
   // cover photo first, then the video, then the other photos
@@ -2326,6 +2425,7 @@ function buildCountdown(elId, target){
   };
   tick(); setInterval(tick, 1000);
 }
+buildCountdown('cd-make1give1', '2026-11-25T14:00:00+07:00');
 buildCountdown('cd-apsara', '2025-03-15T19:00:00');
 buildCountdown('cd-cooking', '2025-03-16T09:00:00');
 
@@ -2480,12 +2580,16 @@ function refreshTotal(){
 
   document.getElementById('psTotal').textContent = '$' + tot.toFixed(2);
   document.getElementById('btnTotal').textContent = (tot === 0 && base === 0) ? 'Free' : '$' + tot.toFixed(2);
+  ['payAmt','payAmt2'].forEach(id=>{ const e = document.getElementById(id); if(e) e.textContent = '$' + tot.toFixed(2); });
 }
 
 /* OPEN MODAL — regular workshops */
-function openModal(title, icon, cat, partner, city, price, dur, maxS, eventDate){
+function openModal(title, icon, cat, partner, city, price, dur, maxS, eventDate, opts){
   nakDiscount = 0;
-  curBooking = {title, icon, cat, partner, city, price, dur, maxS, eventDate, isNak: false};
+  opts = opts || {};
+  // single: one fixed date · noDiscount: promo / referral codes don't apply · payQR: pay by ABA / KHQR in the form
+  curBooking = {title, icon, cat, partner, city, price, dur, maxS, eventDate, isNak: false,
+                single: !!opts.single, noDiscount: !!opts.noDiscount, payQR: !!opts.payQR};
   _setupModal();
 }
 
@@ -2521,8 +2625,10 @@ function _setupModal(){
     hdr.classList.remove('nak-header');
     submitBtn.classList.remove('nak-submit');
     nakNotice.style.display = 'none';
-    promoHint.style.display = isFree ? 'none' : 'flex';
+    promoHint.style.display = (isFree || curBooking.noDiscount) ? 'none' : 'flex';
   }
+  // promo / referral code field — not for events where codes don't apply
+  ['codeLbl','codeRow'].forEach(id=>{ document.getElementById(id).style.display = curBooking.noDiscount ? 'none' : ''; });
 
   // Pre-fill pending code (not needed for free workshops)
   const pending = sessionStorage.getItem('pendingCode');
@@ -2530,7 +2636,7 @@ function _setupModal(){
   codeInp.value = ''; codeInp.className = '';
   document.getElementById('discBadge').classList.remove('show');
 
-  if(pending && !curBooking.isNak && !isFree){
+  if(pending && !curBooking.isNak && !isFree && !curBooking.noDiscount){
     codeInp.value = pending;
     applyModalCode();
   }
@@ -2539,7 +2645,17 @@ function _setupModal(){
   document.getElementById('formWrap').style.display = 'block';
   document.getElementById('successWrap').style.display = 'none';
   document.getElementById('bForm').reset();
-  document.getElementById('bQty').value = '2';
+  document.getElementById('bQty').value = curBooking.single ? '1' : '2';
+  // ABA / KHQR payment block — events paid online (e.g. Make 1 Give 1)
+  const payBlock = document.getElementById('payBlock');
+  payBlock.style.display = curBooking.payQR ? 'block' : 'none';
+  document.getElementById('bPayer').required = !!curBooking.payQR;
+  if(curBooking.payQR){
+    const qr = document.getElementById('payQRImg');
+    qr.style.display = ''; qr.nextElementSibling.style.display = 'none';
+    qr.src = './imgg/aba-khqr-15.png';
+  }
+  document.getElementById('succPayNote').style.display = curBooking.payQR ? 'block' : 'none';
   refreshTotal();
   document.getElementById('bookModal').classList.add('open');
 }
@@ -2567,6 +2683,20 @@ function buildSessions(baseDate){
     const grid = document.getElementById('sessGrid');
     grid.innerHTML = html;
     grid.querySelector('.sess-opt').classList.add('sel');
+    return;
+  }
+  if(curBooking.single){
+    const d = new Date(baseDate), tz = {timeZone:'Asia/Phnom_Penh'};
+    const lbl  = d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',...tz});
+    const full = d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric',...tz});
+    const time = d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',...tz});
+    const grid = document.getElementById('sessGrid');
+    grid.innerHTML = `<div class="sess-opt sel" data-label="${full}" onclick="pickSess(this)">
+      <input type="radio" name="sess" value="0" checked>
+      <div class="so-date">${lbl}</div>
+      <div class="so-time">${time}</div>
+      <div class="so-seats plenty">${curBooking.maxS} guests only</div>
+    </div>`;
     return;
   }
   const base = new Date(baseDate);
@@ -2628,7 +2758,8 @@ function submitBooking(e){
   const btn = e.target.querySelector('.m-btn');
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Confirming…'; btn.disabled = true;
 
-  const usedCode = document.getElementById('mCode').value || 'None';
+  const usedCode = curBooking.noDiscount ? 'None' : (document.getElementById('mCode').value || 'None');
+  const payerTxt = curBooking.payQR ? '\nPaid by ABA / KHQR — name on bank account: ' + (document.getElementById('bPayer').value.trim() || 'not given yet') : '';
   const sel = document.querySelector('.sess-opt.sel');
   const sessionTxt = sel
     ? (sel.dataset.label || sel.querySelector('.so-date').textContent) + ' · ' + sel.querySelector('.so-time').textContent
@@ -2655,7 +2786,7 @@ function submitBooking(e){
                   '\nBooking ref: ' + bookingRef +
                   (hostInfo ? '\nHost notified: ' + hostInfo.name + ' <' + hostInfo.email + '>' : '') +
                   '\nTotal: ' + (base === 0 ? 'FREE' : '$' + total) +
-                  '\nReferral code generated: ' + myCode,
+                  '\nReferral code generated: ' + myCode + payerTxt,
     request_type: curBooking.isNak ? 'Chef Nak Booking via TosTrip' : 'Workshop Booking',
     friend_name:  curBooking.partner,
     duration:     curBooking.dur,
@@ -2706,7 +2837,7 @@ function submitBooking(e){
       guests:      qty,
       message:     guestNotes + '\nTickets: ' + qty + '\nBooking ref: ' + bookingRef +
                    (usedCode !== 'None' ? '\nCode used: ' + usedCode : '') +
-                   '\nReferral code generated: ' + myCode
+                   '\nReferral code generated: ' + myCode + payerTxt
     }, EJ_KEY);
   };
 
@@ -2725,7 +2856,7 @@ function submitBooking(e){
       duration:    curBooking.dur,
       guests:      qty,
       total:       totalTxt,
-      message:     guestNotes + '\nBooking ref: ' + bookingRef,
+      message:     guestNotes + '\nBooking ref: ' + bookingRef + payerTxt,
       booking_ref: bookingRef
     }, EJ_HOST_KEY).catch(err=>{
       console.error('Guest receipt not sent:', err);
