@@ -669,6 +669,15 @@ textarea.reg-in{resize:vertical;min-height:62px}
   .succ-actions{flex-direction:column}
   .share-chs{flex-wrap:wrap}
 }
+
+/* VERANDA POTTERY — featured card gallery */
+#veranda-event{scroll-margin-top:140px}
+#verImg{cursor:zoom-in;transition:opacity .25s,transform .55s}
+#verVid{cursor:zoom-in}
+.ver-thumbs{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;margin-bottom:14px;scrollbar-width:thin}
+.ver-thumb{position:relative;flex:0 0 64px;height:64px;border-radius:10px;overflow:hidden;border:2px solid transparent;padding:0;background:var(--bg3);opacity:.6;transition:opacity .2s,border-color .2s}
+.ver-thumb img,.ver-thumb video{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ver-thumb.on,.ver-thumb:hover,.ver-thumb:focus-visible{opacity:1;border-color:var(--p)}
 </style>
 </head>
 <body>
@@ -787,6 +796,52 @@ textarea.reg-in{resize:vertical;min-height:62px}
 <div class="events-wrap">
   <div class="sec-eyebrow"><span class="live-dot">Live &amp; Upcoming</span></div>
   <div class="sec-h2">Ongoing Events &amp; <em>Shows</em></div>
+
+  <!-- FEATURED: POTTERY WORKSHOP — Veranda Pottery, Phnom Penh
+       Host: Jinsun · Telegram 016 783 083 · verandacoffee28112025@gmail.com
+       Open 8:00 AM – 7:00 PM · max 15 guests · $15 per person
+       Photos & video in ./imgg/: pottery.jpg (cover), pottery1.jpg, pot3.jpg, pot4.jpg, pot.MOV
+       New photos named pottery2.jpg … pottery30.jpg or pot1.jpg … pot30.jpg are added automatically -->
+  <div class="feat-card" id="veranda-event" data-cat="craft" data-city="phnom-penh" data-price="15">
+    <div class="fc-img">
+      <img id="verImg" src="./imgg/pottery.jpg" alt="Pottery Workshop at Veranda Pottery" onclick="verLbOpen()">
+      <video id="verVid" class="fc-vid" muted playsinline preload="metadata" onclick="verLbOpen()"></video>
+      <span class="fc-vid-badge" id="verVidBadge"><i class="fas fa-volume-mute"></i> Tap for sound</span>
+      <button type="button" class="fc-gallery-btn" onclick="verLbOpen()"><i class="fas fa-expand"></i> <span id="verCount">Photos &amp; video</span></button>
+      <div class="fc-badges">
+        <span class="ev-badge b-cooking" id="verOpenBadge">🟢 Open daily</span>
+        <span class="ev-badge b-craft">🏺 Craft</span>
+        <span class="ev-badge b-featured">✨ New on TosTrip</span>
+      </div>
+      <div class="fc-seats">
+        <div class="sb-wrap">
+          <div class="sb-top"><span class="sb-lbl" id="verDayLbl">Open daily</span><span class="sb-num">8:00 AM – 7:00 PM</span></div>
+          <div class="sb-track"><div class="sb-fill fill-green" id="verDayFill" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-partner"><div class="fc-p-ico">🏺</div><div class="fc-p-name">VERANDA POTTERY · TONLE BASSAC · PHNOM PENH</div></div>
+      <div class="fc-title">Pottery Workshop</div>
+      <p class="fc-desc">Watch Veranda's potters shape clay by hand, then make your own little pot, cup or ornament from local clay and paint it in your own colours. A relaxed, hands-on session at Veranda Pottery in Tonle Bassac — no experience needed.</p>
+      <div class="ver-thumbs" id="verThumbs"></div>
+      <div class="fc-meta">
+        <div class="fc-meta-i"><i class="fas fa-calendar"></i> Daily</div>
+        <div class="fc-meta-i"><i class="fas fa-clock"></i> 8:00 AM – 7:00 PM</div>
+        <div class="fc-meta-i"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.app.goo.gl/JDPeSfkXWXcAsByVA?g_st=ic" target="_blank" rel="noopener">#12A, St. 312, Tonle Bassac, Chamkarmon</a></div>
+        <div class="fc-meta-i"><i class="fas fa-users"></i> Max 15 guests</div>
+      </div>
+      <div class="oud-status-lbl" id="verStatusLbl" style="margin-bottom:16px">Open daily · 8:00 AM – 7:00 PM</div>
+      <div class="fc-actions">
+        <button class="btn-primary" onclick="openModal('Pottery Workshop','🏺','craft','Veranda Pottery · Tonle Bassac','Phnom Penh',15,'8 AM – 7 PM',15,null)">
+          <i class="fas fa-ticket-alt"></i> Book Now
+        </button>
+        <a class="btn-outline-sm" href="https://maps.app.goo.gl/JDPeSfkXWXcAsByVA?g_st=ic" target="_blank" rel="noopener"><i class="fas fa-directions"></i> Directions</a>
+        <button class="btn-outline-sm" onclick="toggleSave(this)"><i class="far fa-heart"></i> Save</button>
+        <div class="fc-price">$15 <span>/person</span></div>
+      </div>
+    </div>
+  </div>
 
   <!-- FEATURED (CURRENT EVENT): KHMER AGARWOOD (OUD) — Phnom Penh
        Host: Gech Horng · Telegram 081 567 864 · bungechhorng1993@gmail.com -->
@@ -995,6 +1050,41 @@ textarea.reg-in{resize:vertical;min-height:62px}
       </div>
     </div>
   <div class="wk-grid" id="wkGrid">
+
+    <!-- 0 Veranda Pottery — Phnom Penh · Host: Jinsun · Telegram 016 783 083 · verandacoffee28112025@gmail.com -->
+    <div class="wk-card" data-cat="craft" data-city="phnom-penh" data-price="15">
+      <div class="wk-img">
+        <img src="./imgg/pottery.jpg" alt="Pottery Workshop at Veranda Pottery">
+        <span class="wk-cat b-craft">🏺 Craft</span>
+        <span class="wk-avail av-open">Open</span>
+      </div>
+      <div class="wk-body">
+        <div class="wk-partner">
+          <div class="wk-p-ico">🏺</div>
+          <div class="wk-p-name">Veranda Pottery · Tonle Bassac · Phnom Penh</div>
+        </div>
+        <div class="wk-title">Pottery Workshop</div>
+        <p class="wk-desc">Make your own little pot, cup or ornament from local clay with Veranda's potters, then paint it. Relaxed, hands-on and beginner-friendly.</p>
+        <div class="wk-meta">
+          <div class="wk-mi"><i class="fas fa-clock"></i> 8 AM – 7 PM</div>
+          <div class="wk-mi"><i class="fas fa-users"></i> Max 15</div>
+          <div class="wk-mi"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.app.goo.gl/JDPeSfkXWXcAsByVA?g_st=ic" target="_blank" rel="noopener">St. 312, Tonle Bassac</a></div>
+        </div>
+        <div class="wk-bottom">
+          <div class="wk-price">
+            <div class="wk-price-lbl">Per person</div>
+            <div class="wk-price-val">$15</div>
+            <div class="wk-price-sub">$10 w/ TOSTRIP2026</div>
+          </div>
+          <div class="wk-btns">
+            <button class="btn-wkbook" onclick="openModal('Pottery Workshop','🏺','craft','Veranda Pottery · Tonle Bassac','Phnom Penh',15,'8 AM – 7 PM',15,null)">
+              <i class="fas fa-ticket-alt"></i> Book Now
+            </button>
+            <a class="btn-save" href="#veranda-event" title="See photos and video"><i class="fas fa-images"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- 1 Mordock Ceramic -->
     <div class="wk-card" data-cat="craft" data-city="siem-reap">
@@ -1464,7 +1554,7 @@ textarea.reg-in{resize:vertical;min-height:62px}
   <figure class="lb-fig">
     <img id="lbImg" src="./img/tree1.jpg" alt="Khmer Agarwood (Oud)">
     <video id="lbVid" controls playsinline preload="metadata" hidden></video>
-    <figcaption><span>Khmer Agarwood (Oud) · Chip Mong 271 Mega Mall</span><span id="lbCount">1 / 1</span></figcaption>
+    <figcaption><span id="lbCap">Khmer Agarwood (Oud) · Chip Mong 271 Mega Mall</span><span id="lbCount">1 / 1</span></figcaption>
   </figure>
   <button type="button" class="lb-nav next" onclick="lbGo(lbIdx+1)" aria-label="Next photo"><i class="fas fa-chevron-right"></i></button>
   <div class="lb-thumbs" id="lbThumbs"></div>
@@ -1589,13 +1679,15 @@ textarea.reg-in{resize:vertical;min-height:62px}
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
-const EJ_KEY='gpdCGcS_YFBkq0RFH', EJ_SVC='service_ns14klj', EJ_TPL='template_k8n3dup';
+const EJ_KEY='f6HV0gopdt8FE-mw7', EJ_SVC='service_xum7qyo', EJ_TPL='template_a9e8je3';   // main TosTrip template ("Contact Us")
 if(typeof emailjs!=='undefined') emailjs.init(EJ_KEY);
 
 /* ─── HOST NOTIFICATION EMAILS ───────────────────────────────────
-   When someone books a workshop listed below, a second email is sent
-   straight to that host. It uses its own EmailJS template whose
-   "To Email" field is set to {{to_email}} (see setup notes).        */
+   Booking emails use the main TosTrip template (EJ_TPL, "Contact Us").
+   It always goes to TosTrip (the template's To Email). In that template's
+   Bcc field put {{to_email}}: when someone books a workshop listed below,
+   the host gets the same email too. Other forms send no to_email, so
+   their Bcc stays empty.                                             */
 const EJ_HOST_SVC = 'service_9ogox5a';      // EmailJS service for host emails
 const EJ_HOST_KEY = 'SmoLQAp-ij_aoJbAd';     // public key of that EmailJS account
 const EJ_TPL_HOST = 'template_l1sw4z3';      // host notification template (To Email = {{to_email}})
@@ -1606,6 +1698,12 @@ const EVENT_HOSTS = {
     host:  { name: 'Gech Horng', email: 'bungechhorng1993@gmail.com' },
     daily: true,                       // open every day → guests pick a visit day
     hours: '9:00 AM – 10:00 PM'
+  },
+  'Pottery Workshop': {
+    host:  { name: 'Jinsun (Veranda Pottery)', email: 'verandacoffee28112025@gmail.com' },
+    daily: true,                       // open every day → guests pick a day
+    hours: '8:00 AM – 7:00 PM',
+    closeHour: 19                      // after 7 PM, the first day offered is tomorrow
   }
 };
 
@@ -1643,6 +1741,7 @@ const OUD_EXTRA_MEDIA = [
   // { type:'video', src:'./video/promo.mp4', poster:'./video/promo.jpg' },
 ];
 let oudMedia = [{type:'img', src:'./img/tree1.jpg'}];
+let lbList = null, lbName = 'Khmer Agarwood (Oud)';   // lbList null = the lightbox shows the Oud gallery
 let heroIdx = 0, cardIdx = 0, lbIdx = 0, heroTimer = null, cardTimer = null, heroHover = false;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isVid = i => oudMedia[i] && oudMedia[i].type === 'video';
@@ -1693,9 +1792,7 @@ function renderOudGallery(){
   document.querySelectorAll('.oud-photo-count').forEach(e=>e.textContent = label);
   document.getElementById('oudThumbs').innerHTML = n < 2 ? '' : oudMedia.map((m,i)=>
     `<button type="button" class="oud-thumb${m.type==='video'?' is-vid':''}" aria-label="Show ${m.type} ${i+1}" onclick="cardGo(${i},true)">${thumbHTML(m)}</button>`).join('');
-  document.getElementById('lbThumbs').innerHTML = oudMedia.map((m,i)=>
-    `<button type="button" class="${m.type==='video'?'is-vid':''}" aria-label="${m.type} ${i+1}" onclick="lbGo(${i})">${thumbHTML(m)}</button>`).join('');
-  document.getElementById('oudLb').classList.toggle('single', n < 2);
+  if(!lbList) lbThumbsFor(oudMedia);
   document.getElementById('oudWatchBtn').hidden = nV === 0;
   const cv = document.getElementById('oudVid');
   cv.onended = ()=>cardGo(cardIdx+1);
@@ -1749,18 +1846,31 @@ function startOudAutoplay(){
 }
 
 /* Lightbox (photos and videos) */
+function lbThumbsFor(list){
+  document.getElementById('lbThumbs').innerHTML = list.map((m,i)=>
+    `<button type="button" class="${m.type==='video'?'is-vid':''}" aria-label="${m.type} ${i+1}" onclick="lbGo(${i})">${thumbHTML(m)}</button>`).join('');
+  document.getElementById('oudLb').classList.toggle('single', list.length < 2);
+}
+// open the lightbox with another gallery's photos and videos
+function lbOpenList(list, name, caption, i){
+  lbList = list; lbName = name;
+  lbThumbsFor(list);
+  document.getElementById('lbCap').textContent = caption;
+  lbOpen(i);
+}
 function lbOpen(i){
   const lb = document.getElementById('oudLb');
   lb.classList.add('open'); lb.setAttribute('aria-hidden','false');
   document.body.style.overflow = 'hidden';
-  document.querySelectorAll('#heroShow video, #oudVid').forEach(v=>v.pause());
+  document.querySelectorAll('#heroShow video, #oudVid, #verVid').forEach(v=>v.pause());
   lbGo(i || 0);
   lb.querySelector('.lb-close').focus();
 }
 function lbOpenVideo(){ const i = oudMedia.findIndex(m=>m.type==='video'); lbOpen(i < 0 ? 0 : i); }
 function lbGo(i){
-  const n = oudMedia.length; lbIdx = (i + n) % n;
-  const m = oudMedia[lbIdx];
+  const L = lbList || oudMedia;
+  const n = L.length; lbIdx = (i + n) % n;
+  const m = L[lbIdx];
   const im = document.getElementById('lbImg'), v = document.getElementById('lbVid');
   if(m.type === 'video'){
     im.hidden = true; v.hidden = false;
@@ -1768,7 +1878,7 @@ function lbGo(i){
     v.muted = false; const p = v.play(); if(p) p.catch(()=>{});
   } else {
     v.pause(); v.hidden = true; im.hidden = false;
-    im.src = m.src; im.alt = 'Khmer Agarwood (Oud) photo ' + (lbIdx+1);
+    im.src = m.src; im.alt = m.alt || (lbName + ' photo ' + (lbIdx+1));
   }
   document.getElementById('lbCount').textContent = (lbIdx+1) + ' / ' + n;
   const thumbs = document.querySelectorAll('#lbThumbs button');
@@ -1781,6 +1891,13 @@ function lbClose(){
   lb.classList.remove('open'); lb.setAttribute('aria-hidden','true');
   document.body.style.overflow = '';
   document.getElementById('lbVid').pause();
+  if(lbList){   // back to the Oud gallery
+    lbList = null; lbName = 'Khmer Agarwood (Oud)';
+    lbThumbsFor(oudMedia);
+    document.getElementById('lbCap').textContent = 'Khmer Agarwood (Oud) · Chip Mong 271 Mega Mall';
+    verGo(verIdx); verAuto();
+    return;
+  }
   heroGo(heroIdx); cardGo(cardIdx);
 }
 document.addEventListener('keydown', e=>{
@@ -1811,6 +1928,89 @@ function addSwipe(el, onPrev, onNext){
   addSwipe(document.getElementById('oudLb').querySelector('.lb-fig'), ()=>lbGo(lbIdx-1), ()=>lbGo(lbIdx+1));
   renderOudGallery();
   loadOudMedia();
+})();
+
+/* ════ VERANDA POTTERY — photos & video (Ongoing Events card) ════
+   Files in ./imgg/ :
+     photos  pottery.jpg (cover), pottery1.jpg … pottery30.jpg, pot1.jpg … pot30.jpg
+     video   pot.MOV
+   Missing names are skipped automatically: to add a photo, upload it with the next free name (e.g. pot5.jpg). */
+const VER_DIR = './imgg/';
+const VER_PHOTO_MAX = 30;
+const VER_VIDEOS = [ { type:'video', src: VER_DIR + 'pot.MOV' } ];
+let VER_MEDIA = [ { type:'img', src: VER_DIR + 'pottery.jpg', alt:'Pottery Workshop at Veranda Pottery' } ];
+async function verLoadMedia(){
+  const photos = [{ type:'img', src: VER_DIR + 'pottery.jpg' }];
+  for(let n = 1; n <= VER_PHOTO_MAX; n++) photos.push({ type:'img', src: VER_DIR + 'pottery' + n + '.jpg' });
+  for(let n = 1; n <= VER_PHOTO_MAX; n++) photos.push({ type:'img', src: VER_DIR + 'pot' + n + '.jpg' });
+  const okP = await Promise.all(photos.map(m=>probeImg(m.src)));
+  const okV = await Promise.all(VER_VIDEOS.map(m=>probeVid(m.src)));
+  const fp = photos.filter((_,i)=>okP[i]), fv = VER_VIDEOS.filter((_,i)=>okV[i]);
+  if(!fp.length && !fv.length) return;
+  fp.forEach((m,i)=>{ m.alt = 'Pottery Workshop at Veranda Pottery, photo ' + (i+1); });
+  // cover photo first, then the video, then the other photos
+  VER_MEDIA = fp.length ? [fp[0], ...fv.slice(0,1), ...fp.slice(1), ...fv.slice(1)] : fv;
+  verRender();
+}
+let verIdx = 0, verTimer = null;
+function verRender(){
+  const n = VER_MEDIA.length, nP = VER_MEDIA.filter(m=>m.type==='img').length, nV = n - nP;
+  document.getElementById('verThumbs').innerHTML = n < 2 ? '' : VER_MEDIA.map((m,i)=>
+    `<button type="button" class="ver-thumb${m.type==='video'?' is-vid':''}" aria-label="Show ${m.type==='video'?'video':'photo'} ${i+1}" onclick="verGo(${i},true)">${thumbHTML(m)}</button>`).join('');
+  document.getElementById('verCount').textContent =
+    [nP ? nP + (nP===1?' photo':' photos') : '', nV ? nV + (nV===1?' video':' videos') : ''].filter(Boolean).join(' · ');
+  document.getElementById('verVid').onended = ()=>verGo(verIdx+1);
+  verGo(0); verAuto();
+}
+function verGo(i, user){
+  const n = VER_MEDIA.length; verIdx = (i + n) % n;
+  const m = VER_MEDIA[verIdx];
+  const img = document.getElementById('verImg'), vid = document.getElementById('verVid'), badge = document.getElementById('verVidBadge');
+  if(m.type === 'video'){
+    if(!vid.src.endsWith(m.src.replace('./',''))){ vid.src = m.src; if(m.poster) vid.poster = m.poster; else vid.removeAttribute('poster'); }
+    vid.classList.add('on'); badge.classList.add('on');
+    if(!reduceMotion) playMuted(vid);
+  } else {
+    vid.pause(); vid.classList.remove('on'); badge.classList.remove('on');
+    if(!img.src.endsWith(m.src.replace('./',''))){
+      img.style.opacity = 0;
+      setTimeout(()=>{ img.src = m.src; img.alt = m.alt || 'Veranda Pottery photo'; img.style.opacity = 1; }, 220);
+    }
+  }
+  document.querySelectorAll('.ver-thumb').forEach((e,k)=>e.classList.toggle('on', k===verIdx));
+  if(user) verAuto();
+}
+function verAuto(){
+  clearInterval(verTimer);
+  if(VER_MEDIA.length < 2 || reduceMotion) return;
+  // while the video plays, wait for it to finish (its 'ended' event moves on)
+  verTimer = setInterval(()=>{ if(VER_MEDIA[verIdx].type !== 'video') verGo(verIdx+1); }, 4500);
+}
+function verLbOpen(i){
+  clearInterval(verTimer);
+  lbOpenList(VER_MEDIA, 'Veranda Pottery', 'Pottery Workshop · Veranda Pottery, Tonle Bassac', i ?? verIdx);
+}
+(function(){
+  verRender();
+  verLoadMedia();
+  addSwipe(document.querySelector('#veranda-event .fc-img'), ()=>verGo(verIdx-1,true), ()=>verGo(verIdx+1,true));
+  // open / closed status, Cambodia time (UTC+7): 8:00 AM – 7:00 PM
+  const OPEN = 8*3600, CLOSE = 19*3600, pad = n => String(n).padStart(2,'0');
+  const lbl = document.getElementById('verStatusLbl'), badge = document.getElementById('verOpenBadge');
+  const fill = document.getElementById('verDayFill'), dayLbl = document.getElementById('verDayLbl');
+  const tick = ()=>{
+    const t = new Date(Date.now() + 7*36e5);
+    const secs = t.getUTCHours()*3600 + t.getUTCMinutes()*60 + t.getUTCSeconds();
+    const open = secs >= OPEN && secs < CLOSE;
+    const diff = open ? CLOSE - secs : (secs < OPEN ? OPEN - secs : OPEN + 86400 - secs);
+    const h = Math.floor(diff/3600), m = Math.floor(diff%3600/60);
+    lbl.textContent = open ? '🟢 Open now · closes in ' + h + 'h ' + pad(m) + 'm' : '⏰ Closed now · opens in ' + h + 'h ' + pad(m) + 'm';
+    lbl.classList.toggle('closed', !open);
+    badge.textContent = open ? '🟢 Open now' : '🕗 Opens 8:00 AM';
+    dayLbl.textContent = open ? 'Open today' : 'Closed — opens 8:00 AM';
+    fill.style.width = open ? ((secs-OPEN)/(CLOSE-OPEN)*100).toFixed(1) + '%' : '0%';
+  };
+  tick(); setInterval(tick, 30000);
 })();
 
 /* ════ WELCOME POP-UP ════
@@ -2347,9 +2547,10 @@ function _setupModal(){
 function buildSessions(baseDate){
   const opt = EVENT_HOSTS[curBooking.title];
   if(opt && opt.daily){
-    // Cambodia time; after 10 PM start from tomorrow
+    // Cambodia time; after closing time (default 10 PM) start from tomorrow
     const ict = new Date(Date.now() + 7*36e5);
-    const startOffset = ict.getUTCHours() >= 22 ? 1 : 0;
+    const startOffset = ict.getUTCHours() >= (opt.closeHour || 22) ? 1 : 0;
+    const seatsTxt = curBooking.price === 0 ? 'Free · open to all' : 'Max ' + curBooking.maxS + ' guests';
     let html = '';
     for(let i = 0; i < 4; i++){
       const d = new Date(Date.UTC(ict.getUTCFullYear(), ict.getUTCMonth(), ict.getUTCDate() + startOffset + i));
@@ -2360,7 +2561,7 @@ function buildSessions(baseDate){
         <input type="radio" name="sess" value="${i}" ${i===0?'checked':''}>
         <div class="so-date">${lbl}</div>
         <div class="so-time">${opt.hours}</div>
-        <div class="so-seats plenty">Free · open to all</div>
+        <div class="so-seats plenty">${seatsTxt}</div>
       </div>`;
     }
     const grid = document.getElementById('sessGrid');
@@ -2475,9 +2676,11 @@ function submitBooking(e){
   // Email straight to the workshop host (never blocks the booking if it fails)
   const sendHost = ()=>{
     if(typeof emailjs === 'undefined') return Promise.resolve();
-    const toEmail = hostInfo ? hostInfo.email : EJ_ADMIN_EMAIL;   // no host → booking goes to TosTrip
+    // The template's To Email is TosTrip's inbox; its Bcc field is {{to_email}}, so the host gets a copy.
+    // No host listed → to_email stays empty and only TosTrip gets the email.
+    const toEmail = hostInfo ? hostInfo.email : '';
     const toName  = hostInfo ? hostInfo.name  : 'TosTrip';
-    // host / TosTrip booking email → template_k8n3dup (main TosTrip EmailJS account)
+    // host / TosTrip booking email → template_a9e8je3 ("Contact Us", main TosTrip EmailJS account)
     return emailjs.send(EJ_SVC, EJ_TPL, {
       ...params,                       // old field names (user_name, booking_date, lifestyle…)
       to_email:    toEmail,
