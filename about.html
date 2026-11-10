@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Us — TosTrip Cambodia</title>
+<meta name="description" content="Meet the TosTrip team: young Cambodians connecting travellers with real local life through Live Like a Local, Rent a Friend and hands-on workshops. As featured in Cambodianess.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="About TosTrip — We Built the Trip We Wished Existed">
+<meta property="og:description" content="A student startup from Phnom Penh helping travellers experience Cambodia the Cambodian way. As featured in Cambodianess.">
+<meta property="og:image" content="https://tostrip.co/imgg/tostrip123.jpg">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
@@ -197,6 +202,70 @@ button{font-family:inherit;cursor:pointer}
 .social-links a{color:rgba(255,255,255,.4);font-size:15px;transition:color .2s}
 .social-links a:hover{color:#fff}
 
+/* ── MILESTONE LINK ── */
+.ms-link{color:var(--p);font-weight:600;white-space:nowrap}
+.ms-link:hover{text-decoration:underline}
+
+/* ── IN THE NEWS · CAMBODIANESS ── */
+.press-section{background:linear-gradient(180deg,#f5f3ff 0%,#faf9ff 60%,#fff 100%);border-top:1.5px solid var(--pm);border-bottom:1.5px solid var(--line);scroll-margin-top:66px}
+.press-inner{max-width:1280px;margin:0 auto;padding:88px 28px}
+.press-head{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:44px}
+.press-head h2{font-family:'Playfair Display',serif;font-size:clamp(30px,3.2vw,46px);font-weight:800;color:var(--ink);line-height:1.1}
+.press-head h2 em{font-style:italic;color:var(--p)}
+.press-head p{font-size:15px;color:var(--ink3);line-height:1.75}
+.press-grid{display:grid;grid-template-columns:minmax(0,440px) 1fr;gap:56px;align-items:center}
+.press-media{position:relative;border-radius:var(--r-xl);overflow:hidden;background:#0f1640;box-shadow:var(--sh-lg);border:1.5px solid var(--pm)}
+.press-video,.press-embed{display:none;width:100%;border:0;background:#0f1640}
+.press-video{height:auto;max-height:78vh}
+.press-embed{aspect-ratio:16/9;height:auto}
+.press-embed.vertical{aspect-ratio:9/16;max-height:78vh}
+.press-media.has-video .press-video,.press-media.has-video .press-embed{display:block}
+.press-media.has-video .press-fallback{display:none}
+.press-fallback{display:block;position:relative}
+.press-fallback img{width:100%;height:auto;aspect-ratio:456/508;transition:transform .5s}
+.press-fallback:hover img{transform:scale(1.03)}
+.pf-badge{position:absolute;top:16px;right:16px;display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:100px;background:rgba(255,255,255,.95);color:var(--ink);font-size:12px;font-weight:700;box-shadow:var(--sh-md)}
+.pf-badge i{color:var(--p)}
+.press-cap{font-size:12px;color:var(--ink4);margin-top:12px;text-align:center}
+.press-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:12px;color:var(--ink4);margin-bottom:14px}
+.press-src{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:100px;background:#fff;border:1.5px solid var(--pm);color:var(--pd);font-weight:800;letter-spacing:.6px;text-transform:uppercase;font-size:11px}
+.press-title{font-family:'Playfair Display',serif;font-size:clamp(24px,2.4vw,34px);font-weight:800;color:var(--ink);line-height:1.18;margin-bottom:22px}
+.press-quote{margin:0 0 24px;padding:18px 22px;border-left:4px solid var(--p);background:#fff;border-radius:0 var(--r-md) var(--r-md) 0;box-shadow:var(--sh-sm)}
+.press-quote p{font-family:'Playfair Display',serif;font-size:19px;font-style:italic;color:var(--pd);line-height:1.5}
+.press-quote cite{display:block;margin-top:8px;font-size:12px;font-style:normal;font-weight:600;color:var(--ink4)}
+.press-points{list-style:none;display:flex;flex-direction:column;gap:14px;margin-bottom:28px}
+.press-points li{display:flex;gap:14px;align-items:flex-start;font-size:14.5px;color:var(--ink3);line-height:1.6}
+.press-points li i{width:36px;height:36px;border-radius:var(--r-sm);background:var(--ps);border:1px solid var(--pm);color:var(--p);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.press-points strong{color:var(--ink);font-weight:700}
+.press-actions{display:flex;flex-wrap:wrap;gap:10px}
+.btn-read{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:var(--r-sm);background:var(--p);color:#fff;font-size:14px;font-weight:700;box-shadow:0 4px 16px rgba(102,126,234,.28);transition:all .22s}
+.btn-read:hover{background:var(--pd);transform:translateY(-1px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:9px;padding:13px 20px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:#fff;color:var(--ink2);font-size:14px;font-weight:600;transition:all .2s}
+.btn-ghost:hover{border-color:var(--p);color:var(--p)}
+
+/* ── MEMBER PHOTO AS A PORTRAIT CIRCLE (looks sharp even with a small photo) ── */
+.tc-photo.tc-avatar{background:linear-gradient(135deg,#3f4fc4 0%,#667eea 55%,#9b8cf8 100%);display:flex;align-items:center;justify-content:center}
+.tc-av-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(24px) saturate(1.15);opacity:.5;transform:scale(1.15)}
+.tc-avatar::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,transparent 0 30%,rgba(17,24,39,.28) 100%)}
+.tc-avatar .tc-av-img{position:relative;z-index:1;width:150px;height:150px;border-radius:50%;object-fit:cover;object-position:50% 40%;border:4px solid rgba(255,255,255,.92);box-shadow:0 12px 34px rgba(17,24,39,.35)}
+.tc-av-initials{display:none;position:relative;z-index:1;width:150px;height:150px;border-radius:50%;align-items:center;justify-content:center;background:rgba(255,255,255,.16);border:4px solid rgba(255,255,255,.85);font-family:'Playfair Display',serif;font-size:48px;font-weight:800;color:#fff;letter-spacing:1px}
+.tc-avatar.no-img .tc-av-img,.tc-avatar.no-img .tc-av-bg{display:none}
+.tc-avatar.no-img .tc-av-initials{display:flex}
+.tc-avatar .tc-role-pill,.tc-avatar .tc-num{z-index:2}
+.tc-follow{font-size:12px;font-weight:700;color:var(--ink4);margin-right:4px;align-self:center}
+.tc-focus{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;color:var(--pd);padding:11px 16px;background:var(--ps);border-radius:var(--r-sm);border-left:3px solid var(--p);margin-bottom:18px}
+.tc-focus i{color:var(--p)}
+
+/* ── CONTACT FORM STATUS ── */
+.cf-status{display:none;margin-top:12px;font-size:13px;line-height:1.55;padding:10px 12px;border-radius:var(--r-sm)}
+.cf-status.err{display:block;background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.cf-status.err a{color:#991b1b;text-decoration:underline;font-weight:600}
+
+.contact-section{scroll-margin-top:66px}
+
+/* ── FOOTER BRAND TEXT ── */
+.footer-brand p{font-size:13.5px;color:rgba(255,255,255,.5);line-height:1.7;max-width:360px}
+
 /* ── ANIMATIONS ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .anim{opacity:0;animation:fadeUp .6s ease-out forwards}
@@ -370,6 +439,31 @@ button{font-family:inherit;cursor:pointer}
   /* FOOTER */
   .footer-grid{gap:22px}
 }
+
+/* ── NEW SECTIONS · RESPONSIVE ── */
+@media(max-width:1024px){
+  .press-head{grid-template-columns:1fr;gap:16px}
+  .press-grid{grid-template-columns:1fr;gap:36px}
+  .press-media-wrap{max-width:460px;width:100%;margin:0 auto}
+}
+@media(max-width:768px){
+  .press-inner{padding:56px 16px}
+  .press-head{margin-bottom:28px}
+  .press-head h2{font-size:clamp(26px,7vw,36px)}
+  .press-head p{font-size:14px}
+  .press-quote{padding:16px 18px}
+  .press-quote p{font-size:17px}
+  .press-points li{font-size:14px}
+  .tc-avatar .tc-av-img,.tc-av-initials{width:130px;height:130px}
+}
+@media(max-width:480px){
+  .press-inner{padding:44px 14px}
+  .press-actions a{flex:1 1 auto;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .anim{animation:none!important;opacity:1!important}
+}
 </style>
 </head>
 <body>
@@ -390,7 +484,7 @@ button{font-family:inherit;cursor:pointer}
     </ul>
     <div style="display:flex;align-items:center;gap:10px">
       <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> <span>Back</span></a>
-      <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><i class="fas fa-bars"></i></button>
+      <button class="hamburger" aria-label="Menu" onclick="document.getElementById('navLinks').classList.toggle('open')"><i class="fas fa-bars"></i></button>
     </div>
   </div>
 </nav>
@@ -428,10 +522,10 @@ button{font-family:inherit;cursor:pointer}
         <div class="lbl">MEMBERS</div>
       </div>
       <div class="hi-card2">
-        <div class="hi-card2-ico">🌍</div>
+        <div class="hi-card2-ico">📍</div>
         <div>
-          <div class="val">mainly focus on</div>
-          <div class="sub">siemreap</div>
+          <div class="val">Siem Reap</div>
+          <div class="sub">Our main focus right now</div>
         </div>
       </div>
     </div>
@@ -499,12 +593,66 @@ button{font-family:inherit;cursor:pointer}
           </div>
         </div>
         <div class="milestone">
+          <div class="ms-year">2026</div>
+          <div class="ms-dot"></div>
+          <div class="ms-text">
+            <h4>Featured in Cambodianess</h4>
+            <p>Cambodianess told our story in “Student Startup TosTrip Expands Tourism Experience”. <a href="#press" class="ms-link">See the feature ↓</a></p>
+          </div>
+        </div>
+        <div class="milestone">
           <div class="ms-year">Now</div>
           <div class="ms-dot" style="background:var(--green)"></div>
           <div class="ms-text">
             <h4>Still Mission-Driven</h4>
-            <p>We are still building, still listening, and still committed to making tourism more inclusive and meaningful.</p>
+            <p>Today travellers can book Live Like a Local, Rent a Friend and hands-on workshops with local makers. We are still building, still listening, and still committed to making tourism more inclusive and meaningful.</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IN THE NEWS · CAMBODIANESS
+     The video plays from ./imgg/cambodianess.mp4 (or a YouTube / Facebook / TikTok link —
+     set PRESS_VIDEO in the script at the bottom). Until the video is there, this spot shows the
+     Cambodianess feature image and links to the article, so it never looks broken. -->
+<section class="press-section" id="press">
+  <div class="press-inner">
+    <div class="press-head">
+      <div>
+        <div class="sec-eyebrow">In the News</div>
+        <h2>As Featured in <em>Cambodianess</em></h2>
+      </div>
+      <p>In March 2026, Cambodianess told the story of how our student startup from Phnom Penh helps international visitors experience Cambodia the Cambodian way: beyond the temples, with real local life.</p>
+    </div>
+
+    <div class="press-grid">
+      <div class="press-media-wrap anim anim-d1">
+        <div class="press-media" id="pressMedia">
+          <a class="press-fallback" href="https://cambodianess.com/article/student-startup-tostrip-expands-tourism-experience" target="_blank" rel="noopener">
+            <img src="./imgg/cambodianess.jpg" alt="Cambodianess feature: Student Startup TosTrip Expands Tourism Experience" loading="lazy">
+            <span class="pf-badge"><i class="fas fa-newspaper"></i> Read on Cambodianess</span>
+          </a>
+        </div>
+        <div class="press-cap">Cambodianess · Society · 15 March 2026</div>
+      </div>
+
+      <div class="press-text anim anim-d2">
+        <div class="press-meta"><span class="press-src"><i class="fas fa-newspaper"></i> Cambodianess</span><span>15 March 2026 · by Ky Chamna</span></div>
+        <h3 class="press-title">Student Startup TosTrip Expands Tourism Experience</h3>
+        <blockquote class="press-quote">
+          <p>“TosTrip is a bridge between travelers and local hearts.”</p>
+          <cite>— The TosTrip team, in Cambodianess</cite>
+        </blockquote>
+        <ul class="press-points">
+          <li><i class="fas fa-user-group"></i><span><strong>Live Like a Local &amp; Rent a Friend</strong> — small, personal trips with one local friend instead of a big tour group.</span></li>
+          <li><i class="fas fa-utensils"></i><span><strong>Real daily life</strong> — family restaurants, quiet places and hidden gems, at a flexible pace.</span></li>
+          <li><i class="fas fa-map-location-dot"></i><span><strong>Starting in Siem Reap</strong> — with Phnom Penh, Battambang, Kampot and Sihanoukville planned next.</span></li>
+        </ul>
+        <div class="press-actions">
+          <a class="btn-read" href="https://cambodianess.com/article/student-startup-tostrip-expands-tourism-experience" target="_blank" rel="noopener">Read the full story <i class="fas fa-arrow-up-right-from-square"></i></a>
+          <a class="btn-ghost" href="#contact" onclick="pressEnquiry()"><i class="fas fa-microphone"></i> Press enquiries</a>
         </div>
       </div>
     </div>
@@ -519,7 +667,7 @@ button{font-family:inherit;cursor:pointer}
       <h2>Four Builders.<br><em>One Shared Mission.</em></h2>
     </div>
     <div class="team-header-right">
-      <p>TosTrip was built during the ACTSMART competition at AUPP Technology Center by four friends who shared the same concern: tourism was growing, but many locals were not benefiting from it. We're intentionally small. Every experience is designed, every partner is personally vetted, and every message is answered by one of us.</p>
+      <p>TosTrip started during the ACTSMART competition at AUPP Technology Center, with friends who shared the same concern: tourism was growing, but many locals were not benefiting from it. Today we're a team of four, with Kakda joining as our content creator. We're intentionally small. Every experience is designed, every partner is personally vetted, and every message is answered by one of us.</p>
     </div>
   </div>
 
@@ -548,7 +696,7 @@ button{font-family:inherit;cursor:pointer}
     <!-- MEMBER 2 -->
     <div class="team-card anim anim-d2">
       <div class="tc-photo tall">
-        <img src="./imgg/keo.jpg" alt="Keo Ratanak">
+        <img src="./imgg/keo.jpg" alt="Kan Seilakeo">
         <div class="tc-role-pill rp-2">Airport and airline management</div>
         <div class="tc-num">02</div>
       </div>
@@ -556,7 +704,7 @@ button{font-family:inherit;cursor:pointer}
         <div class="tc-name">Kan Seilakeo</div>
         <div class="tc-role">Strategy & Experience Design</div>
         <div class="tc-quote">"A meaningful experience is never rushed. It's felt."</div>
-        <p class="tc-bio">Raised around Cambodia's tourism industry, Keo had long seen how visitors often missed the heart of the country. He joined the ACTSMART team to help redesign tourism experiences from the ground up — focusing on authenticity, depth, and real human connection.</p>
+        <p class="tc-bio">Raised around Cambodia's tourism industry, Keo had long seen how visitors often missed the heart of the country — and joined the ACTSMART team to help redesign tourism experiences from the ground up, focusing on authenticity, depth, and real human connection.</p>
         <div class="tc-skills">
           <span class="tc-skill">Strategy</span>
           <span class="tc-skill">Cultural Storytelling</span>
@@ -569,7 +717,7 @@ button{font-family:inherit;cursor:pointer}
     <!-- MEMBER 3 -->
     <div class="team-card anim anim-d3">
       <div class="tc-photo short">
-        <img src="./imgg/mariiiina.jpg" alt="Dara Chann">
+        <img src="./imgg/mariiiina.jpg" alt="Mara Marina">
         <div class="tc-role-pill rp-3">Business Administration</div>
         <div class="tc-num">03</div>
       </div>
@@ -587,8 +735,32 @@ button{font-family:inherit;cursor:pointer}
       </div>
     </div>
 
-    <!-- MEMBER 4 -->
-   
+    <!-- MEMBER 4 — photo: ./imgg/kakda.jpg (shown as a portrait circle; swap in a sharper photo with the same name anytime) -->
+    <div class="team-card anim anim-d4">
+      <div class="tc-photo short tc-avatar">
+        <div class="tc-av-bg" style="background-image:url('./imgg/kakda.jpg')"></div>
+        <img class="tc-av-img" src="./imgg/kakda.jpg" alt="Kan Seilakakda" onerror="this.closest('.tc-photo').classList.add('no-img')">
+        <div class="tc-av-initials" aria-hidden="true">KK</div>
+        <div class="tc-role-pill rp-4">Content &amp; Social</div>
+        <div class="tc-num">04</div>
+      </div>
+      <div class="tc-body">
+        <div class="tc-name">Kan Seilakakda</div>
+        <div class="tc-role">Content Creator</div>
+        <div class="tc-focus"><i class="fas fa-clapperboard"></i> Videos · Reels · Social posts</div>
+        <p class="tc-bio">The newest member of TosTrip, Kakda turns our local experiences, workshops and partner stories into content that shows travellers what Cambodia feels like with a local — before they even arrive.</p>
+        <div class="tc-skills">
+          <span class="tc-skill">Video Editing</span>
+          <span class="tc-skill">Social Media</span>
+          <span class="tc-skill">Visual Storytelling</span>
+        </div>
+        <div class="tc-social">
+          <span class="tc-follow">Follow our stories</span>
+          <a class="tc-soc-btn" href="https://www.instagram.com/tostrip_kh?igsh=dTFjbDhkOTZwNHMx" target="_blank" rel="noopener" aria-label="TosTrip on Instagram"><i class="fab fa-instagram"></i></a>
+          <a class="tc-soc-btn" href="https://t.me/tostrip" target="_blank" rel="noopener" aria-label="TosTrip on Telegram"><i class="fab fa-telegram"></i></a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -598,7 +770,7 @@ button{font-family:inherit;cursor:pointer}
     <div class="gg-item gg-main">
       <img src="./imgg/journey6.jpg" alt="Cambodia">
       <div class="gg-overlay">
-        <div class="gg-overlay-text">Our<span>Journey</span><br>So far...</div>
+        <div class="gg-overlay-text">Our <span>Journey</span><br>So far...</div>
       </div>
     </div>
     <div class="gg-item"><img src="./imgg/journey1.jpg" alt=""><div class="gg-overlay"></div></div>
@@ -627,14 +799,21 @@ button{font-family:inherit;cursor:pointer}
           <div class="ci-icon"><i class="fab fa-whatsapp"></i></div>
           <div>
             <div class="ci-label">WhatsApp</div>
-            <div class="ci-val"><a href="tel:0716145925">+855 716145925</a></div>
+            <div class="ci-val"><a href="https://wa.me/855716145925" target="_blank" rel="noopener">+855 71 614 5925</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon"><i class="fab fa-telegram"></i></div>
+          <div>
+            <div class="ci-label">Telegram</div>
+            <div class="ci-val"><a href="https://t.me/tostrip" target="_blank" rel="noopener">@tostrip</a></div>
           </div>
         </div>
         <div class="contact-item">
           <div class="ci-icon"><i class="fab fa-instagram"></i></div>
           <div>
             <div class="ci-label">Instagram</div>
-            <div class="ci-val"><a href="https://www.instagram.com/tostrip_kh?igsh=dTFjbDhkOTZwNHMx">@tostrip_kh</a></div>
+            <div class="ci-val"><a href="https://www.instagram.com/tostrip_kh?igsh=dTFjbDhkOTZwNHMx" target="_blank" rel="noopener">@tostrip_kh</a></div>
           </div>
         </div>
         <div class="contact-item">
@@ -662,11 +841,12 @@ button{font-family:inherit;cursor:pointer}
           <button type="button" class="t-chip" onclick="addTopic(this,'I would like to become a host family or local friend.')">🏠 Become a Host</button>
         </div>
         <div class="f-row">
-          <div class="fg"><label class="fl">Name <span class="req">*</span></label><input type="text" id="c-name" class="fi" placeholder="Your name" required></div>
-          <div class="fg"><label class="fl">Email <span class="req">*</span></label><input type="email" id="c-email" class="fi" placeholder="you@email.com" required></div>
+          <div class="fg"><label class="fl" for="c-name">Name <span class="req">*</span></label><input type="text" id="c-name" class="fi" placeholder="Your name" autocomplete="name" required></div>
+          <div class="fg"><label class="fl" for="c-email">Email <span class="req">*</span></label><input type="email" id="c-email" class="fi" placeholder="you@email.com" autocomplete="email" required></div>
         </div>
-        <div class="fg"><label class="fl">Message <span class="req">*</span></label><textarea id="c-msg" class="fi f-ta" placeholder="Tell us what's on your mind…" required></textarea></div>
+        <div class="fg"><label class="fl" for="c-msg">Message <span class="req">*</span></label><textarea id="c-msg" class="fi f-ta" placeholder="Tell us what's on your mind…" required></textarea></div>
         <button type="submit" class="btn-send"><i class="fas fa-paper-plane"></i> Send Message</button>
+        <p class="cf-status" id="cfStatus" role="alert"></p>
       </form>
     </div>
   </div>
@@ -680,16 +860,37 @@ button{font-family:inherit;cursor:pointer}
         <div class="logo" style="margin-bottom:14px"><img src="./imgg/loko.png" alt="TosTrip" style="height:36px;filter:brightness(0) invert(1);opacity:.9"></div>
         <p>Cambodia's local travel platform. Authentic experiences, verified guides, and offline access — all in one place.</p>
       </div>
-      
-    
+      <div class="fg-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="livelikelocal.html">Live Like a Local</a></li>
+          <li><a href="rentafriend.html">Rent a Friend</a></li>
+          <li><a href="workshop.html">Workshops</a></li>
+          <li><a href="about.html">About Us</a></li>
+        </ul>
+      </div>
+      <div class="fg-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:tostrip123@gmail.com">Email</a></li>
+          <li><a href="https://wa.me/855716145925" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://t.me/tostrip" target="_blank" rel="noopener">Telegram</a></li>
+          <li><a href="#contact">Send a message</a></li>
+        </ul>
+      </div>
+      <div class="fg-col">
+        <h4>In the News</h4>
+        <ul>
+          <li><a href="#press">Cambodianess · 2026</a></li>
+        </ul>
+      </div>
     </div>
     <div class="footer-bottom">
-      <span class="copyright">© 2025 TosTrip. All rights reserved.</span>
+      <span class="copyright">© <span id="yr">2026</span> TosTrip. All rights reserved.</span>
       <div class="social-links">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-tiktok"></i></a>
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-telegram-plane"></i></a>
+        <a href="https://www.instagram.com/tostrip_kh?igsh=dTFjbDhkOTZwNHMx" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://t.me/tostrip" target="_blank" rel="noopener" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+        <a href="https://wa.me/855716145925" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
       </div>
     </div>
   </div>
@@ -697,8 +898,58 @@ button{font-family:inherit;cursor:pointer}
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
-const EJ_KEY='SmoLQAp-ij_aoJbAd',EJ_SVC='service_9ogox5a',EJ_TPL='template_0pi47tp';
+// Same EmailJS account as the Workshops page (the old service_9ogox5a connection had expired: "Gmail_API: Invalid grant")
+const EJ_KEY='f6HV0gopdt8FE-mw7', EJ_SVC='service_xum7qyo', EJ_TPL='template_a9e8je3';
 if(typeof emailjs!=='undefined') emailjs.init(EJ_KEY);
+
+/* ── CAMBODIANESS VIDEO ──
+   PRESS_VIDEO = the Cambodianess video. Either a file in your repo ('./imgg/cambodianess.mp4')
+   or a YouTube / Facebook / TikTok link pasted here. If the video isn't there yet, the
+   section keeps showing the Cambodianess feature image linking to the article. */
+const PRESS_VIDEO = './imgg/cambodianess.mp4';
+
+(function setupPressVideo(){
+  const box = document.getElementById('pressMedia');
+  const url = (PRESS_VIDEO || '').trim();
+  if(!box || !url) return;
+  let m, embed = '';
+  if((m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/))([\w-]{11})/))) embed = 'https://www.youtube-nocookie.com/embed/' + m[1] + '?rel=0';
+  else if((m = url.match(/tiktok\.com\/.*\/video\/(\d+)/))) embed = 'https://www.tiktok.com/embed/v2/' + m[1];
+  else if(/facebook\.com|fb\.watch/.test(url)) embed = 'https://www.facebook.com/plugins/video.php?href=' + encodeURIComponent(url) + '&show_text=false';
+  if(embed){
+    const vertical = /shorts\/|tiktok\.com|\/reel/.test(url);
+    box.insertAdjacentHTML('afterbegin', '<iframe class="press-embed' + (vertical ? ' vertical' : '') + '" src="' + embed + '" title="TosTrip on Cambodianess" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>');
+    box.classList.add('has-video');
+    return;
+  }
+  // a video file in the repo: only show the player once we know the file is there
+  const show = () => {
+    if(box.classList.contains('has-video')) return;
+    const v = document.createElement('video');
+    v.className = 'press-video';
+    v.controls = true; v.playsInline = true; v.preload = 'metadata';
+    v.poster = './imgg/cambodianess.jpg';
+    v.src = url;
+    box.prepend(v);
+    box.classList.add('has-video');
+    v.addEventListener('error', () => { v.remove(); box.classList.remove('has-video'); });
+  };
+  fetch(url, {method:'HEAD'})
+    .then(r => { if(r.ok && !/text\/html/.test(r.headers.get('content-type') || '')) show(); })
+    .catch(() => {   // e.g. opened as a local file: try the video directly
+      const probe = document.createElement('video');
+      probe.preload = 'metadata';
+      probe.addEventListener('loadedmetadata', show, {once:true});
+      probe.src = url;
+    });
+})();
+
+function pressEnquiry(){
+  const chip = [...document.querySelectorAll('.t-chip')].find(b => b.textContent.includes('Press'));
+  if(chip && !chip.classList.contains('sel')) chip.click();
+}
+
+document.getElementById('yr').textContent = new Date().getFullYear();
 
 window.addEventListener('scroll',()=>
   document.getElementById('mainNav').classList.toggle('scrolled',scrollY>30));
@@ -716,30 +967,33 @@ function addTopic(btn, text){
 function submitContact(e){
   e.preventDefault();
   const btn = e.target.querySelector('.btn-send');
+  const status = document.getElementById('cfStatus');
+  const reset = ()=>{ btn.innerHTML='<i class="fas fa-paper-plane"></i> Send Message'; btn.disabled=false; };
+  const fail = ()=>{
+    status.className = 'cf-status err';
+    status.innerHTML = 'Sorry — your message didn’t go through. Please email us at ' +
+      '<a href="mailto:tostrip123@gmail.com">tostrip123@gmail.com</a> or message us on ' +
+      '<a href="https://wa.me/855716145925" target="_blank" rel="noopener">WhatsApp</a>.';
+    reset();
+  };
+  status.className = 'cf-status';
   btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending…';
   btn.disabled=true;
+  const email = document.getElementById('c-email').value.trim();
   const params = {
-    user_name:  document.getElementById('c-name').value,
-    user_email: document.getElementById('c-email').value,
-    message:    document.getElementById('c-msg').value,
+    user_name:  document.getElementById('c-name').value.trim(),
+    user_email: email,
+    reply_to:   email,
+    message:    document.getElementById('c-msg').value.trim(),
     request_type: 'About Page – Contact',
     friend_name: 'TosTrip Team',
     booking_date:'N/A', duration:'N/A', price:'N/A',
     phone:'N/A', people:'N/A', lifestyle:'General Enquiry'
   };
-  if(typeof emailjs!=='undefined'){
-    emailjs.send(EJ_SVC, EJ_TPL, params)
-      .then(()=>{ window.location.href='thankyou.html'; })
-      .catch(err=>{
-        alert('Error: '+(err.text||err.message));
-        btn.innerHTML='<i class="fas fa-paper-plane"></i> Send Message';
-        btn.disabled=false;
-      });
-  } else {
-    alert('Demo: Message sent to TosTrip team!');
-    btn.innerHTML='<i class="fas fa-paper-plane"></i> Send Message';
-    btn.disabled=false;
-  }
+  if(typeof emailjs==='undefined'){ console.error('EmailJS did not load'); fail(); return; }
+  emailjs.send(EJ_SVC, EJ_TPL, params, EJ_KEY)
+    .then(()=>{ window.location.href='thankyou.html'; })
+    .catch(err=>{ console.error('EmailJS error:', err); fail(); });
 }
 
 const animEls = document.querySelectorAll('.anim');
