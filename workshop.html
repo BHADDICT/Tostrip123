@@ -606,6 +606,46 @@ textarea.reg-in{resize:vertical;min-height:62px}
 .succ-actions{display:flex;gap:10px}
 .succ-actions .m-btn{flex:1}
 .btn-done{flex:1;padding:13px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--bg);color:var(--ink2);font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+/* E-receipt on the success screen (Helvetica) */
+#rcptWrap{margin:4px 0 22px;text-align:left}
+#rcptWrap:empty{display:none}
+.rc-card{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background:#fff;border:1px solid var(--line);border-top:6px solid var(--p);border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(17,24,39,.08);color:var(--ink)}
+.rc-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 18px 12px;border-bottom:1px solid var(--line)}
+.rc-brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:20px;letter-spacing:-.3px;color:var(--pd)}
+.rc-brand img{height:28px;width:auto}
+.rc-kind{text-align:right;font-weight:700;font-size:11px;letter-spacing:1.3px;line-height:1.3}
+.rc-kind small{display:block;font-weight:400;font-size:11.5px;letter-spacing:0;color:var(--ink3)}
+.rc-body{padding:14px 18px 16px}
+.rc-chip{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.8px;padding:4px 10px;border-radius:100px;margin-bottom:9px}
+.rc-chip.paid{background:#e7f8ef;color:#047857}
+.rc-chip.free{background:#eef0fd;color:var(--pd)}
+.rc-chip.due{background:#fff4e0;color:#b45309}
+.rc-title{font-weight:700;font-size:17px;line-height:1.25}
+.rc-sub{font-size:12.5px;color:var(--ink3);margin:3px 0 8px}
+.rc-row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:7px 0;border-bottom:1px solid #f1f2f4;font-size:13.5px}
+.rc-row span{flex-shrink:0;font-size:12px;color:var(--ink3)}
+.rc-row b{font-weight:600;text-align:right;word-break:break-word}
+.rc-cut{position:relative;border-top:1.5px dashed #cbd5e1;margin:10px -18px 2px}
+.rc-cut::before,.rc-cut::after{content:'';position:absolute;top:-9px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:1px solid var(--line)}
+.rc-cut::before{left:-9px}
+.rc-cut::after{right:-9px}
+.rc-total{border-bottom:none;padding:10px 0 6px}
+.rc-total span{font-size:13px;font-weight:700;color:var(--ink)}
+.rc-total b{font-size:22px;font-weight:700;color:var(--pd)}
+.rc-foot{margin-top:10px;padding:9px 11px;border-radius:10px;background:var(--bg2);font-size:11.5px;line-height:1.5;color:var(--ink3)}
+.rc-foot span{color:var(--pd);font-weight:700}
+.rc-pdf{margin-top:14px}
+.rc-scratch{margin-top:12px;padding:12px 12px 10px;border-radius:12px;background:#fff7e0;border:1.5px dashed #f2c46d}
+.rc-sc-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.rc-sc-h b{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#92400e}
+.rc-sc-h span{font-size:11.5px;color:#b45309}
+.rc-sc-box{position:relative;height:62px;border-radius:10px;overflow:hidden;background:#fff;border:1px solid #f3dfb0}
+.rc-sc-code{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:700;letter-spacing:6px;color:var(--ink)}
+.rc-sc-foil{position:absolute;inset:0;width:100%;height:100%;cursor:grab;touch-action:none;transition:opacity .4s}
+.rc-sc-foil.gone{opacity:0}
+.rc-sc-how{margin-top:8px;font-size:12px;line-height:1.45;color:#78350f}
+.rc-sc-btn{margin-top:6px;border:none;background:none;padding:2px 0;font-size:12px;font-weight:700;color:var(--p);cursor:pointer;text-decoration:underline}
+.rc-hint{margin-top:8px;font-size:12.5px;color:var(--ink3);text-align:center}
 .btn-done:hover{border-color:var(--p);color:var(--p)}
 
 /* TOAST */
@@ -678,6 +718,9 @@ textarea.reg-in{resize:vertical;min-height:62px}
 .ver-thumb{position:relative;flex:0 0 64px;height:64px;border-radius:10px;overflow:hidden;border:2px solid transparent;padding:0;background:var(--bg3);opacity:.6;transition:opacity .2s,border-color .2s}
 .ver-thumb img,.ver-thumb video{width:100%;height:100%;object-fit:cover;pointer-events:none}
 .ver-thumb.on,.ver-thumb:hover,.ver-thumb:focus-visible{opacity:1;border-color:var(--p)}
+.kas-thumb{position:relative;flex:0 0 64px;height:64px;border-radius:10px;overflow:hidden;border:2px solid transparent;padding:0;background:var(--bg3);opacity:.6;transition:opacity .2s,border-color .2s}
+.kas-thumb img,.kas-thumb video{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.kas-thumb.on,.kas-thumb:hover,.kas-thumb:focus-visible{opacity:1;border-color:var(--p)}
 .ver-story{margin:-4px 0 16px;border:1.5px solid var(--line);border-radius:var(--r-md);background:var(--bg2)}
 .ver-story summary{cursor:pointer;list-style:none;padding:11px 14px;font-size:13px;font-weight:700;color:var(--p);display:flex;align-items:center;gap:8px}
 .ver-story summary::-webkit-details-marker{display:none}
@@ -705,7 +748,23 @@ textarea.reg-in{resize:vertical;min-height:62px}
 .pay-safe{display:flex;gap:8px;font-size:12.5px;line-height:1.5;color:var(--ink3);margin-top:4px}
 .pay-safe i{color:var(--p);margin-top:2px}
 @media(max-width:480px){.pay-row{grid-template-columns:1fr}.pay-qr{width:230px}.pay-qr-missing{width:190px;margin:0 auto}}
-#make1give1{scroll-margin-top:140px}
+#make1give1,#kaset-times{scroll-margin-top:140px}
+.kas-deal{display:flex;gap:10px;align-items:flex-start;margin:-6px 0 14px;padding:10px 14px;border-radius:12px;background:#eef0fd;border:1.5px solid var(--pm);font-size:13.5px;line-height:1.5;color:var(--ink2)}
+.kas-deal i{color:var(--p);margin-top:3px}
+.kas-deal b{color:var(--pd)}
+.fc-was{font-size:.5em;font-weight:600;color:var(--ink4);margin-right:8px;vertical-align:middle}
+.kas-how{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:-4px 0 14px;font-size:12.5px;font-weight:600;color:var(--ink2)}
+.kas-how span{background:var(--bg2);border:1px solid var(--line);border-radius:100px;padding:4px 10px}
+.kas-how i{font-size:9px;color:var(--ink4)}
+.kas-locs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.kas-locs-h{width:100%;font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink3)}
+.kas-locs-h i{color:var(--p);margin-right:4px}
+.kas-loc{display:flex;flex-direction:column;padding:7px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);line-height:1.25}
+.kas-loc b{font-size:13px;color:var(--ink)}
+.kas-loc span{font-size:11px;color:var(--ink3)}
+a.kas-loc{border-color:var(--pm);text-decoration:none}
+a.kas-loc span{color:var(--p);font-weight:700}
+a.kas-loc:hover{border-color:var(--p)}
 .ver-story-sign{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:var(--p);margin-bottom:0!important}
 </style>
 </head>
@@ -740,10 +799,10 @@ textarea.reg-in{resize:vertical;min-height:62px}
   <div class="hero-inner">
     <div>
       <div class="hero-crumb"><a href="index.html">Home</a><i class="fas fa-chevron-right"></i><span>Workshops & Events</span></div>
-      <a href="#oud-event" class="now-on">
-        <span class="live-dot">Now on</span>
-        <strong>Khmer Agarwood (Oud)</strong>
-        <span class="now-on-sub">Free · Chip Mong 271, Phnom Penh</span>
+      <a href="#make1give1" class="now-on" id="heroNowOn">
+        <span class="live-dot">Booking now</span>
+        <strong>Make 1 Give 1</strong>
+        <span class="now-on-sub">Secret Santa pottery · Wed 25 Nov · 2 PM</span>
         <i class="fas fa-chevron-right"></i>
       </a>
       <div class="hero-badge"><i class="fas fa-hands-helping"></i> Hands-on Experiences</div>
@@ -752,7 +811,6 @@ textarea.reg-in{resize:vertical;min-height:62px}
       <div class="hero-pills">
         <span class="h-pill"><i class="fas fa-shield-alt"></i> Verified Partners Only</span>
         <span class="h-pill"><i class="fas fa-users"></i> Small Groups · Max 12</span>
-        <span class="h-pill gold-pill"><i class="fas fa-tag"></i> Code TOSTRIP2026 = $5 Off</span>
       </div>
       <div class="hero-stats">
         <div><div class="hs-num">17</div><div class="hs-lbl">Workshops & Shows</div></div>
@@ -763,11 +821,11 @@ textarea.reg-in{resize:vertical;min-height:62px}
     </div>
     <div class="hero-visual">
       <div class="hv-bg" id="heroShow">
-        <img class="hs-slide active" src="./img/tree1.jpg" alt="Khmer Agarwood (Oud)">
+        <img class="hs-slide active" src="./imgg/make1give1.jpg" alt="Make 1 Give 1 — Secret Santa pottery" style="object-position:50% 16%">
         <div class="hs-shade"></div>
         <button type="button" class="hs-play" aria-label="Play video with sound" onclick="lbOpen(heroIdx)"><i class="fas fa-play"></i></button>
         <div class="hs-top">
-          <span class="hs-live"><span class="live-dot">Now on</span></span>
+          <span class="hs-live"><span class="live-dot" id="heroShowTag">Booking now</span></span>
           <button type="button" class="hs-all" onclick="lbOpen(heroIdx)"><i class="fas fa-images"></i> <span class="oud-photo-count">1 photo</span></button>
         </div>
         <button type="button" class="hs-nav prev" aria-label="Previous photo" onclick="heroGo(heroIdx-1,true)"><i class="fas fa-chevron-left"></i></button>
@@ -775,11 +833,11 @@ textarea.reg-in{resize:vertical;min-height:62px}
         <div class="hs-foot"><span class="hs-count" id="heroCount">1 / 1</span><div class="hs-dots" id="heroDots"></div></div>
       </div>
       <div class="hv-card hv-card1">
-        <div class="hvc-label"><span class="live-dot">Live</span> · <span id="heroLiveTxt">Happening now</span></div>
-        <div class="hvc-title">Khmer Agarwood (Oud)</div>
-        <div class="hvc-row"><i class="fas fa-map-marker-alt" style="color:var(--p)"></i> Chip Mong 271 Mega Mall · Phnom Penh</div>
-        <div class="hvc-row hvc-status" id="heroOudStatus"><i class="fas fa-clock"></i> Daily 9 AM – 10 PM</div>
-        <a href="#oud-event" class="hvc-link">Free entry · See event <i class="fas fa-arrow-right"></i></a>
+        <div class="hvc-label"><span class="live-dot" id="heroEvTag">Special</span> · <span id="heroEvTxt">Wed 25 Nov · 2 PM</span></div>
+        <div class="hvc-title" id="heroEvTitle">Make 1 Give 1</div>
+        <div class="hvc-row" id="heroEvWhere"><i class="fas fa-map-marker-alt" style="color:var(--p)"></i> Veranda Pottery · Tonle Bassac, Phnom Penh</div>
+        <div class="hvc-row hvc-status" id="heroEvStatus"><i class="fas fa-hourglass-half"></i> Secret Santa pottery</div>
+        <a href="#make1give1" class="hvc-link" id="heroEvLink">$15 · 15 seats · Join as a Secret Santa <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
   </div>
@@ -790,7 +848,7 @@ textarea.reg-in{resize:vertical;min-height:62px}
   <div class="ref-banner-inner">
     <div class="rb-icon">🎟️</div>
     <div class="rb-text">
-      <strong>Use code <b style="color:#fde68a;letter-spacing:2px">TOSTRIP2026</b> for $5 off any workshop — or enter your referral code for 10% off.</strong>
+      <strong>Got a referral code from a friend? It gives you 10% off any paid workshop.</strong>
       <span>Enter below or at checkout. Share your code after booking to earn <b>$5 credit</b> per friend.</span>
     </div>
     <div class="rb-form">
@@ -927,9 +985,67 @@ textarea.reg-in{resize:vertical;min-height:62px}
     </div>
   </div>
 
+  <!-- FEATURED (DAILY): KASETTIMES — Cambodia's first vintage newspaper photobooth
+       Locations: Stable TK (St. 347, Toul Kork, Phnom Penh) · Angkor Parvis (Siem Reap) · Pub Street (Siem Reap) · Battambang · Kampot
+       Host: Lay Hun · Telegram 098 35 3355 · layhunloy168@gmail.com · daily 9:00 AM – 10:00 PM · walk-in
+       Price: $2 when booked on TosTrip (instead of $2.50 / 10,000 riel at the booth) — guests key the code from their e-receipt
+       into the machine (set the code in MACHINE_CODES in the script)
+       Photos & video in ./imgg/: kasettimes.jpg (cover), kasettimes.mp4, kasettimes2.jpg, kasettimes3.jpg
+       (a file that isn't uploaded yet is simply skipped — see KAS_ALL in the script) -->
+  <div class="feat-card" id="kaset-times" data-cat="culture" data-city="phnom-penh siem-reap kampot battambang" data-price="2">
+    <div class="fc-img">
+      <img id="kasImg" onclick="kasLbOpen()" style="cursor:pointer" src="./imgg/kasettimes.jpg" alt="The red KasetTimes vintage newspaper photobooth" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 450%22%3E%3Crect width=%22400%22 height=%22450%22 fill=%22%23b3202a%22/%3E%3Ctext x=%22200%22 y=%22235%22 font-family=%22Georgia,serif%22 font-size=%2238%22 fill=%22%23fff%22 text-anchor=%22middle%22%3EKasetTimes%3C/text%3E%3C/svg%3E'">
+      <video id="kasVid" class="fc-vid" muted playsinline preload="metadata" onclick="kasLbOpen()"></video>
+      <span class="fc-vid-badge" id="kasVidBadge"><i class="fas fa-volume-mute"></i> Tap for sound</span>
+      <button type="button" class="fc-gallery-btn" onclick="kasLbOpen()"><i class="fas fa-expand"></i> <span id="kasCount">Photos &amp; video</span></button>
+      <div class="fc-badges">
+        <span class="ev-badge b-cooking" id="kasOpenBadge">🟢 Open daily</span>
+        <span class="ev-badge b-culture">📰 Photobooth</span>
+        <span class="ev-badge b-featured">💵 $2 on TosTrip</span>
+      </div>
+      <div class="fc-seats">
+        <div class="sb-wrap">
+          <div class="sb-top"><span class="sb-lbl" id="kasDayLbl">Open daily</span><span class="sb-num">9:00 AM – 10:00 PM</span></div>
+          <div class="sb-track"><div class="sb-fill fill-green" id="kasDayFill" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-partner"><div class="fc-p-ico">📰</div><div class="fc-p-name">KASETTIMES · PHNOM PENH · SIEM REAP · BATTAMBANG · KAMPOT</div></div>
+      <div class="fc-title">KasetTimes Vintage Newspaper Photobooth</div>
+      <p class="fc-desc">KasetTimes is Cambodia's first vintage newspaper photobooth, transforming everyday moments into timeless front-page memories. Inspired by the charm of classic newspapers, each KasetTimes edition is uniquely designed to reflect the culture, history, and identity of the destination where it is found. More than just a photo, every print becomes a meaningful souvenir that tells a story.</p>
+      <div class="kas-deal"><i class="fas fa-tag"></i><span>Book on TosTrip, then scratch your e-receipt to find your code. Key it into the machine and pay just <b>$2</b> instead of <s>$2.50</s>.</span></div>
+      <div class="kas-how"><span>📸 Pose</span><i class="fas fa-chevron-right"></i><span>🗞️ Pick up your newspaper</span><i class="fas fa-chevron-right"></i><span>📲 Scan the QR for your photo &amp; GIF</span></div>
+      <div class="ver-thumbs" id="kasThumbs"></div>
+      <div class="kas-locs">
+        <div class="kas-locs-h"><i class="fas fa-map-marker-alt"></i> 5 locations</div>
+        <a class="kas-loc" href="https://maps.app.goo.gl/Mg6fsVLrMCmB9Gnw7" target="_blank" rel="noopener"><b>Stable TK</b><span>Phnom Penh · map</span></a>
+        <div class="kas-loc"><b>Angkor Parvis</b><span>Siem Reap</span></div>
+        <div class="kas-loc"><b>Pub Street</b><span>Siem Reap</span></div>
+        <div class="kas-loc"><b>Battambang</b><span>Cambodia</span></div>
+        <div class="kas-loc"><b>Kampot</b><span>Cambodia</span></div>
+      </div>
+      <div class="fc-meta">
+        <div class="fc-meta-i"><i class="fas fa-calendar"></i> Daily</div>
+        <div class="fc-meta-i"><i class="fas fa-clock"></i> 9:00 AM – 10:00 PM</div>
+        <div class="fc-meta-i"><i class="fas fa-users"></i> Walk-in · open to all</div>
+        <div class="fc-meta-i"><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/kaset.times/" target="_blank" rel="noopener">@kaset.times</a></div>
+      </div>
+      <div class="oud-status-lbl" id="kasStatusLbl" style="margin-bottom:16px">Open daily · 9:00 AM – 10:00 PM</div>
+      <div class="fc-actions">
+        <button class="btn-primary" onclick="openModal('KasetTimes Vintage Newspaper Photobooth','📰','culture','KasetTimes','Phnom Penh, Siem Reap, Battambang &amp; Kampot',2,'9 AM – 10 PM','—',null,{noDiscount:true,locations:['Stable TK, Phnom Penh','Angkor Parvis, Siem Reap','Pub Street, Siem Reap','Battambang','Kampot']})">
+          <i class="fas fa-ticket-alt"></i> Book for $2
+        </button>
+        <button type="button" class="btn-outline-sm btn-watch" id="kasWatchBtn" onclick="kasWatch()" hidden><i class="fas fa-play-circle"></i> Watch video</button>
+        <button class="btn-outline-sm" onclick="toggleSave(this)"><i class="far fa-heart"></i> Save</button>
+        <div class="fc-price"><s class="fc-was">$2.50</s>$2 <span>/person</span></div>
+      </div>
+    </div>
+  </div>
+
   <!-- FEATURED (CURRENT EVENT): KHMER AGARWOOD (OUD) — Phnom Penh
        Host: Gech Horng · Telegram 081 567 864 · bungechhorng1993@gmail.com -->
-  <div class="feat-card" id="oud-event" data-cat="craft" data-city="phnom-penh">
+  <div class="feat-card" id="oud-event" data-cat="craft" data-city="phnom-penh" data-ends="2026-10-13T22:00:00+07:00">
     <div class="fc-img">
       <img id="oudImg" src="./img/tree1.jpg" alt="Khmer Agarwood (Oud)" onclick="lbOpen(cardIdx)">
       <video id="oudVid" class="fc-vid" muted playsinline preload="metadata" onclick="lbOpen(cardIdx)"></video>
@@ -1061,11 +1177,6 @@ textarea.reg-in{resize:vertical;min-height:62px}
     </div>
   </div>
 
-  <!-- Promo notice -->
-  <div class="wk-promo-notice">
-    <i class="fas fa-tag"></i>
-    <span>Use code <strong>TOSTRIP2026</strong> at checkout for <strong>$5 off</strong> any paid workshop below.</span>
-  </div>
 
   <!-- Free / Paid quick tabs -->
   <div class="wk-tabs" role="tablist">
@@ -1130,10 +1241,46 @@ textarea.reg-in{resize:vertical;min-height:62px}
       <div class="wk-group-ico paid">💵</div>
       <div>
         <div class="wk-group-title">Paid Workshops</div>
-        <div class="wk-group-sub">Hands-on classes with local makers. Use <strong>TOSTRIP2026</strong> for $5 off.</div>
+        <div class="wk-group-sub">Hands-on classes with local makers.</div>
       </div>
     </div>
   <div class="wk-grid" id="wkGrid">
+
+      <!-- KasetTimes — Phnom Penh, Siem Reap, Battambang, Kampot · Host: Lay Hun · Telegram 098 35 3355 · layhunloy168@gmail.com -->
+      <div class="wk-card" data-cat="culture" data-city="phnom-penh siem-reap kampot battambang" data-price="2">
+        <div class="wk-img">
+          <img src="./imgg/kasettimes.jpg" alt="KasetTimes vintage newspaper photobooth" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 450%22%3E%3Crect width=%22400%22 height=%22450%22 fill=%22%23b3202a%22/%3E%3Ctext x=%22200%22 y=%22235%22 font-family=%22Georgia,serif%22 font-size=%2238%22 fill=%22%23fff%22 text-anchor=%22middle%22%3EKasetTimes%3C/text%3E%3C/svg%3E'">
+          <span class="wk-cat b-culture">📰 Photobooth</span>
+          <span class="wk-avail av-open">$2 on TosTrip</span>
+        </div>
+        <div class="wk-body">
+          <div class="wk-partner">
+            <div class="wk-p-ico">📰</div>
+            <div class="wk-p-name">KasetTimes · 5 locations in Cambodia</div>
+          </div>
+          <div class="wk-title">KasetTimes Vintage Newspaper Photobooth</div>
+          <p class="wk-desc">Cambodia's first vintage newspaper photobooth. Each edition is designed for the place you're in, so every print becomes a front-page souvenir.</p>
+          <div class="wk-meta">
+            <div class="wk-mi"><i class="fas fa-clock"></i> 9 AM – 10 PM</div>
+            <div class="wk-mi"><i class="fas fa-users"></i> Walk-in</div>
+            <div class="wk-mi"><i class="fas fa-map-marker-alt"></i> Phnom Penh · Siem Reap · Battambang · Kampot</div>
+          </div>
+          <div class="wk-bottom">
+            <div class="wk-price">
+              <div class="wk-price-lbl">Per person</div>
+              <div class="wk-price-val">$2</div>
+              <div class="wk-price-sub"><s>$2.50</s> at the booth</div>
+            </div>
+            <div class="wk-btns">
+              <button class="btn-wkbook" onclick="openModal('KasetTimes Vintage Newspaper Photobooth','📰','culture','KasetTimes','Phnom Penh, Siem Reap, Battambang &amp; Kampot',2,'9 AM – 10 PM','—',null,{noDiscount:true,locations:['Stable TK, Phnom Penh','Angkor Parvis, Siem Reap','Pub Street, Siem Reap','Battambang','Kampot']})">
+                <i class="fas fa-ticket-alt"></i> Book Now
+              </button>
+              <a class="btn-save" href="#kaset-times" title="See photos and video"><i class="fas fa-images"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
     <!-- 0 Veranda Pottery — Phnom Penh · Host: Jinsun · Telegram 016 783 083 · verandacoffee28112025@gmail.com -->
     <div class="wk-card" data-cat="craft" data-city="phnom-penh" data-price="15">
@@ -1158,7 +1305,6 @@ textarea.reg-in{resize:vertical;min-height:62px}
           <div class="wk-price">
             <div class="wk-price-lbl">Per person</div>
             <div class="wk-price-val">$15</div>
-            <div class="wk-price-sub">$10 w/ TOSTRIP2026</div>
           </div>
           <div class="wk-btns">
             <button class="btn-wkbook" onclick="openModal('Pottery Workshop','🏺','craft','Veranda Pottery · Tonle Bassac','Phnom Penh',15,'8 AM – 7 PM',15,null)">
@@ -1193,7 +1339,6 @@ textarea.reg-in{resize:vertical;min-height:62px}
           <div class="wk-price">
             <div class="wk-price-lbl">Per person</div>
             <div class="wk-price-val">$20</div>
-            <div class="wk-price-sub">$15 w/ TOSTRIP2026</div>
           </div>
           <div class="wk-btns">
             <button class="btn-wkbook" onclick="openModal('Mordock Ceramic Workshop','🧵','craft','Mordock Ceramic','Siem Reap',20,'2 hrs',12,null)">
@@ -1228,7 +1373,6 @@ textarea.reg-in{resize:vertical;min-height:62px}
           <div class="wk-price">
             <div class="wk-price-lbl">Per person</div>
             <div class="wk-price-val">$32</div>
-            <div class="wk-price-sub">$27 w/ TOSTRIP2026</div>
           </div>
           <div class="wk-btns">
             <button class="btn-wkbook" onclick="openModal('Cambodian Village Cooking Class','🍲','cooking','Village Cooking Class','Siem Reap',32,'3–4 hrs',12,null)">
@@ -1263,7 +1407,6 @@ textarea.reg-in{resize:vertical;min-height:62px}
           <div class="wk-price">
             <div class="wk-price-lbl">Per person</div>
             <div class="wk-price-val">$25</div>
-            <div class="wk-price-sub">$20 w/ TOSTRIP2026</div>
           </div>
           <div class="wk-btns">
             <button class="btn-wkbook" onclick="openModal('Traditional Basket Weaving','🧺','craft','Rokhak Women\'s Handicraft Association','Siem Reap',25,'2 hrs',8,null)">
@@ -1298,7 +1441,6 @@ textarea.reg-in{resize:vertical;min-height:62px}
           <div class="wk-price">
             <div class="wk-price-lbl">Per person</div>
             <div class="wk-price-val">$22</div>
-            <div class="wk-price-sub">$17 w/ TOSTRIP2026</div>
           </div>
           <div class="wk-btns">
             <button class="btn-wkbook" onclick="openModal('Pottery Wheel & Ceramic Painting','🏺','craft','Angkor Pottery Center','Siem Reap',22,'1.5–2 hrs',10,null)">
@@ -1332,7 +1474,6 @@ textarea.reg-in{resize:vertical;min-height:62px}
           <div class="wk-price">
             <div class="wk-price-lbl">Per person</div>
             <div class="wk-price-val">$20</div>
-            <div class="wk-price-sub">$15 w/ TOSTRIP2026</div>
           </div>
           <div class="wk-btns">
             <button class="btn-wkbook" onclick="openModal('Sbek Thom Shadow Puppet Show','🎶','culture','Cambodian Living Arts','Siem Reap',20,'2 hrs',30,null)">
@@ -1367,7 +1508,6 @@ textarea.reg-in{resize:vertical;min-height:62px}
           <div class="wk-price">
             <div class="wk-price-lbl">Per person</div>
             <div class="wk-price-val">$15</div>
-            <div class="wk-price-sub">$10 w/ TOSTRIP2026</div>
           </div>
           <div class="wk-btns">
             <button class="btn-wkbook" onclick="openModal('Kleng Ek Class by Ta Vinthouen','🎨','craft','Kleng Ek','Siem Reap',15,'2–3 hrs',8,null)">
@@ -1582,7 +1722,7 @@ textarea.reg-in{resize:vertical;min-height:62px}
       <p class="sub">Your code is generated after your first booking</p>
       <div class="code-box">
         <div class="cb-lbl">Your Personal Code</div>
-        <div class="cb-code" id="yourCode">TOSTRIP2026</div>
+        <div class="cb-code" id="yourCode">TOS–????</div>
         <div class="cb-sub">Share this · friends get 10% off · you earn $5</div>
         <div class="cb-actions">
           <button class="btn-copy" onclick="copyCode()"><i class="fas fa-copy"></i> Copy Code</button>
@@ -1636,9 +1776,9 @@ textarea.reg-in{resize:vertical;min-height:62px}
   <button type="button" class="lb-close" onclick="lbClose()" aria-label="Close gallery"><i class="fas fa-times"></i></button>
   <button type="button" class="lb-nav prev" onclick="lbGo(lbIdx-1)" aria-label="Previous photo"><i class="fas fa-chevron-left"></i></button>
   <figure class="lb-fig">
-    <img id="lbImg" src="./img/tree1.jpg" alt="Khmer Agarwood (Oud)">
+    <img id="lbImg" src="./imgg/make1give1.jpg" alt="Make 1 Give 1">
     <video id="lbVid" controls playsinline preload="metadata" hidden></video>
-    <figcaption><span id="lbCap">Khmer Agarwood (Oud) · Chip Mong 271 Mega Mall</span><span id="lbCount">1 / 1</span></figcaption>
+    <figcaption><span id="lbCap">Make 1 Give 1 · Secret Santa pottery at Veranda Pottery</span><span id="lbCount">1 / 1</span></figcaption>
   </figure>
   <button type="button" class="lb-nav next" onclick="lbGo(lbIdx+1)" aria-label="Next photo"><i class="fas fa-chevron-right"></i></button>
   <div class="lb-thumbs" id="lbThumbs"></div>
@@ -1657,7 +1797,7 @@ textarea.reg-in{resize:vertical;min-height:62px}
       </div>
       <div class="mh-meta">
         <div class="mh-mi"><i class="fas fa-clock"></i><span id="m-dur">3 hrs</span></div>
-        <div class="mh-mi"><i class="fas fa-users"></i>Max <span id="m-max">12</span></div>
+        <div class="mh-mi" id="m-maxRow"><i class="fas fa-users"></i>Max <span id="m-max">12</span></div>
         <div class="mh-mi"><i class="fas fa-map-marker-alt"></i><span id="m-city">City</span></div>
       </div>
       <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
@@ -1673,20 +1813,11 @@ textarea.reg-in{resize:vertical;min-height:62px}
         </div>
       </div>
 
-      <!-- TOSTRIP2026 promo hint — shown for regular paid workshops -->
-      <div class="promo-code-notice" id="promoHint">
-        <i class="fas fa-tag"></i>
-        <div>
-          <strong>💡 Save $5 — use code TOSTRIP2026</strong>
-          <span>Enter the promo code below to get a flat $5 off your booking total. Works on all paid workshops!</span>
-        </div>
-      </div>
-
-      <label class="fl" id="codeLbl" style="margin-bottom:7px">Promo / Referral code <span style="font-weight:400;color:var(--ink4)">— TOSTRIP2026 saves $5 · referral codes save 10%</span></label>
+      <label class="fl" id="codeLbl" style="margin-bottom:7px">Promo / Referral code <span style="font-weight:400;color:var(--ink4)">— referral codes save 10%</span></label>
       <div class="ref-row" id="codeRow">
         <div class="ref-field">
           <i class="fas fa-tag"></i>
-          <input type="text" id="mCode" placeholder="e.g. TOSTRIP2026" maxlength="12" oninput="this.value=this.value.toUpperCase()">
+          <input type="text" id="mCode" placeholder="e.g. TOSAB123" maxlength="12" oninput="this.value=this.value.toUpperCase()">
         </div>
         <button class="btn-apply" onclick="applyModalCode()">Apply</button>
       </div>
@@ -1696,6 +1827,7 @@ textarea.reg-in{resize:vertical;min-height:62px}
       <div class="sess-grid" id="sessGrid"></div>
 
       <form id="bForm" onsubmit="submitBooking(event)">
+        <div class="fg" id="locRow" hidden><label class="fl" for="bLoc">Location <span class="req">*</span></label><select id="bLoc" class="fi" onchange="locPicked()"></select></div>
         <div class="f-row">
           <div class="fg"><label class="fl">Full Name <span class="req">*</span></label><input type="text" id="bName" class="fi" placeholder="Your name" required></div>
           <div class="fg"><label class="fl">Email <span class="req">*</span></label><input type="email" id="bEmail" class="fi" placeholder="you@email.com" required></div>
@@ -1749,6 +1881,7 @@ textarea.reg-in{resize:vertical;min-height:62px}
     <div class="success-body" id="successWrap" style="display:none">
       <div class="succ-ico">🎉</div>
       <h2>You're booked in!</h2>
+      <div id="rcptWrap"></div>
       <p id="succPayNote" style="display:none"><strong>Payment:</strong> we'll match your ABA / KHQR payment to your booking and email you if anything is missing.</p>
       <p id="succMsg">Confirmation is heading to your inbox. Here's your personal referral code — share it with friends and earn $5 credit every time someone books.</p>
       <div class="succ-code-box">
@@ -1804,6 +1937,18 @@ const EJ_HOST_KEY = 'SmoLQAp-ij_aoJbAd';
 const EJ_TPL_HOST = 'template_l1sw4z3';
 const EJ_ADMIN_EMAIL = 'masitamaramsa@gmail.com';
 const EJ_TPL_GUEST = 'template_0pi47tp';
+/* ─── MACHINE CODES ──────────────────────────────────────────────
+   A code shown as a scratch card on the e-receipt (and in the PDF and the
+   booking email). Guests key it into the machine to pay the TosTrip price.
+   ▶ Put the code KasetTimes gives you between the quotes, e.g. code: 'AB12CD'.
+   While it's empty, the receipt says the code is coming and to show the booking instead. */
+const MACHINE_CODES = {
+  'KasetTimes Vintage Newspaper Photobooth': {
+    code: '',
+    name: 'KasetTimes code',
+    how:  'Key it into the KasetTimes machine to pay just $2 instead of $2.50.'
+  }
+};
 const EVENT_HOSTS = {
   'Khmer Agarwood (Oud)': {
     host:  { name: 'Gech Horng', email: 'bungechhorng1993@gmail.com' },
@@ -1818,6 +1963,12 @@ const EVENT_HOSTS = {
   },
   'Make 1 Give 1 — Secret Santa Pottery': {
     host:  { name: 'Jinsun (Veranda Pottery)', email: 'verandacoffee28112025@gmail.com' }
+  },
+  'KasetTimes Vintage Newspaper Photobooth': {
+    host:  { name: 'Lay Hun (KasetTimes)', email: 'layhunloy168@gmail.com' },
+    daily: true,                       // open every day → guests pick a visit day
+    hours: '9:00 AM – 10:00 PM',
+    closeHour: 22                      // after 10 PM, the first day offered is tomorrow
   }
 };
 
@@ -1825,9 +1976,8 @@ const EVENT_HOSTS = {
 const PCT_CODES = {
   'TOS10':10,'FRIEND10':10,'WELCOME':10,'TOSTRIP':10,'CAMBODIA':10,'MALY2024':10
 };
-const FLAT_CODES = {
-  'TOSTRIP2026': 5
-};
+const FLAT_CODES = {};                       // flat $ off codes (the TOSTRIP2026 $5 promotion has ended)
+const ENDED_CODES = { 'TOSTRIP2026': 'The TOSTRIP2026 promotion has ended' };
 
 let discountPct = 0;
 let discountFlat = 0;
@@ -1837,25 +1987,31 @@ let myCode = '';
 
 
 
-/* ════ OUD EVENT — PHOTO & VIDEO GALLERY ════
-   PHOTOS: save as ./img/tree1.jpg, tree2.jpg … up to tree30.jpg
-           (missing numbers are skipped automatically).
-   VIDEOS: save as ./video/oud1.mp4, oud2.mp4 … up to oud10.mp4.
-           Optional cover image with the same name: ./video/oud1.jpg
-   Files with other names can be listed in OUD_EXTRA_MEDIA.
-   Keep videos short (under 1 minute) and small (under ~20 MB) so the page loads fast. */
-const OUD_PHOTO_MAX = 30;
-const OUD_VIDEO_MAX = 10;
-const OUD_EXTRA_MEDIA = [
-  { type:'video', src:'./img/vid.mp4' },
-  { type:'img',   src:'./img/per2.jpg' },
-  { type:'img',   src:'./img/per.jpg' },
-  { type:'video', src:'./img/per3.MP4', poster:'./img/per.jpg' },
-  // { type:'img',   src:'./img/oud-shop.jpg' },
-  // { type:'video', src:'./video/promo.mp4', poster:'./video/promo.jpg' },
+/* ════ HERO SLIDESHOW + EVENT CARD (top of the page) ════
+   Shows Make 1 Give 1 until it ends (Wed 25 Nov 2026, 5 PM), then Veranda's daily pottery workshop —
+   so the top of the page never advertises a finished event. Files in ./imgg/ (missing ones are skipped).
+   (This gallery used to show the Khmer Agarwood (Oud) event, which ended on 13 Oct; its variables
+   are still called oud… to keep the code below unchanged.) */
+const HERO_M1G1_START = new Date('2026-11-25T14:00:00+07:00').getTime();
+const HERO_M1G1_END   = new Date('2026-11-25T17:00:00+07:00').getTime();
+const heroIsM1G1 = () => Date.now() < HERO_M1G1_END;
+const heroName = () => heroIsM1G1() ? 'Make 1 Give 1' : 'Veranda Pottery';
+let HERO_CAPTION = 'Make 1 Give 1 · Secret Santa pottery at Veranda Pottery';
+const HERO_MEDIA_M1G1 = [
+  { type:'img',   src:'./imgg/make1give1.jpg', pos:'50% 16%' },   // pos: which part of a tall picture to show
+  { type:'video', src:'./imgg/make1give1.mp4', poster:'./imgg/make1give1.jpg' },
+  { type:'img',   src:'./imgg/pottery.jpg' },
+  { type:'img',   src:'./imgg/pot3.jpg' },
+  { type:'img',   src:'./imgg/pot4.jpg' }
 ];
-let oudMedia = [{type:'img', src:'./img/tree1.jpg'}];
-let lbList = null, lbName = 'Khmer Agarwood (Oud)';   // lbList null = the lightbox shows the Oud gallery
+const HERO_MEDIA_VERANDA = [
+  { type:'img',   src:'./imgg/pottery.jpg' },
+  { type:'video', src:'./imgg/pot.MOV' },
+  { type:'img',   src:'./imgg/pot3.jpg' },
+  { type:'img',   src:'./imgg/pot4.jpg' }
+];
+let oudMedia = [{type:'img', src:'./imgg/make1give1.jpg'}];
+let lbList = null, lbName = 'Make 1 Give 1';   // lbList null = the lightbox shows the hero slideshow
 let heroIdx = 0, cardIdx = 0, lbIdx = 0, heroTimer = null, cardTimer = null, heroHover = false;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isVid = i => oudMedia[i] && oudMedia[i].type === 'video';
@@ -1870,10 +2026,7 @@ function probeVid(src){ return new Promise(r=>{
 }); }
 
 async function loadOudMedia(){
-  const photos = [], vids = [];
-  for(let n = 1; n <= OUD_PHOTO_MAX; n++) photos.push({type:'img', src:'./img/tree'+n+'.jpg'});
-  for(let n = 1; n <= OUD_VIDEO_MAX; n++) vids.push({type:'video', src:'./video/oud'+n+'.mp4', poster:'./video/oud'+n+'.jpg'});
-  const all = [...photos, ...vids, ...OUD_EXTRA_MEDIA];
+  const all = (heroIsM1G1() ? HERO_MEDIA_M1G1 : HERO_MEDIA_VERANDA).map(m=>({...m}));
   const ok = await Promise.all(all.map(m => m.type === 'video' ? probeVid(m.src) : probeImg(m.src)));
   const found = all.filter((_,i)=>ok[i]);
   // video covers are optional
@@ -1884,7 +2037,6 @@ async function loadOudMedia(){
   oudMedia = fp.length ? [fp[0], ...fv.slice(0,1), ...fp.slice(1), ...fv.slice(1)] : fv;
   renderOudGallery();
 }
-
 function vidTag(m, cls, extra){ return `<video class="${cls}" src="${m.src}#t=0.5" ${m.poster?`poster="${m.poster}"`:''} muted playsinline preload="metadata" ${extra||''}></video>`; }
 function thumbHTML(m){ return m.type === 'video'
   ? (m.poster ? `<img src="${m.poster}" alt="" loading="lazy">` : vidTag(m,''))
@@ -1896,8 +2048,8 @@ function renderOudGallery(){
   const show = document.getElementById('heroShow');
   show.querySelectorAll('.hs-slide').forEach(e=>e.remove());
   show.insertAdjacentHTML('afterbegin', oudMedia.map((m,i)=> m.type === 'video'
-    ? vidTag(m, 'hs-slide'+(i===0?' active':''), 'aria-label="Khmer Agarwood (Oud) video"')
-    : `<img class="hs-slide${i===0?' active':''}" src="${m.src}" alt="Khmer Agarwood (Oud) photo ${i+1}"${i>1?' loading="lazy"':''}>`).join(''));
+    ? vidTag(m, 'hs-slide'+(i===0?' active':''), `aria-label="${heroName()} video"`)
+    : `<img class="hs-slide${i===0?' active':''}" src="${m.src}" alt="${heroName()} photo ${i+1}"${m.pos?` style="object-position:${m.pos}"`:''}${i>1?' loading="lazy"':''}>`).join(''));
   show.querySelectorAll('video.hs-slide').forEach(v=>v.addEventListener('ended', ()=>{ if(!heroHover) heroGo(heroIdx+1); }));
   show.classList.toggle('single', n < 2);
   document.getElementById('heroDots').innerHTML = oudMedia.map((m,i)=>
@@ -1976,7 +2128,7 @@ function lbOpen(i){
   const lb = document.getElementById('oudLb');
   lb.classList.add('open'); lb.setAttribute('aria-hidden','false');
   document.body.style.overflow = 'hidden';
-  document.querySelectorAll('#heroShow video, #oudVid, #verVid').forEach(v=>v.pause());
+  document.querySelectorAll('#heroShow video, #oudVid, #verVid, #kasVid').forEach(v=>v.pause());
   lbGo(i || 0);
   lb.querySelector('.lb-close').focus();
 }
@@ -2005,11 +2157,12 @@ function lbClose(){
   lb.classList.remove('open'); lb.setAttribute('aria-hidden','true');
   document.body.style.overflow = '';
   document.getElementById('lbVid').pause();
-  if(lbList){   // back to the Oud gallery
-    lbList = null; lbName = 'Khmer Agarwood (Oud)';
+  if(lbList){   // back to the hero slideshow
+    lbList = null; lbName = heroName();
     lbThumbsFor(oudMedia);
-    document.getElementById('lbCap').textContent = 'Khmer Agarwood (Oud) · Chip Mong 271 Mega Mall';
+    document.getElementById('lbCap').textContent = HERO_CAPTION;
     verGo(verIdx); verAuto();
+    if(typeof kasAuto === 'function'){ kasGo(kasIdx); kasAuto(); }
     return;
   }
   heroGo(heroIdx); cardGo(cardIdx);
@@ -2129,6 +2282,86 @@ function verLbOpen(i){
   tick(); setInterval(tick, 30000);
 })();
 
+/* ════ KASETTIMES gallery — files in ./imgg/ (anything not uploaded yet is skipped) ════ */
+const KAS_ALL = [
+  { type:'img',   src:'./imgg/kasettimes.jpg',  alt:'The KasetTimes vintage newspaper photobooth at Stable TK, Phnom Penh' },
+  { type:'video', src:'./imgg/kasettimes.mp4',  alt:'Friends showing off their KasetTimes newspapers' },
+  { type:'img',   src:'./imgg/kasettimes2.jpg', alt:'The KasetTimes booth up close: start, pay, pose, choose a frame, pick up your newspaper' },
+  { type:'img',   src:'./imgg/kasettimes3.jpg', alt:'A “Wanted” front page on the KasetTimes screen' }
+];
+let KAS_MEDIA = [KAS_ALL[0]], kasIdx = 0, kasTimer = null;
+async function kasLoadMedia(){
+  const ok = await Promise.all(KAS_ALL.map(m => m.type === 'video' ? probeVid(m.src) : probeImg(m.src)));
+  const found = KAS_ALL.filter((_, i) => ok[i]);
+  if(found.length){ KAS_MEDIA = found; kasRender(); }
+}
+function kasRender(){
+  const n = KAS_MEDIA.length, nP = KAS_MEDIA.filter(m=>m.type==='img').length, nV = n - nP;
+  document.getElementById('kasThumbs').innerHTML = n < 2 ? '' : KAS_MEDIA.map((m,i)=>
+    `<button type="button" class="kas-thumb${m.type==='video'?' is-vid':''}" aria-label="Show ${m.type==='video'?'video':'photo'} ${i+1}" onclick="kasGo(${i},true)">${thumbHTML(m)}</button>`).join('');
+  document.getElementById('kasCount').textContent =
+    [nP ? nP + (nP===1?' photo':' photos') : '', nV ? nV + (nV===1?' video':' videos') : ''].filter(Boolean).join(' · ') || 'Photos';
+  document.getElementById('kasWatchBtn').hidden = !nV;
+  document.getElementById('kasVid').onended = ()=>kasGo(kasIdx+1);
+  kasGo(0); kasAuto();
+}
+function kasGo(i, user){
+  const n = KAS_MEDIA.length; kasIdx = (i + n) % n;
+  const m = KAS_MEDIA[kasIdx];
+  const img = document.getElementById('kasImg'), vid = document.getElementById('kasVid'), badge = document.getElementById('kasVidBadge');
+  if(m.type === 'video'){
+    if(!vid.src.endsWith(m.src.replace('./',''))){ vid.src = m.src; if(m.poster) vid.poster = m.poster; else vid.removeAttribute('poster'); }
+    vid.classList.add('on'); badge.classList.add('on');
+    if(!reduceMotion) playMuted(vid);
+  } else {
+    vid.pause(); vid.classList.remove('on'); badge.classList.remove('on');
+    if(!img.src.endsWith(m.src.replace('./',''))){
+      img.style.opacity = 0;
+      setTimeout(()=>{ img.src = m.src; img.alt = m.alt || 'KasetTimes photo'; img.style.opacity = 1; }, 220);
+    }
+  }
+  document.querySelectorAll('.kas-thumb').forEach((e,k)=>e.classList.toggle('on', k===kasIdx));
+  if(user) kasAuto();
+}
+function kasAuto(){
+  clearInterval(kasTimer);
+  if(KAS_MEDIA.length < 2 || reduceMotion) return;
+  // while the video plays, wait for it to finish (its 'ended' event moves on)
+  kasTimer = setInterval(()=>{ if(KAS_MEDIA[kasIdx].type !== 'video') kasGo(kasIdx+1); }, 4500);
+}
+function kasLbOpen(i){
+  clearInterval(kasTimer);
+  lbOpenList(KAS_MEDIA, 'KasetTimes', 'KasetTimes Vintage Newspaper Photobooth · Phnom Penh, Siem Reap, Battambang & Kampot', i ?? kasIdx);
+}
+function kasWatch(){ const i = KAS_MEDIA.findIndex(m=>m.type==='video'); if(i > -1) kasLbOpen(i); }
+(function(){
+  if(!document.getElementById('kaset-times')) return;
+  kasRender();
+  kasLoadMedia();
+  addSwipe(document.querySelector('#kaset-times .fc-img'), ()=>kasGo(kasIdx-1,true), ()=>kasGo(kasIdx+1,true));
+})();
+
+/* ════ KASETTIMES — open / closed status, Cambodia time (UTC+7): 9:00 AM – 10:00 PM ════ */
+(function(){
+  const OPEN = 9*3600, CLOSE = 22*3600, pad = n => String(n).padStart(2,'0');
+  const lbl = document.getElementById('kasStatusLbl'), badge = document.getElementById('kasOpenBadge');
+  const fill = document.getElementById('kasDayFill'), dayLbl = document.getElementById('kasDayLbl');
+  if(!lbl) return;
+  const tick = ()=>{
+    const t = new Date(Date.now() + 7*36e5);
+    const secs = t.getUTCHours()*3600 + t.getUTCMinutes()*60 + t.getUTCSeconds();
+    const open = secs >= OPEN && secs < CLOSE;
+    const diff = open ? CLOSE - secs : (secs < OPEN ? OPEN - secs : OPEN + 86400 - secs);
+    const h = Math.floor(diff/3600), m = Math.floor(diff%3600/60);
+    lbl.textContent = open ? '🟢 Open now · closes in ' + h + 'h ' + pad(m) + 'm' : '⏰ Closed now · opens in ' + h + 'h ' + pad(m) + 'm';
+    lbl.classList.toggle('closed', !open);
+    badge.textContent = open ? '🟢 Open now' : '🕘 Opens 9:00 AM';
+    dayLbl.textContent = open ? 'Open today' : 'Closed — opens 9:00 AM';
+    fill.style.width = open ? ((secs-OPEN)/(CLOSE-OPEN)*100).toFixed(1) + '%' : '0%';
+  };
+  tick(); setInterval(tick, 30000);
+})();
+
 /* ════ WELCOME POP-UP ════
    Shows the ongoing event when someone enters the site.
    Appears once per visit (browser tab); stops after the event ends. */
@@ -2183,7 +2416,41 @@ function promoClose(){
   window.addEventListener('load', ()=>setTimeout(promoOpen, PROMO_DELAY));
 })();
 
-/* OUD EVENT — live open/closed status (Cambodia time, UTC+7) */
+/* HERO EVENT CARD — Make 1 Give 1 countdown; after the event, Veranda's open/closed status */
+function heroTick(){
+  const $ = id => document.getElementById(id), now = Date.now(), pad = n => String(n).padStart(2,'0');
+  if(heroIsM1G1()){
+    const day = t => Math.floor((t + 7*36e5) / 864e5), d = day(HERO_M1G1_START) - day(now), live = now >= HERO_M1G1_START;
+    $('heroEvTxt').textContent = live ? 'Happening now' : d <= 0 ? 'Today · 2 PM' : d === 1 ? 'Tomorrow · 2 PM' : 'Wed 25 Nov · 2 PM';
+    const tag = live ? 'Happening now' : 'Booking now';
+    document.querySelector('#heroNowOn .live-dot').textContent = tag; $('heroShowTag').textContent = tag;
+    $('heroEvStatus').innerHTML = '<i class="fas fa-hourglass-half"></i> ' +
+      (live ? 'On now · until 5 PM' : d <= 0 ? 'Starts today at 2 PM' : d === 1 ? 'Starts tomorrow at 2 PM' : 'Starts in ' + d + ' days');
+    return;
+  }
+  if($('heroEvTitle').textContent !== 'Pottery Workshop'){
+    const pill = $('heroNowOn');
+    pill.href = '#veranda-event';
+    pill.innerHTML = '<span class="live-dot">Open daily</span><strong>Pottery Workshop</strong><span class="now-on-sub">Veranda Pottery · Tonle Bassac, Phnom Penh</span><i class="fas fa-chevron-right"></i>';
+    $('heroShowTag').textContent = 'Open daily';
+    $('heroEvTag').textContent = 'Open daily';
+    $('heroEvTitle').textContent = 'Pottery Workshop';
+    const link = $('heroEvLink'); link.href = '#veranda-event'; link.innerHTML = '$15 · Book a pottery class <i class="fas fa-arrow-right"></i>';
+    HERO_CAPTION = 'Pottery Workshop · Veranda Pottery, Tonle Bassac';
+    if(!lbList) $('lbCap').textContent = HERO_CAPTION;
+    const first = document.querySelector('#heroShow .hs-slide');
+    if(first && first.tagName === 'IMG' && first.src.includes('make1give1')) first.src = './imgg/pottery.jpg';
+  }
+  const t = new Date(now + 7*36e5), secs = t.getUTCHours()*3600 + t.getUTCMinutes()*60;
+  const OPEN = 8*3600, CLOSE = 19*3600, open = secs >= OPEN && secs < CLOSE;
+  const diff = open ? CLOSE - secs : (secs < OPEN ? OPEN - secs : OPEN + 86400 - secs);
+  $('heroEvTxt').textContent = '8 AM – 7 PM';
+  $('heroEvStatus').innerHTML = '<i class="fas fa-clock"></i> ' + (open ? 'Open now · closes in ' : 'Closed · opens in ') + Math.floor(diff/3600) + 'h ' + pad(Math.floor(diff%3600/60)) + 'm';
+  $('heroEvStatus').classList.toggle('closed', !open);
+}
+heroTick(); setInterval(heroTick, 60000);
+
+/* OUD EVENT — live open/closed status (Cambodia time, UTC+7) — the event has ended; its card is hidden */
 (function(){
   const OPEN = 9*3600, CLOSE = 22*3600;
   const row = document.getElementById('cd-oud'); if(!row) return;
@@ -2458,7 +2725,7 @@ function cardMatch(c, type){
   if(type === 'all') return true;
   if(type === 'free') return priceOf(c) === 0;
   if(type === 'paid') return priceOf(c) > 0;
-  return c.dataset.cat === type || c.dataset.city === type;
+  return c.dataset.cat === type || (c.dataset.city || '').split(' ').includes(type);   // data-city may list several cities
 }
 let wkType = 'all';
 function filterCards(type, btn){
@@ -2533,7 +2800,7 @@ function applyBannerCode(){
     toast('Code saved — '+PCT_CODES[code]+'% off at checkout!', 'tag');
   } else {
     msg.className = 'rb-msg err';
-    msg.innerHTML = '<i class="fas fa-times-circle"></i> Code not recognised';
+    msg.innerHTML = '<i class="fas fa-times-circle"></i> ' + (ENDED_CODES[code] || 'Code not recognised');
   }
 }
 
@@ -2549,7 +2816,7 @@ function applyModalCode(){
     discountPct = 0;
     inp.classList.add('ok'); inp.classList.remove('err');
     document.getElementById('discText').textContent = `Code "${code}" — $${discountFlat} off applied`;
-    document.getElementById('psDiscLabel').textContent = 'Promo discount (TOSTRIP2026)';
+    document.getElementById('psDiscLabel').textContent = 'Promo discount (' + code + ')';
     badge.classList.add('show');
     refreshTotal();
     toast('$'+discountFlat+' discount applied!', 'tag');
@@ -2567,7 +2834,7 @@ function applyModalCode(){
     inp.classList.add('err'); inp.classList.remove('ok');
     badge.classList.remove('show');
     refreshTotal();
-    toast('Code not recognised — check spelling', 'times-circle');
+    toast(ENDED_CODES[code] || 'Code not recognised — check spelling', 'times-circle');
   }
 }
 
@@ -2613,9 +2880,12 @@ function openModal(title, icon, cat, partner, city, price, dur, maxS, eventDate,
   opts = opts || {};
   // single: one fixed date · noDiscount: promo / referral codes don't apply · payQR: pay by ABA / KHQR in the form
   curBooking = {title, icon, cat, partner, city, price, dur, maxS, eventDate, isNak: false,
-                single: !!opts.single, noDiscount: !!opts.noDiscount, payQR: !!opts.payQR};
+                single: !!opts.single, noDiscount: !!opts.noDiscount, payQR: !!opts.payQR,
+                locations: opts.locations || null};   // locations: guest picks one (e.g. KasetTimes booths)
   _setupModal();
 }
+
+function locPicked(){ document.getElementById('m-city').textContent = document.getElementById('bLoc').value || curBooking.city; }
 
 /* OPEN MODAL — Chef Nak */
 function openNakModal(title, icon, partner, city, price, dur, maxS){
@@ -2632,24 +2902,30 @@ function _setupModal(){
   document.getElementById('m-title').textContent = curBooking.title;
   document.getElementById('m-partner').textContent = curBooking.partner + ' · ' + curBooking.city;
   document.getElementById('m-dur').textContent = curBooking.dur;
-  document.getElementById('m-max').textContent = curBooking.maxS;
+  // no guest limit (walk-in listings pass '—') → say so instead of "Max —"
+  const noMax = !curBooking.maxS || /^[—–-]$/.test(String(curBooking.maxS).trim());
+  document.getElementById('m-maxRow').innerHTML = '<i class="fas fa-users"></i>' +
+    (noMax ? 'Walk-in · open to all' : 'Max <span id="m-max">' + hostEsc(String(curBooking.maxS)) + '</span>');
   document.getElementById('m-city').textContent = curBooking.city;
+  // several locations → the guest chooses one
+  const locRow = document.getElementById('locRow'), locSel = document.getElementById('bLoc');
+  if(curBooking.locations && curBooking.locations.length){
+    locSel.innerHTML = '<option value="">Choose a location…</option>' + curBooking.locations.map(l=>`<option>${hostEsc(l)}</option>`).join('');
+    locSel.required = true; locRow.hidden = false;
+  } else { locSel.innerHTML = ''; locSel.required = false; locRow.hidden = true; }
 
   const hdr = document.getElementById('modalHeader');
   const submitBtn = document.getElementById('submitBtn');
   const nakNotice = document.getElementById('nakDiscNotice');
-  const promoHint = document.getElementById('promoHint');
 
   if(curBooking.isNak){
     hdr.classList.add('nak-header');
     submitBtn.classList.add('nak-submit');
     nakNotice.style.display = 'flex';
-    promoHint.style.display = 'none';
   } else {
     hdr.classList.remove('nak-header');
     submitBtn.classList.remove('nak-submit');
     nakNotice.style.display = 'none';
-    promoHint.style.display = (isFree || curBooking.noDiscount) ? 'none' : 'flex';
   }
   // promo / referral code field — not for events where codes don't apply
   ['codeLbl','codeRow'].forEach(id=>{ document.getElementById(id).style.display = curBooking.noDiscount ? 'none' : ''; });
@@ -2691,7 +2967,8 @@ function buildSessions(baseDate){
     // Cambodia time; after closing time (default 10 PM) start from tomorrow
     const ict = new Date(Date.now() + 7*36e5);
     const startOffset = ict.getUTCHours() >= (opt.closeHour || 22) ? 1 : 0;
-    const seatsTxt = curBooking.price === 0 ? 'Free · open to all' : 'Max ' + curBooking.maxS + ' guests';
+    const noMax = !curBooking.maxS || /^[—–-]$/.test(String(curBooking.maxS).trim());
+    const seatsTxt = curBooking.price === 0 ? 'Free · open to all' : noMax ? 'Walk-in · open to all' : 'Max ' + curBooking.maxS + ' guests';
     let html = '';
     for(let i = 0; i < 4; i++){
       const d = new Date(Date.UTC(ict.getUTCFullYear(), ict.getUTCMonth(), ict.getUTCDate() + startOffset + i));
@@ -2796,6 +3073,9 @@ function submitBooking(e){
   const guestNotes = document.getElementById('bNotes').value.trim() || 'No requests';
   const totalTxt   = base === 0 ? 'Free' : '$' + total.toFixed(2);
   const hostInfo   = (EVENT_HOSTS[curBooking.title] || {}).host;
+  const locTxt     = curBooking.locations ? document.getElementById('bLoc').value : '';
+  const placeTxt   = curBooking.partner + ' · ' + (locTxt || curBooking.city);
+  const machineCode = (MACHINE_CODES[curBooking.title] || {}).code || '';
 
   const params = {
     user_name:    guestName,
@@ -2809,6 +3089,7 @@ function submitBooking(e){
                   (flatAmt > 0 ? '\nPromo discount ('+usedCode+'): –$' + flatAmt : '') +
                   (pctAmt > 0  ? '\nReferral discount: –$' + pctAmt : '') +
                   '\nBooking ref: ' + bookingRef +
+                  (locTxt ? '\nLocation: ' + locTxt : '') +
                   (hostInfo ? '\nHost notified: ' + hostInfo.name + ' <' + hostInfo.email + '>' : '') +
                   '\nTotal: ' + (base === 0 ? 'FREE' : '$' + total) +
                   '\nReferral code generated: ' + myCode + payerTxt,
@@ -2822,7 +3103,7 @@ function submitBooking(e){
     name:         guestName,
     email:        guestEmail,
     workshop:     curBooking.title,
-    venue:        curBooking.partner + ' · ' + curBooking.city,
+    venue:        placeTxt,
     date:         sessionTxt,
     guests:       qty,
     total:        totalTxt,
@@ -2841,7 +3122,7 @@ function submitBooking(e){
       to_name:     toName,
       reply_to:    guestEmail,
       workshop:    curBooking.title,
-      location:    curBooking.partner + ' · ' + curBooking.city,
+      location:    placeTxt,
       visit_date:  sessionTxt,
       tickets:     qty,
       total:       totalTxt,
@@ -2854,11 +3135,13 @@ function submitBooking(e){
       name:        guestName,
       email:       guestEmail,
       phone:       guestPhone,
-      venue:       curBooking.partner + ' · ' + curBooking.city,
+      venue:       placeTxt,
       date:        sessionTxt,
       duration:    curBooking.dur,
       guests:      qty,
       message:     guestNotes + '\nTickets: ' + qty + '\nBooking ref: ' + bookingRef +
+                   (locTxt ? '\nLocation: ' + locTxt : '') +
+                   (machineCode ? '\n' + MACHINE_CODES[curBooking.title].name + ' (key it into the machine): ' + machineCode : '') +
                    (usedCode !== 'None' ? '\nCode used: ' + usedCode : '') +
                    '\nReferral code generated: ' + myCode + payerTxt
     }, EJ_KEY);
@@ -2874,6 +3157,18 @@ function submitBooking(e){
     return sendHost(false);
   });
 
+  // e-receipt (shown on the success screen; PDF on request)
+  const rcpt = {
+    ref: bookingRef, title: curBooking.title, where: placeTxt,
+    session: sessionTxt, duration: curBooking.dur, qty, unit: base, subtotal: sub,
+    discount: Math.max(0, +(sub - total).toFixed(2)), total, code: usedCode,
+    guest: guestName, email: guestEmail, phone: guestPhone === 'N/A' ? '' : guestPhone,
+    payQR: !!curBooking.payQR, payer: curBooking.payQR ? document.getElementById('bPayer').value.trim() : '',
+    machine: MACHINE_CODES[curBooking.title] || null,
+    issuedTxt: new Intl.DateTimeFormat('en-GB', { timeZone:'Asia/Phnom_Penh', day:'numeric', month:'short', year:'numeric' }).format(new Date()) + ', ' +
+               new Intl.DateTimeFormat('en-US', { timeZone:'Asia/Phnom_Penh', hour:'numeric', minute:'2-digit', hour12:true }).format(new Date())
+  };
+
   const finish = ()=>{
     document.getElementById('succMsg').innerHTML = hostInfo
       ? `Your booking <strong>${bookingRef}</strong> for <strong>${hostEsc(sessionTxt)}</strong> is confirmed and <strong>${hostEsc(hostInfo.name)}</strong> has been notified. Here's your personal referral code — share it with friends and earn $5 credit every time someone books.`
@@ -2881,6 +3176,7 @@ function submitBooking(e){
     if (receiptError) {
       document.getElementById('succMsg').innerHTML += `<br><br><span style="color:#b3261e">We couldn't email your receipt (${hostEsc(String(receiptError))}). Please screenshot this page; your booking ref is <strong>${bookingRef}</strong>.</span>`;
     }
+    renderReceipt(rcpt);
     document.getElementById('succCode').textContent = myCode;
     document.getElementById('yourCode').textContent = myCode;
     sessionStorage.setItem('myCode', myCode);
@@ -2898,6 +3194,303 @@ function submitBooking(e){
       refreshTotal();
     });
   } else { finish(); }
+}
+
+/* ════ E-RECEIPT ════════════════════════════════════════════════════
+   After a booking: a receipt card guests can screenshot, plus a PDF in
+   Helvetica they can save. The PDF is made right here in the browser —
+   no extra library. Paid by ABA KHQR → "E-RECEIPT · PAID"; free or
+   not-yet-paid bookings get a "BOOKING CONFIRMATION".                    */
+const RC_BLUE = '#667eea', RC_BLUE_D = '#4f63d2', RC_INK = '#111827', RC_GREY = '#6b7280', RC_LINE = '#e5e7eb';
+const HELV_W  = [278,278,355,556,556,889,667,191,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,278,278,584,584,584,556,1015,667,667,722,722,667,611,778,722,278,500,667,556,833,722,778,667,778,722,667,611,722,667,944,667,667,611,278,278,278,469,556,333,556,556,500,556,556,278,556,556,222,222,500,222,833,556,556,556,556,333,500,278,556,500,722,500,500,500,334,260,334,584,350,556,350,222,556,333,1000,556,556,333,1000,667,333,1000,350,611,350,350,222,222,333,333,350,556,1000,333,1000,500,333,944,350,500,667,278,333,556,556,556,556,260,556,333,737,370,556,584,333,737,333,400,584,333,333,333,556,537,278,333,333,365,556,834,834,834,611,667,667,667,667,667,667,1000,722,667,667,667,667,278,278,278,278,722,722,778,778,778,778,778,584,778,722,722,722,722,667,667,611,556,556,556,556,556,556,889,500,556,556,556,556,278,278,278,278,556,556,556,556,556,556,556,584,611,556,556,556,556,500,556,500];
+const HELVB_W = [278,333,474,556,556,889,722,238,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,333,333,584,584,584,611,975,722,722,722,722,667,611,778,722,278,556,722,611,833,722,778,667,778,722,667,611,722,667,944,667,667,611,333,278,333,584,556,333,556,611,556,611,556,333,611,611,278,278,556,278,889,611,611,611,611,389,556,333,611,556,778,556,556,500,389,280,389,584,350,556,350,278,556,500,1000,556,556,333,1000,667,333,1000,350,611,350,350,278,278,500,500,350,556,1000,333,1000,556,333,944,350,500,667,278,333,556,556,556,556,280,556,333,737,370,556,584,333,737,333,400,584,333,333,333,611,556,278,333,333,365,556,834,834,834,611,722,722,722,722,722,722,1000,722,667,667,667,667,278,278,278,278,722,722,778,778,778,778,778,584,778,722,722,722,722,667,667,611,556,556,556,556,556,556,889,556,556,556,556,556,278,278,278,278,611,611,611,611,611,611,611,584,611,611,611,611,611,556,611,556];
+const RC_CP1252 = {0x20AC:128,0x201A:130,0x0192:131,0x201E:132,0x2026:133,0x2020:134,0x2021:135,0x02C6:136,0x2030:137,0x0160:138,0x2039:139,0x0152:140,0x017D:142,
+  0x2018:145,0x2019:146,0x201C:147,0x201D:148,0x2022:149,0x2013:150,0x2014:151,0x02DC:152,0x2122:153,0x0161:154,0x203A:155,0x0153:156,0x017E:158,0x0178:159};
+const rcCode = ch => { const c = ch.codePointAt(0); if (c >= 32 && c < 127) return c; if (c >= 160 && c <= 255) return c; return RC_CP1252[c] ?? -1; };
+const rcAnsiOK = s => [...String(s)].every(ch => rcCode(ch) >= 0);
+const rcWidth = (s, size, bold) => { const W = bold ? HELVB_W : HELV_W; let w = 0; for (const ch of String(s)) { const c = rcCode(ch); w += c >= 32 ? W[c - 32] : 556; } return w * size / 1000; };
+const rcMoney = n => '$' + (+n).toFixed(2);
+const rcEsc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const rcN = n => String(Number((+n).toFixed(2)));
+
+function rcKind(r){
+  if (r.payQR)       return { title:'E-RECEIPT', word:'receipt', chip:'PAID · ABA KHQR', cls:'paid', totalLbl:'Total paid' };
+  if (r.total === 0) return { title:'BOOKING CONFIRMATION', word:'confirmation', chip:'FREE · CONFIRMED', cls:'free', totalLbl:'Total' };
+  return               { title:'BOOKING CONFIRMATION', word:'confirmation', chip:'BOOKED', cls:'due', totalLbl:'Total to pay' };
+}
+// [label, value] rows — the same rows go on the card and in the PDF
+function rcRows(r){
+  const rows = [['Date & time', r.session]];
+  if (r.duration && !/AM|PM/i.test(r.duration)) rows.push(['Duration', r.duration]);
+  rows.push(['Guest', r.guest], ['Email', r.email]);
+  if (r.phone) rows.push(['Phone', r.phone]);
+  return rows;
+}
+function rcPayRows(r){
+  const k = rcKind(r), rows = [];
+  rows.push([r.qty + (r.qty === 1 ? ' ticket' : ' tickets') + ' × ' + (r.unit === 0 ? 'Free' : rcMoney(r.unit)), r.unit === 0 ? 'Free' : rcMoney(r.subtotal)]);
+  if (r.discount > 0) rows.push(['Discount' + (r.code && r.code !== 'None' ? ' (' + r.code + ')' : ''), '–' + rcMoney(r.discount)]);
+  rows.push({ total:true, label:k.totalLbl, value: r.total === 0 ? 'Free' : rcMoney(r.total) });
+  if (r.payQR) rows.push(['Paid by', r.payer || 'Not given']);
+  return rows;
+}
+function rcNote(r){
+  if (r.machine) return r.machine.code
+    ? 'Key your code into the machine to pay the TosTrip price. Keep this ' + rcKind(r).word + ' until your visit.'
+    : 'Your machine code is on its way. Until then, show this ' + rcKind(r).word + ' at the booth.';
+  return (r.payQR ? 'We check every ABA KHQR payment against bank records and will email you if anything is missing. ' : '') +
+         'Show this ' + rcKind(r).word + ' when you arrive.';
+}
+
+/* the card on the success screen */
+function renderReceipt(r){
+  const k = rcKind(r);
+  const row = x => Array.isArray(x)
+    ? `<div class="rc-row"><span>${rcEsc(x[0])}</span><b>${rcEsc(x[1])}</b></div>`
+    : `<div class="rc-row rc-total"><span>${rcEsc(x.label)}</span><b>${rcEsc(x.value)}</b></div>`;
+  document.getElementById('rcptWrap').innerHTML = `
+    <div class="rc-card" id="rcptCard">
+      <div class="rc-head">
+        <div class="rc-brand"><img src="./imgg/loko.png" alt="" onerror="this.remove()">TosTrip</div>
+        <div class="rc-kind">${k.title}<small>No. ${rcEsc(r.ref)}</small><small>${rcEsc(r.issuedTxt)}</small></div>
+      </div>
+      <div class="rc-body">
+        <span class="rc-chip ${k.cls}">${k.chip}</span>
+        <div class="rc-title">${rcEsc(r.title)}</div>
+        <div class="rc-sub">${rcEsc(r.where)}</div>
+        ${rcRows(r).map(row).join('')}
+        <div class="rc-cut"></div>
+        ${rcPayRows(r).map(row).join('')}
+        ${r.machine && r.machine.code ? `
+        <div class="rc-scratch">
+          <div class="rc-sc-h"><b>${rcEsc(r.machine.name)}</b><span>Scratch to reveal</span></div>
+          <div class="rc-sc-box"><div class="rc-sc-code">${rcEsc(r.machine.code)}</div><canvas class="rc-sc-foil" aria-hidden="true"></canvas></div>
+          <div class="rc-sc-how">${rcEsc(r.machine.how)}</div>
+          <button type="button" class="rc-sc-btn">Tap to reveal</button>
+        </div>` : ''}
+        <div class="rc-foot">${rcEsc(rcNote(r))} <span>tostrip.co</span></div>
+      </div>
+    </div>
+    <button type="button" class="m-btn rc-pdf" id="rcptPdfBtn"><i class="fas fa-file-pdf"></i> Download PDF ${k.word}</button>
+    <div class="rc-hint"><i class="fas fa-camera"></i> Screenshot this ${k.word} or save the PDF.</div>`;
+  document.getElementById('rcptPdfBtn').onclick = () => rcDownload(r);
+  rcLoadLogo();
+  const sc = document.querySelector('#rcptCard .rc-scratch');
+  if (sc) requestAnimationFrame(() => rcScratch(sc));
+}
+
+/* scratch card: rub the silver foil (finger or mouse) to uncover the machine code */
+function rcScratch(wrap){
+  const cv = wrap.querySelector('canvas'), box = wrap.querySelector('.rc-sc-box'), btn = wrap.querySelector('.rc-sc-btn');
+  const W = box.clientWidth, H = box.clientHeight, dpr = Math.min(3, window.devicePixelRatio || 1);
+  cv.width = W * dpr; cv.height = H * dpr;
+  const ctx = cv.getContext('2d'); ctx.scale(dpr, dpr);
+  const g = ctx.createLinearGradient(0, 0, W, H);
+  g.addColorStop(0, '#c9ccd3'); g.addColorStop(.45, '#eef0f4'); g.addColorStop(.55, '#b7bbc4'); g.addColorStop(1, '#dfe2e8');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = 'rgba(255,255,255,.55)';
+  for (let i = 0; i < 70; i++) { ctx.beginPath(); ctx.arc((i * 97) % W, (i * 53) % H, 1 + (i % 3), 0, 7); ctx.fill(); }
+  ctx.fillStyle = '#6b6f78'; ctx.font = '700 15px "Helvetica Neue", Helvetica, Arial, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText('SCRATCH HERE', W / 2, H / 2);
+  ctx.globalCompositeOperation = 'destination-out';
+  let down = false, last = null, moves = 0, done = false;
+  const reveal = () => { if (done) return; done = true; cv.classList.add('gone'); btn.hidden = true; setTimeout(() => cv.remove(), 450); };
+  const pos = e => { const b = cv.getBoundingClientRect(); return [e.clientX - b.left, e.clientY - b.top]; };
+  const rub = ([x, y]) => {
+    ctx.lineWidth = 34; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(...(last || [x, y])); ctx.lineTo(x, y); ctx.stroke();
+    ctx.beginPath(); ctx.arc(x, y, 17, 0, 7); ctx.fill(); last = [x, y];
+    if (++moves % 8 === 0) {                                  // how much foil is left?
+      const d = ctx.getImageData(0, 0, cv.width, cv.height).data; let clear = 0;
+      for (let i = 3; i < d.length; i += 64) if (d[i] < 40) clear++;
+      if (clear / (d.length / 64) > 0.5) reveal();
+    }
+  };
+  cv.addEventListener('pointerdown', e => { down = true; last = null; cv.setPointerCapture(e.pointerId); rub(pos(e)); });
+  cv.addEventListener('pointermove', e => { if (down) rub(pos(e)); });
+  ['pointerup', 'pointercancel'].forEach(ev => cv.addEventListener(ev, () => { down = false; last = null; }));
+  btn.onclick = reveal;
+}
+
+/* TosTrip logo for the PDF (./imgg/loko.png → JPEG on white); the PDF still works without it */
+let rcLogo = null, rcLogoReady = null;
+function rcLoadLogo(){
+  if (rcLogoReady) return rcLogoReady;
+  return rcLogoReady = new Promise(done => {
+    const im = new Image();
+    im.onload = () => {
+      try {
+        const ratio = im.naturalWidth / im.naturalHeight, ph = 160, pw = Math.round(ph * ratio);
+        const cv = document.createElement('canvas'); cv.width = pw; cv.height = ph;
+        const ctx = cv.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, pw, ph); ctx.drawImage(im, 0, 0, pw, ph);
+        rcLogo = { url: cv.toDataURL('image/jpeg', 0.92), pw, ph, ratio };
+      } catch (e) { rcLogo = null; }
+      done();
+    };
+    im.onerror = () => done();
+    setTimeout(done, 2500);
+    im.src = './imgg/loko.png';
+  });
+}
+
+/* ── a small PDF writer: Helvetica + Helvetica-Bold (built into every PDF reader), shapes and JPEGs ── */
+function rcPdfStr(s){
+  let out = '';
+  for (const ch of String(s)) {
+    const c = rcCode(ch), b = c < 0 ? 63 : c;
+    if (b === 40 || b === 41 || b === 92) out += '\\' + String.fromCharCode(b);
+    else if (b > 126) out += '\\' + b.toString(8).padStart(3, '0');
+    else out += String.fromCharCode(b);
+  }
+  return out;
+}
+const rcRGB = hex => [1, 3, 5].map(i => rcN(parseInt(hex.slice(i, i + 2), 16) / 255)).join(' ');
+class RcPDF {
+  constructor(w, h){ this.w = w; this.h = h; this.c = []; this.imgs = []; }
+  rect(x, y, w, h, hex, r){
+    const Y = this.h - y - h; this.c.push(rcRGB(hex) + ' rg');
+    if (!r) { this.c.push(`${rcN(x)} ${rcN(Y)} ${rcN(w)} ${rcN(h)} re f`); return; }
+    const k = 0.5523 * r, X2 = x + w, Y2 = Y + h, P = (...a) => a.map(rcN).join(' ');
+    this.c.push(`${P(x + r, Y)} m ${P(X2 - r, Y)} l ${P(X2 - r + k, Y, X2, Y + r - k, X2, Y + r)} c ${P(X2, Y2 - r)} l ${P(X2, Y2 - r + k, X2 - r + k, Y2, X2 - r, Y2)} c ` +
+                `${P(x + r, Y2)} l ${P(x + r - k, Y2, x, Y2 - r + k, x, Y2 - r)} c ${P(x, Y + r)} l ${P(x, Y + r - k, x + r - k, Y, x + r, Y)} c f`);
+  }
+  line(x1, y1, x2, y2, hex, lw, dash){
+    this.c.push(`${rcRGB(hex)} RG ${rcN(lw || 0.6)} w [${dash || ''}] 0 d ${rcN(x1)} ${rcN(this.h - y1)} m ${rcN(x2)} ${rcN(this.h - y2)} l S`);
+  }
+  // y is the text baseline, measured from the top of the page
+  text(s, x, y, size, o){
+    o = o || {}; s = String(s);
+    if (!rcAnsiOK(s)) return this.textImage(s, x, y, size, o);
+    const sp = o.spacing || 0, w = rcWidth(s, size, o.bold) + sp * Math.max(0, [...s].length - 1);
+    const X = o.align === 'right' ? x - w : o.align === 'center' ? x - w / 2 : x;
+    this.c.push(`${rcRGB(o.color || RC_INK)} rg BT /${o.bold ? 'F2' : 'F1'} ${rcN(size)} Tf ${rcN(sp)} Tc ${rcN(X)} ${rcN(this.h - y)} Td (${rcPdfStr(s)}) Tj ET`);
+    return w;
+  }
+  // Khmer and other scripts Helvetica can't show are drawn as a small picture instead
+  textImage(s, x, y, size, o){
+    const S = 4, cv = document.createElement('canvas'), ctx = cv.getContext('2d');
+    const font = `${o.bold ? 700 : 400} ${size * S}px "Helvetica Neue", Helvetica, Arial, "Noto Sans Khmer", "Khmer OS", sans-serif`;
+    ctx.font = font;
+    const tw = Math.ceil(ctx.measureText(s).width) + 2 * S, th = Math.ceil(size * 1.6 * S);
+    cv.width = tw; cv.height = th;
+    ctx.fillStyle = o.bg || '#ffffff'; ctx.fillRect(0, 0, tw, th);
+    ctx.font = font; ctx.fillStyle = o.color || RC_INK; ctx.textBaseline = 'alphabetic'; ctx.fillText(s, S, size * 1.2 * S);
+    const w = tw / S, h = th / S, X = o.align === 'right' ? x - w : o.align === 'center' ? x - w / 2 : x;
+    this.image(cv.toDataURL('image/jpeg', 0.92), tw, th, X, y - size * 1.2, w, h);
+    return w;
+  }
+  image(dataURL, pw, ph, x, y, w, h){
+    this.imgs.push({ bin: atob(dataURL.split(',')[1]), pw, ph });
+    this.c.push(`q ${rcN(w)} 0 0 ${rcN(h)} ${rcN(x)} ${rcN(this.h - y - h)} cm /Im${this.imgs.length} Do Q`);
+  }
+  blob(title){
+    const content = this.c.join('\n'), xo = this.imgs.map((_, i) => `/Im${i + 1} ${8 + i} 0 R`).join(' ');
+    const p = n => String(n).padStart(2, '0'), t = new Date(Date.now() + 7 * 36e5);
+    const date = `D:${t.getUTCFullYear()}${p(t.getUTCMonth() + 1)}${p(t.getUTCDate())}${p(t.getUTCHours())}${p(t.getUTCMinutes())}${p(t.getUTCSeconds())}+07'00'`;
+    const objs = [
+      '<< /Type /Catalog /Pages 2 0 R >>',
+      '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
+      `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${rcN(this.w)} ${rcN(this.h)}] /Resources << /Font << /F1 4 0 R /F2 5 0 R >>${xo ? ' /XObject << ' + xo + ' >>' : ''} >> /Contents 6 0 R >>`,
+      '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>',
+      '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>',
+      `<< /Length ${content.length} >>\nstream\n${content}\nendstream`,
+      `<< /Title (${rcPdfStr(title)}) /Author (TosTrip) /Producer (tostrip.co) /CreationDate (${date}) >>`,
+      ...this.imgs.map(im => `<< /Type /XObject /Subtype /Image /Width ${im.pw} /Height ${im.ph} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${im.bin.length} >>\nstream\n${im.bin}\nendstream`)
+    ];
+    let pdf = '%PDF-1.4\n%âãÏÓ\n';
+    const offs = objs.map((o, i) => { const at = pdf.length; pdf += `${i + 1} 0 obj\n${o}\nendobj\n`; return at; });
+    const xref = pdf.length;
+    pdf += `xref\n0 ${objs.length + 1}\n0000000000 65535 f \n` + offs.map(o => String(o).padStart(10, '0') + ' 00000 n \n').join('') +
+           `trailer\n<< /Size ${objs.length + 1} /Root 1 0 R /Info 7 0 R >>\nstartxref\n${xref}\n%%EOF\n`;
+    const bytes = new Uint8Array(pdf.length);
+    for (let i = 0; i < pdf.length; i++) bytes[i] = pdf.charCodeAt(i) & 255;
+    return new Blob([bytes], { type: 'application/pdf' });
+  }
+}
+function rcWrap(s, size, bold, maxW){
+  const lines = []; let cur = '';
+  for (const w of String(s).split(/\s+/)) {
+    const t = cur ? cur + ' ' + w : w;
+    if (!cur || rcWidth(t, size, bold) <= maxW) cur = t; else { lines.push(cur); cur = w; }
+  }
+  if (cur) lines.push(cur);
+  return lines;
+}
+
+/* lay the receipt out on an A5-wide page, as tall as the details need */
+function rcDraw(d, r){
+  const k = rcKind(r), M = 36, R = d.w - M, CW = R - M;
+  d.rect(0, 0, d.w, 7, RC_BLUE);
+  let bx = M;
+  if (rcLogo) { const h = 26, w = h * rcLogo.ratio; d.image(rcLogo.url, rcLogo.pw, rcLogo.ph, M, 27, w, h); bx = M + w + 7; }
+  d.text('TosTrip', bx, 46.5, 17, { bold: true, color: RC_BLUE_D });
+  d.text(k.title, R, 37, 9.5, { bold: true, align: 'right', spacing: 1.1 });
+  d.text('No. ' + r.ref, R, 50, 8.5, { color: RC_GREY, align: 'right' });
+  d.text(r.issuedTxt, R, 61, 8.5, { color: RC_GREY, align: 'right' });
+  d.line(M, 72, R, 72, RC_LINE, 0.8);
+
+  const chip = { paid: ['#e7f8ef', '#047857'], free: ['#eef0fd', RC_BLUE_D], due: ['#fff4e0', '#b45309'] }[k.cls];
+  const cw = rcWidth(k.chip, 7.5, true) + 0.7 * (k.chip.length - 1) + 18;
+  d.rect(M, 86, cw, 17, chip[0], 8.5);
+  d.text(k.chip, M + 9, 97.4, 7.5, { bold: true, color: chip[1], spacing: 0.7 });
+
+  let y = 128;
+  rcWrap(r.title, 15, true, CW).forEach(line => { d.text(line, M, y, 15, { bold: true }); y += 18.5; });
+  y -= 2;
+  rcWrap(r.where, 9.5, false, CW).forEach(line => { d.text(line, M, y, 9.5, { color: RC_GREY }); y += 13; });
+  y += 14;
+
+  const row = x => {
+    if (!Array.isArray(x)) {                                   // the total
+      y += 6;
+      d.text(x.label, M, y, 11, { bold: true });
+      d.text(x.value, R, y + 1, 17, { bold: true, color: RC_BLUE_D, align: 'right' });
+      y += 24; return;
+    }
+    const lw = rcWidth(x[0], 8.5) + 18, lines = rcWrap(x[1], 10, false, CW - lw);
+    d.text(x[0], M, y, 8.5, { color: RC_GREY });
+    lines.forEach((ln, i) => d.text(ln, R, y + i * 13, 10, { align: 'right' }));
+    y += (lines.length - 1) * 13 + 8;
+    d.line(M, y, R, y, '#eef0f3', 0.6);
+    y += 15;
+  };
+  rcRows(r).forEach(row);
+  y += 2; d.line(M, y, R, y, '#c7cdd8', 0.9, '3 3'); y += 19;
+  rcPayRows(r).forEach(row);
+  if (r.machine && r.machine.code) {                           // machine code box
+    y += 4;
+    d.rect(M, y, CW, 70, '#fff7e0', 10);
+    d.text(r.machine.name.toUpperCase(), M + 14, y + 22, 8, { bold: true, color: '#92400e', spacing: 1 });
+    d.text(r.machine.code, M + 14, y + 52, 22, { bold: true, spacing: 3 });
+    rcWrap(r.machine.how, 8.5, false, CW / 2 - 10).forEach((ln, i) => d.text(ln, R - 14, y + 36 + i * 11, 8.5, { color: '#4b5563', align: 'right' }));
+    y += 84;
+  }
+
+  const note = rcWrap(rcNote(r), 8.5, false, CW - 24), boxH = note.length * 12 + 18, boxY = y + 6;
+  d.rect(M, boxY, CW, boxH, '#f5f6fb', 8);
+  note.forEach((ln, i) => d.text(ln, M + 12, boxY + 16 + i * 12, 8.5, { color: '#4b5563' }));
+  d.text('Thank you for booking with TosTrip  ·  tostrip.co', d.w / 2, boxY + boxH + 26, 8.5, { color: RC_BLUE_D, align: 'center' });
+  d.rect(0, boxY + boxH + 46, d.w, 7, RC_BLUE);                // bottom edge, like the top
+  return boxY + boxH + 53;                                     // height the page needs
+}
+function rcBuildPDF(r){
+  const W = 419.53;
+  const need = rcDraw(new RcPDF(W, 2000), r);                  // dry run to measure the height
+  const d = new RcPDF(W, need);
+  rcDraw(d, r);
+  return d.blob('TosTrip ' + rcKind(r).word + ' ' + r.ref);
+}
+async function rcDownload(r){
+  try {
+    await rcLoadLogo();
+    const url = URL.createObjectURL(rcBuildPDF(r)), a = document.createElement('a');
+    a.href = url; a.download = 'TosTrip-' + rcKind(r).word + '-' + r.ref + '.pdf';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+  } catch (e) {
+    console.error('PDF receipt failed:', e);
+    alert('Sorry, the PDF could not be made on this device. Please screenshot your ' + rcKind(r).word + ' instead.');
+  }
 }
 
 /* REFERRAL DASHBOARD */
