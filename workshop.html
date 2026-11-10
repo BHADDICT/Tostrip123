@@ -751,7 +751,10 @@ textarea.reg-in{resize:vertical;min-height:62px}
 .pay-safe{display:flex;gap:8px;font-size:12.5px;line-height:1.5;color:var(--ink3);margin-top:4px}
 .pay-safe i{color:var(--p);margin-top:2px}
 @media(max-width:480px){.pay-row{grid-template-columns:1fr}.pay-qr{width:230px}.pay-qr-missing{width:190px;margin:0 auto}}
-#make1give1,#kaset-times{scroll-margin-top:140px}
+#make1give1,#kaset-times,#gech-wood{scroll-margin-top:140px}
+.gw-thumb{position:relative;flex:0 0 64px;height:64px;border-radius:10px;overflow:hidden;border:2px solid transparent;padding:0;background:var(--bg3);opacity:.6;transition:opacity .2s,border-color .2s}
+.gw-thumb img,.gw-thumb video{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.gw-thumb.on,.gw-thumb:hover,.gw-thumb:focus-visible{opacity:1;border-color:var(--p)}
 .kas-deal{display:flex;gap:10px;align-items:flex-start;margin:-6px 0 14px;padding:10px 14px;border-radius:12px;background:#eef0fd;border:1.5px solid var(--pm);font-size:13.5px;line-height:1.5;color:var(--ink2)}
 .kas-deal i{color:var(--p);margin-top:3px}
 .kas-deal b{color:var(--pd)}
@@ -1046,8 +1049,8 @@ a.kas-loc:hover{border-color:var(--p)}
     </div>
   </div>
 
-  <!-- FEATURED (CURRENT EVENT): KHMER AGARWOOD (OUD) — Phnom Penh
-       Host: Gech Horng · Telegram 081 567 864 · bungechhorng1993@gmail.com -->
+  <!-- OLD OUD EVENT CARD (10–13 Oct) — stays hidden: the hero slideshow code still uses its elements.
+       The live agarwood listing is the #gech-wood card further down. -->
   <div class="feat-card" id="oud-event" data-cat="craft" data-city="phnom-penh" data-ends="2026-10-13T22:00:00+07:00">
     <div class="fc-img">
       <img id="oudImg" src="./img/tree1.jpg" alt="Khmer Agarwood (Oud)" onclick="lbOpen(cardIdx)">
@@ -1091,42 +1094,50 @@ a.kas-loc:hover{border-color:var(--p)}
     </div>
   </div>
 
-  <!-- FEATURED: APSARA SHOW -->
-  <div class="feat-card" data-cat="culture" data-city="siem-reap">
+  <!-- FEATURED: KHMER AGARWOOD (OUD) BY GECH HORNG — Chip Mong 271 Mega Mall, Phnom Penh · free, open daily 9 AM – 10 PM
+       Host: Gech Horng · Telegram 081 567 864 · bungechhorng1993@gmail.com (reservations are emailed to him)
+       Gallery: ./img/tree1.jpg (cover) … tree12.jpg, oud-perfume.jpg, per.jpg, per2.jpg, vid.mp4, per3.MP4 — missing files are skipped -->
+  <div class="feat-card" id="gech-wood" data-cat="craft" data-city="phnom-penh" data-price="0">
     <div class="fc-img">
-      <img src="./imgg/apsara .png" alt="Apsara Show">
+      <img id="gwImg" onclick="gwLbOpen()" style="cursor:pointer" src="./img/tree1.jpg" alt="Khmer agarwood (oud) by Gech Horng" onerror="this.onerror=null;this.src='./img/oud-perfume.jpg'">
+      <video id="gwVid" class="fc-vid" muted playsinline preload="metadata" onclick="gwLbOpen()"></video>
+      <span class="fc-vid-badge" id="gwVidBadge"><i class="fas fa-volume-mute"></i> Tap for sound</span>
+      <button type="button" class="fc-gallery-btn" onclick="gwLbOpen()"><i class="fas fa-expand"></i> <span id="gwCount">Photos</span></button>
       <div class="fc-badges">
-        <span class="ev-badge b-show">🔴 Live Show</span>
-        <span class="ev-badge b-featured">⭐ Featured</span>
+        <span class="ev-badge b-cooking" id="gwOpenBadge">🟢 Open daily</span>
+        <span class="ev-badge b-craft">🌳 Craft</span>
+        <span class="ev-badge b-featured">🎁 Free entry</span>
       </div>
       <div class="fc-seats">
         <div class="sb-wrap">
-          <div class="sb-top"><span class="sb-lbl">Seats remaining</span><span class="sb-num">4 left</span></div>
-          <div class="sb-track"><div class="sb-fill fill-red" style="width:67%"></div></div>
+          <div class="sb-top"><span class="sb-lbl" id="gwDayLbl">Open daily</span><span class="sb-num">9:00 AM – 10:00 PM</span></div>
+          <div class="sb-track"><div class="sb-fill fill-green" id="gwDayFill" style="width:0%"></div></div>
         </div>
       </div>
     </div>
     <div class="fc-body">
-      <div class="fc-partner"><div class="fc-p-ico">💃</div><div class="fc-p-name">LANA DANCE · SIEM REAP</div></div>
-      <div class="fc-title">LANA DANCE SIEM REAP</div>
-      <p class="fc-desc">Lana Dance is a personal journey that began in Siem Reap, where the graceful Apsara carvings of Angkor Wat first sparked a deep curiosity. Captivated by live performances and inspired by a background in Middle Eastern dance, Lana chose to explore Cambodian classical dance not just as a spectator, but as a participant — using movement as a way to connect more intimately with the culture.</p>
+      <div class="fc-partner"><div class="fc-p-ico">🌳</div><div class="fc-p-name">GECH HORNG · CHIP MONG 271 MEGA MALL · PHNOM PENH</div></div>
+      <div class="fc-title">Khmer Agarwood (Oud)</div>
+      <p class="fc-desc">Discover Khmer agarwood (oud), one of Cambodia's most treasured natural aromatics. Learn where it comes from, how the fragrant resin forms inside the tree, and experience its scent first-hand. Drop in any time during opening hours — it's free.</p>
+      <div class="ver-thumbs" id="gwThumbs"></div>
       <div class="fc-meta">
-        <div class="fc-meta-i"><i class="fas fa-calendar"></i> Saturday 15 March 2025 · 7:00 PM</div>
-        <div class="fc-meta-i"><i class="fas fa-clock"></i> 2.5 hours</div>
-        <div class="fc-meta-i"><i class="fas fa-map-marker-alt"></i> Khmer Pub Ln, Krong Siem Reap 17252</div>
-        <div class="fc-meta-i"><i class="fas fa-users"></i> Max 40 guests</div>
+        <div class="fc-meta-i"><i class="fas fa-calendar"></i> Daily</div>
+        <div class="fc-meta-i"><i class="fas fa-clock"></i> 9:00 AM – 10:00 PM</div>
+        <div class="fc-meta-i"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.app.goo.gl/MyvoVsYoM7Gv87ZXA?g_st=ic" target="_blank" rel="noopener" style="color:var(--p);text-decoration:underline">Chip Mong 271 Mega Mall, Norodom Blvd (St. 360 &amp; 370)</a></div>
+        <div class="fc-meta-i"><i class="fas fa-users"></i> Open to all</div>
       </div>
-      <div class="countdown-row" id="cd-apsara"></div>
+      <div class="oud-status-lbl" id="gwStatusLbl" style="margin-bottom:16px">Open daily · 9:00 AM – 10:00 PM</div>
       <div class="fc-actions">
-        <button class="btn-primary" onclick="openModal('LANA DANCE SIEM REAP','💃','culture','LANA DANCE','Siem Reap',18,'2.5 hrs',40,'2025-03-15T19:00:00')">
-          <i class="fas fa-ticket-alt"></i> Book Tickets
+        <button class="btn-primary" onclick="openModal('Khmer Agarwood (Oud)','🌳','craft','Gech Horng · Chip Mong 271 Mega Mall','Phnom Penh',0,'9 AM – 10 PM','—',null)">
+          <i class="fas fa-ticket-alt"></i> Reserve Free Spot
         </button>
+        <button type="button" class="btn-outline-sm btn-watch" id="gwWatchBtn" onclick="gwWatch()" hidden><i class="fas fa-play-circle"></i> Watch video</button>
+        <a class="btn-outline-sm" href="https://maps.app.goo.gl/MyvoVsYoM7Gv87ZXA?g_st=ic" target="_blank" rel="noopener"><i class="fas fa-directions"></i> Directions</a>
         <button class="btn-outline-sm" onclick="toggleSave(this)"><i class="far fa-heart"></i> Save</button>
-        <div class="fc-price">$18 <span>/person</span></div>
+        <div class="fc-price">Free <span>/person</span></div>
       </div>
     </div>
   </div>
-
 </div>
 
 <!-- ════ WORKSHOPS ════ -->
@@ -1164,8 +1175,8 @@ a.kas-loc:hover{border-color:var(--p)}
     </div>
     <div class="wk-grid" id="wkGridFree">
 
-      <!-- Khmer Agarwood (Oud) — free, 10–13 Oct 2026 -->
-      <div class="wk-card" data-cat="craft" data-city="phnom-penh" data-price="0" data-ends="2026-10-13T22:00:00+07:00">
+      <!-- Khmer Agarwood (Oud) by Gech Horng — free, open daily 9 AM – 10 PM -->
+      <div class="wk-card" data-cat="craft" data-city="phnom-penh" data-price="0">
         <div class="wk-img">
           <img src="./img/oud-perfume.jpg" alt="Khmer agarwood oils and perfume" onerror="this.onerror=null;this.src='./img/tree1.jpg'">
           <span class="wk-cat b-craft">🌳 Craft</span>
@@ -1179,7 +1190,7 @@ a.kas-loc:hover{border-color:var(--p)}
           <div class="wk-title">Khmer Agarwood (Oud)</div>
           <p class="wk-desc">Smell real Khmer oud, see hand-engraved agarwood art and learn how the precious resin forms inside the tree. Drop in any time — it's free.</p>
           <div class="wk-meta">
-            <div class="wk-mi"><i class="fas fa-calendar"></i> 10–13 Oct</div>
+            <div class="wk-mi"><i class="fas fa-calendar"></i> Daily</div>
             <div class="wk-mi"><i class="fas fa-clock"></i> 9 AM – 10 PM</div>
             <div class="wk-mi"><i class="fas fa-users"></i> Open to all</div>
           </div>
@@ -1193,7 +1204,7 @@ a.kas-loc:hover{border-color:var(--p)}
               <button class="btn-wkbook" onclick="openModal('Khmer Agarwood (Oud)','🌳','craft','Gech Horng · Chip Mong 271 Mega Mall','Phnom Penh',0,'9 AM – 10 PM','—',null)">
                 <i class="fas fa-ticket-alt"></i> Reserve
               </button>
-              <a class="btn-save" href="#oud-event" title="See event photos"><i class="fas fa-images"></i></a>
+              <a class="btn-save" href="#gech-wood" title="See photos"><i class="fas fa-images"></i></a>
             </div>
           </div>
         </div>
@@ -2197,6 +2208,93 @@ function kasWatch(){ const i = KAS_MEDIA.findIndex(m=>m.type==='video'); if(i > 
   tick(); setInterval(tick, 30000);
 })();
 
+/* ════ KHMER AGARWOOD (OUD) BY GECH — featured card gallery ════
+   Photos ./img/tree1.jpg … tree12.jpg plus the files below (missing ones are skipped).
+   The first photo is the cover; the first video comes second. */
+const GW_ALL = [
+  ...Array.from({length: 12}, (_, i) => ({ type:'img', src:'./img/tree' + (i + 1) + '.jpg', alt:'Khmer agarwood (oud) by Gech Horng' })),
+  { type:'img',   src:'./img/oud-perfume.jpg', alt:'Khmer agarwood oils and perfume' },
+  { type:'img',   src:'./img/per.jpg',  alt:'Khmer agarwood perfume' },
+  { type:'img',   src:'./img/per2.jpg', alt:'Khmer agarwood perfume' },
+  { type:'video', src:'./img/vid.mp4',  alt:'Khmer agarwood (oud) video' },
+  { type:'video', src:'./img/per3.MP4', poster:'./img/per.jpg', alt:'Khmer agarwood perfume video' }
+];
+let GW_MEDIA = [GW_ALL[0]], gwIdx = 0, gwTimer = null;
+async function gwLoadMedia(){
+  const ok = await Promise.all(GW_ALL.map(m => m.type === 'video' ? probeVid(m.src) : probeImg(m.src)));
+  const found = GW_ALL.filter((_, i) => ok[i]).map(m => ({...m}));
+  await Promise.all(found.filter(m => m.type === 'video' && m.poster).map(async m => { if(!(await probeImg(m.poster))) delete m.poster; }));
+  if(!found.length) return;
+  const fp = found.filter(m => m.type === 'img'), fv = found.filter(m => m.type === 'video');
+  GW_MEDIA = fp.length ? [fp[0], ...fv.slice(0,1), ...fp.slice(1), ...fv.slice(1)] : fv;
+  gwRender();
+}
+function gwRender(){
+  const n = GW_MEDIA.length, nP = GW_MEDIA.filter(m => m.type === 'img').length, nV = n - nP;
+  document.getElementById('gwThumbs').innerHTML = n < 2 ? '' : GW_MEDIA.map((m, i) =>
+    `<button type="button" class="gw-thumb${m.type==='video'?' is-vid':''}" aria-label="Show ${m.type==='video'?'video':'photo'} ${i+1}" onclick="gwGo(${i},true)">${thumbHTML(m)}</button>`).join('');
+  document.getElementById('gwCount').textContent =
+    [nP ? nP + (nP===1?' photo':' photos') : '', nV ? nV + (nV===1?' video':' videos') : ''].filter(Boolean).join(' · ') || 'Photos';
+  document.getElementById('gwWatchBtn').hidden = !nV;
+  document.getElementById('gwVid').onended = () => gwGo(gwIdx + 1);
+  gwGo(0); gwAuto();
+}
+function gwGo(i, user){
+  const n = GW_MEDIA.length; gwIdx = (i + n) % n;
+  const m = GW_MEDIA[gwIdx];
+  const img = document.getElementById('gwImg'), vid = document.getElementById('gwVid'), badge = document.getElementById('gwVidBadge');
+  if(m.type === 'video'){
+    if(!vid.src.endsWith(m.src.replace('./',''))){ vid.src = m.src; if(m.poster) vid.poster = m.poster; else vid.removeAttribute('poster'); }
+    vid.classList.add('on'); badge.classList.add('on');
+    if(!reduceMotion) playMuted(vid);
+  } else {
+    vid.pause(); vid.classList.remove('on'); badge.classList.remove('on');
+    if(!img.src.endsWith(m.src.replace('./',''))){
+      img.style.opacity = 0;
+      setTimeout(() => { img.src = m.src; img.alt = m.alt || 'Khmer agarwood photo'; img.style.opacity = 1; }, 220);
+    }
+  }
+  document.querySelectorAll('.gw-thumb').forEach((e, k) => e.classList.toggle('on', k === gwIdx));
+  if(user) gwAuto();
+}
+function gwAuto(){
+  clearInterval(gwTimer);
+  if(GW_MEDIA.length < 2 || reduceMotion) return;
+  gwTimer = setInterval(() => { if(GW_MEDIA[gwIdx].type !== 'video') gwGo(gwIdx + 1); }, 4500);   // a video moves on when it ends
+}
+function gwLbOpen(i){
+  clearInterval(gwTimer);
+  lbOpenList(GW_MEDIA, 'Khmer Agarwood (Oud)', 'Khmer Agarwood (Oud) by Gech Horng · Chip Mong 271 Mega Mall, Phnom Penh', i ?? gwIdx);
+}
+function gwWatch(){ const i = GW_MEDIA.findIndex(m => m.type === 'video'); if(i > -1) gwLbOpen(i); }
+(function(){
+  if(!document.getElementById('gech-wood')) return;
+  gwRender();
+  gwLoadMedia();
+  addSwipe(document.querySelector('#gech-wood .fc-img'), () => gwGo(gwIdx - 1, true), () => gwGo(gwIdx + 1, true));
+})();
+
+/* ════ KHMER AGARWOOD — open / closed status, Cambodia time (UTC+7): 9:00 AM – 10:00 PM ════ */
+(function(){
+  const OPEN = 9*3600, CLOSE = 22*3600, pad = n => String(n).padStart(2,'0');
+  const lbl = document.getElementById('gwStatusLbl'), badge = document.getElementById('gwOpenBadge');
+  const fill = document.getElementById('gwDayFill'), dayLbl = document.getElementById('gwDayLbl');
+  if(!lbl) return;
+  const tick = () => {
+    const t = new Date(Date.now() + 7*36e5);
+    const secs = t.getUTCHours()*3600 + t.getUTCMinutes()*60 + t.getUTCSeconds();
+    const open = secs >= OPEN && secs < CLOSE;
+    const diff = open ? CLOSE - secs : (secs < OPEN ? OPEN - secs : OPEN + 86400 - secs);
+    const h = Math.floor(diff/3600), m = Math.floor(diff%3600/60);
+    lbl.textContent = open ? '🟢 Open now · closes in ' + h + 'h ' + pad(m) + 'm' : '⏰ Closed now · opens in ' + h + 'h ' + pad(m) + 'm';
+    lbl.classList.toggle('closed', !open);
+    badge.textContent = open ? '🟢 Open now' : '🕘 Opens 9:00 AM';
+    dayLbl.textContent = open ? 'Open today' : 'Closed — opens 9:00 AM';
+    fill.style.width = open ? ((secs-OPEN)/(CLOSE-OPEN)*100).toFixed(1) + '%' : '0%';
+  };
+  tick(); setInterval(tick, 30000);
+})();
+
 /* ════ WELCOME POP-UP ════
    Shows the ongoing event when someone enters the site.
    Appears once per visit (browser tab); stops after the event ends. */
@@ -2545,7 +2643,6 @@ function buildCountdown(elId, target){
   tick(); setInterval(tick, 1000);
 }
 buildCountdown('cd-make1give1', '2026-11-25T14:00:00+07:00');
-buildCountdown('cd-apsara', '2025-03-15T19:00:00');
 
 /* FILTER — workshop grids (free + paid) and ongoing events */
 const priceOf = c => {
