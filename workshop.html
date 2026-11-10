@@ -298,6 +298,9 @@ a.btn-save{display:inline-flex;align-items:center;justify-content:center;text-de
 .av-open{background:rgba(16,185,129,.15);color:#059669;border:1px solid rgba(16,185,129,.3)}
 .av-fill{background:rgba(245,158,11,.15);color:#d97706;border:1px solid rgba(245,158,11,.3)}
 .av-full{background:rgba(239,68,68,.15);color:#dc2626;border:1px solid rgba(239,68,68,.3)}
+.av-wait{background:rgba(102,126,234,.92);color:#fff;border:1px solid rgba(255,255,255,.35)}
+.wk-card.wk-waitlist{border-color:var(--pm)}
+.wk-wait-val{color:var(--p)}
 .wk-body{padding:18px 20px;flex:1;display:flex;flex-direction:column}
 .wk-partner{display:flex;align-items:center;gap:7px;margin-bottom:10px}
 .wk-p-ico{width:26px;height:26px;border-radius:6px;background:var(--bg3);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
@@ -1124,41 +1127,6 @@ a.kas-loc:hover{border-color:var(--p)}
     </div>
   </div>
 
-  <!-- FEATURED: COOKING CLASS -->
-  <div class="feat-card" data-cat="cooking" data-city="siem-reap">
-    <div class="fc-img">
-      <img src="./img/cook4.png" alt="Cooking Class">
-      <div class="fc-badges">
-        <span class="ev-badge b-cooking">🍲 Cooking</span>
-        <span class="ev-badge b-hot">🔥 Selling Fast</span>
-      </div>
-      <div class="fc-seats">
-        <div class="sb-wrap">
-          <div class="sb-top"><span class="sb-lbl">Seats remaining</span><span class="sb-num">6 left</span></div>
-          <div class="sb-track"><div class="sb-fill fill-amber" style="width:50%"></div></div>
-        </div>
-      </div>
-    </div>
-    <div class="fc-body">
-      <div class="fc-partner"><div class="fc-p-ico">🍲</div><div class="fc-p-name">Cambodian Village Cooking Class · Siem Reap</div></div>
-      <div class="fc-title">Cambodian Village Cooking Class</div>
-      <p class="fc-desc">Simple but flavorsome, Cambodian cuisine makes use of fresh fish from the Mekong and an abundance of Asian spices. Immerse yourself in Siem Reap's culinary heritage as you enjoy a cooking class with a local chef in a typical Cambodian village, and enjoy a delicious 3-course lunch of traditional Khmer cuisine.</p>
-      <div class="fc-meta">
-        <div class="fc-meta-i"><i class="fas fa-calendar"></i> Sunday 16 March 2025 · 9:00 AM</div>
-        <div class="fc-meta-i"><i class="fas fa-clock"></i> 3 hours</div>
-        <div class="fc-meta-i"><i class="fas fa-map-marker-alt"></i> Siem Reap</div>
-        <div class="fc-meta-i"><i class="fas fa-users"></i> Max 12 guests</div>
-      </div>
-      <div class="countdown-row" id="cd-cooking"></div>
-      <div class="fc-actions">
-        <button class="btn-primary" onclick="openModal('Cambodian Village Cooking Class','🍲','cooking','Village Cooking Class','Siem Reap',32,'3 hrs',12,'2025-03-16T09:00:00')">
-          <i class="fas fa-ticket-alt"></i> Book Now
-        </button>
-        <button class="btn-outline-sm" onclick="toggleSave(this)"><i class="far fa-heart"></i> Save</button>
-        <div class="fc-price">$32 <span>/person</span></div>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- ════ WORKSHOPS ════ -->
@@ -1245,6 +1213,42 @@ a.kas-loc:hover{border-color:var(--p)}
       </div>
     </div>
   <div class="wk-grid" id="wkGrid">
+
+      <!-- Doun Kok Cooking Workshop — WAITLIST · Sundays only · up to 10 people per Sunday.
+           Waitlist sign-ups are emailed to TosTrip (no payment taken). Photos: ./img/dk-chef-cooking.jpg (falls back to dk-group-water.jpg, then ./imgg/dounkok.jpg) -->
+      <div class="wk-card wk-waitlist" data-cat="cooking" data-waitlist="10">
+        <div class="wk-img">
+          <img src="./img/dk-chef-cooking.jpg" alt="Cooking with a village chef in Doun Kok" onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='./img/dk-group-water.jpg'}else if(this.dataset.fb==1){this.dataset.fb=2;this.src='./imgg/dounkok.jpg'}else{this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 450%22%3E%3Crect width=%22400%22 height=%22450%22 fill=%22%23667eea%22/%3E%3Ctext x=%22200%22 y=%22235%22 font-family=%22Georgia,serif%22 font-size=%2236%22 fill=%22%23fff%22 text-anchor=%22middle%22%3EDoun Kok%3C/text%3E%3C/svg%3E'}">
+          <span class="wk-cat b-cooking">🍲 Cooking</span>
+          <span class="wk-avail av-wait">Waitlist open</span>
+        </div>
+        <div class="wk-body">
+          <div class="wk-partner">
+            <div class="wk-p-ico">🍲</div>
+            <div class="wk-p-name">TosTrip × Doun Kok Village</div>
+          </div>
+          <div class="wk-title">Doun Kok Cooking Workshop</div>
+          <p class="wk-desc">Cook Khmer food with a village chef and the host families of Doun Kok, then sit down together for the meal you made. Every workshop supports the village directly.</p>
+          <div class="wk-meta">
+            <div class="wk-mi"><i class="fas fa-calendar"></i> Sundays only</div>
+            <div class="wk-mi"><i class="fas fa-users"></i> Max 10</div>
+            <div class="wk-mi"><i class="fas fa-map-marker-alt"></i> Doun Kok Village</div>
+          </div>
+          <div class="wk-bottom">
+            <div class="wk-price">
+              <div class="wk-price-lbl">Join the</div>
+              <div class="wk-price-val wk-wait-val">Waitlist</div>
+              <div class="wk-price-sub">Free to join · no payment now</div>
+            </div>
+            <div class="wk-btns">
+              <button class="btn-wkbook" onclick="openModal('Doun Kok Cooking Workshop','🍲','cooking','TosTrip','Doun Kok Village',0,'Sundays only',10,null,{noDiscount:true,waitlist:{max:10}})">
+                <i class="fas fa-list-ul"></i> Join waitlist
+              </button>
+              <button class="btn-save" onclick="toggleSaveCard(this)"><i class="far fa-heart"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- KasetTimes — Phnom Penh, Siem Reap, Battambang, Kampot · Host: Lay Hun · Telegram 098 35 3355 · layhunloy168@gmail.com -->
       <div class="wk-card" data-cat="culture" data-city="phnom-penh siem-reap kampot battambang" data-price="2">
@@ -1342,175 +1346,6 @@ a.kas-loc:hover{border-color:var(--p)}
           </div>
           <div class="wk-btns">
             <button class="btn-wkbook" onclick="openModal('Mordock Ceramic Workshop','🧵','craft','Mordock Ceramic','Siem Reap',20,'2 hrs',12,null)">
-              <i class="fas fa-ticket-alt"></i> Book Now
-            </button>
-            <button class="btn-save" onclick="toggleSaveCard(this)"><i class="far fa-heart"></i></button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2 Cambodian Village Cooking -->
-    <div class="wk-card" data-cat="cooking" data-city="siem-reap">
-      <div class="wk-img">
-        <img src="./imgg/cooking123.jpg" alt="Khmer Gourmet Cooking Class">
-        <span class="wk-cat b-cooking">🍲 Cooking</span>
-        <span class="wk-avail av-open">Open</span>
-      </div>
-      <div class="wk-body">
-        <div class="wk-partner">
-          <div class="wk-p-ico">🍲</div>
-          <div class="wk-p-name">Cambodian Village Cooking Class · Siem Reap</div>
-        </div>
-        <div class="wk-title">Cambodian Village Cooking Class</div>
-        <p class="wk-desc">Visit a local market to learn about Cambodian herbs and spices, then prepare classic dishes like Fish Amok and Lok Lak in a fully hands-on session.</p>
-        <div class="wk-meta">
-          <div class="wk-mi"><i class="fas fa-clock"></i> 3–4 hours</div>
-          <div class="wk-mi"><i class="fas fa-users"></i> Max 12</div>
-          <div class="wk-mi"><i class="fas fa-calendar"></i> Daily</div>
-        </div>
-        <div class="wk-bottom">
-          <div class="wk-price">
-            <div class="wk-price-lbl">Per person</div>
-            <div class="wk-price-val">$32</div>
-          </div>
-          <div class="wk-btns">
-            <button class="btn-wkbook" onclick="openModal('Cambodian Village Cooking Class','🍲','cooking','Village Cooking Class','Siem Reap',32,'3–4 hrs',12,null)">
-              <i class="fas fa-ticket-alt"></i> Book Now
-            </button>
-            <button class="btn-save" onclick="toggleSaveCard(this)"><i class="far fa-heart"></i></button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3 Rokhak Basket Weaving -->
-    <div class="wk-card" data-cat="craft" data-city="siem-reap">
-      <div class="wk-img">
-        <img src="./imgg/rokhat.jpg" alt="Rokhak Basket Weaving">
-        <span class="wk-cat b-craft">🧺 Craft</span>
-        <span class="wk-avail av-open">Open</span>
-      </div>
-      <div class="wk-body">
-        <div class="wk-partner">
-          <div class="wk-p-ico">🧺</div>
-          <div class="wk-p-name">Rokhak Women's Handicraft Association · Siem Reap</div>
-        </div>
-        <div class="wk-title">Traditional Water Hyacinth Basket Weaving</div>
-        <p class="wk-desc">Join a women-led social enterprise and learn sustainable basket weaving techniques while creating your own handmade souvenir to take home.</p>
-        <div class="wk-meta">
-          <div class="wk-mi"><i class="fas fa-clock"></i> 2 hours</div>
-          <div class="wk-mi"><i class="fas fa-users"></i> Max 8</div>
-          <div class="wk-mi"><i class="fas fa-calendar"></i> Mon–Sat</div>
-        </div>
-        <div class="wk-bottom">
-          <div class="wk-price">
-            <div class="wk-price-lbl">Per person</div>
-            <div class="wk-price-val">$25</div>
-          </div>
-          <div class="wk-btns">
-            <button class="btn-wkbook" onclick="openModal('Traditional Basket Weaving','🧺','craft','Rokhak Women\'s Handicraft Association','Siem Reap',25,'2 hrs',8,null)">
-              <i class="fas fa-ticket-alt"></i> Book Now
-            </button>
-            <button class="btn-save" onclick="toggleSaveCard(this)"><i class="far fa-heart"></i></button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 4 Angkor Pottery Center -->
-    <div class="wk-card" data-cat="craft" data-city="siem-reap">
-      <div class="wk-img">
-        <img src="./imgg/poterr.jpg" alt="Angkor Pottery Center">
-        <span class="wk-cat b-craft">🏺 Craft</span>
-        <span class="wk-avail av-open">Open</span>
-      </div>
-      <div class="wk-body">
-        <div class="wk-partner">
-          <div class="wk-p-ico">🏺</div>
-          <div class="wk-p-name">Angkor Pottery Center · Siem Reap</div>
-        </div>
-        <div class="wk-title">Pottery Wheel & Ceramic Painting</div>
-        <p class="wk-desc">Shape clay on a pottery wheel or paint Khmer ceramics. Your piece will be glazed and fired — ready for collection or shipped home.</p>
-        <div class="wk-meta">
-          <div class="wk-mi"><i class="fas fa-clock"></i> 1.5–2 hours</div>
-          <div class="wk-mi"><i class="fas fa-users"></i> Max 10</div>
-          <div class="wk-mi"><i class="fas fa-calendar"></i> Daily</div>
-        </div>
-        <div class="wk-bottom">
-          <div class="wk-price">
-            <div class="wk-price-lbl">Per person</div>
-            <div class="wk-price-val">$22</div>
-          </div>
-          <div class="wk-btns">
-            <button class="btn-wkbook" onclick="openModal('Pottery Wheel & Ceramic Painting','🏺','craft','Angkor Pottery Center','Siem Reap',22,'1.5–2 hrs',10,null)">
-              <i class="fas fa-ticket-alt"></i> Book Now
-            </button>
-            <button class="btn-save" onclick="toggleSaveCard(this)"><i class="far fa-heart"></i></button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 5 Cambodian Living Arts -->
-    <div class="wk-card" data-cat="culture" data-city="siem-reap">
-      <div class="wk-img">
-        <img src="./imgg/sbek.jpg" alt="Cambodian Living Arts Performance">
-        <span class="wk-cat b-show">🎶 Culture</span>
-        <span class="wk-avail av-open">Open</span>
-      </div>
-      <div class="wk-body">
-        <div class="wk-partner">
-          <div class="wk-p-ico">🎶</div>
-          <div class="wk-p-name">Cambodian Living Arts · Siem Reap</div>
-        </div>
-        <div class="wk-title">Traditional Sbek Thom & Shadow Puppet Show</div>
-        <p class="wk-desc">Experience classical Khmer music and Sbek Thom shadow puppetry performed by master artists in an intimate theatre setting.</p>
-        <div class="wk-meta">
-          <div class="wk-mi"><i class="fas fa-clock"></i> 2 hours</div>
-          <div class="wk-mi"><i class="fas fa-calendar"></i> Selected evenings</div>
-        </div>
-        <div class="wk-bottom">
-          <div class="wk-price">
-            <div class="wk-price-lbl">Per person</div>
-            <div class="wk-price-val">$20</div>
-          </div>
-          <div class="wk-btns">
-            <button class="btn-wkbook" onclick="openModal('Sbek Thom Shadow Puppet Show','🎶','culture','Cambodian Living Arts','Siem Reap',20,'2 hrs',30,null)">
-              <i class="fas fa-ticket-alt"></i> Book Now
-            </button>
-            <button class="btn-save" onclick="toggleSaveCard(this)"><i class="far fa-heart"></i></button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 6 Kleng Ek -->
-    <div class="wk-card" data-cat="craft" data-city="siem-reap">
-      <div class="wk-img">
-        <img src="./imgg/klengek.jpg" alt="Kleng Ek Class by Ta Vinthouen">
-        <span class="wk-cat b-craft">🎨 Craft</span>
-        <span class="wk-avail av-open">Open</span>
-      </div>
-      <div class="wk-body">
-        <div class="wk-partner">
-          <div class="wk-p-ico">🎨</div>
-          <div class="wk-p-name">Kleng Ek · Siem Reap</div>
-        </div>
-        <div class="wk-title">Kleng Ek Class by Ta Vinthouen</div>
-        <p class="wk-desc">Learn the traditional art of Kleng Ek with Ta Vinthouen in an intimate, hands-on workshop that preserves authentic Cambodian craftsmanship.</p>
-        <div class="wk-meta">
-          <div class="wk-mi"><i class="fas fa-clock"></i> 2–3 hours</div>
-          <div class="wk-mi"><i class="fas fa-users"></i> Small group</div>
-          <div class="wk-mi"><i class="fas fa-calendar"></i> By reservation</div>
-        </div>
-        <div class="wk-bottom">
-          <div class="wk-price">
-            <div class="wk-price-lbl">Per person</div>
-            <div class="wk-price-val">$15</div>
-          </div>
-          <div class="wk-btns">
-            <button class="btn-wkbook" onclick="openModal('Kleng Ek Class by Ta Vinthouen','🎨','craft','Kleng Ek','Siem Reap',15,'2–3 hrs',8,null)">
               <i class="fas fa-ticket-alt"></i> Book Now
             </button>
             <button class="btn-save" onclick="toggleSaveCard(this)"><i class="far fa-heart"></i></button>
@@ -1823,7 +1658,7 @@ a.kas-loc:hover{border-color:var(--p)}
       </div>
       <div class="disc-badge" id="discBadge"><i class="fas fa-check-circle"></i> <span id="discText">Discount applied</span></div>
 
-      <label class="fl" style="margin-bottom:8px;margin-top:4px">Choose a Session <span class="req">*</span></label>
+      <label class="fl" id="sessLbl" style="margin-bottom:8px;margin-top:4px">Choose a Session <span class="req">*</span></label>
       <div class="sess-grid" id="sessGrid"></div>
 
       <form id="bForm" onsubmit="submitBooking(event)">
@@ -1834,7 +1669,7 @@ a.kas-loc:hover{border-color:var(--p)}
         </div>
         <div class="f-row">
           <div class="fg"><label class="fl">Phone</label><input type="tel" id="bPhone" class="fi" placeholder="+855 12 345 678"></div>
-          <div class="fg"><label class="fl">Tickets <span class="req">*</span></label>
+          <div class="fg"><label class="fl" id="qtyLbl" for="bQty">Tickets <span class="req">*</span></label>
             <select id="bQty" class="fi" onchange="refreshTotal()">
               <option value="1">1 ticket</option>
               <option value="2" selected>2 tickets</option>
@@ -1873,14 +1708,14 @@ a.kas-loc:hover{border-color:var(--p)}
           <div class="fg"><label class="fl">Name on your bank account <span class="req">*</span></label><input type="text" id="bPayer" class="fi" placeholder="As shown in your banking app"></div>
           <div class="pay-safe"><i class="fas fa-lock"></i><span>Only pay through this page on TosTrip. TosTrip will never ask for your PIN, password or OTP code.</span></div>
         </div>
-        <div class="ok-note"><i class="fas fa-shield-alt"></i><span><strong>Free cancellation</strong> up to 48 hours before your session.</span></div>
+        <div class="ok-note" id="okNote"><i class="fas fa-shield-alt"></i><span><strong>Free cancellation</strong> up to 48 hours before your session.</span></div>
         <button type="submit" class="m-btn" id="submitBtn"><i class="fas fa-check-circle"></i> Confirm Booking — <span id="btnTotal">$44</span></button>
       </form>
     </div>
 
     <div class="success-body" id="successWrap" style="display:none">
-      <div class="succ-ico">🎉</div>
-      <h2>You're booked in!</h2>
+      <div class="succ-ico" id="succIco">🎉</div>
+      <h2 id="succH2">You're booked in!</h2>
       <div id="rcptWrap"></div>
       <p id="succPayNote" style="display:none"><strong>Payment:</strong> we'll match your ABA / KHQR payment to your booking and email you if anything is missing.</p>
       <p id="succMsg">Confirmation is heading to your inbox. Here's your personal referral code — share it with friends and earn $5 credit every time someone books.</p>
@@ -2711,7 +2546,6 @@ function buildCountdown(elId, target){
 }
 buildCountdown('cd-make1give1', '2026-11-25T14:00:00+07:00');
 buildCountdown('cd-apsara', '2025-03-15T19:00:00');
-buildCountdown('cd-cooking', '2025-03-16T09:00:00');
 
 /* FILTER — workshop grids (free + paid) and ongoing events */
 const priceOf = c => {
@@ -2720,11 +2554,12 @@ const priceOf = c => {
   return t.startsWith('free') ? 0 : (parseFloat(t.replace(/[^0-9.]/g,'')) || 0);
 };
 const endedCard = c => c.dataset.ends && Date.now() > new Date(c.dataset.ends).getTime();
+const isWait = c => c.dataset.waitlist != null;          // waitlist cards (no price yet) sit with the paid workshops
 function cardMatch(c, type){
   if(endedCard(c)) return false;
   if(type === 'all') return true;
-  if(type === 'free') return priceOf(c) === 0;
-  if(type === 'paid') return priceOf(c) > 0;
+  if(type === 'free') return priceOf(c) === 0 && !isWait(c);
+  if(type === 'paid') return priceOf(c) > 0 || isWait(c);
   return c.dataset.cat === type || (c.dataset.city || '').split(' ').includes(type);   // data-city may list several cities
 }
 let wkType = 'all';
@@ -2755,8 +2590,8 @@ function wkTab(type){ filterCards(type, null); }
 function wkCounts(){
   const cards = [...document.querySelectorAll('.wk-section .wk-card')].filter(c=>!endedCard(c));
   document.getElementById('wkNAll').textContent  = cards.length;
-  document.getElementById('wkNFree').textContent = cards.filter(c=>priceOf(c)===0).length;
-  document.getElementById('wkNPaid').textContent = cards.filter(c=>priceOf(c)>0).length;
+  document.getElementById('wkNFree').textContent = cards.filter(c=>priceOf(c)===0 && !isWait(c)).length;
+  document.getElementById('wkNPaid').textContent = cards.filter(c=>priceOf(c)>0 || isWait(c)).length;
 }
 document.addEventListener('DOMContentLoaded', ()=>{ wkCounts(); filterCards('all', document.querySelector('.f-chip.active')); });
 
@@ -2863,7 +2698,8 @@ function refreshTotal(){
   document.getElementById('psDisc').textContent = '–$' + discAmt.toFixed(2);
 
   document.getElementById('psTotal').textContent = '$' + tot.toFixed(2);
-  document.getElementById('btnTotal').textContent = (tot === 0 && base === 0) ? 'Free' : '$' + tot.toFixed(2);
+  const bt = document.getElementById('btnTotal');   // not there in waitlist mode
+  if(bt) bt.textContent = (tot === 0 && base === 0) ? 'Free' : '$' + tot.toFixed(2);
   ['payAmt','payAmt2'].forEach(id=>{ const e = document.getElementById(id); if(e) e.textContent = '$' + tot.toFixed(2); });
   // the KHQR is fixed at $15 — more than one ticket means paying it once per ticket
   const pm = document.getElementById('payMulti');
@@ -2881,8 +2717,19 @@ function openModal(title, icon, cat, partner, city, price, dur, maxS, eventDate,
   // single: one fixed date · noDiscount: promo / referral codes don't apply · payQR: pay by ABA / KHQR in the form
   curBooking = {title, icon, cat, partner, city, price, dur, maxS, eventDate, isNak: false,
                 single: !!opts.single, noDiscount: !!opts.noDiscount, payQR: !!opts.payQR,
-                locations: opts.locations || null};   // locations: guest picks one (e.g. KasetTimes booths)
+                locations: opts.locations || null,    // locations: guest picks one (e.g. KasetTimes booths)
+                waitlist: opts.waitlist || null};     // waitlist: {max} → pick a Sunday, no payment now (e.g. Doun Kok)
   _setupModal();
+}
+
+/* waitlist mode (Doun Kok): different labels, up to N people, no payment block */
+const QTY_DEFAULT = document.getElementById('bQty').innerHTML;
+const OK_DEFAULT  = document.getElementById('okNote').innerHTML;
+const OK_WAIT     = '<i class="fas fa-list-ul"></i><span><strong>No payment now.</strong> Joining the waitlist is free. We\'ll email you to confirm your spot.</span>';
+function submitLabel(){
+  return curBooking.waitlist
+    ? '<i class="fas fa-list-ul"></i> Join the waitlist'
+    : '<i class="fas fa-check-circle"></i> Confirm Booking — <span id="btnTotal">$0</span>';
 }
 
 function locPicked(){ document.getElementById('m-city').textContent = document.getElementById('bLoc').value || curBooking.city; }
@@ -2929,6 +2776,18 @@ function _setupModal(){
   }
   // promo / referral code field — not for events where codes don't apply
   ['codeLbl','codeRow'].forEach(id=>{ document.getElementById(id).style.display = curBooking.noDiscount ? 'none' : ''; });
+  // waitlist: "Choose a Sunday", up to N people, no price or payment, own button and success text
+  const wl = curBooking.waitlist;
+  document.getElementById('sessLbl').firstChild.textContent = wl ? 'Choose a Sunday ' : 'Choose a Session ';
+  document.getElementById('qtyLbl').firstChild.textContent  = wl ? 'People ' : 'Tickets ';
+  document.getElementById('bQty').innerHTML = wl
+    ? Array.from({length: wl.max || 10}, (_, i) => `<option value="${i + 1}">${i + 1} ${i ? 'people' : 'person'}</option>`).join('')
+    : QTY_DEFAULT;
+  document.querySelector('#bForm .price-sum').style.display = wl ? 'none' : '';
+  document.getElementById('okNote').innerHTML = wl ? OK_WAIT : OK_DEFAULT;
+  submitBtn.innerHTML = submitLabel();
+  document.getElementById('succH2').textContent = wl ? "You're on the waitlist!" : "You're booked in!";
+  document.getElementById('succIco').textContent = wl ? '📝' : '🎉';
 
   // Pre-fill pending code (not needed for free workshops)
   const pending = sessionStorage.getItem('pendingCode');
@@ -2945,7 +2804,7 @@ function _setupModal(){
   document.getElementById('formWrap').style.display = 'block';
   document.getElementById('successWrap').style.display = 'none';
   document.getElementById('bForm').reset();
-  document.getElementById('bQty').value = curBooking.single ? '1' : '2';
+  document.getElementById('bQty').value = (curBooking.single || curBooking.waitlist) ? '1' : '2';
   // ABA / KHQR payment block — events paid online (e.g. Make 1 Give 1)
   const payBlock = document.getElementById('payBlock');
   payBlock.style.display = curBooking.payQR ? 'block' : 'none';
@@ -2962,6 +2821,26 @@ function _setupModal(){
 }
 
 function buildSessions(baseDate){
+  if(curBooking.waitlist){
+    // Sundays only (Cambodia time), starting from the next Sunday
+    const ict = new Date(Date.now() + 7*36e5);
+    let add = (7 - ict.getUTCDay()) % 7; if(add === 0) add = 7;
+    const max = curBooking.waitlist.max || 10;
+    let html = '';
+    for(let i = 0; i < 6; i++){
+      const d = new Date(Date.UTC(ict.getUTCFullYear(), ict.getUTCMonth(), ict.getUTCDate() + add + 7*i));
+      const lbl  = d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',timeZone:'UTC'});
+      const full = d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:'UTC'});
+      html += `<div class="sess-opt${i===0?' sel':''}" data-label="${full}" onclick="pickSess(this)">
+        <input type="radio" name="sess" value="${i}" ${i===0?'checked':''}>
+        <div class="so-date">${lbl}</div>
+        <div class="so-time">Waitlist</div>
+        <div class="so-seats plenty">Up to ${max} people</div>
+      </div>`;
+    }
+    document.getElementById('sessGrid').innerHTML = html;
+    return;
+  }
   const opt = EVENT_HOSTS[curBooking.title];
   if(opt && opt.daily){
     // Cambodia time; after closing time (default 10 PM) start from tomorrow
@@ -3058,7 +2937,7 @@ function submitBooking(e){
   myCode = 'TOS' + initials + Math.floor(Math.random()*900+100);
 
   const btn = e.target.querySelector('.m-btn');
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Confirming…'; btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ' + (curBooking.waitlist ? 'Joining…' : 'Confirming…'); btn.disabled = true;
 
   const usedCode = curBooking.noDiscount ? 'None' : (document.getElementById('mCode').value || 'None');
   const payerTxt = curBooking.payQR ? '\nPaid by ABA / KHQR — name on bank account: ' + (document.getElementById('bPayer').value.trim() || 'not given yet') : '';
@@ -3071,7 +2950,9 @@ function submitBooking(e){
   const guestEmail = document.getElementById('bEmail').value.trim();
   const guestPhone = document.getElementById('bPhone').value.trim() || 'N/A';
   const guestNotes = document.getElementById('bNotes').value.trim() || 'No requests';
-  const totalTxt   = base === 0 ? 'Free' : '$' + total.toFixed(2);
+  const wl         = curBooking.waitlist;
+  const totalTxt   = wl ? 'Waitlist (no payment yet)' : base === 0 ? 'Free' : '$' + total.toFixed(2);
+  const wlTxt      = wl ? 'WAITLIST · ' + qty + (qty === 1 ? ' person' : ' people') + ' for ' + sessionTxt.split(' · ')[0] + ' (max ' + (wl.max || 10) + ' per Sunday) — please confirm their spot\n' : '';
   const hostInfo   = (EVENT_HOSTS[curBooking.title] || {}).host;
   const locTxt     = curBooking.locations ? document.getElementById('bLoc').value : '';
   const placeTxt   = curBooking.partner + ' · ' + (locTxt || curBooking.city);
@@ -3082,7 +2963,7 @@ function submitBooking(e){
     user_email:   guestEmail,
     phone:        guestPhone,
     booking_date: sessionTxt,
-    message:      (document.getElementById('bNotes').value || 'No requests') +
+    message:      wlTxt + (document.getElementById('bNotes').value || 'No requests') +
                   '\nTickets: ' + qty +
                   '\nCode used: ' + usedCode +
                   (nakFlat > 0 ? '\nChef Nak TosTrip discount: –$' + nakFlat : '') +
@@ -3091,9 +2972,9 @@ function submitBooking(e){
                   '\nBooking ref: ' + bookingRef +
                   (locTxt ? '\nLocation: ' + locTxt : '') +
                   (hostInfo ? '\nHost notified: ' + hostInfo.name + ' <' + hostInfo.email + '>' : '') +
-                  '\nTotal: ' + (base === 0 ? 'FREE' : '$' + total) +
+                  '\nTotal: ' + (wl ? 'Waitlist (no payment yet)' : base === 0 ? 'FREE' : '$' + total) +
                   '\nReferral code generated: ' + myCode + payerTxt,
-    request_type: curBooking.isNak ? 'Chef Nak Booking via TosTrip' : 'Workshop Booking',
+    request_type: curBooking.isNak ? 'Chef Nak Booking via TosTrip' : wl ? 'Waitlist — ' + curBooking.title : 'Workshop Booking',
     friend_name:  curBooking.partner,
     duration:     curBooking.dur,
     price:        total,
@@ -3139,7 +3020,7 @@ function submitBooking(e){
       date:        sessionTxt,
       duration:    curBooking.dur,
       guests:      qty,
-      message:     guestNotes + '\nTickets: ' + qty + '\nBooking ref: ' + bookingRef +
+      message:     wlTxt + guestNotes + '\n' + (wl ? 'People: ' : 'Tickets: ') + qty + '\nBooking ref: ' + bookingRef +
                    (locTxt ? '\nLocation: ' + locTxt : '') +
                    (machineCode ? '\n' + MACHINE_CODES[curBooking.title].name + ' (key it into the machine): ' + machineCode : '') +
                    (usedCode !== 'None' ? '\nCode used: ' + usedCode : '') +
@@ -3164,13 +3045,16 @@ function submitBooking(e){
     discount: Math.max(0, +(sub - total).toFixed(2)), total, code: usedCode,
     guest: guestName, email: guestEmail, phone: guestPhone === 'N/A' ? '' : guestPhone,
     payQR: !!curBooking.payQR, payer: curBooking.payQR ? document.getElementById('bPayer').value.trim() : '',
+    waitlist: !!wl,
     machine: MACHINE_CODES[curBooking.title] || null,
     issuedTxt: new Intl.DateTimeFormat('en-GB', { timeZone:'Asia/Phnom_Penh', day:'numeric', month:'short', year:'numeric' }).format(new Date()) + ', ' +
                new Intl.DateTimeFormat('en-US', { timeZone:'Asia/Phnom_Penh', hour:'numeric', minute:'2-digit', hour12:true }).format(new Date())
   };
 
   const finish = ()=>{
-    document.getElementById('succMsg').innerHTML = hostInfo
+    document.getElementById('succMsg').innerHTML = wl
+      ? `You're on the waitlist for <strong>${hostEsc(sessionTxt.split(' · ')[0])}</strong> (ref <strong>${bookingRef}</strong>). We'll email you to confirm your spot. Here's your personal referral code — share it with friends and earn $5 credit every time someone books.`
+      : hostInfo
       ? `Your booking <strong>${bookingRef}</strong> for <strong>${hostEsc(sessionTxt)}</strong> is confirmed and <strong>${hostEsc(hostInfo.name)}</strong> has been notified. Here's your personal referral code — share it with friends and earn $5 credit every time someone books.`
       : `Confirmation is heading to your inbox (ref <strong>${bookingRef}</strong>). Here's your personal referral code — share it with friends and earn $5 credit every time someone books.`;
     if (receiptError) {
@@ -3182,14 +3066,14 @@ function submitBooking(e){
     sessionStorage.setItem('myCode', myCode);
     document.getElementById('formWrap').style.display = 'none';
     document.getElementById('successWrap').style.display = 'block';
-    btn.innerHTML = '<i class="fas fa-check-circle"></i> Confirm Booking — <span id="btnTotal">$0</span>';
+    btn.innerHTML = submitLabel();
     btn.disabled = false;
   };
 
   if(typeof emailjs !== 'undefined'){
     sendAll().then(finish).catch(err=>{
       alert('Error: ' + (err.text || err.message));
-      btn.innerHTML = '<i class="fas fa-check-circle"></i> Confirm Booking — <span id="btnTotal">$0</span>';
+      btn.innerHTML = submitLabel();
       btn.disabled = false;
       refreshTotal();
     });
@@ -3214,20 +3098,22 @@ const rcEsc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','
 const rcN = n => String(Number((+n).toFixed(2)));
 
 function rcKind(r){
+  if (r.waitlist)    return { title:'WAITLIST CONFIRMATION', word:'confirmation', chip:'ON THE WAITLIST', cls:'free', totalLbl:'To pay now' };
   if (r.payQR)       return { title:'E-RECEIPT', word:'receipt', chip:'PAID · ABA KHQR', cls:'paid', totalLbl:'Total paid' };
   if (r.total === 0) return { title:'BOOKING CONFIRMATION', word:'confirmation', chip:'FREE · CONFIRMED', cls:'free', totalLbl:'Total' };
   return               { title:'BOOKING CONFIRMATION', word:'confirmation', chip:'BOOKED', cls:'due', totalLbl:'Total to pay' };
 }
 // [label, value] rows — the same rows go on the card and in the PDF
 function rcRows(r){
-  const rows = [['Date & time', r.session]];
-  if (r.duration && !/AM|PM/i.test(r.duration)) rows.push(['Duration', r.duration]);
+  const rows = [r.waitlist ? ['Sunday you chose', r.session.split(' · ')[0]] : ['Date & time', r.session]];
+  if (r.duration && !r.waitlist && !/AM|PM/i.test(r.duration)) rows.push(['Duration', r.duration]);
   rows.push(['Guest', r.guest], ['Email', r.email]);
   if (r.phone) rows.push(['Phone', r.phone]);
   return rows;
 }
 function rcPayRows(r){
   const k = rcKind(r), rows = [];
+  if (r.waitlist) return [['People', String(r.qty)], { total:true, label:k.totalLbl, value:'Nothing yet' }];
   rows.push([r.qty + (r.qty === 1 ? ' ticket' : ' tickets') + ' × ' + (r.unit === 0 ? 'Free' : rcMoney(r.unit)), r.unit === 0 ? 'Free' : rcMoney(r.subtotal)]);
   if (r.discount > 0) rows.push(['Discount' + (r.code && r.code !== 'None' ? ' (' + r.code + ')' : ''), '–' + rcMoney(r.discount)]);
   rows.push({ total:true, label:k.totalLbl, value: r.total === 0 ? 'Free' : rcMoney(r.total) });
@@ -3235,6 +3121,7 @@ function rcPayRows(r){
   return rows;
 }
 function rcNote(r){
+  if (r.waitlist) return "You're on the waitlist. We'll email you to confirm your spot. Keep this confirmation until then.";
   if (r.machine) return r.machine.code
     ? 'Key your code into the machine to pay the TosTrip price. Keep this ' + rcKind(r).word + ' until your visit.'
     : 'Your machine code is on its way. Until then, show this ' + rcKind(r).word + ' at the booth.';
@@ -3469,7 +3356,7 @@ function rcDraw(d, r){
   const note = rcWrap(rcNote(r), 8.5, false, CW - 24), boxH = note.length * 12 + 18, boxY = y + 6;
   d.rect(M, boxY, CW, boxH, '#f5f6fb', 8);
   note.forEach((ln, i) => d.text(ln, M + 12, boxY + 16 + i * 12, 8.5, { color: '#4b5563' }));
-  d.text('Thank you for booking with TosTrip  ·  tostrip.co', d.w / 2, boxY + boxH + 26, 8.5, { color: RC_BLUE_D, align: 'center' });
+  d.text((r.waitlist ? 'Thank you for joining the waitlist' : 'Thank you for booking with TosTrip') + '  ·  tostrip.co', d.w / 2, boxY + boxH + 26, 8.5, { color: RC_BLUE_D, align: 'center' });
   d.rect(0, boxY + boxH + 46, d.w, 7, RC_BLUE);                // bottom edge, like the top
   return boxY + boxH + 53;                                     // height the page needs
 }
