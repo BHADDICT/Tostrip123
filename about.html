@@ -266,6 +266,47 @@ button{font-family:inherit;cursor:pointer}
 /* ── FOOTER BRAND TEXT ── */
 .footer-brand p{font-size:13.5px;color:rgba(255,255,255,.5);line-height:1.7;max-width:360px}
 
+/* ── MOMENTS GALLERY ── */
+.moments{max-width:1280px;margin:0 auto;padding:96px 28px 72px;scroll-margin-top:66px}
+.mo-head{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:26px}
+.mo-head h2{font-family:'Playfair Display',serif;font-size:clamp(30px,3.2vw,46px);font-weight:800;color:var(--ink);line-height:1.1}
+.mo-head h2 em{font-style:italic;color:var(--p)}
+.mo-head p{font-size:15px;color:var(--ink3);line-height:1.75}
+.mo-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.mo-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:100px;border:1.5px solid var(--line);background:var(--bg);font-size:13px;font-weight:600;color:var(--ink3);transition:all .18s}
+.mo-chip span{font-size:11px;font-weight:700;color:var(--ink3);background:var(--bg3);border-radius:100px;padding:1px 8px}
+.mo-chip:hover{border-color:var(--p);color:var(--p)}
+.mo-chip.on{background:var(--p);border-color:var(--p);color:#fff;box-shadow:0 4px 14px rgba(102,126,234,.28)}
+.mo-chip.on span{background:rgba(255,255,255,.22);color:#fff}
+.mo-grid{columns:3;column-gap:16px}
+.mo-item{break-inside:avoid;margin:0 0 16px;position:relative;border-radius:var(--r-md);overflow:hidden;cursor:zoom-in;background:var(--bg3);box-shadow:var(--sh-sm);transform:translateZ(0)}
+.mo-item img{width:100%;height:auto;display:block;transition:transform .55s}
+.mo-item:hover img{transform:scale(1.045)}
+.mo-item:focus-visible{outline:3px solid var(--p);outline-offset:3px}
+.mo-cap{position:absolute;left:0;right:0;bottom:0;padding:40px 14px 12px;background:linear-gradient(to top,rgba(17,24,39,.78),rgba(17,24,39,0));color:#fff;font-size:13.5px;font-weight:600;line-height:1.35;display:flex;flex-direction:column;align-items:flex-start;gap:6px;opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s}
+.mo-item:hover .mo-cap,.mo-item:focus-visible .mo-cap{opacity:1;transform:none}
+.mo-tag{font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);padding:2px 8px;border-radius:100px}
+.mo-item.hide,.mo-item.gone{display:none}
+.mo-foot{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.mo-more{display:inline-flex;align-items:center;gap:9px;padding:13px 24px;border-radius:var(--r-sm);border:1.5px solid var(--p);background:var(--ps);color:var(--pd);font-size:14px;font-weight:700;transition:all .2s}
+.mo-more:hover{background:var(--p);color:#fff}
+.mo-ig{display:inline-flex;align-items:center;gap:8px;padding:13px 18px;border-radius:var(--r-sm);font-size:14px;font-weight:600;color:var(--ink3);transition:color .2s}
+.mo-ig:hover{color:var(--p)}
+.mo-chip[hidden],.mo-more[hidden],.mo-lb[hidden]{display:none!important}
+/* viewer */
+.mo-lb{position:fixed;inset:0;z-index:3000;background:rgba(12,14,34,.94);display:flex;align-items:center;justify-content:center;padding:24px 80px}
+.mo-lb-fig{margin:0;display:flex;flex-direction:column;align-items:center;max-width:100%}
+.mo-lb-fig img{width:auto;height:auto;max-width:100%;max-height:calc(100vh - 140px);max-height:calc(100dvh - 140px);border-radius:12px;box-shadow:0 24px 70px rgba(0,0,0,.55);object-fit:contain;background:#14162e}
+.mo-lb-fig figcaption{margin-top:14px;color:#fff;font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 12px;text-align:center}
+.mo-lb-tag{font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;background:var(--p);padding:3px 10px;border-radius:100px}
+.mo-lb-n{font-size:12px;font-weight:500;color:rgba(255,255,255,.55)}
+.mo-lb-x,.mo-lb-nav{position:absolute;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-size:17px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.mo-lb-x:hover,.mo-lb-nav:hover{background:rgba(255,255,255,.2)}
+.mo-lb-x{top:16px;right:16px;font-size:20px}
+.mo-lb-nav{top:50%;transform:translateY(-50%)}
+.mo-lb-nav.prev{left:16px}
+.mo-lb-nav.next{right:16px}
+
 /* ── ANIMATIONS ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .anim{opacity:0;animation:fadeUp .6s ease-out forwards}
@@ -459,6 +500,28 @@ button{font-family:inherit;cursor:pointer}
 @media(max-width:480px){
   .press-inner{padding:44px 14px}
   .press-actions a{flex:1 1 auto;justify-content:center}
+}
+@media(max-width:1024px){
+  .mo-head{grid-template-columns:1fr;gap:14px}
+  .mo-grid{columns:2}
+}
+@media(max-width:768px){
+  .moments{padding:56px 16px 48px}
+  .mo-head h2{font-size:clamp(26px,7vw,36px)}
+  .mo-head p{font-size:14px}
+  .mo-grid{column-gap:10px}
+  .mo-item{margin-bottom:10px;border-radius:var(--r-sm)}
+  .mo-filters{gap:6px}
+  .mo-chip{padding:7px 13px;font-size:12.5px}
+  .mo-lb{padding:64px 10px 92px}
+  .mo-lb-fig img{max-height:calc(100vh - 220px);max-height:calc(100dvh - 220px)}
+  .mo-lb-nav{top:auto;bottom:22px;transform:none}
+  .mo-lb-nav.prev{left:calc(50% - 64px)}
+  .mo-lb-nav.next{right:calc(50% - 64px)}
+}
+@media(hover:none){
+  .mo-item{cursor:pointer}
+  .mo-item:hover img{transform:none}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -780,6 +843,105 @@ button{font-family:inherit;cursor:pointer}
   </div>
 </div>
 
+<!-- MOMENTS · photos are ./imgg/mama1.jpg … mama18.jpg
+     To change a caption, edit the text inside <span class="mo-cap-t">.
+     data-cat picks the filter: events · meetings · trips · team (also change the word in <span class="mo-tag">).
+     The first 9 photos show first; "Show all" opens the rest. A photo that isn't uploaded yet hides itself. -->
+<section class="moments" id="moments">
+  <div class="mo-head">
+    <div>
+      <div class="sec-eyebrow">Moments Along the Way</div>
+      <h2>Snapshots From <em>the Road</em></h2>
+    </div>
+    <p>Events, meetings, rides and trips: a few moments from building TosTrip together. Tap any photo to see it bigger.</p>
+  </div>
+  <div class="mo-filters" role="group" aria-label="Filter photos">
+    <button type="button" class="mo-chip on" data-f="all" aria-pressed="true">All <span>18</span></button>
+    <button type="button" class="mo-chip" data-f="events" aria-pressed="false">Events <span>6</span></button>
+    <button type="button" class="mo-chip" data-f="meetings" aria-pressed="false">Meetings <span>2</span></button>
+    <button type="button" class="mo-chip" data-f="trips" aria-pressed="false">Trips <span>4</span></button>
+    <button type="button" class="mo-chip" data-f="team" aria-pressed="false">Team <span>6</span></button>
+  </div>
+  <div class="mo-grid" id="moGrid">
+    <figure class="mo-item" data-cat="events" tabindex="0" role="button" aria-label="View photo: Bokor Mountain Trail 2026">
+      <img src="./imgg/mama14.jpg" width="1600" height="900" loading="lazy" decoding="async" alt="The TosTrip team at the summit during Bokor Mountain Trail 2026" onerror="this.closest('.mo-item').classList.add('gone');window.moRefresh&&moRefresh()">
+      <figcaption class="mo-cap"><span class="mo-tag">Events</span><span class="mo-cap-t">Bokor Mountain Trail 2026</span></figcaption>
+    </figure>
+    <figure class="mo-item" data-cat="meetings" tabindex="0" role="button" aria-label="View photo: At the Ministry of Tourism">
+      <img src="./imgg/mama13.jpg" width="1200" height="1600" loading="lazy" decoding="async" alt="The TosTrip team outside the Ministry of Tourism in Phnom Penh" onerror="this.closest('.mo-item').classList.add('gone');window.moRefresh&&moRefresh()">
+      <figcaption class="mo-cap"><span class="mo-tag">Meetings</span><span class="mo-cap-t">At the Ministry of Tourism</span></figcaption>
+    </figure>
+    <figure class="mo-item" data-cat="events" tabindex="0" role="button" aria-label="View photo: Independence Day Ride · 73 km">
+      <img src="./imgg/mama6.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="The TosTrip crew with their bikes before the Independence Day Ride" onerror="this.closest('.mo-item').classList.add('gone');window.moRefresh&&moRefresh()">
+      <figcaption class="mo-cap"><span class="mo-tag">Events</span><span class="mo-cap-t">Independence Day Ride · 73 km</span></figcaption>
+    </figure>
+    <figure class="mo-item" data-cat="events" tabindex="0" role="button" aria-label="View photo: Green Season Tourism Event, Kampot">
+      <img src="./imgg/mama17.jpg" width="1600" height="900" loading="lazy" decoding="async" alt="The TosTrip team on stage with organisers at the Green Season tourism event in Kampot" onerror="this.closest('.mo-item').classList.add('gone');window.moRefresh&&moRefresh()">
+      <figcaption class="mo-cap"><span class="mo-tag">Events</span><span class="mo-cap-t">Green Season Tourism Event, Kampot</span></figcaption>
+    </figure>
+    <figure class="mo-item" data-cat="meetings" tabindex="0" role="button" aria-label="View photo: At the Cambodia Tourism Board">
+      <img src="./imgg/mama2.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="The TosTrip team at the Cambodia Tourism Board" onerror="this.closest('.mo-item').classList.add('gone');window.moRefresh&&moRefresh()">
+      <figcaption class="mo-cap"><span class="mo-tag">Meetings</span><span class="mo-cap-t">At the Cambodia Tourism Board</span></figcaption>
+    </figure>
+    <figure class="mo-item" data-cat="trips" tabindex="0" role="button" aria-label="View photo: Merlion Park, Singapore">
+      <img src="./imgg/mama11.jpg" width="1200" height="1600" loading="lazy" decoding="async" alt="Team members holding the Cambodian flag at Merlion Park, Singapore" onerror="this.closest('.mo-item').classList.add('gone');window.moRefresh&&moRefresh()">
+      <figcaption class="mo-cap"><span class="mo-tag">Trips</span><span class="mo-cap-t">Merlion Park, Singapore</span></figcaption>
+    </figure>
+    <figure class="mo-item" data-cat="team" tabindex="0" role="button" aria-label="View photo: The TosTrip crew">
+      <img src="./imgg/mama1.jpg" width="1600" height="900" loading="lazy" decoding="async" alt="The TosTrip team in their TosTrip T-shirts" onerror="this.closest('.mo-item').classList.add('gone');window.moRefresh&&moRefresh()">
+      <figcaption class="mo-cap"><span class="mo-tag">Team</span><span class="mo-cap-t">The TosTrip crew</span></figcaption>
+    </figure>
+    <figure class="mo-item" data-cat="team" tabindex="0" role="button" aria-label="View photo: Quad-bike adventure">
+      <img src="./imgg/mama12.jpg" width="1200" height="1600" loading="lazy" decoding="async" alt="Two team members on a quad bike" onerror="this.closest('.mo-item').classList.add('gone');window.moRefresh&&moRefresh()">
+      <figcaption class="mo-cap"><span class="mo-tag">Team</span><span class="mo-cap-t">Quad-bike adventure</span></figcaption>
+    </figure>
+    <figure class="mo-item" data-cat="team" tabindex="0" role="button" aria-label="View photo: Lunch on the water">
+      <img src="./imgg/mama8.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="The team sharing lunch on a river boat" onerror="this.closest('.mo-item').classList.add('gone');window.moRefresh&&moRefresh()">
+      <figcaption class="mo-cap"><span class="mo-tag">Team</span><span class="mo-cap-t">Lunch on the water</span></figcaption>
+    </figure>
+    <figure class="mo-item" data-cat="events" tabindex="0" role="button" aria-label="View photo: On the mic at Bokor">
+      <img src="./imgg/mama15.jpg" width="900" height="1600" loading="lazy" decoding="async" alt="A team member interviewing a guest at Bokor Mountain" onerror="this.closest('.mo-item').classList.add('gone');window.moRefresh&&moRefresh()">
+      <figcaption class="mo-cap"><span class="mo-tag">Events</span><span class="mo-cap-t">On the mic at Bokor</span></figcaption>
+    </figure>
+    <figure class="mo-item" data-cat="team" tabindex="0" role="button" aria-label="View photo: Planning over coffee">
+      <img src="./imgg/mama4.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="Four team members at a cafe table with a laptop" onerror="this.closest('.mo-item').classList.add('gone');window.moRefresh&&moRefresh()">
+      <figcaption class="mo-cap"><span class="mo-tag">Team</span><span class="mo-cap-t">Planning over coffee</span></figcaption>
+    </figure>
+    <figure class="mo-item" data-cat="trips" tabindex="0" role="button" aria-label="View photo: Proudly Cambodian">
+      <img src="./imgg/mama10.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="A group holding the Cambodian flag and a university flag in a restaurant" onerror="this.closest('.mo-item').classList.add('gone');window.moRefresh&&moRefresh()">
+      <figcaption class="mo-cap"><span class="mo-tag">Trips</span><span class="mo-cap-t">Proudly Cambodian</span></figcaption>
+    </figure>
+    <figure class="mo-item" data-cat="events" tabindex="0" role="button" aria-label="View photo: At the Bokor Mountain Trail">
+      <img src="./imgg/mama16.jpg" width="900" height="1600" loading="lazy" decoding="async" alt="The team in front of the Bokor Mountain Trail 2026 banner" onerror="this.closest('.mo-item').classList.add('gone');window.moRefresh&&moRefresh()">
+      <figcaption class="mo-cap"><span class="mo-tag">Events</span><span class="mo-cap-t">At the Bokor Mountain Trail</span></figcaption>
+    </figure>
+    <figure class="mo-item" data-cat="trips" tabindex="0" role="button" aria-label="View photo: Ready for take-off">
+      <img src="./imgg/mama9.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="The group with luggage and flags at the airport" onerror="this.closest('.mo-item').classList.add('gone');window.moRefresh&&moRefresh()">
+      <figcaption class="mo-cap"><span class="mo-tag">Trips</span><span class="mo-cap-t">Ready for take-off</span></figcaption>
+    </figure>
+    <figure class="mo-item" data-cat="team" tabindex="0" role="button" aria-label="View photo: Good food, good company">
+      <img src="./imgg/mama5.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="A big group selfie with the TosTrip team and a chef" onerror="this.closest('.mo-item').classList.add('gone');window.moRefresh&&moRefresh()">
+      <figcaption class="mo-cap"><span class="mo-tag">Team</span><span class="mo-cap-t">Good food, good company</span></figcaption>
+    </figure>
+    <figure class="mo-item" data-cat="trips" tabindex="0" role="button" aria-label="View photo: Flying the flag with friends">
+      <img src="./imgg/mama3.jpg" width="1280" height="960" loading="lazy" decoding="async" alt="A large group holding the Cambodian flag and a university flag" onerror="this.closest('.mo-item').classList.add('gone');window.moRefresh&&moRefresh()">
+      <figcaption class="mo-cap"><span class="mo-tag">Trips</span><span class="mo-cap-t">Flying the flag with friends</span></figcaption>
+    </figure>
+    <figure class="mo-item" data-cat="team" tabindex="0" role="button" aria-label="View photo: Lunch by the river">
+      <img src="./imgg/mama7.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="The team having lunch at a riverside restaurant" onerror="this.closest('.mo-item').classList.add('gone');window.moRefresh&&moRefresh()">
+      <figcaption class="mo-cap"><span class="mo-tag">Team</span><span class="mo-cap-t">Lunch by the river</span></figcaption>
+    </figure>
+    <figure class="mo-item" data-cat="events" tabindex="0" role="button" aria-label="View photo: Summit smiles at Bokor">
+      <img src="./imgg/mama18.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="The team giving a thumbs-up at the Bokor summit" onerror="this.closest('.mo-item').classList.add('gone');window.moRefresh&&moRefresh()">
+      <figcaption class="mo-cap"><span class="mo-tag">Events</span><span class="mo-cap-t">Summit smiles at Bokor</span></figcaption>
+    </figure>
+  </div>
+  <div class="mo-foot">
+    <button type="button" class="mo-more" id="moMore" hidden><span>Show all <b>18</b> photos</span><i class="fas fa-chevron-down"></i></button>
+    <a class="mo-ig" href="https://www.instagram.com/tostrip_kh?igsh=dTFjbDhkOTZwNHMx" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> More on Instagram</a>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="contact-grid">
@@ -853,6 +1015,17 @@ button{font-family:inherit;cursor:pointer}
 </section>
 
 
+<!-- PHOTO VIEWER (opens when a Moments photo is tapped) -->
+<div class="mo-lb" id="moLb" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <button type="button" class="mo-lb-x" aria-label="Close"><i class="fas fa-xmark"></i></button>
+  <button type="button" class="mo-lb-nav prev" aria-label="Previous photo"><i class="fas fa-chevron-left"></i></button>
+  <figure class="mo-lb-fig">
+    <img id="moLbImg" alt="">
+    <figcaption><span class="mo-lb-tag" id="moLbTag"></span><span id="moLbCap"></span><span class="mo-lb-n" id="moLbN"></span></figcaption>
+  </figure>
+  <button type="button" class="mo-lb-nav next" aria-label="Next photo"><i class="fas fa-chevron-right"></i></button>
+</div>
+
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-grid">
@@ -906,7 +1079,7 @@ if(typeof emailjs!=='undefined') emailjs.init(EJ_KEY);
    PRESS_VIDEO = the Cambodianess video. Either a file in your repo ('./imgg/cambodianess.mp4')
    or a YouTube / Facebook / TikTok link pasted here. If the video isn't there yet, the
    section keeps showing the Cambodianess feature image linking to the article. */
-const PRESS_VIDEO = './imgg/cambodianess.mp4';
+const PRESS_VIDEO = 'https://youtu.be/VLhGwbx91EI';
 
 (function setupPressVideo(){
   const box = document.getElementById('pressMedia');
@@ -918,7 +1091,7 @@ const PRESS_VIDEO = './imgg/cambodianess.mp4';
   else if(/facebook\.com|fb\.watch/.test(url)) embed = 'https://www.facebook.com/plugins/video.php?href=' + encodeURIComponent(url) + '&show_text=false';
   if(embed){
     const vertical = /shorts\/|tiktok\.com|\/reel/.test(url);
-    box.insertAdjacentHTML('afterbegin', '<iframe class="press-embed' + (vertical ? ' vertical' : '') + '" src="' + embed + '" title="TosTrip on Cambodianess" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>');
+    box.insertAdjacentHTML('afterbegin', '<iframe class="press-embed' + (vertical ? ' vertical' : '') + '" src="' + embed + '" title="TosTrip on Cambodianess" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen"></iframe>');
     box.classList.add('has-video');
     return;
   }
@@ -995,6 +1168,86 @@ function submitContact(e){
     .then(()=>{ window.location.href='thankyou.html'; })
     .catch(err=>{ console.error('EmailJS error:', err); fail(); });
 }
+
+/* ── MOMENTS GALLERY: filters, "show all", photo viewer ── */
+(function(){
+  const grid = document.getElementById('moGrid');
+  if(!grid) return;
+  const chips = [...document.querySelectorAll('.mo-chip')];
+  const moreBtn = document.getElementById('moMore');
+  const LIMIT = 9;
+  let filter = 'all', expanded = false;
+  const live = () => [...grid.querySelectorAll('.mo-item:not(.gone)')];
+  const matching = () => live().filter(i => filter === 'all' || i.dataset.cat === filter);
+
+  function refresh(){
+    const all = live();
+    chips.forEach(c => {
+      const f = c.dataset.f, n = f === 'all' ? all.length : all.filter(i => i.dataset.cat === f).length;
+      c.querySelector('span').textContent = n;
+      c.hidden = f !== 'all' && n === 0;
+    });
+    const m = matching(), lim = (filter === 'all' && !expanded) ? LIMIT : Infinity;
+    all.forEach(i => i.classList.add('hide'));
+    m.forEach((i, k) => i.classList.toggle('hide', k >= lim));
+    moreBtn.hidden = m.length <= lim;
+    moreBtn.querySelector('b').textContent = m.length;
+  }
+  window.moRefresh = refresh;
+
+  chips.forEach(c => c.addEventListener('click', () => {
+    filter = c.dataset.f;
+    chips.forEach(x => { x.classList.toggle('on', x === c); x.setAttribute('aria-pressed', x === c ? 'true' : 'false'); });
+    refresh();
+  }));
+  moreBtn.addEventListener('click', () => { expanded = true; refresh(); });
+
+  // photo viewer
+  const lb = document.getElementById('moLb'), lbImg = document.getElementById('moLbImg');
+  const lbTag = document.getElementById('moLbTag'), lbCap = document.getElementById('moLbCap'), lbN = document.getElementById('moLbN');
+  let list = [], idx = 0, opener = null;
+  function show(){
+    const it = list[idx], img = it.querySelector('img');
+    lbImg.src = img.getAttribute('src'); lbImg.alt = img.alt;
+    lbTag.textContent = it.querySelector('.mo-tag').textContent;
+    lbCap.textContent = it.querySelector('.mo-cap-t').textContent;
+    lbN.textContent = (idx + 1) + ' / ' + list.length;
+    [1, -1].forEach(d => { const nb = list[(idx + d + list.length) % list.length]; if(nb){ const p = new Image(); p.src = nb.querySelector('img').getAttribute('src'); } });
+  }
+  function open(it){
+    list = matching(); idx = Math.max(0, list.indexOf(it)); opener = it;
+    show(); lb.hidden = false; document.body.style.overflow = 'hidden';
+    lb.querySelector('.mo-lb-x').focus();
+  }
+  function close(){
+    lb.hidden = true; document.body.style.overflow = ''; lbImg.removeAttribute('src');
+    if(opener) opener.focus({preventScroll: true});
+  }
+  function step(d){ if(list.length){ idx = (idx + d + list.length) % list.length; show(); } }
+  grid.addEventListener('click', e => { const it = e.target.closest('.mo-item'); if(it) open(it); });
+  grid.addEventListener('keydown', e => {
+    if((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('mo-item')){ e.preventDefault(); open(e.target); }
+  });
+  lb.addEventListener('click', e => {
+    if(e.target.closest('.mo-lb-x') || e.target === lb) close();
+    else if(e.target.closest('.prev')) step(-1);
+    else if(e.target.closest('.next')) step(1);
+  });
+  document.addEventListener('keydown', e => {
+    if(lb.hidden) return;
+    if(e.key === 'Escape') close();
+    else if(e.key === 'ArrowLeft') step(-1);
+    else if(e.key === 'ArrowRight') step(1);
+  });
+  let tx = null;
+  lb.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive: true});
+  lb.addEventListener('touchend', e => {
+    if(tx === null) return;
+    const dx = e.changedTouches[0].clientX - tx; tx = null;
+    if(Math.abs(dx) > 45) step(dx < 0 ? 1 : -1);
+  });
+  refresh();
+})();
 
 const animEls = document.querySelectorAll('.anim');
 const io = new IntersectionObserver(entries=>{
