@@ -650,6 +650,8 @@ textarea.reg-in{resize:vertical;min-height:62px}
 .rc-sc-h span{font-size:11.5px;color:#b45309}
 .rc-sc-box{position:relative;height:62px;border-radius:10px;overflow:hidden;background:#fff;border:1px solid #f3dfb0}
 .rc-sc-code{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:700;letter-spacing:6px;color:var(--ink)}
+.rc-sc-box.multi{height:auto;min-height:62px}
+.rc-sc-box.multi .rc-sc-code{position:relative;inset:auto;min-height:62px;flex-wrap:wrap;gap:6px 20px;padding:10px 12px;font-size:24px;letter-spacing:4px}
 .rc-sc-foil{position:absolute;inset:0;width:100%;height:100%;cursor:grab;touch-action:none;transition:opacity .4s}
 .rc-sc-foil.gone{opacity:0}
 .rc-sc-how{margin-top:8px;font-size:12px;line-height:1.45;color:#78350f}
@@ -1807,17 +1809,19 @@ const MACHINE_CODES = {
   }
 };
 /* claims this booking's one-time code from the Sheet. Never fails: on any problem the code is '' */
-function claimMachine(title, ref, guest, email){
+function claimMachine(title, ref, guest, email, qty){
   const m = MACHINE_CODES[title];
   if (!m) return Promise.resolve(null);
-  const blank = Object.assign({}, m, { code: '' });
+  qty = Math.max(1, Math.min(10, qty || 1));          // one code per ticket
+  const pack = codes => Object.assign({}, m, { codes, code: codes.join('  '), missing: qty - codes.length });
+  const blank = pack([]);
   if (!m.api) return Promise.resolve(blank);
   const ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
   const timer = ctrl ? setTimeout(() => ctrl.abort(), 15000) : null;
-  const url = m.api + '?' + new URLSearchParams({ ref, name: guest, email }).toString();
+  const url = m.api + '?' + new URLSearchParams({ ref, name: guest, email, qty: String(qty) }).toString();
   return fetch(url, { redirect: 'follow', signal: ctrl ? ctrl.signal : undefined })
     .then(res => res.json())
-    .then(d => Object.assign({}, m, { code: String((d && d.code) || '') }))
+    .then(d => pack(((d && d.codes) || (d && d.code ? [d.code] : [])).map(String).slice(0, qty)))
     .catch(err => { console.error('Could not get a KasetTimes code:', err); return blank; })
     .finally(() => { if (timer) clearTimeout(timer); });
 }
@@ -3145,8 +3149,8 @@ function submitBooking(e){
       guests:      qty,
       message:     wlTxt + guestNotes + '\n' + (wl ? 'People: ' : 'Tickets: ') + qty + '\nBooking ref: ' + bookingRef +
                    (locTxt ? '\nLocation: ' + locTxt : '') +
-                   (machineCode ? '\n' + machine.name + ' (key it into the machine): ' + machineCode
-                     : machine ? '\n' + machine.name + ': NOT ASSIGNED (Sheet unreachable or out of codes) — please send the guest a code by hand' : '') +
+                   (machineCode ? '\n' + machine.name + (machine.codes.length > 1 ? 's (one per ticket' : ' (') + ', key into the machine): ' + machine.codes.join(', ') : '') +
+                   (machine && machine.missing > 0 ? '\n' + machine.name + ': ' + machine.missing + (machineCode ? ' MORE' : '') + ' NOT ASSIGNED (Sheet unreachable or out of codes) — please send the guest ' + (machine.missing === 1 ? 'a code' : machine.missing + ' codes') + ' by hand' : '') +
                    (usedCode !== 'None' ? '\nCode used: ' + usedCode : '') +
                    '\nReferral code generated: ' + myCode + payerTxt
     }, EJ_KEY);
@@ -3195,7 +3199,7 @@ function submitBooking(e){
   };
 
   // claim the KasetTimes code first (not for waitlists), so the email and receipt show the same code
-  const claim = wl ? Promise.resolve(null) : claimMachine(curBooking.title, bookingRef, guestName, guestEmail);
+  const claim = wl ? Promise.resolve(null) : claimMachine(curBooking.title, bookingRef, guestName, guestEmail, qty);
   claim.then(m=>{
     machine = m; machineCode = m ? m.code : ''; rcpt.machine = m;
     if(typeof emailjs !== 'undefined'){
@@ -3251,9 +3255,14 @@ function rcPayRows(r){
 }
 function rcNote(r){
   if (r.waitlist) return "You're on the waitlist. We'll email you to confirm your spot. Keep this confirmation until then.";
-  if (r.machine) return r.machine.code
-    ? 'Key your code into the machine to pay the TosTrip price. Keep this ' + rcKind(r).word + ' until your visit.'
-    : 'Your machine code is on its way. Until then, show this ' + rcKind(r).word + ' at the booth.';
+  if (r.machine) {
+    const n = (r.machine.codes || []).length, miss = r.machine.missing || 0;
+    if (!n) return 'Your machine code' + (miss > 1 ? 's are' : ' is') + ' on its way. Until then, show this ' + rcKind(r).word + ' at the booth.';
+    return (n > 1 ? 'Each code works once, one per ticket. Key one in for each photo to pay the TosTrip price. '
+                  : 'Key your code into the machine to pay the TosTrip price. ') +
+           (miss ? 'Your other ' + (miss > 1 ? miss + ' codes are' : 'code is') + ' on its way by email. ' : '') +
+           'Keep this ' + rcKind(r).word + ' until your visit.';
+  }
   return (r.payQR ? 'We check every ABA KHQR payment against bank records and will email you if anything is missing. ' : '') +
          'Show this ' + rcKind(r).word + ' when you arrive.';
 }
@@ -3279,8 +3288,8 @@ function renderReceipt(r){
         ${rcPayRows(r).map(row).join('')}
         ${r.machine && r.machine.code ? `
         <div class="rc-scratch">
-          <div class="rc-sc-h"><b>${rcEsc(r.machine.name)}</b><span>Scratch to reveal</span></div>
-          <div class="rc-sc-box"><div class="rc-sc-code">${rcEsc(r.machine.code)}</div><canvas class="rc-sc-foil" aria-hidden="true"></canvas></div>
+          <div class="rc-sc-h"><b>${rcEsc(r.machine.name)}${r.machine.codes.length > 1 ? 's · 1 per ticket' : ''}</b><span>Scratch to reveal</span></div>
+          <div class="rc-sc-box${r.machine.codes.length > 1 ? ' multi' : ''}"><div class="rc-sc-code">${r.machine.codes.map(c => '<span>' + rcEsc(c) + '</span>').join('')}</div><canvas class="rc-sc-foil" aria-hidden="true"></canvas></div>
           <div class="rc-sc-how">${rcEsc(r.machine.how)}</div>
           <button type="button" class="rc-sc-btn">Tap to reveal</button>
         </div>` : ''}
@@ -3475,11 +3484,23 @@ function rcDraw(d, r){
   rcPayRows(r).forEach(row);
   if (r.machine && r.machine.code) {                           // machine code box
     y += 4;
+    if (r.machine.codes.length > 1) {                          // several codes: own line, "how" under it
+      const txt = r.machine.codes.join('   ');
+      let sz = 20; while (sz > 10 && rcWidth(txt, sz, true) + txt.length * 2 > CW - 28) sz--;
+      const how = rcWrap('One code per ticket, each works once. ' + r.machine.how, 8.5, false, CW - 28);
+      const h = 64 + how.length * 11;
+      d.rect(M, y, CW, h, '#fff7e0', 10);
+      d.text((r.machine.name + 'S').toUpperCase(), M + 14, y + 22, 8, { bold: true, color: '#92400e', spacing: 1 });
+      d.text(txt, M + 14, y + 46, sz, { bold: true, spacing: 2 });
+      how.forEach((ln, i) => d.text(ln, M + 14, y + 64 + i * 11, 8.5, { color: '#4b5563' }));
+      y += h + 14;
+    } else {
     d.rect(M, y, CW, 70, '#fff7e0', 10);
     d.text(r.machine.name.toUpperCase(), M + 14, y + 22, 8, { bold: true, color: '#92400e', spacing: 1 });
     d.text(r.machine.code, M + 14, y + 52, 22, { bold: true, spacing: 3 });
     rcWrap(r.machine.how, 8.5, false, CW / 2 - 10).forEach((ln, i) => d.text(ln, R - 14, y + 36 + i * 11, 8.5, { color: '#4b5563', align: 'right' }));
     y += 84;
+    }
   }
 
   const note = rcWrap(rcNote(r), 8.5, false, CW - 24), boxH = note.length * 12 + 18, boxY = y + 6;
