@@ -1799,9 +1799,24 @@ const EJ_TPL_GUEST = 'template_0pi47tp';
    To add codes later, just add rows to the Sheet — no change here.
    If api is empty, the Sheet can't be reached, or the codes run out, the receipt
    says the code is on its way and the booking email tells TosTrip to send one by hand. */
+const TOSTRIP_SHEET_API = 'https://script.google.com/macros/s/AKfycbzgXKBjItRy3XPSgCs9yzuqBDg5tuFzyvBwJv-KCll2FfmJWKavZmsSta5JrdgQ9Owv/exec';   // Apps Script web app on the TosTrip Google Sheet
+/* ─── SIGN-UP LOG ────────────────────────────────────────────────
+   Events listed here also write every booking (one row each) into their own Google Sheet.
+   ▶ api: the /exec link of that Sheet's Apps Script web app. Empty = not logged. */
+const SHEET_LOG = {
+  'Make 1 Give 1 — Secret Santa Pottery': {
+    api: ''                             // ← Make 1 Give 1 Sheet's web app link, e.g. 'https://script.google.com/macros/s/AKfy.../exec'
+  }
+};
+function logToSheet(title, row){
+  const cfg = SHEET_LOG[title];
+  if (!cfg || !cfg.api) return Promise.resolve();
+  const url = cfg.api + '?' + new URLSearchParams(Object.assign({ action: 'log' }, row)).toString();
+  return fetch(url, { redirect: 'follow' }).catch(err => console.error('Could not add the booking to the Google Sheet:', err));
+}
 const MACHINE_CODES = {
   'KasetTimes Vintage Newspaper Photobooth': {
-    api:  'https://script.google.com/macros/s/AKfycbzgXKBjItRy3XPSgCs9yzuqBDg5tuFzyvBwJv-KCll2FfmJWKavZmsSta5JrdgQ9Owv/exec',   // Apps Script web app (TosTrip × KasetTimes codes sheet)
+    api:  TOSTRIP_SHEET_API,   // Apps Script web app (TosTrip × KasetTimes codes sheet)
     name: 'KasetTimes code',
     how:  'Key it into the KasetTimes machine to pay just $2 instead of $2.50.'
   }
@@ -3198,16 +3213,23 @@ function submitBooking(e){
 
   // claim the KasetTimes code first (not for waitlists), so the email and receipt show the same code
   const claim = wl ? Promise.resolve(null) : claimMachine(curBooking.title, bookingRef, guestName, guestEmail, qty);
+  // Make 1 Give 1 etc.: add the guest's name to the Google Sheet (doesn't hold up the booking)
+  const logRow = ()=>{ logToSheet(curBooking.title, {
+    ref: bookingRef, name: guestName, email: guestEmail, phone: guestPhone === 'N/A' ? '' : guestPhone,
+    tickets: String(qty), session: sessionTxt, total: totalTxt,
+    payer: curBooking.payQR ? document.getElementById('bPayer').value.trim() : '',
+    notes: guestNotes === 'No requests' ? '' : guestNotes, referral: myCode
+  }); };
   claim.then(m=>{
     machine = m; machineCode = m ? m.code : ''; rcpt.machine = m;
     if(typeof emailjs !== 'undefined'){
-      sendAll().then(finish).catch(err=>{
+      sendAll().then(()=>{ logRow(); finish(); }).catch(err=>{
         alert('Error: ' + (err.text || err.message));
         btn.innerHTML = submitLabel();
         btn.disabled = false;
         refreshTotal();
       });
-    } else { finish(); }
+    } else { logRow(); finish(); }
   });
 }
 
