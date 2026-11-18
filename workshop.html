@@ -1792,15 +1792,35 @@ const EJ_TPL_GUEST = 'template_0pi47tp';
 /* ─── MACHINE CODES ──────────────────────────────────────────────
    A code shown as a scratch card on the e-receipt (and in the PDF and the
    booking email). Guests key it into the machine to pay the TosTrip price.
-   ▶ Put the code KasetTimes gives you between the quotes, e.g. code: 'AB12CD'.
-   While it's empty, the receipt says the code is coming and to show the booking instead. */
+   KasetTimes codes work ONCE each, so they live in a Google Sheet, not in this page.
+   Every booking asks the Sheet for the next unused code; the Sheet marks it used
+   (with the booking ref, guest and time) so no two guests ever get the same code.
+   ▶ Paste your Apps Script web-app URL into api (ends in /exec). See the setup steps.
+   To add codes later, just add rows to the Sheet — no change here.
+   If api is empty, the Sheet can't be reached, or the codes run out, the receipt
+   says the code is on its way and the booking email tells TosTrip to send one by hand. */
 const MACHINE_CODES = {
   'KasetTimes Vintage Newspaper Photobooth': {
-    code: '',
+    api:  'https://script.google.com/macros/s/AKfycbyoeH8y8y7jQpJtcmj139vruhFy3x6pXe75eMRwTOg1Pf-9Zz_NPcrnNyAvHrFLaTwS/exec',   // Apps Script web app (TosTrip × KasetTimes codes sheet)
     name: 'KasetTimes code',
     how:  'Key it into the KasetTimes machine to pay just $2 instead of $2.50.'
   }
 };
+/* claims this booking's one-time code from the Sheet. Never fails: on any problem the code is '' */
+function claimMachine(title, ref, guest, email){
+  const m = MACHINE_CODES[title];
+  if (!m) return Promise.resolve(null);
+  const blank = Object.assign({}, m, { code: '' });
+  if (!m.api) return Promise.resolve(blank);
+  const ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+  const timer = ctrl ? setTimeout(() => ctrl.abort(), 15000) : null;
+  const url = m.api + '?' + new URLSearchParams({ ref, name: guest, email }).toString();
+  return fetch(url, { redirect: 'follow', signal: ctrl ? ctrl.signal : undefined })
+    .then(res => res.json())
+    .then(d => Object.assign({}, m, { code: String((d && d.code) || '') }))
+    .catch(err => { console.error('Could not get a KasetTimes code:', err); return blank; })
+    .finally(() => { if (timer) clearTimeout(timer); });
+}
 const EVENT_HOSTS = {
   'Khmer Agarwood (Oud)': {
     host:  { name: 'Gech Horng', email: 'bungechhorng1993@gmail.com' },
@@ -3059,7 +3079,7 @@ function submitBooking(e){
   const hostInfo   = (EVENT_HOSTS[curBooking.title] || {}).host;
   const locTxt     = curBooking.locations ? document.getElementById('bLoc').value : '';
   const placeTxt   = curBooking.partner + ' · ' + (locTxt || curBooking.city);
-  const machineCode = (MACHINE_CODES[curBooking.title] || {}).code || '';
+  let machine = null, machineCode = '';               // KasetTimes one-time code — claimed from the Sheet below
 
   const params = {
     user_name:    guestName,
@@ -3125,7 +3145,8 @@ function submitBooking(e){
       guests:      qty,
       message:     wlTxt + guestNotes + '\n' + (wl ? 'People: ' : 'Tickets: ') + qty + '\nBooking ref: ' + bookingRef +
                    (locTxt ? '\nLocation: ' + locTxt : '') +
-                   (machineCode ? '\n' + MACHINE_CODES[curBooking.title].name + ' (key it into the machine): ' + machineCode : '') +
+                   (machineCode ? '\n' + machine.name + ' (key it into the machine): ' + machineCode
+                     : machine ? '\n' + machine.name + ': NOT ASSIGNED (Sheet unreachable or out of codes) — please send the guest a code by hand' : '') +
                    (usedCode !== 'None' ? '\nCode used: ' + usedCode : '') +
                    '\nReferral code generated: ' + myCode + payerTxt
     }, EJ_KEY);
@@ -3149,7 +3170,7 @@ function submitBooking(e){
     guest: guestName, email: guestEmail, phone: guestPhone === 'N/A' ? '' : guestPhone,
     payQR: !!curBooking.payQR, payer: curBooking.payQR ? document.getElementById('bPayer').value.trim() : '',
     waitlist: !!wl,
-    machine: MACHINE_CODES[curBooking.title] || null,
+    machine: machine,
     issuedTxt: new Intl.DateTimeFormat('en-GB', { timeZone:'Asia/Phnom_Penh', day:'numeric', month:'short', year:'numeric' }).format(new Date()) + ', ' +
                new Intl.DateTimeFormat('en-US', { timeZone:'Asia/Phnom_Penh', hour:'numeric', minute:'2-digit', hour12:true }).format(new Date())
   };
@@ -3173,14 +3194,19 @@ function submitBooking(e){
     btn.disabled = false;
   };
 
-  if(typeof emailjs !== 'undefined'){
-    sendAll().then(finish).catch(err=>{
-      alert('Error: ' + (err.text || err.message));
-      btn.innerHTML = submitLabel();
-      btn.disabled = false;
-      refreshTotal();
-    });
-  } else { finish(); }
+  // claim the KasetTimes code first (not for waitlists), so the email and receipt show the same code
+  const claim = wl ? Promise.resolve(null) : claimMachine(curBooking.title, bookingRef, guestName, guestEmail);
+  claim.then(m=>{
+    machine = m; machineCode = m ? m.code : ''; rcpt.machine = m;
+    if(typeof emailjs !== 'undefined'){
+      sendAll().then(finish).catch(err=>{
+        alert('Error: ' + (err.text || err.message));
+        btn.innerHTML = submitLabel();
+        btn.disabled = false;
+        refreshTotal();
+      });
+    } else { finish(); }
+  });
 }
 
 /* ════ E-RECEIPT ════════════════════════════════════════════════════
