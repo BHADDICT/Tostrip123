@@ -591,6 +591,9 @@ textarea.reg-in{resize:vertical;min-height:62px}
 .fi{width:100%;padding:11px 13px;border-radius:var(--r-sm);border:1.5px solid var(--line);outline:none;font-family:inherit;font-size:14px;color:var(--ink);transition:border-color .2s,box-shadow .2s;background:var(--bg)}
 .fi:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(102,126,234,.1)}
 .fi::placeholder{color:var(--ink4)}
+.fi.fi-err{border-color:#e53e3e;box-shadow:0 0 0 3px rgba(229,62,62,.12)}
+.fi-err-msg{display:none;font-size:12.5px;color:#e53e3e;margin-top:6px;gap:6px;align-items:center}
+.fi-err-msg.show{display:flex}
 .f-row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
 .price-sum{background:var(--bg2);border:1.5px solid var(--line);border-radius:var(--r-sm);padding:15px 17px;margin-bottom:16px}
 .ps-row{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--ink3);margin-bottom:5px}
@@ -814,7 +817,7 @@ a.kas-loc:hover{border-color:var(--p)}
       <a href="#make1give1" class="now-on" id="heroNowOn">
         <span class="live-dot">Booking now</span>
         <strong>Make 1 Give 1</strong>
-        <span class="now-on-sub">Secret Santa pottery · Wed 25 Nov · 2 PM</span>
+        <span class="now-on-sub">Secret Santa pottery · Wed 25 &amp; Sun 29 Nov · 2 PM</span>
         <i class="fas fa-chevron-right"></i>
       </a>
       <div class="hero-badge"><i class="fas fa-hands-helping"></i> Hands-on Experiences</div>
@@ -845,11 +848,11 @@ a.kas-loc:hover{border-color:var(--p)}
         <div class="hs-foot"><span class="hs-count" id="heroCount">1 / 1</span><div class="hs-dots" id="heroDots"></div></div>
       </div>
       <div class="hv-card hv-card1">
-        <div class="hvc-label"><span class="live-dot" id="heroEvTag">Special</span> · <span id="heroEvTxt">Wed 25 Nov · 2 PM</span></div>
+        <div class="hvc-label"><span class="live-dot" id="heroEvTag">Special</span> · <span id="heroEvTxt">Wed 25 &amp; Sun 29 Nov · 2 PM</span></div>
         <div class="hvc-title" id="heroEvTitle">Make 1 Give 1</div>
         <div class="hvc-row" id="heroEvWhere"><i class="fas fa-map-marker-alt" style="color:var(--p)"></i> Veranda Pottery · Tonle Bassac, Phnom Penh</div>
         <div class="hvc-row hvc-status" id="heroEvStatus"><i class="fas fa-hourglass-half"></i> Secret Santa pottery</div>
-        <a href="#make1give1" class="hvc-link" id="heroEvLink">$15 · 15 seats · Join as a Secret Santa <i class="fas fa-arrow-right"></i></a>
+        <a href="#make1give1" class="hvc-link" id="heroEvLink">$15 · 2 dates · Join as a Secret Santa <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
   </div>
@@ -897,22 +900,23 @@ a.kas-loc:hover{border-color:var(--p)}
   <div class="sec-h2">Ongoing Events &amp; <em>Shows</em></div>
 
   <!-- FEATURED (UPCOMING EVENT): MAKE 1 GIVE 1 — Secret Santa pottery at Veranda Pottery
-       Wednesday 25 November 2026 · 2:00 – 5:00 PM · 15 seats · $15, paid by ABA / KHQR in the booking form
+       Wed 25 Nov 2026 (5 seats) and Sun 29 Nov 2026 (10 seats) · 2:00 – 5:00 PM · $15, paid by ABA / KHQR in the booking form
+       Dates, seats and bookings already taken live in M1G1_DATES in the script — change them there.
        Every piece becomes a Christmas gift for a child at PIO (People Improvement Organization).
        Files in ./imgg/: make1give1.jpg (cover), make1give1.mp4 (promo video). The $15 ABA KHQR is built into the booking form.
        The card hides itself after the event (data-ends). -->
-  <div class="feat-card" id="make1give1" data-cat="craft" data-city="phnom-penh" data-price="15" data-ends="2026-11-25T17:00:00+07:00">
+  <div class="feat-card" id="make1give1" data-cat="craft" data-city="phnom-penh" data-price="15" data-ends="2026-11-29T17:00:00+07:00">
     <div class="fc-img">
       <img src="./imgg/make1give1.jpg" alt="Make 1 Give 1 — a Secret Santa pottery workshop" onclick="lbOpenList([{type:'video',src:'./imgg/make1give1.mp4',poster:'./imgg/make1give1.jpg'}],'Make 1 Give 1','Make 1 Give 1 · Secret Santa Pottery at Veranda Pottery',0)" style="cursor:pointer;object-position:50% 40%">
       <button type="button" class="fc-gallery-btn" onclick="lbOpenList([{type:'video',src:'./imgg/make1give1.mp4',poster:'./imgg/make1give1.jpg'}],'Make 1 Give 1','Make 1 Give 1 · Secret Santa Pottery at Veranda Pottery',0)"><i class="fas fa-play"></i> Watch video</button>
       <div class="fc-badges">
         <span class="ev-badge b-featured">🎁 Give back</span>
         <span class="ev-badge b-craft">🏺 Pottery</span>
-        <span class="ev-badge b-show">🎄 Wed 25 Nov</span>
+        <span class="ev-badge b-show">🎄 25 &amp; 29 Nov</span>
       </div>
       <div class="fc-seats">
         <div class="sb-wrap">
-          <div class="sb-top"><span class="sb-lbl">Seats</span><span class="sb-num">15 guests only</span></div>
+          <div class="sb-top"><span class="sb-lbl">Seats</span><span class="sb-num" id="m1g1Seats">15 guests only</span></div>
           <div class="sb-track"><div class="sb-fill fill-green" style="width:0%"></div></div>
         </div>
       </div>
@@ -922,15 +926,15 @@ a.kas-loc:hover{border-color:var(--p)}
       <div class="fc-title">Make 1 Give 1 — Secret Santa Pottery</div>
       <p class="fc-desc">Spend an afternoon at Veranda Pottery shaping and painting your own clay piece with their potters — then give it away. You become a Secret Santa: your piece is fired, wrapped with a card from you, and delivered by the TosTrip team to a child at PIO (People Improvement Organization) before Christmas. Snacks and drinks included.</p>
       <div class="fc-meta">
-        <div class="fc-meta-i"><i class="fas fa-calendar"></i> Wednesday 25 November 2026 · 2:00 PM</div>
+        <div class="fc-meta-i"><i class="fas fa-calendar"></i> Wed 25 Nov or Sun 29 Nov 2026 · 2:00 PM</div>
         <div class="fc-meta-i"><i class="fas fa-clock"></i> About 3 hours</div>
         <div class="fc-meta-i"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.app.goo.gl/JDPeSfkXWXcAsByVA?g_st=ic" target="_blank" rel="noopener">Veranda Pottery, #12A St. 312, Tonle Bassac</a></div>
-        <div class="fc-meta-i"><i class="fas fa-users"></i> 15 guests only</div>
+        <div class="fc-meta-i"><i class="fas fa-users"></i> <span id="m1g1SeatsMeta">25 Nov: 5 guests · 29 Nov: 10 guests</span></div>
         <div class="fc-meta-i"><i class="fas fa-cookie-bite"></i> Snacks &amp; drinks included</div>
       </div>
       <div class="countdown-row" id="cd-make1give1"></div>
       <div class="fc-actions">
-        <button class="btn-primary" onclick="openModal('Make 1 Give 1 — Secret Santa Pottery','🎁','craft','TosTrip × Veranda Pottery','Phnom Penh',15,'About 3 hrs',15,'2026-11-25T14:00:00+07:00',{single:true,noDiscount:true,payQR:true})">
+        <button class="btn-primary" onclick="openModal('Make 1 Give 1 — Secret Santa Pottery','🎁','craft','TosTrip × Veranda Pottery','Phnom Penh',15,'About 3 hrs',15,'2026-11-25T14:00:00+07:00',{single:true,noDiscount:true,payQR:true,dates:M1G1_DATES})">
           <i class="fas fa-gift"></i> Join as a Secret Santa
         </button>
         <button type="button" class="btn-outline-sm btn-watch" onclick="lbOpenList([{type:'video',src:'./imgg/make1give1.mp4',poster:'./imgg/make1give1.jpg'}],'Make 1 Give 1','Make 1 Give 1 · Secret Santa Pottery at Veranda Pottery',0)"><i class="fas fa-play-circle"></i> Watch video</button>
@@ -985,7 +989,7 @@ a.kas-loc:hover{border-color:var(--p)}
         <div class="fc-meta-i"><i class="fas fa-users"></i> Max 15 guests</div>
       </div>
       <div class="oud-status-lbl" id="verStatusLbl" style="margin-bottom:16px">Open daily · 8:00 AM – 7:00 PM</div>
-      <a href="#make1give1" class="now-on" style="margin-bottom:16px"><span class="live-dot">Special</span><strong>Make 1 Give 1</strong><span class="now-on-sub">Secret Santa pottery · Wed 25 Nov · 2 PM</span><i class="fas fa-chevron-right"></i></a>
+      <a href="#make1give1" class="now-on" style="margin-bottom:16px"><span class="live-dot">Special</span><strong>Make 1 Give 1</strong><span class="now-on-sub">Secret Santa pottery · Wed 25 &amp; Sun 29 Nov · 2 PM</span><i class="fas fa-chevron-right"></i></a>
       <div class="fc-actions">
         <button class="btn-primary" onclick="openModal('Pottery Workshop','🏺','craft','Veranda Pottery · Tonle Bassac','Phnom Penh',15,'8 AM – 7 PM',15,null)">
           <i class="fas fa-ticket-alt"></i> Book Now
@@ -1722,7 +1726,7 @@ a.kas-loc:hover{border-color:var(--p)}
           </div>
           <div class="pay-multi" id="payMulti" style="display:none"><i class="fas fa-info-circle"></i><span id="payMultiTxt"></span></div>
           <div class="pay-tip"><i class="fas fa-mobile-alt"></i><span>Booking on your phone? Tap <strong>Save QR</strong> (or press and hold the code), then open the picture from your bank app's scanner — the gallery icon.</span></div>
-          <div class="fg"><label class="fl">Name on your bank account <span class="req">*</span></label><input type="text" id="bPayer" class="fi" placeholder="As shown in your banking app"></div>
+          <div class="fg"><label class="fl">Name on your bank account <span class="req">*</span></label><input type="text" id="bPayer" class="fi" placeholder="As shown in your banking app" autocomplete="name" oninput="clearPayerErr()"><div class="fi-err-msg" id="bPayerErr"><i class="fas fa-exclamation-circle"></i><span>Please type the name on your bank account so we can match your payment.</span></div></div>
           <div class="pay-safe"><i class="fas fa-lock"></i><span>Only pay through this page on TosTrip. TosTrip will never ask for your PIN, password or OTP code.</span></div>
         </div>
         <div class="ok-note" id="okNote"><i class="fas fa-shield-alt"></i><span><strong>Free cancellation</strong> up to 48 hours before your session.</span></div>
@@ -1881,8 +1885,16 @@ let myCode = '';
    so the top of the page never advertises a finished event. Files in ./imgg/ (missing ones are skipped).
    (This gallery used to show the Khmer Agarwood (Oud) event, which ended on 13 Oct; its variables
    are still called oud… to keep the code below unchanged.) */
-const HERO_M1G1_START = new Date('2026-11-25T14:00:00+07:00').getTime();
-const HERO_M1G1_END   = new Date('2026-11-25T17:00:00+07:00').getTime();
+/* MAKE 1 GIVE 1 DATES — max = seats for that day, booked = seats already taken.
+   Update "booked" as people pay, and the page shows the right seats left. */
+const M1G1_DATES = [
+  { start:'2026-11-25T14:00:00+07:00', end:'2026-11-25T17:00:00+07:00', max:5,  booked:2 },
+  { start:'2026-11-29T14:00:00+07:00', end:'2026-11-29T17:00:00+07:00', max:10, booked:0 },
+];
+const m1g1Next = () => M1G1_DATES.find(x => Date.now() < new Date(x.end).getTime()) || M1G1_DATES[M1G1_DATES.length - 1];
+const m1g1Left = x => Math.max(0, x.max - (x.booked || 0));
+let   HERO_M1G1_START = new Date(m1g1Next().start).getTime();
+const HERO_M1G1_END   = new Date(M1G1_DATES[M1G1_DATES.length - 1].end).getTime();
 const heroIsM1G1 = () => Date.now() < HERO_M1G1_END;
 const heroName = () => heroIsM1G1() ? 'Make 1 Give 1' : 'Veranda Pottery';
 let HERO_CAPTION = 'Make 1 Give 1 · Secret Santa pottery at Veranda Pottery';
@@ -2396,8 +2408,10 @@ function promoClose(){
 function heroTick(){
   const $ = id => document.getElementById(id), now = Date.now(), pad = n => String(n).padStart(2,'0');
   if(heroIsM1G1()){
+    HERO_M1G1_START = new Date(m1g1Next().start).getTime();
     const day = t => Math.floor((t + 7*36e5) / 864e5), d = day(HERO_M1G1_START) - day(now), live = now >= HERO_M1G1_START;
-    $('heroEvTxt').textContent = live ? 'Happening now' : d <= 0 ? 'Today · 2 PM' : d === 1 ? 'Tomorrow · 2 PM' : 'Wed 25 Nov · 2 PM';
+    const nextLbl = new Date(HERO_M1G1_START).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',timeZone:'Asia/Phnom_Penh'});
+    $('heroEvTxt').textContent = live ? 'Happening now' : d <= 0 ? 'Today · 2 PM' : d === 1 ? 'Tomorrow · 2 PM' : nextLbl + ' · 2 PM';
     const tag = live ? 'Happening now' : 'Booking now';
     document.querySelector('#heroNowOn .live-dot').textContent = tag; $('heroShowTag').textContent = tag;
     $('heroEvStatus').innerHTML = '<i class="fas fa-hourglass-half"></i> ' +
@@ -2668,7 +2682,7 @@ function buildCountdown(elId, target){
   const el = document.getElementById(elId);
   if(!el) return;
   const tick = ()=>{
-    const diff = new Date(target) - new Date();
+    const diff = new Date(typeof target === 'function' ? target() : target) - new Date();
     if(diff <= 0){ el.innerHTML = '<span style="color:var(--green);font-weight:700;font-size:15px">🟢 Happening now!</span>'; return; }
     const d = Math.floor(diff/864e5), h = Math.floor((diff%864e5)/36e5),
           m = Math.floor((diff%36e5)/6e4), s = Math.floor((diff%6e4)/1e3);
@@ -2685,7 +2699,16 @@ function buildCountdown(elId, target){
   };
   tick(); setInterval(tick, 1000);
 }
-buildCountdown('cd-make1give1', '2026-11-25T14:00:00+07:00');
+buildCountdown('cd-make1give1', () => m1g1Next().start);
+// Make 1 Give 1 card: seats left per date
+(function(){
+  const sh = x => new Date(x.start).toLocaleDateString('en-GB',{day:'numeric',month:'short',timeZone:'Asia/Phnom_Penh'});
+  const open = M1G1_DATES.filter(x => Date.now() < new Date(x.end).getTime());
+  const left = open.reduce((n, x) => n + m1g1Left(x), 0);
+  const a = document.getElementById('m1g1Seats'), b = document.getElementById('m1g1SeatsMeta');
+  if(a) a.textContent = left ? left + ' seats left' : 'Sold out';
+  if(b) b.textContent = open.map(x => sh(x) + ': ' + (m1g1Left(x) ? m1g1Left(x) + ' of ' + x.max + ' left' : 'sold out')).join(' · ');
+})();
 
 /* FILTER — workshop grids (free + paid) and ongoing events */
 const priceOf = c => {
@@ -2856,7 +2879,7 @@ function openModal(title, icon, cat, partner, city, price, dur, maxS, eventDate,
   opts = opts || {};
   // single: one fixed date · noDiscount: promo / referral codes don't apply · payQR: pay by ABA / KHQR in the form
   curBooking = {title, icon, cat, partner, city, price, dur, maxS, eventDate, isNak: false,
-                single: !!opts.single, noDiscount: !!opts.noDiscount, payQR: !!opts.payQR,
+                single: !!opts.single, noDiscount: !!opts.noDiscount, payQR: !!opts.payQR, dates: opts.dates || null,
                 locations: opts.locations || null,    // locations: guest picks one (e.g. KasetTimes booths)
                 waitlist: opts.waitlist || null};     // waitlist: {max} → pick a Sunday, no payment now (e.g. Doun Kok)
   _setupModal();
@@ -2945,10 +2968,13 @@ function _setupModal(){
   document.getElementById('successWrap').style.display = 'none';
   document.getElementById('bForm').reset();
   document.getElementById('bQty').value = (curBooking.single || curBooking.waitlist) ? '1' : '2';
+  if(curBooking.dates){ const s = document.querySelector('.sess-opt.sel'); if(s) pickSess(s); }
   // ABA / KHQR payment block — events paid online (e.g. Make 1 Give 1)
   const payBlock = document.getElementById('payBlock');
   payBlock.style.display = curBooking.payQR ? 'block' : 'none';
   document.getElementById('bPayer').required = !!curBooking.payQR;
+  document.getElementById('submitBtn').disabled = !!(curBooking.dates && !document.querySelector('.sess-opt.sel'));
+  clearPayerErr();
   if(curBooking.payQR){
     const qr = document.getElementById('payQRImg');
     qr.style.display = ''; qr.nextElementSibling.style.display = 'none';
@@ -3006,6 +3032,29 @@ function buildSessions(baseDate){
     grid.querySelector('.sess-opt').classList.add('sel');
     return;
   }
+  if(curBooking.dates){
+    // fixed dates with their own seat limits (e.g. Make 1 Give 1: 25 & 29 Nov)
+    const tz = {timeZone:'Asia/Phnom_Penh'};
+    let html = '';
+    curBooking.dates.forEach((x, i) => {
+      if(Date.now() >= new Date(x.end).getTime()) return;            // date has passed
+      const d = new Date(x.start), left = m1g1Left(x), full = left === 0;
+      const sc = full ? 'none' : left <= 3 ? 'few' : 'plenty';
+      const sl = full ? 'Sold out' : left === 1 ? '1 seat left' : left + ' seats left';
+      html += `<div class="sess-opt${full?' sess-full':''}" data-label="${d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric',...tz})}" data-left="${left}" onclick="pickSess(this)">
+        <input type="radio" name="sess" value="${i}" ${full?'disabled':''}>
+        ${full?'<div class="so-full-tag">SOLD OUT</div>':''}
+        <div class="so-date">${d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',...tz})}</div>
+        <div class="so-time">${d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',...tz})}</div>
+        <div class="so-seats ${sc}">${sl}</div>
+      </div>`;
+    });
+    const grid = document.getElementById('sessGrid');
+    grid.innerHTML = html || '<div class="so-seats none">All dates are sold out.</div>';
+    const first = grid.querySelector('.sess-opt:not(.sess-full)');
+    if(first) pickSess(first); else document.getElementById('submitBtn').disabled = true;
+    return;
+  }
   if(curBooking.single){
     const d = new Date(baseDate), tz = {timeZone:'Asia/Phnom_Penh'};
     const lbl  = d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',...tz});
@@ -3050,6 +3099,13 @@ function pickSess(el){
   document.querySelectorAll('.sess-opt').forEach(s=>s.classList.remove('sel'));
   el.classList.add('sel');
   el.querySelector('input').checked = true;
+  // limit tickets to the seats left on this date
+  if(el.dataset.left){
+    const q = document.getElementById('bQty'), cur = parseInt(q.value) || 1, left = Math.min(5, +el.dataset.left);
+    q.innerHTML = Array.from({length: left}, (_, i) => `<option value="${i+1}">${i+1} ticket${i ? 's' : ''}</option>`).join('');
+    q.value = String(Math.min(cur, left));
+    if(typeof refreshTotal === 'function') refreshTotal();
+  }
 }
 
 function closeModal(){
@@ -3062,8 +3118,27 @@ document.getElementById('bookModal').addEventListener('click', e=>{
 });
 
 /* SUBMIT */
+function clearPayerErr(){
+  document.getElementById('bPayer').classList.remove('fi-err');
+  document.getElementById('bPayerErr').classList.remove('show');
+}
+
 function submitBooking(e){
   e.preventDefault();
+  // Paid-by-QR events (e.g. Make 1 Give 1): don't confirm until the bank-account name is filled in
+  if(curBooking.payQR){
+    const payerEl = document.getElementById('bPayer');
+    const payer = payerEl.value.replace(/\s+/g,' ').trim();
+    if(payer.replace(/[^\p{L}]/gu,'').length < 2){
+      payerEl.value = payer;
+      payerEl.classList.add('fi-err');
+      document.getElementById('bPayerErr').classList.add('show');
+      payerEl.scrollIntoView({behavior:'smooth', block:'center'});
+      payerEl.focus({preventScroll:true});
+      return;
+    }
+    payerEl.value = payer;
+  }
   const qty = parseInt(document.getElementById('bQty').value);
   const base = curBooking.price ?? 22;
   const sub = base * qty;
