@@ -544,7 +544,8 @@ textarea.reg-in{resize:vertical;min-height:62px}
 .mh{background:linear-gradient(135deg,#4f63d2 0%,#667eea 100%);padding:26px 30px;border-radius:var(--r-xl) var(--r-xl) 0 0;position:relative}
 .mh.nak-header{background:linear-gradient(135deg,#1a1208 0%,#3d2408 100%)}
 .mh-row{display:flex;align-items:flex-start;gap:14px;margin-bottom:10px}
-.mh-ico{width:48px;height:48px;border-radius:var(--r-sm);background:rgba(255,255,255,.2);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.mh-ico img{width:100%;height:100%;object-fit:contain;display:block}
+.mh-ico{background:#fff!important;padding:5px;overflow:hidden;width:48px;height:48px;border-radius:var(--r-sm);background:rgba(255,255,255,.2);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
 .mh h2{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:#fff;margin-bottom:2px;line-height:1.2}
 .mh p{font-size:13px;color:rgba(255,255,255,.7)}
 .mh-meta{display:flex;gap:16px;flex-wrap:wrap}
@@ -2908,7 +2909,9 @@ function _setupModal(){
   discountPct = 0; discountFlat = 0;
   const isFree = curBooking.price === 0;
 
-  document.getElementById('m-ico').textContent = curBooking.icon;
+  const mIco = document.getElementById('m-ico');   // the TosTrip logo is always shown here (emoji only if the logo file is missing)
+  mIco.innerHTML = '<img src="./imgg/loko.png" alt="TosTrip">';
+  mIco.querySelector('img').onerror = function(){ mIco.textContent = curBooking.icon; };
   document.getElementById('m-title').textContent = curBooking.title;
   document.getElementById('m-partner').textContent = curBooking.partner + ' · ' + curBooking.city;
   document.getElementById('m-dur').textContent = curBooking.dur;
