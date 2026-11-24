@@ -1888,8 +1888,8 @@ let myCode = '';
 /* MAKE 1 GIVE 1 DATES — max = seats for that day, booked = seats already taken.
    Update "booked" as people pay, and the page shows the right seats left. */
 const M1G1_DATES = [
-  { start:'2026-11-25T14:00:00+07:00', end:'2026-11-25T17:00:00+07:00', max:5,  booked:2 },
-  { start:'2026-11-29T14:00:00+07:00', end:'2026-11-29T17:00:00+07:00', max:10, booked:0 },
+  { start:'2026-11-25T14:00:00+07:00', end:'2026-11-25T17:00:00+07:00', max:5,  booked:8 },
+  { start:'2026-11-29T14:00:00+07:00', end:'2026-11-29T17:00:00+07:00', max:10, booked:5 },
 ];
 const m1g1Next = () => M1G1_DATES.find(x => Date.now() < new Date(x.end).getTime()) || M1G1_DATES[M1G1_DATES.length - 1];
 const m1g1Left = x => Math.max(0, x.max - (x.booked || 0));
