@@ -1,0 +1,100 @@
+[
+ {
+  "n": "Veranda Pottery",
+  "c": "workshop",
+  "lat": null,
+  "lng": null,
+  "note": "Phnom Penh partner. Add GPS."
+ },
+ {
+  "n": "Kaset Times",
+  "c": "workshop",
+  "lat": null,
+  "lng": null,
+  "note": "Phnom Penh partner. Add GPS."
+ },
+ {
+  "n": "Ood Woods Crafting",
+  "c": "workshop",
+  "lat": null,
+  "lng": null,
+  "note": "Phnom Penh partner. Add GPS."
+ },
+ {
+  "n": "Pu Seila House",
+  "c": "workshop",
+  "lat": null,
+  "lng": null,
+  "note": "Doun Kok, Phnom Penh. Add GPS."
+ },
+ {
+  "n": "Western International School (Toul Sangke)",
+  "c": "pin",
+  "lat": null,
+  "lng": null,
+  "note": "Toul Sangke campus. Add GPS."
+ },
+ {
+  "n": "emart24 BKK1 (St 310 corner St 57)",
+  "c": "convenience",
+  "lat": null,
+  "lng": null,
+  "note": "BKK1, Phnom Penh. Add GPS."
+ },
+ {
+  "n": "emart24 598 (Chea Sophara)",
+  "c": "convenience",
+  "lat": null,
+  "lng": null,
+  "note": "Chea Sophara (598) Rd, Russey Keo. Add GPS."
+ },
+ {
+  "n": "emart24 Tuol Sleng (St 360)",
+  "c": "convenience",
+  "lat": null,
+  "lng": null,
+  "note": "#74AB St 360, Boeng Keng Kang. Add GPS."
+ },
+ {
+  "n": "emart24 Coconut Park Koh Norea",
+  "c": "convenience",
+  "lat": null,
+  "lng": null,
+  "note": "Koh Norea. Add GPS."
+ },
+ {
+  "n": "emart24 Kampuchea Krom",
+  "c": "convenience",
+  "lat": null,
+  "lng": null,
+  "note": "Kampuchea Krom Blvd. Add GPS."
+ },
+ {
+  "n": "emart24 Sen Sok City",
+  "c": "convenience",
+  "lat": null,
+  "lng": null,
+  "note": "Sen Sok City. Add GPS."
+ },
+ {
+  "n": "emart24 Peng Huoth Euro Park",
+  "c": "convenience",
+  "lat": null,
+  "lng": null,
+  "note": "Sangkat Niroth, Chbar Ampov. Add GPS."
+ },
+ {
+  "n": "Techo International Airport (Phnom Penh)",
+  "c": "travel",
+  "lat": 11.359145,
+  "lng": 104.933911,
+  "note": "Replaced the old Phnom Penh airport in Sept 2025."
+ },
+ {
+  "n": "CWE",
+  "c": "workshop",
+  "lat": null,
+  "lng": null,
+  "note": "Siem Reap partner. Add GPS."
+ }
+]
