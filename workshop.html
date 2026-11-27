@@ -831,22 +831,6 @@ a.kas-loc:hover{border-color:var(--p)}
   </div>
 </section>
 
-<!-- REFERRAL BANNER -->
-<div class="ref-banner">
-  <div class="ref-banner-inner">
-    <div class="rb-icon">🎟️</div>
-    <div class="rb-text">
-      <strong>Got a referral code from a friend? It gives you 10% off any paid workshop.</strong>
-      <span>Enter below or at checkout. Share your code after booking to earn <b>$5 credit</b> per friend.</span>
-    </div>
-    <div class="rb-form">
-      <input type="text" class="rb-input" id="bannerCode" placeholder="Enter code…" maxlength="12" oninput="this.value=this.value.toUpperCase()">
-      <button class="rb-btn" onclick="applyBannerCode()"><i class="fas fa-tag"></i> Apply</button>
-    </div>
-    <div class="rb-msg" id="bannerMsg"></div>
-  </div>
-</div>
-
 <!-- FILTER BAR -->
 <div class="filter-bar">
   <div class="filter-inner">
@@ -1532,45 +1516,6 @@ a.kas-loc:hover{border-color:var(--p)}
   </div>
 </section>
 
-<!-- ════ REFERRAL SECTION ════ -->
-<div class="ref-section">
-  <div class="ref-inner">
-    <div class="ref-left">
-      <div class="ref-eyebrow"><i class="fas fa-gift"></i> Referral Programme</div>
-      <h2>Share &amp; <em>Both Save</em></h2>
-      <p>Every booking generates a personal referral code. Share it with anyone before they book — they get <strong>10% off</strong>, and you earn <strong>$5 credit</strong> toward your next experience. No cap, no expiry.</p>
-      <div class="ref-steps">
-        <div class="rs"><div class="rs-num">1</div><div><h4>Book Any Workshop</h4><p>Complete your booking and your unique referral code is generated instantly and emailed to you.</p></div></div>
-        <div class="rs"><div class="rs-num">2</div><div><h4>Share Your Code</h4><p>Send it to friends via WhatsApp, Instagram, or any channel. They enter it at checkout before paying.</p></div></div>
-        <div class="rs"><div class="rs-num">3</div><div><h4>Everyone Wins</h4><p>Your friend gets 10% off their booking. You get $5 TosTrip credit added to your account automatically.</p></div></div>
-      </div>
-    </div>
-    <div class="ref-panel">
-      <h3>Your Referral Dashboard</h3>
-      <p class="sub">Your code is generated after your first booking</p>
-      <div class="code-box">
-        <div class="cb-lbl">Your Personal Code</div>
-        <div class="cb-code" id="yourCode">TOS–????</div>
-        <div class="cb-sub">Share this · friends get 10% off · you earn $5</div>
-        <div class="cb-actions">
-          <button class="btn-copy" onclick="copyCode()"><i class="fas fa-copy"></i> Copy Code</button>
-          <button class="btn-share-sm" onclick="shareVia('whatsapp')"><i class="fas fa-share-alt"></i> Share</button>
-        </div>
-      </div>
-      <div class="ref-stats">
-        <div class="rs-card"><div class="rs-num2" id="refCount">0</div><div class="rs-lbl">Friends Referred</div></div>
-        <div class="rs-card"><div class="rs-num2" id="refCredit">$0</div><div class="rs-lbl">Credit Earned</div></div>
-      </div>
-      <div class="share-chs">
-        <button class="sh-ch wa" onclick="shareVia('whatsapp')"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></button>
-        <button class="sh-ch fb" onclick="shareVia('facebook')"><i class="fab fa-facebook-f"></i><span>Facebook</span></button>
-        <button class="sh-ch tg" onclick="shareVia('telegram')"><i class="fab fa-telegram-plane"></i><span>Telegram</span></button>
-        <button class="sh-ch lk" onclick="copyLink()"><i class="fas fa-link"></i><span>Copy Link</span></button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- ════ PHOTO LIGHTBOX ════ -->
 <div class="lb" id="oudLb" aria-hidden="true" onclick="if(event.target===this)lbClose()">
   <button type="button" class="lb-close" onclick="lbClose()" aria-label="Close gallery"><i class="fas fa-times"></i></button>
@@ -1613,16 +1558,6 @@ a.kas-loc:hover{border-color:var(--p)}
         </div>
       </div>
 
-      <label class="fl" id="codeLbl" style="margin-bottom:7px">Promo / Referral code <span style="font-weight:400;color:var(--ink4)">— referral codes save 10%</span></label>
-      <div class="ref-row" id="codeRow">
-        <div class="ref-field">
-          <i class="fas fa-tag"></i>
-          <input type="text" id="mCode" placeholder="e.g. TOSAB123" maxlength="12" oninput="this.value=this.value.toUpperCase()">
-        </div>
-        <button class="btn-apply" onclick="applyModalCode()">Apply</button>
-      </div>
-      <div class="disc-badge" id="discBadge"><i class="fas fa-check-circle"></i> <span id="discText">Discount applied</span></div>
-
       <label class="fl" id="sessLbl" style="margin-bottom:8px;margin-top:4px">Choose a Session <span class="req">*</span></label>
       <div class="sess-grid" id="sessGrid"></div>
 
@@ -1660,7 +1595,7 @@ a.kas-loc:hover{border-color:var(--p)}
           <div class="pay-h"><i class="fas fa-qrcode"></i> Pay <span id="payAmt">$15.00</span> by ABA / KHQR</div>
           <div class="pay-row">
             <div class="pay-qr-col">
-              <img id="payQRImg" class="pay-qr" alt="ABA KHQR payment code — 15 USD" onerror="this.style.display='none';this.nextElementSibling.style.display='block';document.getElementById('bPayer').required=false">
+              <img id="payQRImg" class="pay-qr" alt="ABA KHQR payment code — 15 USD" onerror="qrFallback(this)" onload="document.getElementById('paySave').href=this.src">
               <div class="pay-qr-missing"><i class="fas fa-qrcode"></i>Payment QR coming soon — confirm your booking and we'll email you how to pay.</div>
               <a class="pay-save" id="paySave" download="TosTrip-Make1Give1-KHQR-15USD.jpg"><i class="fas fa-download"></i> Save QR</a>
             </div>
@@ -1685,14 +1620,8 @@ a.kas-loc:hover{border-color:var(--p)}
       <h2 id="succH2">You're booked in!</h2>
       <div id="rcptWrap"></div>
       <p id="succPayNote" style="display:none"><strong>Payment:</strong> we'll match your ABA / KHQR payment to your booking and email you if anything is missing.</p>
-      <p id="succMsg">Confirmation is heading to your inbox. Here's your personal referral code — share it with friends and earn $5 credit every time someone books.</p>
-      <div class="succ-code-box">
-        <div class="scb-lbl">Your Referral Code</div>
-        <div class="scb-code" id="succCode">TOS–????</div>
-        <div class="scb-sub">Friends get 10% off · you earn $5 credit per booking</div>
-      </div>
+      <p id="succMsg">Confirmation is heading to your inbox.</p>
       <div class="succ-actions">
-        <button class="m-btn" onclick="copySuccessCode()"><i class="fas fa-copy"></i> Copy & Share</button>
         <button class="btn-done" onclick="closeModal()">Done</button>
       </div>
     </div>
@@ -2659,61 +2588,6 @@ function toggleSaveCard(btn){
   toast(saved ? 'Saved to wishlist' : 'Removed from wishlist', saved ? 'heart' : 'times-circle');
 }
 
-/* BANNER CODE */
-function applyBannerCode(){
-  const code = document.getElementById('bannerCode').value.trim().toUpperCase();
-  const msg = document.getElementById('bannerMsg');
-  if(!code){ msg.className='rb-msg err'; msg.innerHTML='<i class="fas fa-times-circle"></i> Enter a code first'; return; }
-  if(FLAT_CODES[code]){
-    msg.className = 'rb-msg ok';
-    msg.innerHTML = `<i class="fas fa-check-circle"></i> $${FLAT_CODES[code]} off saved!`;
-    sessionStorage.setItem('pendingCode', code);
-    toast('Code saved — $'+FLAT_CODES[code]+' off at checkout!', 'tag');
-  } else if(PCT_CODES[code]){
-    msg.className = 'rb-msg ok';
-    msg.innerHTML = `<i class="fas fa-check-circle"></i> ${PCT_CODES[code]}% off saved!`;
-    sessionStorage.setItem('pendingCode', code);
-    toast('Code saved — '+PCT_CODES[code]+'% off at checkout!', 'tag');
-  } else {
-    msg.className = 'rb-msg err';
-    msg.innerHTML = '<i class="fas fa-times-circle"></i> ' + (ENDED_CODES[code] || 'Code not recognised');
-  }
-}
-
-/* MODAL CODE */
-function applyModalCode(){
-  const code = document.getElementById('mCode').value.trim().toUpperCase();
-  const inp = document.getElementById('mCode');
-  const badge = document.getElementById('discBadge');
-  if(!code){ toast('Enter a code first', 'exclamation-circle'); return; }
-
-  if(FLAT_CODES[code]){
-    discountFlat = FLAT_CODES[code];
-    discountPct = 0;
-    inp.classList.add('ok'); inp.classList.remove('err');
-    document.getElementById('discText').textContent = `Code "${code}" — $${discountFlat} off applied`;
-    document.getElementById('psDiscLabel').textContent = 'Promo discount (' + code + ')';
-    badge.classList.add('show');
-    refreshTotal();
-    toast('$'+discountFlat+' discount applied!', 'tag');
-  } else if(PCT_CODES[code]){
-    discountPct = PCT_CODES[code];
-    discountFlat = 0;
-    inp.classList.add('ok'); inp.classList.remove('err');
-    document.getElementById('discText').textContent = `Code "${code}" — ${discountPct}% discount applied`;
-    document.getElementById('psDiscLabel').textContent = 'Referral discount';
-    badge.classList.add('show');
-    refreshTotal();
-    toast(discountPct+'% discount applied!', 'tag');
-  } else {
-    discountPct = 0; discountFlat = 0;
-    inp.classList.add('err'); inp.classList.remove('ok');
-    badge.classList.remove('show');
-    refreshTotal();
-    toast(ENDED_CODES[code] || 'Code not recognised — check spelling', 'times-circle');
-  }
-}
-
 /* TOTAL CALCULATOR */
 function refreshTotal(){
   const qty = parseInt(document.getElementById('bQty')?.value || 2);
@@ -2782,6 +2656,16 @@ function openNakModal(title, icon, partner, city, price, dur, maxS){
   _setupModal();
 }
 
+/* $15 KHQR image — tries these files in order (the first one that exists is shown) */
+const QR_SRCS = ['./imgg/veranda.jpg','./imgg/veranda.jpeg','./imgg/veranda.png','./imgg/Veranda.jpg','./imgg/Veranda.jpeg','./imgg/Veranda.png','./imgg/veranda.JPG','./imgg/aba-khqr-15.png'];
+function qrFallback(img){
+  const i = (+img.dataset.i || 0) + 1;
+  if(i < QR_SRCS.length){ img.dataset.i = i; img.src = QR_SRCS[i]; return; }
+  console.error('KHQR image not found. Tried:', QR_SRCS.join(', '));
+  img.style.display = 'none'; img.nextElementSibling.style.display = 'block';
+  document.getElementById('bPayer').required = false;
+}
+
 function _setupModal(){
   discountPct = 0; discountFlat = 0;
   const isFree = curBooking.price === 0;
@@ -2817,8 +2701,6 @@ function _setupModal(){
     submitBtn.classList.remove('nak-submit');
     nakNotice.style.display = 'none';
   }
-  // promo / referral code field — not for events where codes don't apply
-  ['codeLbl','codeRow'].forEach(id=>{ document.getElementById(id).style.display = curBooking.noDiscount ? 'none' : ''; });
   // waitlist: "Choose a Sunday", up to N people, no price or payment, own button and success text
   const wl = curBooking.waitlist;
   document.getElementById('sessLbl').firstChild.textContent = wl ? 'Choose a Sunday ' : 'Choose a Session ';
@@ -2831,17 +2713,6 @@ function _setupModal(){
   submitBtn.innerHTML = submitLabel();
   document.getElementById('succH2').textContent = wl ? "You're on the waitlist!" : "You're booked in!";
   document.getElementById('succIco').textContent = wl ? '📝' : '🎉';
-
-  // Pre-fill pending code (not needed for free workshops)
-  const pending = sessionStorage.getItem('pendingCode');
-  const codeInp = document.getElementById('mCode');
-  codeInp.value = ''; codeInp.className = '';
-  document.getElementById('discBadge').classList.remove('show');
-
-  if(pending && !curBooking.isNak && !isFree && !curBooking.noDiscount){
-    codeInp.value = pending;
-    applyModalCode();
-  }
 
   buildSessions(curBooking.eventDate || new Date().toISOString());
   document.getElementById('formWrap').style.display = 'block';
@@ -2858,8 +2729,8 @@ function _setupModal(){
   if(curBooking.payQR){
     const qr = document.getElementById('payQRImg');
     qr.style.display = ''; qr.nextElementSibling.style.display = 'none';
-    if(!qr.getAttribute('src')) qr.src = './imgg/veranda.jpg';   // the $15 KHQR image
-    document.getElementById('paySave').href = qr.src;
+    qr.dataset.i = 0; qr.src = QR_SRCS[0];   // the $15 KHQR image (tries the other names below if it isn't found)
+    document.getElementById('paySave').href = QR_SRCS[0];
   }
   document.getElementById('succPayNote').style.display = curBooking.payQR ? 'block' : 'none';
   refreshTotal();
@@ -2991,7 +2862,6 @@ function pickSess(el){
 function closeModal(){
   document.getElementById('bookModal').classList.remove('open');
   discountPct = 0; discountFlat = 0; nakDiscount = 0;
-  sessionStorage.removeItem('pendingCode');
 }
 document.getElementById('bookModal').addEventListener('click', e=>{
   if(e.target === document.getElementById('bookModal')) closeModal();
@@ -3028,13 +2898,11 @@ function submitBooking(e){
   const total = Math.max(0, +(sub - nakFlat - flatAmt - pctAmt).toFixed(2));
 
   const name = document.getElementById('bName').value.trim();
-  const initials = name.split(' ').map(w=>w[0]||'').join('').toUpperCase().slice(0,3);
-  myCode = 'TOS' + initials + Math.floor(Math.random()*900+100);
 
   const btn = e.target.querySelector('.m-btn');
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ' + (curBooking.waitlist ? 'Joining…' : 'Confirming…'); btn.disabled = true;
 
-  const usedCode = curBooking.noDiscount ? 'None' : (document.getElementById('mCode').value || 'None');
+  const usedCode = 'None';
   const payerTxt = curBooking.payQR ? '\nPaid by ABA / KHQR — name on bank account: ' + (document.getElementById('bPayer').value.trim() || 'not given yet') : '';
   const sel = document.querySelector('.sess-opt.sel');
   const sessionTxt = sel
@@ -3063,12 +2931,11 @@ function submitBooking(e){
                   '\nCode used: ' + usedCode +
                   (nakFlat > 0 ? '\nChef Nak TosTrip discount: –$' + nakFlat : '') +
                   (flatAmt > 0 ? '\nPromo discount ('+usedCode+'): –$' + flatAmt : '') +
-                  (pctAmt > 0  ? '\nReferral discount: –$' + pctAmt : '') +
                   '\nBooking ref: ' + bookingRef +
                   (locTxt ? '\nLocation: ' + locTxt : '') +
                   (hostInfo ? '\nHost notified: ' + hostInfo.name + ' <' + hostInfo.email + '>' : '') +
                   '\nTotal: ' + (wl ? 'Waitlist (no payment yet)' : base === 0 ? 'FREE' : '$' + total) +
-                  '\nReferral code generated: ' + myCode + payerTxt,
+                  payerTxt,
     request_type: curBooking.isNak ? 'Chef Nak Booking via TosTrip' : wl ? 'Waitlist — ' + curBooking.title : 'Workshop Booking',
     friend_name:  curBooking.partner,
     duration:     curBooking.dur,
@@ -3120,7 +2987,7 @@ function submitBooking(e){
                    (machineCode ? '\n' + machine.name + (machine.codes.length > 1 ? 's (one per ticket' : ' (') + ', key into the machine): ' + machine.codes.join(', ') : '') +
                    (machine && machine.missing > 0 ? '\n' + machine.name + ': ' + machine.missing + (machineCode ? ' MORE' : '') + ' NOT ASSIGNED (Sheet unreachable or out of codes) — please send the guest ' + (machine.missing === 1 ? 'a code' : machine.missing + ' codes') + ' by hand' : '') +
                    (usedCode !== 'None' ? '\nCode used: ' + usedCode : '') +
-                   '\nReferral code generated: ' + myCode + payerTxt
+                   payerTxt
     }, EJ_KEY);
   };
 
@@ -3149,17 +3016,14 @@ function submitBooking(e){
 
   const finish = ()=>{
     document.getElementById('succMsg').innerHTML = wl
-      ? `You're on the waitlist for <strong>${hostEsc(sessionTxt.split(' · ')[0])}</strong> (ref <strong>${bookingRef}</strong>). We'll email you to confirm your spot. Here's your personal referral code — share it with friends and earn $5 credit every time someone books.`
+      ? `You're on the waitlist for <strong>${hostEsc(sessionTxt.split(' · ')[0])}</strong> (ref <strong>${bookingRef}</strong>). We'll email you to confirm your spot.`
       : hostInfo
-      ? `Your booking <strong>${bookingRef}</strong> for <strong>${hostEsc(sessionTxt)}</strong> is confirmed and <strong>${hostEsc(hostInfo.name)}</strong> has been notified. Here's your personal referral code — share it with friends and earn $5 credit every time someone books.`
-      : `Confirmation is heading to your inbox (ref <strong>${bookingRef}</strong>). Here's your personal referral code — share it with friends and earn $5 credit every time someone books.`;
+      ? `Your booking <strong>${bookingRef}</strong> for <strong>${hostEsc(sessionTxt)}</strong> is confirmed and <strong>${hostEsc(hostInfo.name)}</strong> has been notified.`
+      : `Confirmation is heading to your inbox (ref <strong>${bookingRef}</strong>).`;
     if (receiptError) {
       document.getElementById('succMsg').innerHTML += `<br><br><span style="color:#b3261e">We couldn't email your receipt (${hostEsc(String(receiptError))}). Please screenshot this page; your booking ref is <strong>${bookingRef}</strong>.</span>`;
     }
     renderReceipt(rcpt);
-    document.getElementById('succCode').textContent = myCode;
-    document.getElementById('yourCode').textContent = myCode;
-    sessionStorage.setItem('myCode', myCode);
     document.getElementById('formWrap').style.display = 'none';
     document.getElementById('successWrap').style.display = 'block';
     btn.innerHTML = submitLabel();
@@ -3173,7 +3037,7 @@ function submitBooking(e){
     ref: bookingRef, name: guestName, email: guestEmail, phone: guestPhone === 'N/A' ? '' : guestPhone,
     tickets: String(qty), session: sessionTxt, total: totalTxt,
     payer: curBooking.payQR ? document.getElementById('bPayer').value.trim() : '',
-    notes: guestNotes === 'No requests' ? '' : guestNotes, referral: myCode
+    notes: guestNotes === 'No requests' ? '' : guestNotes
   }); };
   claim.then(m=>{
     machine = m; machineCode = m ? m.code : ''; rcpt.machine = m;
@@ -3506,49 +3370,9 @@ async function rcDownload(r){
   }
 }
 
-/* REFERRAL DASHBOARD */
-window.addEventListener('load', ()=>{
-  const saved = sessionStorage.getItem('myCode');
-  if(saved){ document.getElementById('yourCode').textContent = saved; myCode = saved; }
-  document.getElementById('refCount').textContent = sessionStorage.getItem('refCount') || 0;
-  document.getElementById('refCredit').textContent = '$' + (sessionStorage.getItem('refCredit') || 0);
-  const urlCode = new URLSearchParams(location.search).get('ref');
-  if(urlCode){
-    document.getElementById('bannerCode').value = urlCode.toUpperCase();
-    applyBannerCode();
-    document.querySelector('.ref-banner').scrollIntoView({behavior:'smooth',block:'center'});
-  }
-});
-
-function copyCode(){
-  const c = document.getElementById('yourCode').textContent;
-  if(c.includes('?')){ toast('Book first to generate your code', 'exclamation-circle'); return; }
-  doCopy(c); toast('Code copied!', 'copy');
-}
-function copySuccessCode(){
-  doCopy(document.getElementById('succCode').textContent);
-  toast('Code copied — share it!', 'copy');
-}
-function copyLink(){
-  const c = myCode || sessionStorage.getItem('myCode');
-  if(!c || c.includes('?')){ toast('Book first to get your referral link', 'exclamation-circle'); return; }
-  doCopy(SITE_URL + '?ref=' + c);
-  toast('Referral link copied!', 'link');
-}
 function doCopy(text){
   if(navigator.clipboard){ navigator.clipboard.writeText(text); }
   else { const t=document.createElement('textarea'); t.value=text; document.body.appendChild(t); t.select(); document.execCommand('copy'); document.body.removeChild(t); }
-}
-function shareVia(ch){
-  const c = myCode || sessionStorage.getItem('myCode');
-  if(!c || c.includes('?')){ toast('Book first to get your referral code', 'exclamation-circle'); return; }
-  const msg = encodeURIComponent('🇰🇭 Just booked a workshop with TosTrip! Use my code '+c+' for 10% off → ' + SITE_URL + '?ref=' + c);
-  const urls = {
-    whatsapp: 'https://wa.me/?text=' + msg,
-    facebook: 'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(SITE_URL)+'&quote='+msg,
-    telegram: 'https://t.me/share/url?url='+encodeURIComponent(SITE_URL)+'&text='+msg
-  };
-  if(urls[ch]) window.open(urls[ch], '_blank');
 }
 </script>
 </body>
