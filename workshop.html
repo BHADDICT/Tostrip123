@@ -3177,14 +3177,14 @@ function submitBooking(e){
   }); };
   claim.then(m=>{
     machine = m; machineCode = m ? m.code : ''; rcpt.machine = m;
+    logRow();   // save to the Google Sheet FIRST — never depends on the email working
     if(typeof emailjs !== 'undefined'){
-      sendAll().then(()=>{ logRow(); finish(); }).catch(err=>{
-        alert('Error: ' + (err.text || err.message));
-        btn.innerHTML = submitLabel();
-        btn.disabled = false;
-        refreshTotal();
+      sendAll().then(finish).catch(err=>{
+        // email failed twice (quota / expired Gmail link) — the booking is already in the Sheet, so still show the receipt
+        receiptError = (err && (err.text || err.message)) || 'email failed';
+        finish();
       });
-    } else { logRow(); finish(); }
+    } else { finish(); }
   });
 }
 
