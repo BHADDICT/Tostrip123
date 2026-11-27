@@ -507,6 +507,7 @@ button.ess:active{transform:scale(.99)}
           <div class="err" id="sos-err" style="min-height:0"></div>
           <textarea class="t" id="sos-text" aria-label="Message to send" placeholder="Your message appears here. You can edit it before sending."></textarea>
           <a id="ch-sms" class="btn btn-primary disabled" href="#">💬 Send by SMS</a>
+          <a id="ch-sms-team" class="btn btn-ghost disabled" href="#">🛟 Also send to TosTrip team</a>
           <label class="chk" style="margin-top:2px"><input type="checkbox" id="sos-nolink"><span>Send without a link (coordinates only). Some phone networks block SMS that contain links. Try this if messages to other people do not arrive.</span></label>
           <div class="smsnote">Best option: SMS works with phone signal, no internet needed.</div>
           <div class="warnbox">⚠️ SMS needs <b>cell signal</b> (Wi-Fi does not count) and a plan or credit that can send SMS in Cambodia. If your phone says <b>Not Delivered</b>, tap Try Again or use WhatsApp below. Tap <b>Save to Outbox</b> to send it later when you have signal.</div>
@@ -622,6 +623,9 @@ button.ess:active{transform:scale(.99)}
    an "Open the full TosTrip app" button inside the kit.
    ===================================================================== */
 const MAIN_APP_URL = null;
+
+/* TosTrip team number that can receive travelers' SOS messages by SMS (the traveler taps the button, nothing is sent automatically). */
+const TEAM_PHONE = '0716145925';
 
 /* Emergency-contact sheet (optional). Paste your Google Apps Script web app URL here
    (see sheet-setup.gs). Leave empty to switch the sheet feature off completely. */
@@ -1512,6 +1516,7 @@ function paintChannels(){
   const l=chanLinks(val,S.contact.phone);
   const sms=$('#ch-sms'), wa=$('#ch-wa'), tg=$('#ch-tg');
   sms.href=has?l.sms:'#'; sms.classList.toggle('disabled',!has);
+  const tm=$('#ch-sms-team'); tm.href=has?l.team:'#'; tm.classList.toggle('disabled',!has);
   wa.href=has?l.wa:'#'; wa.classList.toggle('disabled',!has);
   tg.href=has?l.tg:'#'; tg.classList.toggle('disabled',!has);
   const ph=S.contact.phone, call=$('#s-call'); call.href=ph?`tel:${digits(ph)}`:'#'; call.classList.toggle('disabled',!ph);
@@ -1534,6 +1539,7 @@ $('#btn-prep').onclick=async function(){
   if(!S.contact.phone) toast('Add a safety contact below to use SMS or WhatsApp.');
 };
 $('#chan').addEventListener('click',e=>{ const a=e.target.closest('a'); if(a&&a.classList.contains('disabled')) e.preventDefault(); });
+$('#ch-sms-team').addEventListener('click',e=>{ if($('#ch-sms-team').classList.contains('disabled')) e.preventDefault(); });
 $('#ch-sms').addEventListener('click',e=>{ if($('#ch-sms').classList.contains('disabled')){ e.preventDefault(); return; } setTimeout(()=>toast('If it says Not Delivered, check you have cell signal. Try WhatsApp, or save it to the Outbox.'),1500); });
 $('#s-call').addEventListener('click',e=>{ if($('#s-call').classList.contains('disabled')) e.preventDefault(); });
 $('#ch-copy').onclick=()=>{ const v=$('#sos-text').value.trim(); v?copyText(v,'Message copied'):toast('Tap "Get my location" first.'); };
@@ -1661,7 +1667,7 @@ const outbox=()=>S.outbox||(S.outbox=[]);
 function chanLinks(text,phone){
   const enc=encodeURIComponent(text), ios=/iP(hone|ad|od)/.test(navigator.userAgent);
   const m=text.match(/https?:\/\/\S+/), url=m?m[0]:'https://tostrip.co';
-  return { sms:`sms:${phone?'+'+intl(phone):''}${ios?'&':'?'}body=${enc}`, wa:`https://wa.me/${phone?intl(phone):''}?text=${enc}`,
+  return { sms:`sms:${phone?'+'+intl(phone):''}${ios?'&':'?'}body=${enc}`, team:`sms:+${intl(TEAM_PHONE)}${ios?'&':'?'}body=${enc}`, wa:`https://wa.me/${phone?intl(phone):''}?text=${enc}`,
            tg:`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text.replace(url,'').trim())}` };
 }
 function renderOutbox(){
@@ -1671,7 +1677,7 @@ function renderOutbox(){
   $('#ob-list').innerHTML=n?list.map(o=>{ const l=chanLinks(o.text,S.contact.phone);
     return `<div class="ob" data-id="${esc(o.id)}"><b>${o.kind==='help'?'🆘':'✅'} ${esc(new Date(o.t).toLocaleString(undefined,{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}))}</b>
       <pre>${esc(o.text)}</pre>
-      <div class="chips">${l.sms?`<a class="chip" href="${l.sms}">💬 SMS</a>`:''}${l.wa?`<a class="chip" href="${l.wa}" target="_blank" rel="noopener">🟢 WhatsApp</a>`:''}
+      <div class="chips">${l.sms?`<a class="chip" href="${l.sms}">💬 SMS</a>`:''}<a class="chip" href="${l.team}">🛟 SMS TosTrip</a>${l.wa?`<a class="chip" href="${l.wa}" target="_blank" rel="noopener">🟢 WhatsApp</a>`:''}
       <a class="chip" href="${l.tg}" target="_blank" rel="noopener">✈️ Telegram</a>
       <button class="chip" data-act="share">📤 Share</button><button class="chip" data-act="sent">✓ Sent</button><button class="chip" data-act="del">🗑</button></div></div>`; }).join('')
     :'<div class="empty">Nothing waiting. Use "Send later" on a message when you have no signal.</div>';
