@@ -1662,7 +1662,7 @@ a.kas-loc:hover{border-color:var(--p)}
             <div class="pay-qr-col">
               <img id="payQRImg" class="pay-qr" alt="ABA KHQR payment code — 15 USD" onerror="this.style.display='none';this.nextElementSibling.style.display='block';document.getElementById('bPayer').required=false">
               <div class="pay-qr-missing"><i class="fas fa-qrcode"></i>Payment QR coming soon — confirm your booking and we'll email you how to pay.</div>
-              <a class="pay-save" id="paySave" download="TosTrip-Make1Give1-KHQR-15USD.png"><i class="fas fa-download"></i> Save QR</a>
+              <a class="pay-save" id="paySave" download="TosTrip-Make1Give1-KHQR-15USD.jpg"><i class="fas fa-download"></i> Save QR</a>
             </div>
             <ol class="pay-steps">
               <li><b>1</b><span>Open ABA, ACLEDA, Wing or any Bakong / KHQR app.</span></li>
@@ -2858,7 +2858,7 @@ function _setupModal(){
   if(curBooking.payQR){
     const qr = document.getElementById('payQRImg');
     qr.style.display = ''; qr.nextElementSibling.style.display = 'none';
-    if(!qr.getAttribute('src')) qr.src = './imgg/aba-khqr-15.png';   // the $15 KHQR image
+    if(!qr.getAttribute('src')) qr.src = './imgg/veranda.jpg';   // the $15 KHQR image
     document.getElementById('paySave').href = qr.src;
   }
   document.getElementById('succPayNote').style.display = curBooking.payQR ? 'block' : 'none';
