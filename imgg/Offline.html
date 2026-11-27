@@ -217,6 +217,16 @@ textarea.t{min-height:120px;resize:vertical;line-height:1.5;font-size:.9rem}
 .sync{font-size:.82rem;font-weight:700;color:var(--mute)}
 .sync.ok{color:var(--ok)}
 .smsnote{font-size:.8rem;color:var(--mute);text-align:center;margin-top:-4px}
+.card[hidden]{display:none}
+.radar svg{width:100%;height:auto;display:block;max-width:340px;margin:0 auto}
+.radar .rd{cursor:pointer}
+.selrow{display:flex;gap:14px;align-items:center}
+.selrow b{font-size:1.05rem}
+.dir{font-weight:800;color:var(--p700);font-size:.95rem}
+.place.sel{border-color:var(--p600);box-shadow:0 0 0 3px rgba(124,58,237,.18)}
+.place{cursor:pointer}
+.place .m small.walk{color:var(--p700);font-weight:700}
+.chip.live[aria-pressed="true"]{background:#DC2626;border-color:#DC2626}
 /* ---------- voice / outbox ---------- */
 .rec{display:flex;flex-direction:column;align-items:center;gap:10px}
 .recbtn{width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#EF4444,#B91C1C);color:#fff;font-size:2rem;display:grid;place-items:center;box-shadow:0 10px 24px rgba(220,38,38,.4);transition:.2s}
@@ -386,13 +396,36 @@ textarea.t{min-height:120px;resize:vertical;line-height:1.5;font-size:.9rem}
 
       <div class="panel" id="p-nearby">
         <div class="card">
-          <h3>📍 Places near you</h3>
-          <div class="muted" id="near-status">Tap below to find your position. Works without signal if GPS is on.</div>
-          <button class="btn btn-primary btn-sm" id="btn-locate" style="width:100%">📡 Update my location</button>
+          <h3>🚶 Within walking distance</h3>
+          <div class="chips" id="nr-chips"></div>
+          <div class="muted" id="near-status"></div>
+          <div class="row">
+            <button class="btn btn-primary btn-sm" id="btn-locate">📡 Update location</button>
+            <button class="btn btn-ghost btn-sm" id="btn-pin">📌 Pin this spot</button>
+          </div>
+          <div class="chips">
+            <button class="chip live" id="chip-live" aria-pressed="false">🔴 Live tracking</button>
+            <button class="chip" id="chip-compass" aria-pressed="false">🧭 Compass</button>
+          </div>
         </div>
-        <div class="chips" id="near-prov"></div>
+        <div class="card radar" id="radar-card" hidden>
+          <div id="radar-svg"></div>
+          <div class="muted" id="radar-cap" style="text-align:center"></div>
+        </div>
+        <div class="card" id="sel-card" hidden></div>
         <div class="chips" id="near-cat"></div>
         <div class="list" id="near-list"></div>
+        <div class="card" id="export-card">
+          <h3>📤 For the TosTrip team</h3>
+          <div class="muted">Standing at a partner? Tap <b>Pin this spot</b>, choose "TosTrip partner" and type the name. When you have all of them, export a ready-made <b>places.json</b> and upload it next to the page.</div>
+          <button class="btn btn-ghost btn-sm" id="btn-export" style="width:100%">📤 Export my pins as places.json</button>
+        </div>
+        <div class="card" id="around-card">
+          <h3>⬇️ Add places around me</h3>
+          <div class="muted">Saves cafés, food, pharmacies, ATMs, clinics, police, toilets and shops within about 1.8 km of where you are now. Do this once on hotel wifi, then it works with no signal.</div>
+          <button class="btn btn-ghost btn-sm" id="btn-around" style="width:100%">⬇️ Download places around me</button>
+          <div class="muted" id="around-info"></div>
+        </div>
       </div>
 
       <div class="panel" id="p-phrases">
@@ -529,6 +562,16 @@ textarea.t{min-height:120px;resize:vertical;line-height:1.5;font-size:.9rem}
     <p class="sub">Are you OK? If not, send your location to your safety contact now.</p>
     <button class="btn btn-primary" id="al-ok">✅ I'm OK</button>
     <button class="btn btn-danger" id="al-send">🆘 Send my location</button>
+  </div>
+</div>
+
+<div class="overlay" id="pin" role="dialog" aria-modal="true" aria-label="Pin this spot">
+  <div class="sheet" style="text-align:left">
+    <h2 style="text-align:center">📌 Pin this spot</h2>
+    <div class="chips" id="pin-chips"></div>
+    <label class="f">Name<input class="t" id="pin-name" maxlength="40" placeholder="e.g. My hotel"></label>
+    <div class="muted" id="pin-loc"></div>
+    <div class="row"><button class="btn btn-ghost" id="pin-cancel">Cancel</button><button class="btn btn-primary" id="pin-save">Save pin</button></div>
   </div>
 </div>
 
@@ -824,6 +867,7 @@ async function startDownload(){
     {t:`Maps & places (${places.length})`, run:async()=>{pack.places=places;return 'ok';}},
     {t:`Khmer phrasebook (${PHRASES.length} phrases)`, run:async()=>{pack.phrases=PHRASES;return 'ok';}},
     {t:'Khmer voice clips', run:async()=>{ const r=await fetchPhraseAudio(); if(r.n){ S.audioCount=r.n; save(); return 'ok'; } return ['skip','No recorded clips on the server yet. Your phone voice is used instead.']; }},
+    {t:'TosTrip partner places', run:async()=>{ pack.extra=await fetchExtraPlaces(); return 'ok'; }},
     {t:'Emergency numbers & SOS', run:async()=>{pack.emergency=EMERGENCY;return 'ok';}},
     {t:'Riel exchange rate', run:async()=>{ const ok=await fetchRate(); return ok?'ok':['skip',`Using ៛${fmt(S.rate)} per $1 (no signal)`]; }},
     {t:'Your current location', run:async()=>{ try{await locate();return 'ok';}catch(e){return ['skip','Skipped — you can allow it later in Nearby']; } }},
@@ -859,6 +903,7 @@ function enterApp(){
   showScreen('s-app'); paintConn(); goTab('home'); tick();
 }
 function goTab(name){
+  if(tabNow==='nearby'&&name!=='nearby') stopNearbyLive();
   tabNow=name;
   $$('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.tab===(name==='voice'?'home':name)));
   $$('.panel').forEach(p=>p.classList.toggle('active',p.id==='p-'+name));
@@ -935,38 +980,244 @@ setInterval(tick,1000);
 $('#al-ok').onclick=endCheckin;
 $('#al-send').onclick=()=>{ $('#alarm').classList.remove('show'); goTab('sos'); setKind('help'); setTimeout(()=>$('#btn-prep').click(),150); };
 
-/* ---- Nearby ---- */
-let nearProv='all', nearCat='all';
+/* ---- Nearby: walking distance, drawn inside the app (no map needed) ---- */
+const NCAT={culture:['🏯','Culture'],market:['🛍️','Markets'],nature:['🌿','Nature'],beach:['🏖️','Beach'],village:['🪷','Village'],travel:['🛫','Transport'],
+  health:['🏥','Health'],workshop:['🎨','Workshops'],pin:['📌','My pins'],food:['🍜','Food'],cafe:['☕','Cafés'],pharmacy:['💊','Pharmacy'],atm:['🏧','ATM / bank'],
+  police:['👮','Police'],toilet:['🚻','Toilets'],shop:['🛒','Shops'],stay:['🛏️','Stays'],sight:['🏛️','Sights'],water:['💧','Water']};
+const ci=c=>(NCAT[c]||['📍'])[0];
+const cn=c=>(NCAT[c]||[])[1]||c;
+const walkMin=d=>Math.max(1,Math.round(d*1.3/4.8*60));      // streets are ~1.3x the straight line, 4.8 km/h
+const tukMin=d=>Math.max(2,Math.round(d*1.3/20*60)+2);
+const radLabel=r=>r<1?Math.round(r*1000)+' m':r+' km';
+let nearR=S.nearR||1, nearSel=null, nearCat='all', nearShown=[], liveWatch=null, compassH=null, compassFn=null, lastNearPaint=0, lastLiveSave=0, livePending=0;
+
+/* --- place sources: built-in + partner list + downloaded "around me" + my pins --- */
+const AROUND_KEY='tostrip_around_v1';
+function aroundAreas(){ try{ return JSON.parse(lsGet(AROUND_KEY)||'[]'); }catch(e){ return []; } }
+function allPlaces(){
+  const pack=loadPack()||{}, seen=new Set(), out=[];
+  const add=o=>{ if(!isFinite(o.lat)||!isFinite(o.lng)||seen.has(o.id)) return; seen.add(o.id); out.push(o); };
+  (pack.places||[]).forEach(p=>add({id:p.id,n:p.n,c:p.c,lat:p.lat,lng:p.lng,a:p.a}));
+  (pack.extra||[]).forEach((p,i)=>add({id:'x'+i,n:p.n,c:p.c||'workshop',lat:p.lat,lng:p.lng,note:p.note,tt:true}));
+  aroundAreas().forEach(a=>a.items.forEach(p=>add({id:p.i,n:p.n,c:p.c,lat:p.lat,lng:p.lng,around:true})));
+  (S.pins||[]).forEach(p=>add({id:p.id,n:p.n,c:p.c||'pin',lat:p.lat,lng:p.lng,pin:true}));
+  return out;
+}
+function computeNear(){
+  const l=S.lastLoc; if(!l) return [];
+  return allPlaces().map(p=>({...p,d:dist(l,p),b:bearing(l,p)})).filter(p=>p.d<=nearR).sort((a,b)=>a.d-b.d);
+}
+async function fetchExtraPlaces(){
+  const ctl=new AbortController(), to=setTimeout(()=>ctl.abort(),5000);
+  try{
+    const r=await fetch('places.json',{signal:ctl.signal,cache:'no-store'}); if(!r.ok) return [];
+    const j=await r.json(); if(!Array.isArray(j)) return [];
+    const num=v=>v!==null&&v!==''&&v!==undefined&&Number.isFinite(+v);
+    return j.filter(x=>x&&typeof x.n==='string'&&num(x.lat)&&num(x.lng)&&Math.abs(+x.lat)<=90&&Math.abs(+x.lng)<=180)
+            .slice(0,300).map(x=>({n:x.n.slice(0,60),c:NCAT[x.c]?x.c:'workshop',lat:+x.lat,lng:+x.lng,note:typeof x.note==='string'?x.note.slice(0,120):''}));
+  }catch(e){ return []; } finally{ clearTimeout(to); }
+}
+
+/* --- rendering --- */
 function renderNearby(){
-  const pack=loadPack()||{places:[]};
-  const provs=PROVINCES.filter(p=>(pack.provinces||[]).includes(p.k));
-  $('#near-prov').innerHTML=[{k:'all',n:'All areas'},...provs].map(p=>`<button class="chip" data-k="${p.k}" aria-pressed="${nearProv===p.k}">${esc(p.n)}</button>`).join('');
-  const cats=[...new Set((pack.places||[]).map(p=>p.c))];
-  $('#near-cat').innerHTML=[['all','All types'],...cats.map(c=>[c,CATS[c]])].map(([k,n])=>`<button class="chip" data-k="${k}" aria-pressed="${nearCat===k}">${esc(n)}</button>`).join('');
-  paintNearStatus(); paintNearList();
+  $('#nr-chips').innerHTML=[0.5,1,2].map(r=>`<button class="chip" data-r="${r}" aria-pressed="${nearR===r}">${radLabel(r)}</button>`).join('');
+  $('#chip-live').setAttribute('aria-pressed',liveWatch!==null);
+  $('#chip-compass').setAttribute('aria-pressed',compassFn!==null);
+  paintNearStatus(); paintNearBody(); paintAroundInfo();
 }
 function paintNearStatus(){
-  const l=S.lastLoc;
-  $('#near-status').textContent = l?`Using your position from ${ago(l.t)} (±${Math.round(l.acc)} m). Distances are in a straight line.`:'Tap below to find your position. Works without signal if GPS is on.';
+  const l=S.lastLoc, el=$('#near-status');
+  if(!l){ el.textContent='Tap "Update location" to see what is around you.'; return; }
+  el.textContent=`Your position: ±${Math.round(l.acc)} m, ${ago(l.t)}.`+(l.acc>60?' GPS is rough here, so distances may be off by that much.':'')+' Walking times assume streets, about 1.3× the straight line.';
 }
-function paintNearList(){
-  const pack=loadPack()||{places:[]}; const l=S.lastLoc;
-  let list=(pack.places||[]).filter(p=>(nearProv==='all'||p.p===nearProv)&&(nearCat==='all'||p.c===nearCat))
-    .map(p=>({...p,d:l?dist(l,p):null,b:l?bearing(l,p):null}));
-  list.sort((a,b)=>l?a.d-b.d:a.n.localeCompare(b.n));
-  $('#near-list').innerHTML=list.length?list.map(p=>`
-    <div class="place"><div class="e">${CAT_ICON[p.c]||'📍'}</div>
-      <div class="m"><b>${esc(p.n)}</b><small>${esc((PROVINCES.find(x=>x.k===p.p)||{}).n||'')}${p.a?' · ≈ approx. pin':''}</small><br>
-        <a class="go" href="${mapsUrl(p)}" target="_blank" rel="noopener">Open in Maps ↗</a></div>
-      <div class="d">${p.d!=null?fmtDist(p.d)+`<small>${card8(p.b)} of you</small>`:'<small>enable GPS</small>'}</div></div>`).join('')
-    :'<div class="empty">Nothing here yet. Try another filter.</div>';
+function paintNearBody(){
+  const list=computeNear();
+  const cats=[...new Set(list.map(p=>p.c))];
+  if(nearCat!=='all'&&!cats.includes(nearCat)) nearCat='all';
+  $('#near-cat').innerHTML=cats.length>1?[['all','All'],...cats.map(c=>[c,ci(c)+' '+cn(c)])].map(([k,n])=>`<button class="chip" data-k="${k}" aria-pressed="${nearCat===k}">${esc(n)}</button>`).join(''):'';
+  nearShown=list.filter(p=>nearCat==='all'||p.c===nearCat);
+  if(nearSel&&!nearShown.find(p=>p.id===nearSel)) nearSel=null;
+  paintRadar(); paintSel(); paintNearList(list);
+  lastNearPaint=Date.now();
 }
-$('#near-prov').onclick=e=>{ const b=e.target.closest('[data-k]'); if(!b) return; nearProv=b.dataset.k; renderNearby(); };
-$('#near-cat').onclick=e=>{ const b=e.target.closest('[data-k]'); if(!b) return; nearCat=b.dataset.k; renderNearby(); };
+function paintRadar(){
+  const card=$('#radar-card'), l=S.lastLoc;
+  if(!l){ card.hidden=true; return; } card.hidden=false;
+  const C=150, R=118, rot=compassH==null?0:-compassH; let g='';
+  [1,2/3,1/3].forEach((f,i)=>{ g+=`<circle cx="${C}" cy="${C}" r="${(R*f).toFixed(1)}" fill="${i===0?'#F7F5FF':'none'}" stroke="#C4B5FD" stroke-width="1.5" ${i?'stroke-dasharray="4 5"':''}/>`; });
+  [1,2/3,1/3].forEach(f=>{ g+=`<text x="${C+4}" y="${(C-R*f+12).toFixed(1)}" font-size="9" font-weight="700" fill="#8B7FB5">${radLabel(nearR*f)}</text>`; });
+  let dots=`<line x1="${C}" y1="${C-R}" x2="${C}" y2="${C+R}" stroke="#E7E2F5"/><line x1="${C-R}" y1="${C}" x2="${C+R}" y2="${C}" stroke="#E7E2F5"/>`
+    +`<text x="${C}" y="${C-R-7}" text-anchor="middle" font-size="12" font-weight="800" fill="#6D28D9">N</text>`;
+  nearShown.slice(0,60).forEach(p=>{
+    const a=rad(p.b), rr=Math.min(p.d/nearR,1)*R, x=C+rr*Math.sin(a), y=C-rr*Math.cos(a), sel=p.id===nearSel;
+    dots+=`<g class="rd" data-id="${esc(p.id)}" role="button" aria-label="${esc(p.n)}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${sel?16:12}" fill="${sel?'#6D28D9':'#fff'}" stroke="#6D28D9" stroke-width="${sel?3:1.5}"/>`
+      +`<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="central" font-size="${sel?16:13}" transform="rotate(${-rot} ${x.toFixed(1)} ${y.toFixed(1)})">${ci(p.c)}</text></g>`;
+  });
+  const cone=compassH!=null?`<path d="M${C} ${C} L${C-16} ${C-44} A46 46 0 0 1 ${C+16} ${C-44} Z" fill="rgba(37,99,235,.22)"/>`:'';
+  $('#radar-svg').innerHTML=`<svg viewBox="0 0 300 300" role="img" aria-label="Radar of places within ${radLabel(nearR)}">${g}<g transform="rotate(${rot} ${C} ${C})">${dots}</g>${cone}<circle cx="${C}" cy="${C}" r="7" fill="#2563EB" stroke="#fff" stroke-width="3"/></svg>`;
+  $('#radar-cap').textContent=`${nearShown.length} place${nearShown.length===1?'':'s'} within ${radLabel(nearR)}. ${compassH!=null?'Top = the way you are facing.':'Top = north.'} Tap a dot.`;
+}
+function relWords(b){
+  const a=(b-(compassH||0)+360)%360;
+  if(a<20||a>340) return 'Straight ahead'; if(a<70) return 'Ahead, to the right'; if(a<110) return 'To your right';
+  if(a<160) return 'Behind, to the right'; if(a<200) return 'Behind you'; if(a<250) return 'Behind, to the left';
+  if(a<290) return 'To your left'; return 'Ahead, to the left';
+}
+function paintSel(){
+  const card=$('#sel-card'), p=nearShown.find(x=>x.id===nearSel);
+  if(!p){ card.hidden=true; return; } card.hidden=false;
+  const ang=(p.b-(compassH||0)+360)%360;
+  card.innerHTML=`<div class="selrow"><svg width="68" height="68" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#EDE9FE"/><g transform="rotate(${ang.toFixed(0)} 32 32)"><path d="M32 7 L45 40 L32 32 L19 40 Z" fill="#6D28D9"/></g></svg>
+    <div><b>${ci(p.c)} ${esc(p.n)}</b><div class="muted">${fmtDist(p.d)} · about ${walkMin(p.d)} min walk</div>
+    <div class="dir">${compassH!=null?relWords(p.b):card8(p.b)+' of you'}</div></div></div>
+    ${p.note?`<div class="muted">${esc(p.note)}</div>`:''}
+    ${compassH==null?'<div class="muted">Tip: tap 🧭 Compass so the arrow follows the way you turn.</div>':''}
+    <div class="row"><button class="btn btn-ghost btn-sm" id="sel-copy">📋 Coordinates</button>${p.pin?'<button class="btn btn-ghost btn-sm" id="sel-del">🗑 Delete pin</button>':''}</div>
+    <a class="muted" href="${mapsUrl(p)}" target="_blank" rel="noopener" style="text-align:center;text-decoration:underline">Open in a maps app (needs signal)</a>`;
+  const cp=$('#sel-copy'); if(cp) cp.onclick=()=>copyText(`${p.lat.toFixed(6)}, ${p.lng.toFixed(6)}`,'Coordinates copied');
+  const dl=$('#sel-del'); if(dl) dl.onclick=()=>{ S.pins=(S.pins||[]).filter(x=>x.id!==p.id); save(); nearSel=null; paintNearBody(); toast('Pin deleted'); };
+}
+function paintNearList(all){
+  const box=$('#near-list'), l=S.lastLoc;
+  if(!l){ box.innerHTML='<div class="empty">No position yet. Tap <b>Update location</b> above.</div>'; return; }
+  if(!nearShown.length){
+    let near=null; allPlaces().forEach(p=>{ const d=dist(l,p); if(!near||d<near.d) near={...p,d}; });
+    box.innerHTML=`<div class="card"><b>Nothing saved within ${radLabel(nearR)} of you.</b>
+      ${near?`<div class="muted">Nearest saved place: <b>${esc(near.n)}</b>, ${fmtDist(near.d)} away. ${near.d<=5?`That's about ${walkMin(near.d)} min on foot or ${tukMin(near.d)} min by tuk-tuk.`:'That is too far to walk. Take a tuk-tuk, taxi or bus.'}</div>`:''}
+      <div class="row">${nearR<2?'<button class="btn btn-ghost btn-sm" data-r="2">Show 2 km</button>':''}<button class="btn btn-primary btn-sm" id="empty-around">⬇️ Add places around me</button></div></div>`;
+    const b=$('#empty-around'); if(b) b.onclick=()=>$('#btn-around').click();
+    return;
+  }
+  box.innerHTML=nearShown.map(p=>`<div class="place${p.id===nearSel?' sel':''}" data-id="${esc(p.id)}" role="button" tabindex="0">
+    <div class="e">${ci(p.c)}</div>
+    <div class="m"><b>${esc(p.n)}</b><small class="walk">${walkMin(p.d)} min walk · ${card8(p.b)}</small><br><small>${esc(cn(p.c))}${p.a?' · approx. pin':''}${p.pin?' · saved by you':''}</small></div>
+    <div class="d">${fmtDist(p.d)}</div></div>`).join('');
+}
+function pickPlace(id){ nearSel=id; paintRadar(); paintSel(); paintNearList(); $('#sel-card').scrollIntoView({block:'nearest',behavior:'smooth'}); }
+$('#radar-svg').addEventListener('click',e=>{ const g=e.target.closest('[data-id]'); if(g) pickPlace(g.dataset.id); });
+$('#near-list').addEventListener('click',e=>{ const r=e.target.closest('[data-r]'); if(r){ setRadius(+r.dataset.r); return; } const c=e.target.closest('.place'); if(c) pickPlace(c.dataset.id); });
+$('#near-list').addEventListener('keydown',e=>{ if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('place')){ e.preventDefault(); pickPlace(e.target.dataset.id); } });
+function setRadius(r){ nearR=r; S.nearR=r; save(); renderNearby(); }
+$('#nr-chips').onclick=e=>{ const b=e.target.closest('[data-r]'); if(b) setRadius(+b.dataset.r); };
+$('#near-cat').onclick=e=>{ const b=e.target.closest('[data-k]'); if(b){ nearCat=b.dataset.k; paintNearBody(); } };
+
+/* --- location, live tracking, compass --- */
 $('#btn-locate').onclick=async function(){
   this.disabled=true; this.textContent='Finding you…';
-  try{ const l=await locate(); toast(l.fresh?'Location updated':'GPS unavailable — using last known position'); }catch(e){ toast(geoErr(e)); }
-  this.disabled=false; this.textContent='📡 Update my location'; paintNearStatus(); paintNearList();
+  try{ const l=await locateBest(a=>{ this.textContent=`Getting GPS… ±${Math.round(a)} m`; }); toast(l.fresh?'Location updated':'GPS unavailable. Using last known position.'); }
+  catch(e){ toast(geoErr(e)); }
+  this.disabled=false; this.textContent='📡 Update location'; renderNearby();
+};
+function stopLive(){ if(livePending){ clearTimeout(livePending); livePending=0; } if(liveWatch!==null){ try{navigator.geolocation.clearWatch(liveWatch);}catch(_){} liveWatch=null; } }
+$('#chip-live').onclick=()=>{
+  if(liveWatch!==null){ stopLive(); renderNearby(); return; }
+  if(!navigator.geolocation) return toast('GPS is not supported on this device.');
+  liveWatch=navigator.geolocation.watchPosition(p=>{
+    S.lastLoc={lat:p.coords.latitude,lng:p.coords.longitude,acc:p.coords.accuracy||0,t:Date.now()};
+    if(Date.now()-lastLiveSave>15000){ save(); lastLiveSave=Date.now(); }
+    const wait=1000-(Date.now()-lastNearPaint);
+    if(wait<=0){ paintNearStatus(); paintNearBody(); }
+    else if(!livePending) livePending=setTimeout(()=>{ livePending=0; paintNearStatus(); paintNearBody(); },wait);   // trailing update so the last fix is never dropped
+  },e=>{ if(e.code===1){ toast(geoErr(e)); stopLive(); renderNearby(); } /* brief GPS drop-outs are ignored; tracking keeps going */ },{enableHighAccuracy:true,maximumAge:2000,timeout:30000});
+  renderNearby(); toast('Live tracking on. It uses more battery.');
+};
+let compassRaf=0;
+function stopCompass(){ if(compassFn){ removeEventListener('deviceorientationabsolute',compassFn,true); removeEventListener('deviceorientation',compassFn,true); compassFn=null; } compassH=null; }
+$('#chip-compass').onclick=async()=>{
+  if(compassFn){ stopCompass(); renderNearby(); return; }
+  try{
+    if(typeof DeviceOrientationEvent!=='undefined'&&typeof DeviceOrientationEvent.requestPermission==='function'){
+      const r=await DeviceOrientationEvent.requestPermission(); if(r!=='granted') return toast('Compass permission was not allowed.');
+    }
+  }catch(e){ return toast('Compass is not available on this device.'); }
+  if(!('DeviceOrientationEvent' in window)) return toast('Compass is not available on this device.');
+  compassFn=e=>{
+    let v=null;
+    if(typeof e.webkitCompassHeading==='number') v=e.webkitCompassHeading;            // iPhone
+    else if((e.absolute||e.type==='deviceorientationabsolute')&&e.alpha!=null) v=(360-e.alpha)%360; // Android
+    if(v==null) return; compassH=v;
+    if(!compassRaf) compassRaf=requestAnimationFrame(()=>{ compassRaf=0; paintRadar(); paintSel(); });
+  };
+  addEventListener('deviceorientationabsolute',compassFn,true); addEventListener('deviceorientation',compassFn,true);
+  renderNearby(); toast('Hold your phone flat. The radar turns with you.');
+};
+function stopNearbyLive(){ stopLive(); stopCompass(); }
+
+/* --- pins: save hotel, host, meeting point... and walk back to it offline --- */
+let pinLoc=null, pinKind='';
+const PIN_KINDS=['🎨 TosTrip partner','🏨 My hotel','🏠 Host home','🤝 Meeting point','🛺 Tuk-tuk stop','🍜 Good food'];
+$('#pin-chips').innerHTML=PIN_KINDS.map(k=>`<button class="chip" data-k="${esc(k)}" aria-pressed="false">${esc(k)}</button>`).join('');
+$('#pin-chips').onclick=e=>{ const b=e.target.closest('[data-k]'); if(!b) return; pinKind=b.dataset.k; $$('#pin-chips .chip').forEach(x=>x.setAttribute('aria-pressed',x===b)); $('#pin-name').value=pinKind.replace(/^\S+\s/,''); };
+$('#btn-pin').onclick=async function(){
+  this.disabled=true; const old=this.textContent; this.textContent='Finding you…';
+  try{ pinLoc=await locateBest(a=>{ this.textContent=`GPS ±${Math.round(a)} m`; }); }
+  catch(e){ this.disabled=false; this.textContent=old; return toast(geoErr(e)); }
+  this.disabled=false; this.textContent=old;
+  if((S.pins||[]).length>=30) return toast('You can keep up to 30 pins. Delete one first.');
+  pinKind=''; $$('#pin-chips .chip').forEach(x=>x.setAttribute('aria-pressed','false')); $('#pin-name').value='';
+  $('#pin-loc').textContent=`${pinLoc.lat.toFixed(5)}, ${pinLoc.lng.toFixed(5)} · ±${Math.round(pinLoc.acc)} m${pinLoc.fresh?'':' · last known position'}`;
+  $('#pin').classList.add('show'); $('#pin-name').focus();
+};
+$('#pin-cancel').onclick=()=>$('#pin').classList.remove('show');
+$('#pin-save').onclick=()=>{
+  const n=$('#pin-name').value.trim(); if(!n) return toast('Give the pin a name.');
+  const pin={id:'pin'+Date.now(),n,c:/partner/i.test(pinKind)?'workshop':'pin',lat:pinLoc.lat,lng:pinLoc.lng,acc:Math.round(pinLoc.acc||0),t:Date.now()};
+  (S.pins=S.pins||[]).unshift(pin); save(); $('#pin').classList.remove('show'); nearSel=pin.id; renderNearby(); toast('Pinned. You can walk back to it offline.');
+};
+
+/* --- export pins as places.json (team tool) --- */
+$('#btn-export').onclick=()=>{
+  const pins=S.pins||[]; if(!pins.length) return toast('Pin at least one spot first.');
+  const out=pins.slice().reverse().map(p=>({n:p.n,c:p.c==='workshop'?'workshop':'pin',lat:+p.lat.toFixed(6),lng:+p.lng.toFixed(6),note:''}));
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([JSON.stringify(out,null,2)],{type:'application/json'})); a.download='places.json';
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),5000);
+  toast(`places.json saved with ${out.length} place${out.length>1?'s':''}. Add a note to each if you like.`);
+};
+
+/* --- download places around me (needs signal once, then works offline) --- */
+const AROUND_R=1800;
+const AROUND_BLOCKS=[['[amenity=restaurant]',40],['[amenity=cafe]',30],['[amenity=pharmacy]',25],['[amenity~"^(hospital|clinic)$"]',20],['[amenity~"^(atm|bank)$"]',30],
+  ['[amenity=police]',10],['[amenity=toilets]',15],['[amenity=drinking_water]',10],['[shop~"^(convenience|supermarket)$"]',30],['[tourism~"^(hotel|guest_house|hostel)$"]',30],['[tourism~"^(attraction|museum)$"]',20]];
+const AROUND_DEFAULT={atm:'ATM / bank',toilet:'Public toilets',police:'Police',pharmacy:'Pharmacy',health:'Clinic / hospital',water:'Drinking water'};
+function classifyOSM(t){
+  const a=t.amenity, sh=t.shop, tu=t.tourism;
+  if(a==='restaurant') return 'food'; if(a==='cafe') return 'cafe'; if(a==='pharmacy') return 'pharmacy'; if(a==='hospital'||a==='clinic') return 'health';
+  if(a==='atm'||a==='bank') return 'atm'; if(a==='police') return 'police'; if(a==='toilets') return 'toilet'; if(a==='drinking_water') return 'water';
+  if(sh==='convenience'||sh==='supermarket') return 'shop'; if(tu==='hotel'||tu==='guest_house'||tu==='hostel') return 'stay'; if(tu==='attraction'||tu==='museum') return 'sight';
+  return null;
+}
+function paintAroundInfo(){
+  const a=aroundAreas(), n=a.reduce((x,y)=>x+y.items.length,0);
+  $('#around-info').textContent=n?`${n} places saved from ${a.length} area${a.length>1?'s':''}. Last download ${ago(Math.max(...a.map(x=>x.t)))}.`:'Nothing downloaded yet.';
+}
+$('#btn-around').onclick=async function(){
+  if(!navigator.onLine) return toast('You need signal for this. Try again on wifi.');
+  this.disabled=true; const old=this.textContent; this.textContent='Finding you…';
+  try{
+    const l=await locateBest(); this.textContent='Downloading places…';
+    const q='[out:json][timeout:25];'+AROUND_BLOCKS.map(([f,n])=>`nwr(around:${AROUND_R},${l.lat.toFixed(5)},${l.lng.toFixed(5)})${f};out center ${n};`).join('');
+    let j=null;
+    for(const ep of ['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter']){
+      const ctl=new AbortController(), to=setTimeout(()=>ctl.abort(),30000);
+      try{ const r=await fetch(ep,{method:'POST',signal:ctl.signal,headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'data='+encodeURIComponent(q)}); if(!r.ok) throw new Error('bad'); j=await r.json(); break; }
+      catch(e){ j=null; } finally{ clearTimeout(to); }
+    }
+    if(!j||!Array.isArray(j.elements)) throw new Error('The places service did not answer. Try again in a minute.');
+    const seen=new Set(), items=[];
+    for(const el of j.elements){
+      const t=el.tags||{}, c=classifyOSM(t); const lat=el.lat!=null?el.lat:(el.center&&el.center.lat), lng=el.lon!=null?el.lon:(el.center&&el.center.lon);
+      if(!c||lat==null||lng==null) continue;
+      const n=(t['name:en']||t.name||AROUND_DEFAULT[c]||'').toString().slice(0,60); if(!n) continue;
+      const id='o'+String(el.type||'n')[0]+el.id; if(seen.has(id)) continue; seen.add(id);
+      items.push({i:id,n,c,lat:+lat.toFixed(5),lng:+lng.toFixed(5)});
+    }
+    if(!items.length) throw new Error('No places found here. This area may not be mapped yet.');
+    let areas=aroundAreas().filter(a=>dist(a,l)>0.8);
+    areas.unshift({lat:+l.lat.toFixed(5),lng:+l.lng.toFixed(5),t:Date.now(),items}); areas=areas.slice(0,4);
+    lsSet(AROUND_KEY,JSON.stringify(areas));
+    toast(`Saved ${items.length} places around you`); renderNearby();
+  }catch(e){ toast((e&&e.message)||'Could not download places.'); }
+  this.disabled=false; this.textContent=old;
 };
 
 /* ---- Phrases ---- */
