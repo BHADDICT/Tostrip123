@@ -623,8 +623,8 @@ const PLACES = [
   {id:'ce',  n:'Choeung Ek Memorial',         p:'pp', c:'culture', lat:11.4842, lng:104.9014},
   {id:'cm',  n:'Central Market (Psar Thmei)', p:'pp', c:'market',  lat:11.5696, lng:104.9211},
   {id:'rm',  n:'Russian Market (Psar Toul Tom Poung)', p:'pp', c:'market', lat:11.5424, lng:104.9138},
-  {id:'ppa', n:'Phnom Penh Intl Airport',     p:'pp', c:'travel',  lat:11.5466, lng:104.8441},
-  {id:'cal', n:'Calmette Hospital',           p:'pp', c:'health',  lat:11.5679, lng:104.9171, a:1},
+  {id:'ppa', n:'Techo International Airport', p:'pp', c:'travel',  lat:11.3591, lng:104.9339},
+  {id:'cal', n:'Calmette Hospital',           p:'pp', c:'health',  lat:11.5813, lng:104.9158},
   {id:'aw',  n:'Angkor Wat',                  p:'sr', c:'culture', lat:13.4125, lng:103.8670},
   {id:'by',  n:'Bayon Temple',                p:'sr', c:'culture', lat:13.4412, lng:103.8590},
   {id:'tp',  n:'Ta Prohm',                    p:'sr', c:'culture', lat:13.4350, lng:103.8890},
@@ -637,6 +637,34 @@ const PLACES = [
   {id:'och', n:'Ochheuteal Beach',            p:'sh', c:'beach',   lat:10.5890, lng:103.5110, a:1},
   {id:'btc', n:'Battambang City Centre',      p:'bb', c:'market',  lat:13.0957, lng:103.2022},
   {id:'kd',  n:'Koh Dach (Silk Island)',      p:'kd', c:'village', lat:11.6200, lng:105.0100, a:1}
+];
+/* TosTrip partner & landmark places, built into this page (no separate file needed).
+   Rows with lat/lng = null are ignored until you fill in the GPS. Add rows here any time.
+   A places.json next to the page is still read too, if you ever upload one. */
+const BUILTIN_EXTRA = [
+  {"n": "Veranda Pottery", "c": "workshop", "lat": null, "lng": null, "note": "Phnom Penh partner. Add GPS."},
+  {"n": "Kaset Times", "c": "workshop", "lat": null, "lng": null, "note": "Phnom Penh partner. Add GPS."},
+  {"n": "Ood Woods Crafting", "c": "workshop", "lat": null, "lng": null, "note": "Phnom Penh partner. Add GPS."},
+  {"n": "Pu Seila House", "c": "workshop", "lat": null, "lng": null, "note": "Doun Kok, Phnom Penh. Add GPS."},
+  {"n": "Western International School (Toul Sangke)", "c": "pin", "lat": null, "lng": null, "note": "Toul Sangke campus. Add GPS."},
+  {"n": "emart24 BKK1 (St 310 corner St 57)", "c": "convenience", "lat": null, "lng": null, "note": "BKK1, Phnom Penh. Add GPS."},
+  {"n": "emart24 598 (Chea Sophara)", "c": "convenience", "lat": null, "lng": null, "note": "Chea Sophara (598) Rd, Russey Keo. Add GPS."},
+  {"n": "emart24 Tuol Sleng (St 360)", "c": "convenience", "lat": null, "lng": null, "note": "#74AB St 360, Boeng Keng Kang. Add GPS."},
+  {"n": "emart24 Coconut Park Koh Norea", "c": "convenience", "lat": null, "lng": null, "note": "Koh Norea. Add GPS."},
+  {"n": "emart24 Kampuchea Krom", "c": "convenience", "lat": null, "lng": null, "note": "Kampuchea Krom Blvd. Add GPS."},
+  {"n": "emart24 Sen Sok City", "c": "convenience", "lat": null, "lng": null, "note": "Sen Sok City. Add GPS."},
+  {"n": "emart24 Peng Huoth Euro Park", "c": "convenience", "lat": null, "lng": null, "note": "Sangkat Niroth, Chbar Ampov. Add GPS."},
+  {"n": "Khmer-Soviet Friendship Hospital", "c": "health", "lat": 11.544837, "lng": 104.904022, "note": "Government hospital, Blvd 271."},
+  {"n": "Royal Phnom Penh Hospital", "c": "health", "lat": null, "lng": null, "note": "No. 888 Russian Confederation Blvd, Sen Sok. Add GPS."},
+  {"n": "Raffles Medical Phnom Penh", "c": "health", "lat": null, "lng": null, "note": "#161 Street 51 (Pasteur). Add GPS."},
+  {"n": "Sunrise Japan Hospital", "c": "health", "lat": null, "lng": null, "note": "No. 177E Kola Loum St, Chroy Changvar. Add GPS."},
+  {"n": "Sen Sok International University Hospital", "c": "health", "lat": null, "lng": null, "note": "Street 1986, Sen Sok. Add GPS."},
+  {"n": "KFC Monivong", "c": "food", "lat": null, "lng": null, "note": "No. 56E0 Preah Monivong Blvd, Wat Phnom. Add GPS."},
+  {"n": "KFC Norodom", "c": "food", "lat": null, "lng": null, "note": "No. 93E0 Norodom Blvd. Add GPS."},
+  {"n": "KFC Sovanna", "c": "food", "lat": null, "lng": null, "note": "Gold Street, Chamkar Mon. Add GPS."},
+  {"n": "KFC Sivutha", "c": "food", "lat": null, "lng": null, "note": "Add GPS."},
+  {"n": "KFC Attwood", "c": "food", "lat": null, "lng": null, "note": "#23Eo Confederation de la Russie. Add GPS."},
+  {"n": "CWE", "c": "workshop", "lat": null, "lng": null, "note": "Siem Reap partner. Add GPS."}
 ];
 const PHRASE_CATS = {basics:'👋 Basics', friends:'🤝 Friends', eat:'🍜 Eating', move:'🛺 Getting around', shop:'🛍️ Shopping', num:'🔢 Numbers', sos:'🆘 Emergency'};
 const PHRASES = [
@@ -1015,7 +1043,7 @@ function allPlaces(){
   const pack=loadPack()||{}, seen=new Set(), out=[];
   const add=o=>{ if(!isFinite(o.lat)||!isFinite(o.lng)||seen.has(o.id)) return; seen.add(o.id); out.push(o); };
   (pack.places||[]).forEach(p=>add({id:p.id,n:p.n,c:p.c,lat:p.lat,lng:p.lng,a:p.a}));
-  (pack.extra||[]).forEach((p,i)=>add({id:'x'+i,n:p.n,c:p.c||'workshop',lat:p.lat,lng:p.lng,note:p.note,tt:true}));
+  (pack.extra&&pack.extra.length?pack.extra:cleanExtra(BUILTIN_EXTRA)).forEach((p,i)=>add({id:'x'+i,n:p.n,c:p.c||'workshop',lat:p.lat,lng:p.lng,note:p.note,tt:true}));
   aroundAreas().forEach(a=>a.items.forEach(p=>add({id:p.i,n:p.n,c:p.c,lat:p.lat,lng:p.lng,h:p.h,x:p.x,around:true})));
   (S.pins||[]).forEach(p=>add({id:p.id,n:p.n,c:p.c||'pin',lat:p.lat,lng:p.lng,pin:true}));
   return out;
@@ -1024,15 +1052,20 @@ function computeNear(){
   const l=S.lastLoc; if(!l) return [];
   return allPlaces().map(p=>({...p,d:dist(l,p),b:bearing(l,p)})).filter(p=>p.d<=nearR).sort((a,b)=>a.d-b.d);
 }
+const numOk=v=>v!==null&&v!==''&&v!==undefined&&Number.isFinite(+v);
+function cleanExtra(j){
+  if(!Array.isArray(j)) return [];
+  return j.filter(x=>x&&typeof x.n==='string'&&numOk(x.lat)&&numOk(x.lng)&&Math.abs(+x.lat)<=90&&Math.abs(+x.lng)<=180)
+          .slice(0,300).map(x=>({n:x.n.slice(0,60),c:NCAT[x.c]?x.c:'workshop',lat:+x.lat,lng:+x.lng,note:typeof x.note==='string'?x.note.slice(0,160):''}));
+}
 async function fetchExtraPlaces(){
+  const base=cleanExtra(BUILTIN_EXTRA);
   const ctl=new AbortController(), to=setTimeout(()=>ctl.abort(),5000);
   try{
-    const r=await fetch('places.json',{signal:ctl.signal,cache:'no-store'}); if(!r.ok) return [];
-    const j=await r.json(); if(!Array.isArray(j)) return [];
-    const num=v=>v!==null&&v!==''&&v!==undefined&&Number.isFinite(+v);
-    return j.filter(x=>x&&typeof x.n==='string'&&num(x.lat)&&num(x.lng)&&Math.abs(+x.lat)<=90&&Math.abs(+x.lng)<=180)
-            .slice(0,300).map(x=>({n:x.n.slice(0,60),c:NCAT[x.c]?x.c:'workshop',lat:+x.lat,lng:+x.lng,note:typeof x.note==='string'?x.note.slice(0,120):''}));
-  }catch(e){ return []; } finally{ clearTimeout(to); }
+    const r=await fetch('places.json',{signal:ctl.signal,cache:'no-store'}); if(!r.ok) return base;
+    const extra=cleanExtra(await r.json()), seen=new Set(base.map(x=>x.n+x.lat+x.lng));
+    return base.concat(extra.filter(x=>!seen.has(x.n+x.lat+x.lng)));
+  }catch(e){ return base; } finally{ clearTimeout(to); }
 }
 
 /* --- rendering --- */
