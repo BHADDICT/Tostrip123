@@ -211,6 +211,28 @@ textarea.t{min-height:120px;resize:vertical;line-height:1.5;font-size:.9rem}
 .foot{text-align:center;color:var(--p700);font-weight:700;font-size:.85rem;padding:6px 0 2px}
 .foot small{display:block;color:var(--mute);font-weight:500;margin-top:2px}
 
+/* ---------- voice / outbox ---------- */
+.rec{display:flex;flex-direction:column;align-items:center;gap:10px}
+.recbtn{width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#EF4444,#B91C1C);color:#fff;font-size:2rem;display:grid;place-items:center;box-shadow:0 10px 24px rgba(220,38,38,.4);transition:.2s}
+.recbtn:active{transform:scale(.95)}
+.recbtn.on{animation:recpulse 1.2s infinite}
+@keyframes recpulse{0%{box-shadow:0 0 0 0 rgba(220,38,38,.55)}100%{box-shadow:0 0 0 24px rgba(220,38,38,0)}}
+.rectime{font-variant-numeric:tabular-nums;font-weight:800;font-size:1.1rem;color:var(--p800);min-height:1.4em}
+.vitem{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.vitem b{font-size:.95rem}
+.vitem small{color:var(--mute);font-size:.78rem;display:block;margin-top:2px}
+.vitem audio{width:100%;height:40px}
+.vitem .row .btn{padding:9px 10px;font-size:.82rem}
+.ib.has{background:var(--p700);color:#fff}
+.actions button{position:relative}
+.badge{position:absolute;top:6px;right:10px;min-width:20px;height:20px;border-radius:99px;background:#DC2626;color:#fff;font-size:.7rem;font-weight:800;display:grid;place-items:center;padding:0 5px;font-style:normal}
+.badge[hidden]{display:none}
+.ob{display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:14px;background:var(--p50);border:1px solid var(--line)}
+.ob pre{white-space:pre-wrap;font:inherit;font-size:.82rem;color:var(--ink)}
+.ob .chips{gap:6px}
+.ob .chip{padding:7px 11px;font-size:.78rem}
+.sticky{position:sticky;bottom:0}
+
 /* ---------- overlays ---------- */
 .overlay{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(30,10,70,.82);backdrop-filter:blur(6px)}
 .overlay.show{display:flex;animation:fadeIn .25s both}
@@ -337,7 +359,9 @@ textarea.t{min-height:120px;resize:vertical;line-height:1.5;font-size:.9rem}
           <button data-go="phrases"><span>🗣️</span>Phrases</button>
           <button data-go="money"><span>💵</span>Money</button>
           <button id="act-checkin"><span>⏱️</span>Check-in</button>
-          <button id="act-call117"><span>👮</span>Call 117</button>
+          <button data-go="voice"><span>🎙️</span>Voice notes</button>
+          <button id="act-outbox"><span>🕓</span>Outbox<i class="badge" id="ob-badge" hidden></i></button>
+          <button id="act-call117" style="grid-column:span 2"><span>👮</span>Call 117 (Police)</button>
         </div>
         <div class="card" id="checkin-card"></div>
         <div class="card" id="loc-card"></div>
@@ -366,7 +390,7 @@ textarea.t{min-height:120px;resize:vertical;line-height:1.5;font-size:.9rem}
       <div class="panel" id="p-phrases">
         <input class="t" id="ph-q" type="search" placeholder="Search English, Khmer or sound…" aria-label="Search phrases">
         <div class="chips" id="ph-cat"></div>
-        <div class="muted">Tap a phrase to show it full-screen to a local. 🔊 plays it if your phone has a Khmer voice.</div>
+        <div class="muted">Tap a phrase to show it full-screen to a local. 🔊 plays a recorded Khmer voice, or your phone's Khmer voice if it has one.</div>
         <div class="list" id="ph-list"></div>
         <div class="muted" style="text-align:center">Sounds are approximate romanization. Say <b>baat</b> (men) or <b>chas</b> (women) for "yes".</div>
       </div>
@@ -387,6 +411,16 @@ textarea.t{min-height:120px;resize:vertical;line-height:1.5;font-size:.9rem}
         <div class="card"><h3>💡 Money tips</h3>
           <p class="muted">Dollars and riel are both used everywhere. Small change usually comes back in riel, and most shops treat ៛4,000 as $1. Keep a few ៛1,000–៛5,000 notes for tuk-tuks, markets and village stalls.</p>
         </div>
+      </div>
+
+      <div class="panel" id="p-voice">
+        <div style="display:flex;align-items:center;gap:10px"><button class="back" id="v-back" aria-label="Back">←</button><h2>🎙️ Voice notes</h2></div>
+        <div class="card">
+          <label class="f">Label (optional)<input class="t" id="v-label" placeholder="e.g. Directions from my host"></label>
+          <div class="rec"><button class="recbtn" id="v-rec" aria-label="Start recording">🎙️</button><div class="rectime" id="v-time"></div></div>
+          <div class="muted" id="v-store">Saved on this phone. Works with no signal. Tap the red button to start, tap again to stop.</div>
+        </div>
+        <div class="list" id="v-list"></div>
       </div>
 
       <div class="panel" id="p-sos">
@@ -411,8 +445,22 @@ textarea.t{min-height:120px;resize:vertical;line-height:1.5;font-size:.9rem}
             <a id="ch-wa" class="disabled" href="#" target="_blank" rel="noopener">🟢 WhatsApp</a>
             <a id="ch-tg" href="#" target="_blank" rel="noopener">✈️ Telegram</a>
             <button id="ch-share">📤 Share…</button>
-            <button id="ch-copy" style="grid-column:span 2">📋 Copy message</button>
+            <button id="ch-copy">📋 Copy</button>
+            <button id="ch-outbox">🕓 Send later</button>
           </div>
+        </div>
+
+        <div class="card">
+          <h3>🎙️ SOS voice clip</h3>
+          <div class="muted">Record up to 30 seconds of what's happening. It is saved on your phone and works with no signal. Sharing it needs signal.</div>
+          <div class="rec"><button class="recbtn" id="sosrec" aria-label="Start recording">🎙️</button><div class="rectime" id="sosrec-time"></div></div>
+          <div id="sosrec-out"></div>
+        </div>
+
+        <div class="card" id="outbox-card">
+          <h3>🕓 Outbox <span id="ob-count"></span></h3>
+          <div class="muted">Messages you saved to send later. Pick a channel when you have signal.</div>
+          <div class="list" id="ob-list"></div>
         </div>
 
         <div class="card">
@@ -437,6 +485,16 @@ textarea.t{min-height:120px;resize:vertical;line-height:1.5;font-size:.9rem}
       <button class="tab" role="tab" data-tab="money" aria-selected="false"><span>💵</span>Money</button>
       <button class="tab sos" role="tab" data-tab="sos" aria-selected="false"><span>🆘</span>SOS</button>
     </nav>
+  </section>
+  <!-- ===================== TEAM: PHRASE RECORDER (?record=1) ===================== -->
+  <section class="screen" id="s-author" aria-label="Phrase recorder">
+    <div class="topbar"><button class="back" id="au-back" aria-label="Back">←</button><h2>🎙️ Phrase recorder</h2></div>
+    <div class="body">
+      <p class="sub">Team tool. Record a native Khmer speaker saying each phrase (quiet room, phone close). Download the ZIP and unzip it next to this page so you get an <b>audio</b> folder. Travelers then download the clips with their kit.</p>
+      <div class="muted" id="au-count"></div>
+      <div class="list" id="au-list"></div>
+      <button class="btn btn-primary sticky" id="au-zip">⬇️ Download ZIP</button>
+    </div>
   </section>
 </main>
 
@@ -725,6 +783,7 @@ async function startDownload(){
   const steps=[
     {t:`Maps & places (${places.length})`, run:async()=>{pack.places=places;return 'ok';}},
     {t:`Khmer phrasebook (${PHRASES.length} phrases)`, run:async()=>{pack.phrases=PHRASES;return 'ok';}},
+    {t:'Khmer voice clips', run:async()=>{ const r=await fetchPhraseAudio(); if(r.n){ S.audioCount=r.n; save(); return 'ok'; } return ['skip','No recorded clips on the server yet. Your phone voice is used instead.']; }},
     {t:'Emergency numbers & SOS', run:async()=>{pack.emergency=EMERGENCY;return 'ok';}},
     {t:'Riel exchange rate', run:async()=>{ const ok=await fetchRate(); return ok?'ok':['skip',`Using ៛${fmt(S.rate)} per $1 (no signal)`]; }},
     {t:'Your current location', run:async()=>{ try{await locate();return 'ok';}catch(e){return ['skip','Skipped — you can allow it later in Nearby']; } }},
@@ -755,15 +814,16 @@ $('#btn-start').onclick = ()=>{ glitch(); setTimeout(enterApp,350); };
 /* ------------------------------- app ----------------------------- */
 let tabNow='home';
 function enterApp(){
+  loadAudioIds();
   if(!loadPack()){ lsSet(PACK,JSON.stringify({v:1,savedAt:Date.now(),provinces:S.provinces,places:PLACES.filter(p=>S.provinces.includes(p.p)),phrases:PHRASES,emergency:EMERGENCY})); }
   showScreen('s-app'); paintConn(); goTab('home'); tick();
 }
 function goTab(name){
   tabNow=name;
-  $$('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.tab===name));
+  $$('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.tab===(name==='voice'?'home':name)));
   $$('.panel').forEach(p=>p.classList.toggle('active',p.id==='p-'+name));
   $('#panels').scrollTop=0;
-  ({home:renderHome,nearby:renderNearby,phrases:renderPhrases,money:renderMoney,sos:renderSOS})[name]();
+  ({home:renderHome,nearby:renderNearby,phrases:renderPhrases,money:renderMoney,sos:renderSOS,voice:renderVoice})[name]();
 }
 $('.tabs').onclick=e=>{ const t=e.target.closest('.tab'); if(t) goTab(t.dataset.tab); };
 $('#p-home').addEventListener('click',e=>{ const b=e.target.closest('[data-go]'); if(b) goTab(b.dataset.go); });
@@ -775,7 +835,7 @@ function renderHome(){
   const kb=Math.max(1,Math.round(JSON.stringify(pack).length/1024));
   $('#kit-kv').innerHTML=`<div><b>${(pack.places||[]).length}</b><span>PLACES</span></div><div><b>${(pack.phrases||[]).length}</b><span>PHRASES</span></div><div><b>${kb} KB</b><span>ON DEVICE</span></div>`;
   $('#kit-when').textContent = S.preparedAt?`Downloaded ${new Date(S.preparedAt).toLocaleString(undefined,{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}.`:'';
-  renderLocCard(); renderCheckin();
+  renderLocCard(); renderCheckin(); renderOutbox();
   const link=$('#main-app-link'); if(MAIN_APP_URL){ link.href=MAIN_APP_URL; link.style.display='inline-flex'; }
   const c=$('#act-call117'); c.onclick=()=>{ location.href='tel:117'; };
 }
@@ -793,9 +853,10 @@ $('#btn-update').onclick=()=>{ fillSetup(); showScreen('s-setup'); };
 let wipeArm=0;
 $('#btn-wipe').onclick=function(){
   if(Date.now()-wipeArm>4000){ wipeArm=Date.now(); this.textContent='Tap again to confirm'; setTimeout(()=>{this.textContent='Remove offline data'},4000); return; }
-  lsDel(PACK); lsDel(KEY); S=loadState(); this.textContent='Remove offline data';
+  const keepOb=S.outbox||[]; lsDel(PACK); lsDel(KEY); S=loadState(); S.outbox=keepOb; save(); audioIds=new Set(); idb.clear('phraseAudio').catch(()=>{});
+  this.textContent='Remove offline data';
   try{ navigator.serviceWorker&&navigator.serviceWorker.getRegistrations().then(r=>r.forEach(x=>x.unregister())); caches&&caches.delete('tostrip-offline-v1'); }catch(e){}
-  toast('Offline data removed from this phone.'); paintWelcome(); showScreen('s-welcome');
+  toast('Downloaded data removed. Your voice notes and Outbox were kept.'); paintWelcome(); showScreen('s-welcome');
 };
 
 /* ---- Check-in ---- */
@@ -815,6 +876,7 @@ function renderCheckin(){
   }
 }
 function endCheckin(){ S.checkin=null; alarmed=false; save(); $('#alarm').classList.remove('show'); renderCheckin(); toast('Check-in ended. Stay safe!'); }
+$('#act-outbox').onclick=()=>{ goTab('sos'); setTimeout(()=>$('#outbox-card').scrollIntoView({behavior:'smooth',block:'center'}),150); };
 $('#act-checkin').onclick=()=>{ $('#checkin-card').scrollIntoView({behavior:'smooth',block:'center'}); };
 function tick(){
   const c=S.checkin; if(!c) return;
@@ -884,7 +946,7 @@ function paintPhrases(){
   $('#ph-list').innerHTML=out.length?out.map(([p,i])=>`
     <div class="phrase" data-i="${i}" role="button" tabindex="0" aria-label="Show ${esc(p[1])} to a local">
       <div class="l"><div class="en">${esc(p[1])}</div><div class="km" lang="km">${esc(p[2])}</div><div class="ro">${esc(p[3])}</div></div>
-      <button class="ib" data-say="${i}" aria-label="Play ${esc(p[1])}">🔊</button>
+      <button class="ib${audioIds.has(pid(i))?' has':''}" data-say="${i}" aria-label="Play ${esc(p[1])}">🔊</button>
       <button class="ib" data-copy="${i}" aria-label="Copy Khmer text">📋</button>
     </div>`).join(''):'<div class="empty">No phrase matches. Try a different word.</div>';
 }
@@ -893,15 +955,15 @@ $('#ph-q').oninput=paintPhrases;
 function phraseAt(i){ const pack=loadPack(); return ((pack&&pack.phrases)||PHRASES)[i]; }
 $('#ph-list').onclick=e=>{
   const s=e.target.closest('[data-say]'), c=e.target.closest('[data-copy]');
-  if(s){ e.stopPropagation(); speak(phraseAt(+s.dataset.say)[2]); return; }
+  if(s){ e.stopPropagation(); playPhrase(+s.dataset.say); return; }
   if(c){ e.stopPropagation(); copyText(phraseAt(+c.dataset.copy)[2],'Khmer text copied'); return; }
-  const card=e.target.closest('.phrase'); if(card) openShow(phraseAt(+card.dataset.i));
+  const card=e.target.closest('.phrase'); if(card) openShow(+card.dataset.i);
 };
-$('#ph-list').onkeydown=e=>{ if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('phrase')){ e.preventDefault(); openShow(phraseAt(+e.target.dataset.i)); } };
-let showKm='';
-function openShow(p){ showKm=p[2]; $('#show-km').textContent=p[2]; $('#show-ro').textContent=p[3]; $('#show-en').textContent=p[1]; $('#show').classList.add('show'); $('#show-close').focus(); }
+$('#ph-list').onkeydown=e=>{ if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('phrase')){ e.preventDefault(); openShow(+e.target.dataset.i); } };
+let showIdx=0;
+function openShow(i){ showIdx=i; const p=phraseAt(i); $('#show-km').textContent=p[2]; $('#show-ro').textContent=p[3]; $('#show-en').textContent=p[1]; $('#show').classList.add('show'); $('#show-close').focus(); }
 $('#show-close').onclick=()=>$('#show').classList.remove('show');
-$('#show-say').onclick=()=>speak(showKm);
+$('#show-say').onclick=()=>playPhrase(showIdx);
 function speak(t){
   if(!('speechSynthesis' in window)) return toast('Speech is not supported here. Use "show to a local" instead.');
   const v=(speechSynthesis.getVoices()||[]).find(v=>(v.lang||'').toLowerCase().startsWith('km'));
@@ -993,12 +1055,251 @@ $('#ch-share').onclick=async()=>{
   if(navigator.share){ try{ await navigator.share({text:v}); }catch(e){} } else copyText(v,'Sharing is not supported here. Message copied.');
 };
 
+/* =====================================================================
+   Storage (IndexedDB) – voice notes, downloaded phrase audio, team recordings
+   ===================================================================== */
+let dbp=null;
+function openDB(){ return new Promise((res,rej)=>{
+  if(!('indexedDB' in window)) return rej(new Error('Storage is not available in this browser mode.'));
+  const r=indexedDB.open('tostrip_offline_db',1);
+  r.onupgradeneeded=()=>{ ['voice','phraseAudio','authoring'].forEach(n=>r.result.createObjectStore(n,{keyPath:'id'})); };
+  r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); r.onblocked=()=>rej(new Error('Storage is busy. Close other TosTrip tabs.'));
+}); }
+async function dbx(store,mode,fn){
+  const d=await (dbp||(dbp=openDB()));
+  return new Promise((res,rej)=>{ const t=d.transaction(store,mode); const rq=fn(t.objectStore(store));
+    t.oncomplete=()=>res(rq?rq.result:undefined); t.onerror=()=>rej(t.error); t.onabort=()=>rej(t.error); });
+}
+const idb={ put:(s,v)=>dbx(s,'readwrite',o=>o.put(v)), get:(s,k)=>dbx(s,'readonly',o=>o.get(k)), all:s=>dbx(s,'readonly',o=>o.getAll()),
+            keys:s=>dbx(s,'readonly',o=>o.getAllKeys()), del:(s,k)=>dbx(s,'readwrite',o=>o.delete(k)), clear:s=>dbx(s,'readwrite',o=>o.clear()) };
+
+/* ---- recorder ---- */
+const extOf=m=>/mp4|aac/.test(m||'')?'m4a':/ogg/.test(m||'')?'ogg':'webm';
+const fmtMs=ms=>{ const s=Math.round(ms/1000); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); };
+function pickMime(){ if(!window.MediaRecorder) return ''; return ['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg;codecs=opus'].find(m=>MediaRecorder.isTypeSupported(m))||''; }
+async function recordStart(maxMs,onTick){
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!window.MediaRecorder) throw new Error('Recording needs this page to be on HTTPS in an up-to-date browser.');
+  const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true}});
+  const mime=pickMime(); const rec=new MediaRecorder(stream,mime?{mimeType:mime}:{}); const chunks=[]; const t0=Date.now();
+  let iv=null, to=null;
+  const done=new Promise(res=>{ rec.onstop=()=>{ stream.getTracks().forEach(t=>t.stop()); clearInterval(iv); clearTimeout(to);
+    res({blob:new Blob(chunks,{type:rec.mimeType||mime||'audio/webm'}),ms:Date.now()-t0}); }; });
+  rec.ondataavailable=e=>{ if(e.data&&e.data.size) chunks.push(e.data); };
+  iv=setInterval(()=>onTick&&onTick(Date.now()-t0),200);
+  to=setTimeout(()=>{ if(rec.state!=='inactive') rec.stop(); },maxMs);
+  rec.start(250);
+  return {stop:()=>{ if(rec.state!=='inactive') rec.stop(); }, done};
+}
+function recErr(e){
+  const n=e&&e.name;
+  if(n==='NotAllowedError'||n==='SecurityError') return 'Microphone is blocked. Allow the microphone for this page in your browser settings.';
+  if(n==='NotFoundError'||n==='OverconstrainedError') return 'No microphone found on this device.';
+  return (e&&e.message)||'Could not record.';
+}
+function attachRecorder({btn,timeEl,max,kind,label,onSaved}){
+  let cur=null;
+  const idle=()=>{ btn.disabled=false; btn.classList.remove('on'); btn.textContent='🎙️'; btn.setAttribute('aria-label','Start recording'); timeEl.textContent=''; };
+  btn.onclick=async()=>{
+    if(cur){ cur.stop(); return; }
+    try{
+      btn.disabled=true;
+      const c=await recordStart(max,ms=>{ timeEl.textContent=fmtMs(ms)+' / '+fmtMs(max); });
+      cur=c; btn.disabled=false; btn.classList.add('on'); btn.textContent='⏹'; btn.setAttribute('aria-label','Stop recording'); timeEl.textContent='0:00 / '+fmtMs(max);
+      const r=await c.done; cur=null; idle();
+      if(r.blob.size<300) return toast('That recording was empty. Try again.');
+      const rec={id:'v'+Date.now(),kind,label:(label&&label())||'',blob:r.blob,mime:r.blob.type,ms:r.ms,t:Date.now(),loc:S.lastLoc||null};
+      await idb.put('voice',rec);
+      try{ navigator.storage&&navigator.storage.persist&&navigator.storage.persist(); }catch(_){}
+      toast('Saved on this phone'); onSaved&&onSaved(rec);
+    }catch(e){ cur=null; idle(); toast(recErr(e)); }
+  };
+}
+async function shareRec(rec){
+  const nm=`tostrip-${new Date(rec.t).toISOString().slice(0,16).replace(/[:T]/g,'-')}.${extOf(rec.mime)}`;
+  const file=new File([rec.blob],nm,{type:rec.mime||'audio/webm'});
+  try{ if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],text:'Voice note from TosTrip'}); return; } }
+  catch(e){ if(e&&e.name==='AbortError') return; }
+  const a=document.createElement('a'); a.href=URL.createObjectURL(file); a.download=nm; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),5000); toast('Saved to your downloads. Attach it in any chat app.');
+}
+
+/* ---- voice notes ---- */
+function nearestName(l){
+  if(!l) return '';
+  const ps=((loadPack()||{}).places)||PLACES; let best=null;
+  ps.forEach(p=>{ const d=dist(l,p); if(!best||d<best.d) best={n:p.n,d}; });
+  return best&&best.d<30?`near ${best.n}`:`${l.lat.toFixed(4)}, ${l.lng.toFixed(4)}`;
+}
+let vUrls=[];
+async function renderVoice(){
+  vUrls.forEach(u=>URL.revokeObjectURL(u)); vUrls=[];
+  const box=$('#v-list'); let items;
+  try{ items=(await idb.all('voice')).sort((a,b)=>b.t-a.t); }
+  catch(e){ box.innerHTML=`<div class="empty">${esc(e.message||'Voice storage is not available here.')}<br>Private browsing can block it.</div>`; return; }
+  box.innerHTML=items.length?items.map(v=>{
+    const u=URL.createObjectURL(v.blob); vUrls.push(u);
+    return `<div class="vitem" data-id="${esc(v.id)}">
+      <div><b>${v.kind==='sos'?'🆘':'🎙️'} ${esc(v.label||(v.kind==='sos'?'SOS voice clip':'Voice note'))}</b>
+      <small>${esc(new Date(v.t).toLocaleString(undefined,{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}))} · ${fmtMs(v.ms)}</small>
+      ${v.loc?`<small>📍 ${esc(nearestName(v.loc))}</small>`:''}</div>
+      <audio controls preload="metadata" src="${u}"></audio>
+      <div class="row"><button class="btn btn-ghost btn-sm" data-act="share">📤 Share / save</button><button class="btn btn-ghost btn-sm" data-act="del">🗑 Delete</button></div></div>`;
+  }).join(''):'<div class="empty">No voice notes yet. Tap the red button to record one.</div>';
+  try{ const e=await navigator.storage.estimate(); if(e&&e.usage!=null) $('#v-store').textContent=`Saved on this phone. Works with no signal. Using ${(e.usage/1048576).toFixed(1)} MB of storage.`; }catch(_){}
+}
+$('#v-list').addEventListener('click',async e=>{
+  const b=e.target.closest('[data-act]'); if(!b) return;
+  const id=b.closest('.vitem').dataset.id;
+  if(b.dataset.act==='share'){ const r=await idb.get('voice',id); if(r) shareRec(r); }
+  else if(b.dataset.act==='del'){
+    if(b.dataset.arm&&Date.now()-b.dataset.arm<4000){ await idb.del('voice',id); toast('Deleted'); renderVoice(); }
+    else { b.dataset.arm=Date.now(); b.textContent='Tap again to delete'; setTimeout(()=>{ if(b.isConnected){ b.textContent='🗑 Delete'; delete b.dataset.arm; } },4000); }
+  }
+});
+$('#v-back').onclick=()=>goTab('home');
+attachRecorder({btn:$('#v-rec'),timeEl:$('#v-time'),max:120000,kind:'note',label:()=>$('#v-label').value.trim(),onSaved:()=>{ $('#v-label').value=''; renderVoice(); }});
+
+/* ---- SOS voice clip ---- */
+let sosUrl=null;
+function showSosClip(rec){
+  if(sosUrl) URL.revokeObjectURL(sosUrl); sosUrl=URL.createObjectURL(rec.blob);
+  $('#sosrec-out').innerHTML=`<audio controls src="${sosUrl}" style="width:100%"></audio>
+    <div class="row" style="margin-top:8px"><button class="btn btn-primary btn-sm" id="sosrec-share">📤 Share clip</button><button class="btn btn-ghost btn-sm" id="sosrec-all">All voice notes</button></div>`;
+  $('#sosrec-share').onclick=()=>shareRec(rec); $('#sosrec-all').onclick=()=>goTab('voice');
+}
+attachRecorder({btn:$('#sosrec'),timeEl:$('#sosrec-time'),max:30000,kind:'sos',label:()=>'SOS voice clip',onSaved:showSosClip});
+
+/* ---- Outbox (send later) ---- */
+const outbox=()=>S.outbox||(S.outbox=[]);
+function chanLinks(text,phone){
+  const enc=encodeURIComponent(text), ios=/iP(hone|ad|od)/.test(navigator.userAgent);
+  const m=text.match(/https?:\/\/\S+/), url=m?m[0]:'https://tostrip.co';
+  return { sms:phone?`sms:${digits(phone)}${ios?'&':'?'}body=${enc}`:null, wa:phone?`https://wa.me/${intl(phone)}?text=${enc}`:null,
+           tg:`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text.replace(url,'').trim())}` };
+}
+function renderOutbox(){
+  const list=outbox(), n=list.length;
+  const bd=$('#ob-badge'); bd.hidden=!n; bd.textContent=n;
+  $('#ob-count').textContent=n?`(${n})`:'';
+  $('#ob-list').innerHTML=n?list.map(o=>{ const l=chanLinks(o.text,S.contact.phone);
+    return `<div class="ob" data-id="${esc(o.id)}"><b>${o.kind==='help'?'🆘':'✅'} ${esc(new Date(o.t).toLocaleString(undefined,{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}))}</b>
+      <pre>${esc(o.text)}</pre>
+      <div class="chips">${l.sms?`<a class="chip" href="${l.sms}">💬 SMS</a>`:''}${l.wa?`<a class="chip" href="${l.wa}" target="_blank" rel="noopener">🟢 WhatsApp</a>`:''}
+      <a class="chip" href="${l.tg}" target="_blank" rel="noopener">✈️ Telegram</a>
+      <button class="chip" data-act="share">📤 Share</button><button class="chip" data-act="sent">✓ Sent</button><button class="chip" data-act="del">🗑</button></div></div>`; }).join('')
+    :'<div class="empty">Nothing waiting. Use "Send later" on a message when you have no signal.</div>';
+}
+$('#ob-list').addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]'); if(!b) return;
+  const id=b.closest('.ob').dataset.id, o=outbox().find(x=>x.id===id); if(!o) return;
+  if(b.dataset.act==='share'){ if(navigator.share) navigator.share({text:o.text}).catch(()=>{}); else copyText(o.text,'Message copied'); return; }
+  S.outbox=outbox().filter(x=>x.id!==id); save(); renderOutbox(); toast(b.dataset.act==='sent'?'Marked as sent':'Removed');
+});
+$('#ch-outbox').onclick=()=>{
+  const v=$('#sos-text').value.trim(); if(!v) return toast('Tap "Get my location" first.');
+  outbox().unshift({id:'o'+Date.now(),t:Date.now(),kind,text:v}); save(); renderOutbox();
+  toast('Saved to Outbox. Send it when you have signal.');
+};
+addEventListener('online',()=>{
+  const n=outbox().length; renderOutbox();
+  if(n&&$('#s-app').classList.contains('active')) toast(`Signal is back. ${n} message${n>1?'s are':' is'} waiting in your Outbox.`);
+});
+
+/* ---- recorded Khmer phrase audio ---- */
+let audioIds=new Set(), curAudio=null;
+const pid=i=>'p'+String(i+1).padStart(2,'0');
+async function loadAudioIds(){
+  try{ audioIds=new Set(await idb.keys('phraseAudio')); }catch(e){ audioIds=new Set(); }
+  if(tabNow==='phrases') paintPhrases();
+}
+async function fetchPhraseAudio(){
+  const ctl=new AbortController(), to=setTimeout(()=>ctl.abort(),5000); let man;
+  try{ const r=await fetch('audio/manifest.json',{signal:ctl.signal,cache:'no-store'}); if(!r.ok) throw new Error('none'); man=await r.json(); }
+  catch(e){ return {n:0}; } finally{ clearTimeout(to); }
+  const ids=Object.keys(man||{}); let n=0, i=0;
+  const worker=async()=>{ while(i<ids.length){ const id=ids[i++]; try{
+    const r=await fetch('audio/'+man[id],{cache:'no-store'}); if(!r.ok) continue;
+    const blob=await r.blob(); await idb.put('phraseAudio',{id,blob,mime:blob.type}); n++; }catch(e){} } };
+  await Promise.all([worker(),worker(),worker(),worker()]);
+  await loadAudioIds();
+  return {n};
+}
+async function playPhrase(i){
+  const id=pid(i);
+  try{
+    const rec=(authorMode&&await idb.get('authoring',id))||await idb.get('phraseAudio',id);
+    if(rec&&rec.blob){
+      const u=URL.createObjectURL(rec.blob); if(curAudio) curAudio.pause();
+      curAudio=new Audio(u); curAudio.onended=curAudio.onerror=()=>URL.revokeObjectURL(u);
+      await curAudio.play(); return;
+    }
+  }catch(e){}
+  speak(phraseAt(i)[2]);
+}
+
+/* ---- team tool: record phrases, export ZIP (open this page with ?record=1) ---- */
+const authorMode=/[?&]record=1/.test(location.search);
+const CRC=(()=>{ const t=new Uint32Array(256); for(let n=0;n<256;n++){ let c=n; for(let k=0;k<8;k++) c=c&1?0xEDB88320^(c>>>1):c>>>1; t[n]=c>>>0; } return t; })();
+function crc32(u8){ let c=0xFFFFFFFF; for(let i=0;i<u8.length;i++) c=CRC[(c^u8[i])&255]^(c>>>8); return (c^0xFFFFFFFF)>>>0; }
+function buildZip(files){
+  const enc=new TextEncoder(), parts=[], cd=[]; let off=0;
+  for(const f of files){
+    const nm=enc.encode(f.name), crc=crc32(f.data), sz=f.data.length;
+    const lh=new DataView(new ArrayBuffer(30));
+    lh.setUint32(0,0x04034b50,true); lh.setUint16(4,20,true); lh.setUint16(6,0x0800,true); lh.setUint16(12,0x21,true);
+    lh.setUint32(14,crc,true); lh.setUint32(18,sz,true); lh.setUint32(22,sz,true); lh.setUint16(26,nm.length,true);
+    parts.push(new Uint8Array(lh.buffer),nm,f.data);
+    const ch=new DataView(new ArrayBuffer(46));
+    ch.setUint32(0,0x02014b50,true); ch.setUint16(4,20,true); ch.setUint16(6,20,true); ch.setUint16(8,0x0800,true); ch.setUint16(14,0x21,true);
+    ch.setUint32(16,crc,true); ch.setUint32(20,sz,true); ch.setUint32(24,sz,true); ch.setUint16(28,nm.length,true); ch.setUint32(42,off,true);
+    cd.push(new Uint8Array(ch.buffer),nm); off+=30+nm.length+sz;
+  }
+  const cdSize=cd.reduce((a,b)=>a+b.length,0), end=new DataView(new ArrayBuffer(22));
+  end.setUint32(0,0x06054b50,true); end.setUint16(8,files.length,true); end.setUint16(10,files.length,true); end.setUint32(12,cdSize,true); end.setUint32(16,off,true);
+  return new Blob([...parts,...cd,new Uint8Array(end.buffer)],{type:'application/zip'});
+}
+let authRec=null;
+async function renderAuthor(){
+  let have={}; try{ (await idb.all('authoring')).forEach(r=>have[r.id]=r); }catch(e){ toast(e.message); }
+  const n=Object.keys(have).length;
+  $('#au-count').textContent=`${n} of ${PHRASES.length} phrases recorded.`;
+  $('#au-list').innerHTML=PHRASES.map((p,i)=>{ const r=have[pid(i)];
+    return `<div class="phrase" style="cursor:default"><div class="l"><div class="en">${i+1}. ${esc(p[1])}</div><div class="km" lang="km">${esc(p[2])}</div><div class="ro">${esc(p[3])}</div>
+      ${r?`<div class="muted">✅ recorded · ${fmtMs(r.ms)}</div>`:''}</div>
+      ${r?`<button class="ib" data-play="${i}" aria-label="Play">▶</button>`:''}
+      <button class="ib" data-rec="${i}" aria-label="${r?'Re-record':'Record'}">${r?'↻':'🎙️'}</button></div>`; }).join('');
+}
+$('#au-list').addEventListener('click',async e=>{
+  const pl=e.target.closest('[data-play]'), rc=e.target.closest('[data-rec]');
+  if(pl) return playPhrase(+pl.dataset.play);
+  if(!rc) return;
+  if(authRec){ authRec.stop(); return; }
+  const i=+rc.dataset.rec;
+  try{
+    const c=await recordStart(10000,ms=>{ rc.textContent='⏹ '+fmtMs(ms); }); authRec=c; rc.textContent='⏹';
+    const r=await c.done; authRec=null;
+    if(r.blob.size>=300){ await idb.put('authoring',{id:pid(i),blob:r.blob,mime:r.blob.type,ms:r.ms}); toast('Recorded'); }
+  }catch(err){ authRec=null; toast(recErr(err)); }
+  renderAuthor();
+});
+$('#au-zip').onclick=async()=>{
+  let recs=[]; try{ recs=await idb.all('authoring'); }catch(e){}
+  if(!recs.length) return toast('Record at least one phrase first.');
+  const files=[], man={};
+  for(const r of recs.sort((a,b)=>a.id.localeCompare(b.id))){ const nm=`${r.id}.${extOf(r.mime)}`; man[r.id]=nm; files.push({name:'audio/'+nm,data:new Uint8Array(await r.blob.arrayBuffer())}); }
+  files.push({name:'audio/manifest.json',data:new TextEncoder().encode(JSON.stringify(man,null,1))});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(buildZip(files)); a.download='tostrip-audio.zip'; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),5000); toast(`ZIP with ${recs.length} clips downloaded. Unzip it next to this page.`);
+};
+$('#au-back').onclick=()=>{ location.href=location.pathname; };
+
 /* ---- global ---- */
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ $('#show').classList.remove('show'); } });
 $('#show').addEventListener('click',e=>{ if(e.target.id==='show') $('#show').classList.remove('show'); });
 
 /* ------------------------------ boot ----------------------------- */
 paintWelcome();
+if(authorMode){ showScreen('s-author'); renderAuthor(); }
 (function floatSpeeds(){ $$('.bg i,.hero .fi').forEach((el,i)=>{ el.style.animationDuration=(6+Math.random()*4).toFixed(1)+'s'; }); })();
 /* If the kit is already saved, make sure the page itself is cached too. */
 if(S.ready) registerSW();
