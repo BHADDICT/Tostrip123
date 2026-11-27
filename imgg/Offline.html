@@ -227,6 +227,16 @@ textarea.t{min-height:120px;resize:vertical;line-height:1.5;font-size:.9rem}
 .place{cursor:pointer}
 .place .m small.walk{color:var(--p700);font-weight:700}
 .chip.live[aria-pressed="true"]{background:#DC2626;border-color:#DC2626}
+.esslist{display:flex;flex-direction:column;gap:8px}
+.ess{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:14px;background:var(--p50);border:1px solid var(--line);text-align:left;width:100%}
+button.ess:active{transform:scale(.99)}
+.ess .ei{font-size:1.5rem;flex:none}
+.ess .et{flex:1;min-width:0}
+.ess .et b{display:block;font-size:.9rem}
+.ess .et small{color:var(--mute);font-size:.78rem;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ess .ed{text-align:right;font-weight:800;color:var(--p700);font-size:.95rem;white-space:nowrap}
+.ess .ed small{display:block;font-weight:600;color:var(--mute);font-size:.7rem}
+.ess.none{opacity:.55}
 /* ---------- voice / outbox ---------- */
 .rec{display:flex;flex-direction:column;align-items:center;gap:10px}
 .recbtn{width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#EF4444,#B91C1C);color:#fff;font-size:2rem;display:grid;place-items:center;box-shadow:0 10px 24px rgba(220,38,38,.4);transition:.2s}
@@ -408,6 +418,10 @@ textarea.t{min-height:120px;resize:vertical;line-height:1.5;font-size:.9rem}
             <button class="chip" id="chip-compass" aria-pressed="false">🧭 Compass</button>
           </div>
         </div>
+        <div class="card" id="ess-card" hidden>
+          <h3>⚡ Nearest essentials</h3>
+          <div class="esslist" id="ess-list"></div>
+        </div>
         <div class="card radar" id="radar-card" hidden>
           <div id="radar-svg"></div>
           <div class="muted" id="radar-cap" style="text-align:center"></div>
@@ -422,7 +436,7 @@ textarea.t{min-height:120px;resize:vertical;line-height:1.5;font-size:.9rem}
         </div>
         <div class="card" id="around-card">
           <h3>⬇️ Add places around me</h3>
-          <div class="muted">Saves cafés, food, pharmacies, ATMs, clinics, police, toilets and shops within about 1.8 km of where you are now. Do this once on hotel wifi, then it works with no signal.</div>
+          <div class="muted">Saves restaurants, ATMs, convenience stores, pharmacies, toilets, clinics and more. Places within 700 m are saved in the most detail. It also updates itself when you have signal and have moved to a new area, and then works with no signal.</div>
           <button class="btn btn-ghost btn-sm" id="btn-around" style="width:100%">⬇️ Download places around me</button>
           <div class="muted" id="around-info"></div>
         </div>
@@ -871,6 +885,7 @@ async function startDownload(){
     {t:'Emergency numbers & SOS', run:async()=>{pack.emergency=EMERGENCY;return 'ok';}},
     {t:'Riel exchange rate', run:async()=>{ const ok=await fetchRate(); return ok?'ok':['skip',`Using ៛${fmt(S.rate)} per $1 (no signal)`]; }},
     {t:'Your current location', run:async()=>{ try{await locate();return 'ok';}catch(e){return ['skip','Skipped — you can allow it later in Nearby']; } }},
+    {t:'Restaurants, ATMs & shops nearby', run:async()=>{ if(!S.lastLoc||!navigator.onLine) return ['skip','Skipped. Open Nearby when you have signal and it downloads by itself.']; try{ const n=await downloadAround(S.lastLoc); return n?'ok':['skip','No places found here yet.']; }catch(e){ return ['skip','Skipped. Open Nearby when you have signal and it downloads by itself.']; } }},
     {t:'App files for offline use', run:async()=>{ const ok=await registerSW(); return ok?'ok':['skip','Data saved. Host over HTTPS to cache the page too.']; }}
   ];
   const ul=$('#steps');
@@ -982,10 +997,12 @@ $('#al-send').onclick=()=>{ $('#alarm').classList.remove('show'); goTab('sos'); 
 
 /* ---- Nearby: walking distance, drawn inside the app (no map needed) ---- */
 const NCAT={culture:['🏯','Culture'],market:['🛍️','Markets'],nature:['🌿','Nature'],beach:['🏖️','Beach'],village:['🪷','Village'],travel:['🛫','Transport'],
-  health:['🏥','Health'],workshop:['🎨','Workshops'],pin:['📌','My pins'],food:['🍜','Food'],cafe:['☕','Cafés'],pharmacy:['💊','Pharmacy'],atm:['🏧','ATM / bank'],
+  health:['🏥','Health'],workshop:['🎨','Workshops'],pin:['📌','My pins'],food:['🍜','Food'],cafe:['☕','Cafés'],pharmacy:['💊','Pharmacy'],atm:['🏧','ATM / bank'],convenience:['🏪','Convenience'],bank:['🏦','Banks'],
   police:['👮','Police'],toilet:['🚻','Toilets'],shop:['🛒','Shops'],stay:['🛏️','Stays'],sight:['🏛️','Sights'],water:['💧','Water']};
 const ci=c=>(NCAT[c]||['📍'])[0];
 const cn=c=>(NCAT[c]||[])[1]||c;
+const CPRI=['food','atm','convenience','pharmacy','toilet','cafe','shop','health','police','water','market','workshop','pin','stay','sight','culture','nature','beach','village','travel'];
+const gkey=c=>c==='bank'?'atm':c;
 const walkMin=d=>Math.max(1,Math.round(d*1.3/4.8*60));      // streets are ~1.3x the straight line, 4.8 km/h
 const tukMin=d=>Math.max(2,Math.round(d*1.3/20*60)+2);
 const radLabel=r=>r<1?Math.round(r*1000)+' m':r+' km';
@@ -999,7 +1016,7 @@ function allPlaces(){
   const add=o=>{ if(!isFinite(o.lat)||!isFinite(o.lng)||seen.has(o.id)) return; seen.add(o.id); out.push(o); };
   (pack.places||[]).forEach(p=>add({id:p.id,n:p.n,c:p.c,lat:p.lat,lng:p.lng,a:p.a}));
   (pack.extra||[]).forEach((p,i)=>add({id:'x'+i,n:p.n,c:p.c||'workshop',lat:p.lat,lng:p.lng,note:p.note,tt:true}));
-  aroundAreas().forEach(a=>a.items.forEach(p=>add({id:p.i,n:p.n,c:p.c,lat:p.lat,lng:p.lng,around:true})));
+  aroundAreas().forEach(a=>a.items.forEach(p=>add({id:p.i,n:p.n,c:p.c,lat:p.lat,lng:p.lng,h:p.h,x:p.x,around:true})));
   (S.pins||[]).forEach(p=>add({id:p.id,n:p.n,c:p.c||'pin',lat:p.lat,lng:p.lng,pin:true}));
   return out;
 }
@@ -1024,7 +1041,26 @@ function renderNearby(){
   $('#chip-live').setAttribute('aria-pressed',liveWatch!==null);
   $('#chip-compass').setAttribute('aria-pressed',compassFn!==null);
   paintNearStatus(); paintNearBody(); paintAroundInfo();
+  autoAround();
 }
+const ESS=[['🍜','Restaurant',['food']],['🏧','ATM',['atm','bank']],['🏪','Convenience store',['convenience']],['💊','Pharmacy',['pharmacy']],['🚻','Toilets',['toilet']]];
+function paintEssentials(){
+  const l=S.lastLoc, card=$('#ess-card'); if(!l){ card.hidden=true; return; } card.hidden=false;
+  const all=allPlaces().map(p=>({...p,d:dist(l,p),b:bearing(l,p)}));
+  $('#ess-list').innerHTML=ESS.map(([ic,lab,cs])=>{
+    const p=all.filter(x=>cs.includes(x.c)).sort((a,b)=>a.d-b.d)[0];
+    return p?`<button class="ess" data-id="${esc(p.id)}"><span class="ei">${ic}</span><span class="et"><b>${lab}</b><small>${esc(p.n)}${p.h==='24/7'?' · open 24 h':''}</small></span><span class="ed">${fmtDist(p.d)}<small>${walkMin(p.d)} min · ${card8(p.b)}</small></span></button>`
+      :`<div class="ess none"><span class="ei">${ic}</span><span class="et"><b>${lab}</b><small>None saved yet. Download places around you below.</small></span></div>`;
+  }).join('');
+}
+$('#ess-list').addEventListener('click',e=>{
+  const b=e.target.closest('[data-id]'); if(!b) return;
+  const p=allPlaces().find(x=>x.id===b.dataset.id), l=S.lastLoc; if(!p||!l) return;
+  const d=dist(l,p);
+  if(d>2) return toast(`${p.n} is ${fmtDist(d)} away. That is too far to walk, take a tuk-tuk.`);
+  if(d>nearR) setRadius([0.5,1,2].find(r=>r>=d)||2);
+  nearCat='all'; paintNearBody(); pickPlace(p.id);
+});
 function paintNearStatus(){
   const l=S.lastLoc, el=$('#near-status');
   if(!l){ el.textContent='Tap "Update location" to see what is around you.'; return; }
@@ -1032,12 +1068,12 @@ function paintNearStatus(){
 }
 function paintNearBody(){
   const list=computeNear();
-  const cats=[...new Set(list.map(p=>p.c))];
+  const cats=[...new Set(list.map(p=>gkey(p.c)))].sort((a,b)=>(CPRI.indexOf(a)<0?99:CPRI.indexOf(a))-(CPRI.indexOf(b)<0?99:CPRI.indexOf(b)));
   if(nearCat!=='all'&&!cats.includes(nearCat)) nearCat='all';
-  $('#near-cat').innerHTML=cats.length>1?[['all','All'],...cats.map(c=>[c,ci(c)+' '+cn(c)])].map(([k,n])=>`<button class="chip" data-k="${k}" aria-pressed="${nearCat===k}">${esc(n)}</button>`).join(''):'';
-  nearShown=list.filter(p=>nearCat==='all'||p.c===nearCat);
+  $('#near-cat').innerHTML=cats.length>1?[['all','All'],...cats.map(c=>[c,c==='atm'?'🏧 ATM / bank':ci(c)+' '+cn(c)])].map(([k,n])=>`<button class="chip" data-k="${k}" aria-pressed="${nearCat===k}">${esc(n)}</button>`).join(''):'';
+  nearShown=list.filter(p=>nearCat==='all'||gkey(p.c)===nearCat);
   if(nearSel&&!nearShown.find(p=>p.id===nearSel)) nearSel=null;
-  paintRadar(); paintSel(); paintNearList(list);
+  paintEssentials(); paintRadar(); paintSel(); paintNearList(list);
   lastNearPaint=Date.now();
 }
 function paintRadar(){
@@ -1071,6 +1107,9 @@ function paintSel(){
     <div><b>${ci(p.c)} ${esc(p.n)}</b><div class="muted">${fmtDist(p.d)} · about ${walkMin(p.d)} min walk</div>
     <div class="dir">${compassH!=null?relWords(p.b):card8(p.b)+' of you'}</div></div></div>
     ${p.note?`<div class="muted">${esc(p.note)}</div>`:''}
+    ${p.h?`<div class="muted">🕒 ${p.h==='24/7'?'Open 24 hours':'Hours: '+esc(p.h)}</div>`:''}
+    ${p.x?`<div class="muted">🍽️ ${esc(p.x)}</div>`:''}
+    ${p.around?'<div class="muted">From OpenStreetMap. Opening hours and details may be out of date.</div>':''}
     ${compassH==null?'<div class="muted">Tip: tap 🧭 Compass so the arrow follows the way you turn.</div>':''}
     <div class="row"><button class="btn btn-ghost btn-sm" id="sel-copy">📋 Coordinates</button>${p.pin?'<button class="btn btn-ghost btn-sm" id="sel-del">🗑 Delete pin</button>':''}</div>
     <a class="muted" href="${mapsUrl(p)}" target="_blank" rel="noopener" style="text-align:center;text-decoration:underline">Open in a maps app (needs signal)</a>`;
@@ -1090,7 +1129,7 @@ function paintNearList(all){
   }
   box.innerHTML=nearShown.map(p=>`<div class="place${p.id===nearSel?' sel':''}" data-id="${esc(p.id)}" role="button" tabindex="0">
     <div class="e">${ci(p.c)}</div>
-    <div class="m"><b>${esc(p.n)}</b><small class="walk">${walkMin(p.d)} min walk · ${card8(p.b)}</small><br><small>${esc(cn(p.c))}${p.a?' · approx. pin':''}${p.pin?' · saved by you':''}</small></div>
+    <div class="m"><b>${esc(p.n)}</b><small class="walk">${walkMin(p.d)} min walk · ${card8(p.b)}</small><br><small>${esc(cn(p.c))}${p.x?' · '+esc(p.x):''}${p.h==='24/7'?' · open 24 h':''}${p.a?' · approx. pin':''}${p.pin?' · saved by you':''}</small></div>
     <div class="d">${fmtDist(p.d)}</div></div>`).join('');
 }
 function pickPlace(id){ nearSel=id; paintRadar(); paintSel(); paintNearList(); $('#sel-card').scrollIntoView({block:'nearest',behavior:'smooth'}); }
@@ -1175,30 +1214,43 @@ $('#btn-export').onclick=()=>{
 };
 
 /* --- download places around me (needs signal once, then works offline) --- */
-const AROUND_R=1800;
-const AROUND_BLOCKS=[['[amenity=restaurant]',40],['[amenity=cafe]',30],['[amenity=pharmacy]',25],['[amenity~"^(hospital|clinic)$"]',20],['[amenity~"^(atm|bank)$"]',30],
-  ['[amenity=police]',10],['[amenity=toilets]',15],['[amenity=drinking_water]',10],['[shop~"^(convenience|supermarket)$"]',30],['[tourism~"^(hotel|guest_house|hostel)$"]',30],['[tourism~"^(attraction|museum)$"]',20]];
-const AROUND_DEFAULT={atm:'ATM / bank',toilet:'Public toilets',police:'Police',pharmacy:'Pharmacy',health:'Clinic / hospital',water:'Drinking water'};
+/* Dense near you (700 m), wider but lighter further out (1.8 km). Several statements per type so busy streets can't crowd out other types. */
+const AROUND_NEAR=700, AROUND_FAR=1800, AROUND_TTL=14*864e5;
+const AROUND_BLOCKS=[ // [OSM filter, limit within 700 m, limit within 1.8 km]
+  ['[amenity~"^(restaurant|fast_food|food_court)$"]',100,40],['[amenity=cafe]',50,25],['[shop=convenience]',60,30],['[amenity=atm]',60,30],
+  ['[amenity=bank]',30,15],['[amenity=pharmacy]',40,20],['[amenity~"^(hospital|clinic)$"]',20,15],['[amenity=police]',10,8],
+  ['[amenity=toilets]',20,10],['[amenity=drinking_water]',10,5],['[shop~"^(supermarket|mall|department_store)$"]',30,15],
+  ['[tourism~"^(hotel|guest_house|hostel)$"]',30,20],['[tourism~"^(attraction|museum)$"]',15,15]];
+const AROUND_DEFAULT={atm:'ATM',bank:'Bank',convenience:'Convenience store',toilet:'Public toilets',police:'Police',pharmacy:'Pharmacy',health:'Clinic / hospital',water:'Drinking water'};
 function classifyOSM(t){
   const a=t.amenity, sh=t.shop, tu=t.tourism;
-  if(a==='restaurant') return 'food'; if(a==='cafe') return 'cafe'; if(a==='pharmacy') return 'pharmacy'; if(a==='hospital'||a==='clinic') return 'health';
-  if(a==='atm'||a==='bank') return 'atm'; if(a==='police') return 'police'; if(a==='toilets') return 'toilet'; if(a==='drinking_water') return 'water';
-  if(sh==='convenience'||sh==='supermarket') return 'shop'; if(tu==='hotel'||tu==='guest_house'||tu==='hostel') return 'stay'; if(tu==='attraction'||tu==='museum') return 'sight';
+  if(a==='restaurant'||a==='fast_food'||a==='food_court') return 'food'; if(a==='cafe') return 'cafe'; if(a==='pharmacy') return 'pharmacy';
+  if(a==='hospital'||a==='clinic') return 'health'; if(a==='atm') return 'atm'; if(a==='bank') return 'bank'; if(a==='police') return 'police';
+  if(a==='toilets') return 'toilet'; if(a==='drinking_water') return 'water'; if(sh==='convenience') return 'convenience';
+  if(sh==='supermarket'||sh==='mall'||sh==='department_store') return 'shop';
+  if(tu==='hotel'||tu==='guest_house'||tu==='hostel') return 'stay'; if(tu==='attraction'||tu==='museum') return 'sight';
   return null;
 }
-function paintAroundInfo(){
-  const a=aroundAreas(), n=a.reduce((x,y)=>x+y.items.length,0);
-  $('#around-info').textContent=n?`${n} places saved from ${a.length} area${a.length>1?'s':''}. Last download ${ago(Math.max(...a.map(x=>x.t)))}.`:'Nothing downloaded yet.';
+function osmName(t,c){
+  let n=t['name:en']||t.name||t.brand||'';
+  if(!n&&c==='atm') n=((t.operator||'')+' ATM').trim();
+  if(!n) n=AROUND_DEFAULT[c]||'';
+  return String(n).slice(0,60);
 }
-$('#btn-around').onclick=async function(){
-  if(!navigator.onLine) return toast('You need signal for this. Try again on wifi.');
-  this.disabled=true; const old=this.textContent; this.textContent='Finding you…';
+let aroundBusy=false;
+function paintAroundInfo(){
+  const a=aroundAreas(), n=a.reduce((x,y)=>x+y.items.length,0), el=$('#around-info');
+  if(aroundBusy){ el.textContent='Updating places around you…'; return; }
+  el.textContent=n?`${n} places saved from ${a.length} area${a.length>1?'s':''}. Last update ${ago(Math.max(...a.map(x=>x.t)))}.`:'Nothing downloaded yet.';
+}
+async function downloadAround(l){
+  if(aroundBusy) return 0; aroundBusy=true; paintAroundInfo();
   try{
-    const l=await locateBest(); this.textContent='Downloading places…';
-    const q='[out:json][timeout:25];'+AROUND_BLOCKS.map(([f,n])=>`nwr(around:${AROUND_R},${l.lat.toFixed(5)},${l.lng.toFixed(5)})${f};out center ${n};`).join('');
+    const at=`(around:%R,${l.lat.toFixed(5)},${l.lng.toFixed(5)})`;
+    const q='[out:json][timeout:40];'+AROUND_BLOCKS.map(([f,n1,n2])=>`nwr${at.replace('%R',AROUND_NEAR)}${f};out center ${n1};nwr${at.replace('%R',AROUND_FAR)}${f};out center ${n2};`).join('');
     let j=null;
     for(const ep of ['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter']){
-      const ctl=new AbortController(), to=setTimeout(()=>ctl.abort(),30000);
+      const ctl=new AbortController(), to=setTimeout(()=>ctl.abort(),45000);
       try{ const r=await fetch(ep,{method:'POST',signal:ctl.signal,headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'data='+encodeURIComponent(q)}); if(!r.ok) throw new Error('bad'); j=await r.json(); break; }
       catch(e){ j=null; } finally{ clearTimeout(to); }
     }
@@ -1207,15 +1259,37 @@ $('#btn-around').onclick=async function(){
     for(const el of j.elements){
       const t=el.tags||{}, c=classifyOSM(t); const lat=el.lat!=null?el.lat:(el.center&&el.center.lat), lng=el.lon!=null?el.lon:(el.center&&el.center.lon);
       if(!c||lat==null||lng==null) continue;
-      const n=(t['name:en']||t.name||AROUND_DEFAULT[c]||'').toString().slice(0,60); if(!n) continue;
+      const n=osmName(t,c); if(!n) continue;
       const id='o'+String(el.type||'n')[0]+el.id; if(seen.has(id)) continue; seen.add(id);
-      items.push({i:id,n,c,lat:+lat.toFixed(5),lng:+lng.toFixed(5)});
+      const it={i:id,n,c,lat:+lat.toFixed(5),lng:+lng.toFixed(5)};
+      if(t.opening_hours) it.h=String(t.opening_hours).slice(0,40);
+      if(c==='food'&&t.cuisine) it.x=String(t.cuisine).split(';')[0].replace(/_/g,' ').slice(0,24);
+      items.push(it);
     }
     if(!items.length) throw new Error('No places found here. This area may not be mapped yet.');
-    let areas=aroundAreas().filter(a=>dist(a,l)>0.8);
-    areas.unshift({lat:+l.lat.toFixed(5),lng:+l.lng.toFixed(5),t:Date.now(),items}); areas=areas.slice(0,4);
+    let areas=aroundAreas().filter(a=>dist(a,l)>0.5);
+    areas.unshift({lat:+l.lat.toFixed(5),lng:+l.lng.toFixed(5),t:Date.now(),items}); areas=areas.slice(0,5);
     lsSet(AROUND_KEY,JSON.stringify(areas));
-    toast(`Saved ${items.length} places around you`); renderNearby();
+    return items.length;
+  } finally{ aroundBusy=false; paintAroundInfo(); }
+}
+function needsAround(){
+  const l=S.lastLoc; if(!l) return false;
+  const near=aroundAreas().filter(x=>dist(x,l)<0.6);
+  return !near.length||Date.now()-Math.max(...near.map(x=>x.t))>AROUND_TTL;
+}
+let autoTry=0;
+async function autoAround(){
+  if(aroundBusy||!navigator.onLine||!needsAround()||Date.now()-autoTry<120000) return;
+  autoTry=Date.now();
+  try{ const n=await downloadAround(S.lastLoc); if(n){ toast(`Updated ${n} places around you`); renderNearby(); } }catch(e){ /* quiet: the button is there for a manual try */ }
+}
+$('#btn-around').onclick=async function(){
+  if(!navigator.onLine) return toast('You need signal for this. Try again on wifi.');
+  this.disabled=true; const old=this.textContent; this.textContent='Finding you…';
+  try{
+    const l=await locateBest(); this.textContent='Downloading places…';
+    const n=await downloadAround(l); toast(`Saved ${n} places around you`); renderNearby();
   }catch(e){ toast((e&&e.message)||'Could not download places.'); }
   this.disabled=false; this.textContent=old;
 };
