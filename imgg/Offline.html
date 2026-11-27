@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#4C1D95">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="TosTrip">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>TosTrip – Offline Adventure Mode</title>
 <style>
 /* No web fonts on purpose: this page must look right with zero signal. */
@@ -237,6 +241,12 @@ button.ess:active{transform:scale(.99)}
 .ess .ed{text-align:right;font-weight:800;color:var(--p700);font-size:.95rem;white-space:nowrap}
 .ess .ed small{display:block;font-weight:600;color:var(--mute);font-size:.7rem}
 .ess.none{opacity:.55}
+.guide{align-items:center}
+.guide .sheet{gap:10px}
+.garrow{width:min(62vw,240px);height:auto;margin:0 auto;display:block}
+.gdist{font-size:2.6rem;font-weight:800;color:var(--p800);font-variant-numeric:tabular-nums;line-height:1.1}
+.gname{font-size:1.1rem;font-weight:800}
+.warnbox{font-size:.8rem;line-height:1.45;background:#FFFBEB;border:1px solid #FDE68A;color:#92400E;border-radius:12px;padding:10px 12px;text-align:left}
 /* ---------- voice / outbox ---------- */
 .rec{display:flex;flex-direction:column;align-items:center;gap:10px}
 .recbtn{width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#EF4444,#B91C1C);color:#fff;font-size:2rem;display:grid;place-items:center;box-shadow:0 10px 24px rgba(220,38,38,.4);transition:.2s}
@@ -399,6 +409,7 @@ button.ess:active{transform:scale(.99)}
             <button class="btn btn-ghost btn-sm" id="btn-update">Update downloads</button>
             <button class="btn btn-ghost btn-sm" id="btn-wipe">Remove offline data</button>
           </div>
+          <button class="btn btn-ghost btn-sm" id="btn-install" style="width:100%" hidden>📲 Add TosTrip to my home screen</button>
           <a class="btn btn-primary btn-sm" id="main-app-link" style="display:none" href="#">Open the full TosTrip app</a>
         </div>
         <div class="foot">Make every traveler feel at home in Cambodia.<small>tostrip.co</small></div>
@@ -496,7 +507,9 @@ button.ess:active{transform:scale(.99)}
           <div class="err" id="sos-err" style="min-height:0"></div>
           <textarea class="t" id="sos-text" aria-label="Message to send" placeholder="Your message appears here. You can edit it before sending."></textarea>
           <a id="ch-sms" class="btn btn-primary disabled" href="#">💬 Send by SMS</a>
+          <label class="chk" style="margin-top:2px"><input type="checkbox" id="sos-nolink"><span>Send without a link (coordinates only). Some phone networks block SMS that contain links. Try this if messages to other people do not arrive.</span></label>
           <div class="smsnote">Best option: SMS works with phone signal, no internet needed.</div>
+          <div class="warnbox">⚠️ SMS needs <b>cell signal</b> (Wi-Fi does not count) and a plan or credit that can send SMS in Cambodia. If your phone says <b>Not Delivered</b>, tap Try Again or use WhatsApp below. Tap <b>Save to Outbox</b> to send it later when you have signal.</div>
           <div class="sect">More ways (need internet)</div>
           <div class="chan" id="chan">
             <a id="ch-wa" class="disabled" href="#" target="_blank" rel="noopener">🟢 WhatsApp</a>
@@ -586,6 +599,17 @@ button.ess:active{transform:scale(.99)}
     <label class="f">Name<input class="t" id="pin-name" maxlength="40" placeholder="e.g. My hotel"></label>
     <div class="muted" id="pin-loc"></div>
     <div class="row"><button class="btn btn-ghost" id="pin-cancel">Cancel</button><button class="btn btn-primary" id="pin-save">Save pin</button></div>
+  </div>
+</div>
+
+<div class="overlay guide" id="guide" role="dialog" aria-modal="true" aria-label="Guide me there">
+  <div class="sheet">
+    <div class="gname" id="g-name"></div>
+    <svg class="garrow" id="g-arrow" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="96" fill="#EDE9FE" stroke="#C4B5FD" stroke-width="3"/><text x="100" y="22" text-anchor="middle" font-size="13" font-weight="800" fill="#6D28D9" id="g-n">N</text><g id="g-rot"><path d="M100 24 L142 138 L100 112 L58 138 Z" fill="#6D28D9"/></g></svg>
+    <div class="gdist" id="g-dist">--</div>
+    <div class="muted" id="g-sub"></div>
+    <div class="warnbox" id="g-note" hidden></div>
+    <div class="row"><button class="btn btn-ghost" id="g-compass">🧭 Turn on compass</button><button class="btn btn-primary" id="g-close">Stop</button></div>
   </div>
 </div>
 
@@ -958,6 +982,7 @@ $('#p-home').addEventListener('click',e=>{ const b=e.target.closest('[data-go]')
 
 /* ---- Home ---- */
 function renderHome(){
+  paintInstall();
   const pack=loadPack()||{places:[],phrases:[]};
   $('#hello').innerHTML=`សួស្តី${S.me?', '+esc(S.me):''} 👋<small>Your Adventure Kit is ready.</small>`;
   const kb=Math.max(1,Math.round(JSON.stringify(pack).length/1024));
@@ -1144,9 +1169,11 @@ function paintSel(){
     ${p.x?`<div class="muted">🍽️ ${esc(p.x)}</div>`:''}
     ${p.around?'<div class="muted">From OpenStreetMap. Opening hours and details may be out of date.</div>':''}
     ${compassH==null?'<div class="muted">Tip: tap 🧭 Compass so the arrow follows the way you turn.</div>':''}
+    <button class="btn btn-primary btn-sm" id="sel-guide" style="width:100%">🧭 Guide me there</button>
     <div class="row"><button class="btn btn-ghost btn-sm" id="sel-copy">📋 Coordinates</button>${p.pin?'<button class="btn btn-ghost btn-sm" id="sel-del">🗑 Delete pin</button>':''}</div>
     <a class="muted" href="${mapsUrl(p)}" target="_blank" rel="noopener" style="text-align:center;text-decoration:underline">Open in a maps app (needs signal)</a>`;
   const cp=$('#sel-copy'); if(cp) cp.onclick=()=>copyText(`${p.lat.toFixed(6)}, ${p.lng.toFixed(6)}`,'Coordinates copied');
+  const gd=$('#sel-guide'); if(gd) gd.onclick=()=>guideStart(p);
   const dl=$('#sel-del'); if(dl) dl.onclick=()=>{ S.pins=(S.pins||[]).filter(x=>x.id!==p.id); save(); nearSel=null; paintNearBody(); toast('Pin deleted'); };
 }
 function paintNearList(all){
@@ -1214,6 +1241,65 @@ $('#chip-compass').onclick=async()=>{
   renderNearby(); toast('Hold your phone flat. The radar turns with you.');
 };
 function stopNearbyLive(){ stopLive(); stopCompass(); }
+
+/* --- Guide me there: big arrow + countdown, works offline (GPS + compass need no signal) --- */
+let gT=null, gW=null, gFn=null, gH=null, gLoc=null, gArrived=false, gRaf=0;
+function headingOf(e){
+  if(typeof e.webkitCompassHeading==='number') return e.webkitCompassHeading;
+  if((e.absolute||e.type==='deviceorientationabsolute')&&e.alpha!=null) return (360-e.alpha)%360;
+  return null;
+}
+async function guideCompassOn(){
+  if(gFn) return true;
+  try{
+    if(typeof DeviceOrientationEvent!=='undefined'&&typeof DeviceOrientationEvent.requestPermission==='function'){
+      const r=await DeviceOrientationEvent.requestPermission(); if(r!=='granted'){ toast('Compass permission was not allowed.'); return false; }
+    }
+  }catch(e){ toast('Compass is not available on this device.'); return false; }
+  if(!('DeviceOrientationEvent' in window)){ toast('Compass is not available on this device.'); return false; }
+  gFn=e=>{ const v=headingOf(e); if(v==null) return; gH=v; if(!gRaf) gRaf=requestAnimationFrame(()=>{ gRaf=0; paintGuide(); }); };
+  addEventListener('deviceorientationabsolute',gFn,true); addEventListener('deviceorientation',gFn,true);
+  return true;
+}
+function paintGuide(){
+  if(!gT||!gLoc) return;
+  const d=dist(gLoc,gT), b=bearing(gLoc,gT), ang=(b-(gH||0)+360)%360;
+  $('#g-rot').setAttribute('transform',`rotate(${ang.toFixed(0)} 100 100)`);
+  $('#g-n').textContent=gH==null?'N':'';
+  const near=d*1000<=Math.max(25,Math.min(40,(gLoc.acc||0)));
+  $('#g-dist').textContent=near?'You are here':fmtDist(d);
+  $('#g-sub').textContent=near?'You have arrived.':`About ${walkMin(d)} min on foot · ${gH==null?card8(b)+' of you':relWordsFor(b)}`;
+  if(near&&!gArrived){ gArrived=true; try{navigator.vibrate&&navigator.vibrate([300,150,300]);}catch(_){} }
+  if(!near) gArrived=false;
+  const n=$('#g-note'), msgs=[];
+  if((gLoc.acc||0)>50) msgs.push(`GPS is rough (±${Math.round(gLoc.acc)} m). Move into the open for a better fix.`);
+  if(gH==null&&gFn) msgs.push('Waiting for the compass. Hold your phone flat and move it in a figure 8 if it does not respond.');
+  else if(gH==null) msgs.push('Compass is off. The arrow points to the place as seen with north at the top. Tap Turn on compass so it follows the way you face.');
+  if(d>5) msgs.push('This is far to walk. Consider a tuk-tuk.');
+  n.hidden=!msgs.length; n.textContent=msgs.join(' ');
+}
+function relWordsFor(b){ const a=(b-(gH||0)+360)%360;
+  if(a<20||a>340) return 'straight ahead'; if(a<70) return 'ahead, to the right'; if(a<110) return 'to your right'; if(a<160) return 'behind, to the right';
+  if(a<200) return 'behind you'; if(a<250) return 'behind, to the left'; if(a<290) return 'to your left'; return 'ahead, to the left'; }
+async function guideStart(p){
+  if(!navigator.geolocation) return toast('GPS is not supported on this device.');
+  gT=p; gLoc=S.lastLoc||null; gArrived=false; gH=null;
+  $('#g-name').textContent=`${ci(p.c)} ${p.n}`; $('#g-compass').textContent='🧭 Turn on compass'; $('#g-compass').disabled=false;
+  $('#guide').classList.add('show'); paintGuide();
+  if(!gLoc){ $('#g-dist').textContent='Finding you…'; $('#g-sub').textContent=''; }
+  if(gW!==null){ try{navigator.geolocation.clearWatch(gW);}catch(_){} }
+  gW=navigator.geolocation.watchPosition(pos=>{
+    gLoc={lat:pos.coords.latitude,lng:pos.coords.longitude,acc:pos.coords.accuracy||0,t:Date.now()}; S.lastLoc=gLoc; paintGuide();
+  },e=>{ if(e.code===1){ toast(geoErr(e)); guideStop(); } },{enableHighAccuracy:true,maximumAge:1000,timeout:30000});
+  if(await guideCompassOn()) $('#g-compass').textContent='🧭 Compass on';
+}
+function guideStop(){
+  if(gW!==null){ try{navigator.geolocation.clearWatch(gW);}catch(_){} gW=null; }
+  if(gFn){ removeEventListener('deviceorientationabsolute',gFn,true); removeEventListener('deviceorientation',gFn,true); gFn=null; }
+  gT=null; gH=null; save(); $('#guide').classList.remove('show'); if(tabNow==='nearby') renderNearby();
+}
+$('#g-close').onclick=guideStop;
+$('#g-compass').onclick=async()=>{ if(await guideCompassOn()){ $('#g-compass').textContent='🧭 Compass on'; paintGuide(); } };
 
 /* --- pins: save hotel, host, meeting point... and walk back to it offline --- */
 let pinLoc=null, pinKind='';
@@ -1417,7 +1503,7 @@ function intl(p){ const d=digits(p); if(d.startsWith('+')) return d.slice(1); if
 function buildMsg(loc){
   const who=S.me||'A TosTrip traveler';
   const head=kind==='help'?`HELP! ${who} needs help in Cambodia.`:`${who} is SAFE (TosTrip check-in).`;
-  const where=loc?`GPS ${loc.lat.toFixed(6)},${loc.lng.toFixed(6)} (+/-${Math.round(loc.acc)}m${loc.fresh?'':', LAST KNOWN '+ago(loc.t)}) ${mapsUrl(loc)}`:'Location unavailable.';
+  const where=loc?`GPS ${loc.lat.toFixed(6)},${loc.lng.toFixed(6)} (+/-${Math.round(loc.acc)}m${loc.fresh?'':', LAST KNOWN '+ago(loc.t)})${S.noLink?'':' '+mapsUrl(loc)}`:'Location unavailable.';
   const when=new Date().toLocaleString(undefined,{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
   return `${head} ${where} Sent ${when} via TosTrip`;
 }
@@ -1432,6 +1518,12 @@ function paintChannels(){
   sms.textContent=ph&&S.contact.name?`💬 Send by SMS to ${S.contact.name}`:'💬 Send by SMS';
 }
 $('#sos-text').oninput=paintChannels;
+$('#sos-nolink').checked=!!S.noLink;
+$('#sos-nolink').onchange=function(){
+  S.noLink=this.checked; save(); const t=$('#sos-text');
+  if(this.checked&&t.value) t.value=t.value.replace(/\s*https?:\/\/\S+/g,''); else if(!this.checked&&t.value) toast('Tap "Get my location" again to add the link.');
+  paintChannels();
+};
 $('#btn-prep').onclick=async function(){
   const err=$('#sos-err'); err.textContent=''; this.disabled=true; const old=this.innerHTML; this.textContent='Finding your location…';
   let loc=null;
@@ -1442,7 +1534,7 @@ $('#btn-prep').onclick=async function(){
   if(!S.contact.phone) toast('Add a safety contact below to use SMS or WhatsApp.');
 };
 $('#chan').addEventListener('click',e=>{ const a=e.target.closest('a'); if(a&&a.classList.contains('disabled')) e.preventDefault(); });
-$('#ch-sms').addEventListener('click',e=>{ if($('#ch-sms').classList.contains('disabled')) e.preventDefault(); });
+$('#ch-sms').addEventListener('click',e=>{ if($('#ch-sms').classList.contains('disabled')){ e.preventDefault(); return; } setTimeout(()=>toast('If it says Not Delivered, check you have cell signal. Try WhatsApp, or save it to the Outbox.'),1500); });
 $('#s-call').addEventListener('click',e=>{ if($('#s-call').classList.contains('disabled')) e.preventDefault(); });
 $('#ch-copy').onclick=()=>{ const v=$('#sos-text').value.trim(); v?copyText(v,'Message copied'):toast('Tap "Get my location" first.'); };
 $('#ch-share').onclick=async()=>{
@@ -1569,7 +1661,7 @@ const outbox=()=>S.outbox||(S.outbox=[]);
 function chanLinks(text,phone){
   const enc=encodeURIComponent(text), ios=/iP(hone|ad|od)/.test(navigator.userAgent);
   const m=text.match(/https?:\/\/\S+/), url=m?m[0]:'https://tostrip.co';
-  return { sms:`sms:${phone?digits(phone):''}${ios?'&':'?'}body=${enc}`, wa:`https://wa.me/${phone?intl(phone):''}?text=${enc}`,
+  return { sms:`sms:${phone?'+'+intl(phone):''}${ios?'&':'?'}body=${enc}`, wa:`https://wa.me/${phone?intl(phone):''}?text=${enc}`,
            tg:`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text.replace(url,'').trim())}` };
 }
 function renderOutbox(){
@@ -1738,6 +1830,33 @@ async function flushSheet(){
   }catch(e){ /* stays queued, retried when signal returns */ }
 }
 addEventListener('online',flushSheet);
+
+/* ---- install on the home screen (works from this single file: manifest and icons are made on the fly) ---- */
+let installEv=null;
+const isStandalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+function setupPWA(){
+  try{
+    const img=$('#logo-main'); if(!img||!img.naturalWidth) return;
+    const mk=n=>{ const c=document.createElement('canvas'); c.width=c.height=n; const x=c.getContext('2d'); x.fillStyle='#fff'; x.fillRect(0,0,n,n);
+      const pad=n*.16; x.drawImage(img,pad,pad,n-2*pad,n-2*pad); return c.toDataURL('image/png'); };
+    const ti=document.createElement('link'); ti.rel='apple-touch-icon'; ti.href=mk(180); document.head.appendChild(ti);
+    if(/^https?:$/.test(location.protocol)){
+      const man={name:'TosTrip Offline Adventure Mode',short_name:'TosTrip',start_url:location.origin+location.pathname,scope:location.origin+location.pathname.replace(/[^/]*$/,''),
+        display:'standalone',orientation:'portrait',background_color:'#4C1D95',theme_color:'#4C1D95',
+        icons:[{src:mk(192),sizes:'192x192',type:'image/png',purpose:'any'},{src:mk(512),sizes:'512x512',type:'image/png',purpose:'any'}]};
+      const ml=document.createElement('link'); ml.rel='manifest'; ml.href=URL.createObjectURL(new Blob([JSON.stringify(man)],{type:'application/manifest+json'})); document.head.appendChild(ml);
+    }
+  }catch(e){}
+}
+addEventListener('beforeinstallprompt',e=>{ e.preventDefault(); installEv=e; });
+addEventListener('appinstalled',()=>{ installEv=null; $('#btn-install').hidden=true; toast('TosTrip was added to your home screen.'); });
+$('#btn-install').onclick=async()=>{
+  if(installEv){ installEv.prompt(); try{ await installEv.userChoice; }catch(_){} installEv=null; return; }
+  if(/iP(hone|ad|od)/.test(navigator.userAgent)) toast('On iPhone: tap the Share button, then "Add to Home Screen".');
+  else toast('Open your browser menu and choose "Install app" or "Add to Home screen".');
+};
+function paintInstall(){ const b=$('#btn-install'); if(b) b.hidden=isStandalone(); }
+if(document.readyState==='complete') setupPWA(); else addEventListener('load',setupPWA);
 
 /* ---- global ---- */
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ $('#show').classList.remove('show'); } });
