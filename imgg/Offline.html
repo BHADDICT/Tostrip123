@@ -211,6 +211,12 @@ textarea.t{min-height:120px;resize:vertical;line-height:1.5;font-size:.9rem}
 .foot{text-align:center;color:var(--p700);font-weight:700;font-size:.85rem;padding:6px 0 2px}
 .foot small{display:block;color:var(--mute);font-weight:500;margin-top:2px}
 
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:.83rem;line-height:1.45;background:var(--p50);border:1px solid var(--line);border-radius:12px;padding:12px;font-weight:500;color:var(--ink)}
+.chk input{width:20px;height:20px;margin-top:1px;accent-color:var(--p700);flex:none}
+.chk[hidden]{display:none}
+.sync{font-size:.82rem;font-weight:700;color:var(--mute)}
+.sync.ok{color:var(--ok)}
+.smsnote{font-size:.8rem;color:var(--mute);text-align:center;margin-top:-4px}
 /* ---------- voice / outbox ---------- */
 .rec{display:flex;flex-direction:column;align-items:center;gap:10px}
 .recbtn{width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#EF4444,#B91C1C);color:#fff;font-size:2rem;display:grid;place-items:center;box-shadow:0 10px 24px rgba(220,38,38,.4);transition:.2s}
@@ -313,7 +319,9 @@ textarea.t{min-height:120px;resize:vertical;line-height:1.5;font-size:.9rem}
       <label class="f">Emergency contact name<input class="t" id="in-cname" autocomplete="off" placeholder="e.g. Mom"></label>
       <label class="f">Emergency contact phone<input class="t" id="in-cphone" type="tel" inputmode="tel" autocomplete="off" placeholder="e.g. 012 345 678 or +1 555 0100"></label>
       <div class="err" id="phone-err"></div>
-      <p class="muted">Saved only on this device. It's used to send your location by SMS, WhatsApp or Telegram.</p>
+      <label class="f">Your own phone number (optional)<input class="t" id="in-mephone" type="tel" inputmode="tel" autocomplete="tel" placeholder="So your contact can call you back"></label>
+      <label class="chk" id="in-consent-wrap" hidden><input type="checkbox" id="in-consent"><span>Also save my name and emergency contact in TosTrip's private emergency sheet, so the team can help reach them if something goes wrong. Optional. Your location is never shared this way.</span></label>
+      <p class="muted">Your contact is always saved on this phone and used to send your location by SMS.</p>
 
       <button class="btn btn-primary" id="btn-download" style="margin-top:auto">⬇️ Download my Adventure Kit</button>
     </div>
@@ -440,13 +448,15 @@ textarea.t{min-height:120px;resize:vertical;line-height:1.5;font-size:.9rem}
           <button class="btn btn-danger" id="btn-prep">📍 Get my location &amp; write message</button>
           <div class="err" id="sos-err" style="min-height:0"></div>
           <textarea class="t" id="sos-text" aria-label="Message to send" placeholder="Your message appears here. You can edit it before sending."></textarea>
+          <a id="ch-sms" class="btn btn-primary disabled" href="#">💬 Send by SMS</a>
+          <div class="smsnote">Best option: SMS works with phone signal, no internet needed.</div>
+          <div class="sect">More ways (need internet)</div>
           <div class="chan" id="chan">
-            <a id="ch-sms" class="disabled" href="#">💬 SMS</a>
             <a id="ch-wa" class="disabled" href="#" target="_blank" rel="noopener">🟢 WhatsApp</a>
             <a id="ch-tg" href="#" target="_blank" rel="noopener">✈️ Telegram</a>
             <button id="ch-share">📤 Share…</button>
             <button id="ch-copy">📋 Copy</button>
-            <button id="ch-outbox">🕓 Send later</button>
+            <button id="ch-outbox" style="grid-column:span 2">🕓 Save to Outbox, send later</button>
           </div>
         </div>
 
@@ -468,6 +478,9 @@ textarea.t{min-height:120px;resize:vertical;line-height:1.5;font-size:.9rem}
           <label class="f">Your name<input class="t" id="s-me" autocomplete="name"></label>
           <label class="f">Contact name<input class="t" id="s-cname" autocomplete="off"></label>
           <label class="f">Contact phone<input class="t" id="s-cphone" type="tel" inputmode="tel" autocomplete="off"></label>
+          <label class="f">Your own phone (optional)<input class="t" id="s-mephone" type="tel" inputmode="tel" autocomplete="tel"></label>
+          <label class="chk" id="s-consent-wrap" hidden><input type="checkbox" id="s-consent"><span>Also save my name and emergency contact in TosTrip's private emergency sheet, so the team can help reach them if something goes wrong. Optional. Your location is never shared this way.</span></label>
+          <div class="sync" id="sync-st"></div>
           <div class="err" id="s-err"></div>
           <div class="row">
             <button class="btn btn-primary btn-sm" id="s-save">Save contact</button>
@@ -528,6 +541,10 @@ textarea.t{min-height:120px;resize:vertical;line-height:1.5;font-size:.9rem}
    an "Open the full TosTrip app" button inside the kit.
    ===================================================================== */
 const MAIN_APP_URL = null;
+
+/* Emergency-contact sheet (optional). Paste your Google Apps Script web app URL here
+   (see sheet-setup.gs). Leave empty to switch the sheet feature off completely. */
+const SHEET_ENDPOINT = '';
 
 /* ----------------------------- data ----------------------------- */
 const PROVINCES = [
@@ -693,6 +710,27 @@ async function locate(){
     throw e;
   }
 }
+/* Waits for a better GPS fix (up to ~15 s) instead of taking the first, possibly rough, one. */
+function getBestPosition(maxMs=15000,good=25,onUpdate){
+  return new Promise((res,rej)=>{
+    if(!navigator.geolocation) return rej(new Error('Location is not supported on this device.'));
+    let best=null, lastErr=null, done=false, id=null, to=null;
+    const finish=()=>{ if(done) return; done=true; try{navigator.geolocation.clearWatch(id);}catch(_){} clearTimeout(to); best?res(best):rej(lastErr||new Error('No GPS fix yet.')); };
+    to=setTimeout(finish,maxMs);
+    id=navigator.geolocation.watchPosition(p=>{
+      if(!best||p.coords.accuracy<best.coords.accuracy) best=p;
+      if(onUpdate) onUpdate(p.coords.accuracy);
+      if(p.coords.accuracy<=good) finish();
+    },e=>{ lastErr=e; if(e.code===1) finish(); },{enableHighAccuracy:true,maximumAge:0,timeout:maxMs});
+  });
+}
+async function locateBest(onUpdate){
+  try{
+    const p=await getBestPosition(15000,25,onUpdate);
+    S.lastLoc={lat:p.coords.latitude,lng:p.coords.longitude,acc:p.coords.accuracy||0,t:Date.now()}; save();
+    return {...S.lastLoc,fresh:true};
+  }catch(e){ if(S.lastLoc) return {...S.lastLoc,fresh:false}; throw e; }
+}
 function geoErr(e){
   if(e&&e.code===1) return 'Location permission is blocked. Allow location for this page in your browser settings.';
   if(e&&e.code===3) return 'Could not get a GPS fix in time. Move outside or near a window and try again.';
@@ -734,6 +772,7 @@ function fillSetup(){
   $('#prov-chips').innerHTML = PROVINCES.map(p=>`<button class="chip" data-k="${p.k}" aria-pressed="${selProv.has(p.k)}">${esc(p.n)}</button>`).join('')
     + `<button class="chip" id="prov-all" aria-pressed="false">Select all</button>`;
   $('#in-me').value=S.me||''; $('#in-cname').value=S.contact.name||''; $('#in-cphone').value=S.contact.phone||'';
+  $('#in-mephone').value=S.mePhone||''; $('#in-consent').checked=!!S.share; applyShareUI();
   $('#prov-err').textContent=''; $('#phone-err').textContent='';
   syncAll();
 }
@@ -750,9 +789,10 @@ const validPhone = p=>!p || /^\+?[0-9][0-9 ()\-]{5,18}$/.test(p.trim());
 $('#btn-download').onclick = ()=>{
   if(!selProv.size){ $('#prov-err').textContent='Pick at least one area.'; return; }
   const ph=$('#in-cphone').value.trim();
-  if(!validPhone(ph)){ $('#phone-err').textContent='Enter a valid phone number (digits, spaces, + or -).'; return; }
+  if(!validPhone(ph)||!validPhone($('#in-mephone').value.trim())){ $('#phone-err').textContent='Enter a valid phone number (digits, spaces, + or -).'; return; }
   S.provinces=[...selProv]; S.me=$('#in-me').value.trim();
-  S.contact={name:$('#in-cname').value.trim(),phone:ph}; save();
+  S.contact={name:$('#in-cname').value.trim(),phone:ph}; S.mePhone=$('#in-mephone').value.trim();
+  S.share=!!SHEET_ENDPOINT&&$('#in-consent').checked; save(); pushSheet();
   startDownload();
 };
 
@@ -964,12 +1004,6 @@ let showIdx=0;
 function openShow(i){ showIdx=i; const p=phraseAt(i); $('#show-km').textContent=p[2]; $('#show-ro').textContent=p[3]; $('#show-en').textContent=p[1]; $('#show').classList.add('show'); $('#show-close').focus(); }
 $('#show-close').onclick=()=>$('#show').classList.remove('show');
 $('#show-say').onclick=()=>playPhrase(showIdx);
-function speak(t){
-  if(!('speechSynthesis' in window)) return toast('Speech is not supported here. Use "show to a local" instead.');
-  const v=(speechSynthesis.getVoices()||[]).find(v=>(v.lang||'').toLowerCase().startsWith('km'));
-  if(!v) return toast('No Khmer voice installed on this phone. Show the screen to a local instead.');
-  const u=new SpeechSynthesisUtterance(t); u.voice=v; u.lang=v.lang; speechSynthesis.cancel(); speechSynthesis.speak(u);
-}
 async function copyText(t,msg){
   try{ await navigator.clipboard.writeText(t); toast(msg||'Copied'); }
   catch(e){ const a=document.createElement('textarea'); a.value=t; a.style.position='fixed'; a.style.opacity=0; document.body.appendChild(a); a.select(); let ok=false; try{ok=document.execCommand('copy')}catch(_){} a.remove(); toast(ok?(msg||'Copied'):'Could not copy. Select the text and copy it manually.'); }
@@ -1011,43 +1045,46 @@ function renderSOS(){
   $('#emg').innerHTML=EMERGENCY.main.map(x=>`<a href="tel:${x.n}" aria-label="Call ${x.l} ${x.n}"><span>${x.e}</span><b>${x.n}</b><small>${x.l}</small></a>`).join('');
   $('#emg-more').innerHTML=EMERGENCY.more.map(x=>`<div class="callrow"><span>${esc(x.l)}</span><a href="tel:${digits(x.n)}">📞 ${esc(x.n)}</a></div>`).join('');
   $('#s-me').value=S.me||''; $('#s-cname').value=S.contact.name||''; $('#s-cphone').value=S.contact.phone||'';
+  $('#s-mephone').value=S.mePhone||''; $('#s-consent').checked=!!S.share; applyShareUI();
   $('#s-err').textContent=''; paintChannels();
 }
 $('#s-save').onclick=()=>{
   const ph=$('#s-cphone').value.trim();
-  if(!validPhone(ph)){ $('#s-err').textContent='Enter a valid phone number (digits, spaces, + or -).'; return; }
-  S.me=$('#s-me').value.trim(); S.contact={name:$('#s-cname').value.trim(),phone:ph}; save();
-  $('#s-err').textContent=''; toast(ph?'Safety contact saved':'Contact cleared'); paintChannels();
+  if(!validPhone(ph)||!validPhone($('#s-mephone').value.trim())){ $('#s-err').textContent='Enter a valid phone number (digits, spaces, + or -).'; return; }
+  S.me=$('#s-me').value.trim(); S.contact={name:$('#s-cname').value.trim(),phone:ph}; S.mePhone=$('#s-mephone').value.trim();
+  S.share=!!SHEET_ENDPOINT&&$('#s-consent').checked; save();
+  $('#s-err').textContent=''; toast(ph?'Safety contact saved':'Contact cleared'); paintChannels(); pushSheet();
 };
 function intl(p){ const d=digits(p); if(d.startsWith('+')) return d.slice(1); if(d.startsWith('00')) return d.slice(2); if(d.startsWith('0')) return '855'+d.slice(1); return d; }
 function buildMsg(loc){
   const who=S.me||'A TosTrip traveler';
-  const head=kind==='help'?`🆘 ${who} needs help in Cambodia.`:`✅ ${who} is safe. TosTrip check-in.`;
-  const where=loc?`📍 ${mapsUrl(loc)}\n(accuracy ±${Math.round(loc.acc)} m${loc.fresh?'':', LAST KNOWN '+ago(loc.t)})`:'📍 Location unavailable';
-  return `${head}\n${where}\n🕒 ${new Date().toLocaleString()}\nSent with TosTrip Offline Mode`;
+  const head=kind==='help'?`HELP! ${who} needs help in Cambodia.`:`${who} is SAFE (TosTrip check-in).`;
+  const where=loc?`GPS ${loc.lat.toFixed(6)},${loc.lng.toFixed(6)} (+/-${Math.round(loc.acc)}m${loc.fresh?'':', LAST KNOWN '+ago(loc.t)}) ${mapsUrl(loc)}`:'Location unavailable.';
+  const when=new Date().toLocaleString(undefined,{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+  return `${head} ${where} Sent ${when} via TosTrip`;
 }
 function paintChannels(){
-  const val=$('#sos-text').value, enc=encodeURIComponent(val), ph=S.contact.phone;
-  const has=!!ph&&!!val.trim();
+  const val=$('#sos-text').value, has=!!val.trim();
+  const l=chanLinks(val,S.contact.phone);
   const sms=$('#ch-sms'), wa=$('#ch-wa'), tg=$('#ch-tg');
-  const ios=/iP(hone|ad|od)/.test(navigator.userAgent);
-  sms.href=has?`sms:${digits(ph)}${ios?'&':'?'}body=${enc}`:'#'; sms.classList.toggle('disabled',!has);
-  wa.href=has?`https://wa.me/${intl(ph)}?text=${enc}`:'#'; wa.classList.toggle('disabled',!has);
-  const m=val.match(/https?:\/\/\S+/); const url=m?m[0]:'https://tostrip.co';
-  tg.href=val.trim()?`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(val.replace(url,'').trim())}`:'#'; tg.classList.toggle('disabled',!val.trim());
-  const call=$('#s-call'); call.href=ph?`tel:${digits(ph)}`:'#'; call.classList.toggle('disabled',!ph);
+  sms.href=has?l.sms:'#'; sms.classList.toggle('disabled',!has);
+  wa.href=has?l.wa:'#'; wa.classList.toggle('disabled',!has);
+  tg.href=has?l.tg:'#'; tg.classList.toggle('disabled',!has);
+  const ph=S.contact.phone, call=$('#s-call'); call.href=ph?`tel:${digits(ph)}`:'#'; call.classList.toggle('disabled',!ph);
+  sms.textContent=ph&&S.contact.name?`💬 Send by SMS to ${S.contact.name}`:'💬 Send by SMS';
 }
 $('#sos-text').oninput=paintChannels;
 $('#btn-prep').onclick=async function(){
   const err=$('#sos-err'); err.textContent=''; this.disabled=true; const old=this.innerHTML; this.textContent='Finding your location…';
   let loc=null;
-  try{ loc=await locate(); if(!loc.fresh) err.textContent='GPS did not respond, so this uses your last known location.'; }
+  try{ loc=await locateBest(a=>{ this.textContent=`Getting GPS… ±${Math.round(a)} m`; }); if(!loc.fresh) err.textContent='GPS did not respond, so this uses your last known location.'; else if(loc.acc>100) err.textContent=`GPS is rough (±${Math.round(loc.acc)} m). Step outside or near a window and tap again for a better fix.`; }
   catch(e){ err.textContent=geoErr(e)+' You can still send the message without a pin.'; }
   $('#sos-text').value=buildMsg(loc); paintChannels();
   this.disabled=false; this.innerHTML=old;
   if(!S.contact.phone) toast('Add a safety contact below to use SMS or WhatsApp.');
 };
 $('#chan').addEventListener('click',e=>{ const a=e.target.closest('a'); if(a&&a.classList.contains('disabled')) e.preventDefault(); });
+$('#ch-sms').addEventListener('click',e=>{ if($('#ch-sms').classList.contains('disabled')) e.preventDefault(); });
 $('#s-call').addEventListener('click',e=>{ if($('#s-call').classList.contains('disabled')) e.preventDefault(); });
 $('#ch-copy').onclick=()=>{ const v=$('#sos-text').value.trim(); v?copyText(v,'Message copied'):toast('Tap "Get my location" first.'); };
 $('#ch-share').onclick=async()=>{
@@ -1174,7 +1211,7 @@ const outbox=()=>S.outbox||(S.outbox=[]);
 function chanLinks(text,phone){
   const enc=encodeURIComponent(text), ios=/iP(hone|ad|od)/.test(navigator.userAgent);
   const m=text.match(/https?:\/\/\S+/), url=m?m[0]:'https://tostrip.co';
-  return { sms:phone?`sms:${digits(phone)}${ios?'&':'?'}body=${enc}`:null, wa:phone?`https://wa.me/${intl(phone)}?text=${enc}`:null,
+  return { sms:`sms:${phone?digits(phone):''}${ios?'&':'?'}body=${enc}`, wa:`https://wa.me/${phone?intl(phone):''}?text=${enc}`,
            tg:`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text.replace(url,'').trim())}` };
 }
 function renderOutbox(){
@@ -1206,10 +1243,17 @@ addEventListener('online',()=>{
 });
 
 /* ---- recorded Khmer phrase audio ---- */
-let audioIds=new Set(), curAudio=null;
+let audioIds=new Set();
 const pid=i=>'p'+String(i+1).padStart(2,'0');
+let player=new Audio(); player.preload='auto'; player.setAttribute('playsinline','');
+let audioUrls=new Map(), authUrls=new Map();
 async function loadAudioIds(){
-  try{ audioIds=new Set(await idb.keys('phraseAudio')); }catch(e){ audioIds=new Set(); }
+  try{
+    const recs=await idb.all('phraseAudio');
+    audioUrls.forEach(u=>URL.revokeObjectURL(u));
+    audioUrls=new Map(recs.map(r=>[r.id,URL.createObjectURL(r.blob)]));
+  }catch(e){ audioUrls=new Map(); }
+  audioIds=new Set(audioUrls.keys());
   if(tabNow==='phrases') paintPhrases();
 }
 async function fetchPhraseAudio(){
@@ -1224,18 +1268,33 @@ async function fetchPhraseAudio(){
   await loadAudioIds();
   return {n};
 }
-async function playPhrase(i){
-  const id=pid(i);
-  try{
-    const rec=(authorMode&&await idb.get('authoring',id))||await idb.get('phraseAudio',id);
-    if(rec&&rec.blob){
-      const u=URL.createObjectURL(rec.blob); if(curAudio) curAudio.pause();
-      curAudio=new Audio(u); curAudio.onended=curAudio.onerror=()=>URL.revokeObjectURL(u);
-      await curAudio.play(); return;
-    }
-  }catch(e){}
-  speak(phraseAt(i)[2]);
+/* Playback must start synchronously inside the tap, or iPhones and many Androids block it. */
+function playPhrase(i){
+  const id=pid(i), u=audioUrls.get(id)||(authorMode&&authUrls.get(id));
+  if(u){
+    try{ player.pause(); }catch(_){}
+    player.src=u; player.currentTime=0; player.volume=1;
+    const pr=player.play();
+    if(pr&&pr.catch) pr.catch(()=>toast('Could not play sound. Turn your volume up and try again.'));
+    return;
+  }
+  speak(i);
 }
+/* No recording? Use a Khmer voice if the phone has one, otherwise read the sound guide aloud. */
+function speak(i){
+  const p=phraseAt(i);
+  if(!('speechSynthesis' in window)) return toast('No sound on this phone for this phrase. Show the screen to a local instead.');
+  const vs=speechSynthesis.getVoices()||[];
+  const km=vs.find(v=>/^km/i.test(v.lang||''));
+  const u=new SpeechSynthesisUtterance(km?p[2]:p[3].replace(/[….]/g,'').replace(/-/g,''));
+  if(km){ u.voice=km; u.lang=km.lang; }
+  else{
+    const en=vs.find(v=>/^en/i.test(v.lang||'')); if(en) u.voice=en; u.lang=en?en.lang:'en-US'; u.rate=.75;
+    toast('No Khmer voice on this phone. Reading the sound guide aloud.');
+  }
+  u.volume=1; speechSynthesis.cancel(); speechSynthesis.speak(u);
+}
+try{ if('speechSynthesis' in window){ speechSynthesis.getVoices(); speechSynthesis.addEventListener('voiceschanged',()=>speechSynthesis.getVoices()); } }catch(_){}
 
 /* ---- team tool: record phrases, export ZIP (open this page with ?record=1) ---- */
 const authorMode=/[?&]record=1/.test(location.search);
@@ -1261,6 +1320,7 @@ function buildZip(files){
 let authRec=null;
 async function renderAuthor(){
   let have={}; try{ (await idb.all('authoring')).forEach(r=>have[r.id]=r); }catch(e){ toast(e.message); }
+  authUrls.forEach(u=>URL.revokeObjectURL(u)); authUrls=new Map(Object.values(have).map(r=>[r.id,URL.createObjectURL(r.blob)]));
   const n=Object.keys(have).length;
   $('#au-count').textContent=`${n} of ${PHRASES.length} phrases recorded.`;
   $('#au-list').innerHTML=PHRASES.map((p,i)=>{ const r=have[pid(i)];
@@ -1271,7 +1331,7 @@ async function renderAuthor(){
 }
 $('#au-list').addEventListener('click',async e=>{
   const pl=e.target.closest('[data-play]'), rc=e.target.closest('[data-rec]');
-  if(pl) return playPhrase(+pl.dataset.play);
+  if(pl){ playPhrase(+pl.dataset.play); return; }
   if(!rc) return;
   if(authRec){ authRec.stop(); return; }
   const i=+rc.dataset.rec;
@@ -1293,12 +1353,40 @@ $('#au-zip').onclick=async()=>{
 };
 $('#au-back').onclick=()=>{ location.href=location.pathname; };
 
+/* ---- emergency contact -> Google Sheet (opt-in, queued while offline) ---- */
+function applyShareUI(){ ['#in-consent-wrap','#s-consent-wrap'].forEach(id=>{ const el=$(id); if(el) el.hidden=!SHEET_ENDPOINT; }); paintSync(); }
+function paintSync(){
+  const el=$('#sync-st'); if(!el) return;
+  if(!SHEET_ENDPOINT||!S.share){ el.textContent=''; el.className='sync'; return; }
+  const q=(S.sheetQueue||[]).length;
+  if(q){ el.textContent='🕓 Will be sent to TosTrip when you have signal'; el.className='sync'; }
+  else if(S.synced){ el.textContent='✅ Shared with TosTrip · '+ago(S.synced); el.className='sync ok'; }
+}
+function pushSheet(){
+  if(!SHEET_ENDPOINT||!S.share||!S.contact.phone) return;
+  S.sheetQueue=[{t:new Date().toISOString(),name:S.me||'',myPhone:S.mePhone||'',contactName:S.contact.name||'',contactPhone:S.contact.phone,consent:true,app:'tostrip-offline',v:1}];
+  save(); paintSync(); flushSheet();
+}
+async function flushSheet(){
+  if(!SHEET_ENDPOINT||!navigator.onLine) return;
+  const q=S.sheetQueue||[]; if(!q.length) return;
+  try{
+    for(const item of [...q]){
+      /* text/plain + no-cors avoids a CORS preflight; Apps Script still receives the JSON body. */
+      await fetch(SHEET_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(item)});
+      S.sheetQueue=S.sheetQueue.filter(x=>x!==item&&x.t!==item.t); S.synced=Date.now();
+    }
+    save(); paintSync();
+  }catch(e){ /* stays queued, retried when signal returns */ }
+}
+addEventListener('online',flushSheet);
+
 /* ---- global ---- */
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ $('#show').classList.remove('show'); } });
 $('#show').addEventListener('click',e=>{ if(e.target.id==='show') $('#show').classList.remove('show'); });
 
 /* ------------------------------ boot ----------------------------- */
-paintWelcome();
+paintWelcome(); applyShareUI(); flushSheet();
 if(authorMode){ showScreen('s-author'); renderAuthor(); }
 (function floatSpeeds(){ $$('.bg i,.hero .fi').forEach((el,i)=>{ el.style.animationDuration=(6+Math.random()*4).toFixed(1)+'s'; }); })();
 /* If the kit is already saved, make sure the page itself is cached too. */
